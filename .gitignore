@@ -16,3 +16,6 @@ dist/
 
 # local secrets
 .env
+
+# claude code harness state
+.claude/
