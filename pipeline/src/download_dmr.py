@@ -2,20 +2,34 @@
 
 The FTP host has no uptime guarantee and the brief asks us not to re-fetch on
 every run, so we skip the download entirely if the target file already exists.
+
+The connection stalled silently once (socket sat open with no data for 10+
+minutes, at 99.9998% complete) rather than erroring, so a timeout and a
+resume-on-retry loop are load-bearing here, not defensive dead code.
 """
 
 from __future__ import annotations
 
 import ftplib
+import socket
 import sys
+import time
 from pathlib import Path
 
 FTP_HOST = "5.44.137.84"
 FTP_USER = "dmr-ftp-user"
 FTP_PASS = "dmrpassword"
 REMOTE_DIR = "ESStatistikListeModtag"
+SOCKET_TIMEOUT_S = 120
+MAX_ATTEMPTS = 8
 
 RAW_DIR = Path(__file__).resolve().parents[2] / "data" / "raw" / "dmr"
+
+
+def connect() -> ftplib.FTP:
+    ftp = ftplib.FTP(FTP_HOST, timeout=SOCKET_TIMEOUT_S)
+    ftp.login(FTP_USER, FTP_PASS)
+    return ftp
 
 
 def latest_remote_file(ftp: ftplib.FTP) -> str:
@@ -31,34 +45,54 @@ def latest_remote_file(ftp: ftplib.FTP) -> str:
 def main() -> None:
     RAW_DIR.mkdir(parents=True, exist_ok=True)
 
-    with ftplib.FTP(FTP_HOST) as ftp:
-        ftp.login(FTP_USER, FTP_PASS)
-        remote_path = latest_remote_file(ftp)
-        filename = remote_path.rsplit("/", 1)[-1]
-        local_path = RAW_DIR / filename
+    ftp = connect()
+    remote_path = latest_remote_file(ftp)
+    filename = remote_path.rsplit("/", 1)[-1]
+    local_path = RAW_DIR / filename
 
-        if local_path.exists():
-            print(f"already cached: {local_path}")
-            return
+    if local_path.exists():
+        print(f"already cached: {local_path}")
+        ftp.close()
+        return
 
-        print(f"downloading {remote_path} -> {local_path}")
-        size = ftp.size(remote_path)
-        written = 0
+    size = ftp.size(remote_path)
+    tmp_path = local_path.with_suffix(".zip.part")
+
+    for attempt in range(1, MAX_ATTEMPTS + 1):
+        resume_at = tmp_path.stat().st_size if tmp_path.exists() else 0
+        if resume_at >= size:
+            break
+        print(f"attempt {attempt}/{MAX_ATTEMPTS}: {remote_path} from byte {resume_at}/{size} -> {tmp_path}")
+
+        written = resume_at
 
         def progress(chunk: bytes) -> None:
             nonlocal written
             written += len(chunk)
             fh.write(chunk)
-            if size:
-                pct = written * 100 // size
-                print(f"\r{pct}% ({written}/{size} bytes)", end="", flush=True)
+            print(f"\r{written * 100 // size}% ({written}/{size} bytes)", end="", flush=True)
 
-        tmp_path = local_path.with_suffix(".zip.part")
-        with open(tmp_path, "wb") as fh:
-            ftp.retrbinary(f"RETR {remote_path}", progress)
-        print()
-        tmp_path.rename(local_path)
-        print(f"done: {local_path}")
+        try:
+            with open(tmp_path, "ab") as fh:
+                ftp.retrbinary(f"RETR {remote_path}", progress, rest=resume_at or None)
+            print()
+            break
+        except (socket.timeout, ftplib.all_errors, ConnectionError, EOFError) as e:
+            print(f"\ntransfer stalled/failed ({e!r}); reconnecting to resume")
+            try:
+                ftp.close()
+            except Exception:
+                pass
+            time.sleep(5)
+            ftp = connect()
+    else:
+        raise RuntimeError(f"gave up after {MAX_ATTEMPTS} attempts, {tmp_path.stat().st_size}/{size} bytes")
+
+    ftp.close()
+    if tmp_path.stat().st_size != size:
+        raise RuntimeError(f"incomplete download: {tmp_path.stat().st_size}/{size} bytes")
+    tmp_path.rename(local_path)
+    print(f"done: {local_path}")
 
 
 if __name__ == "__main__":
