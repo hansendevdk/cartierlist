@@ -42,6 +42,13 @@ TOP_N_MODELS = 214  # 90% fleet coverage target, confirmed by user
 NAME_HIGH_THRESHOLD = 0.90
 NAME_MEDIUM_THRESHOLD = 0.65
 
+# Minimum UK test count for a match to be treated as real rather than a stray
+# mis-keyed record. Set to the statistical-stability floor from the Phase 2
+# strategy doc (n>=2000 gives under 1pp standard error on a ~0.75 pass rate),
+# since a match too small to compute a stable metric from is not useful even
+# if it is technically correct.
+STABILITY_THRESHOLD = 2000
+
 # Model-level renames researched directly (not discoverable by text similarity,
 # since the strings share no characters) -- see phase2_crosswalk_strategy.md
 # finding G. Seeded here rather than left as a bare no-candidate row, since the
@@ -54,6 +61,34 @@ KNOWN_MODEL_RENAMES = {
 def load_aliases() -> dict[str, str]:
     with open(ALIASES_CSV, encoding="utf-8") as f:
         return {row["dmr_make_name"]: row["dvsa_make"] for row in csv.DictReader(f)}
+
+
+def build_dvsa_prefix_index(con: duckdb.DuckDBPyConnection, dvsa_make: str) -> dict[str, int]:
+    """Token-PREFIX keyed test counts for one DVSA make.
+
+    Every DVSA model string contributes its count to each of its leading token
+    prefixes, so "CX 30 GT SPORT MHEV" adds to keys "CX", "CX 30",
+    "CX 30 GT", ... This exists because first-token-only collapsing silently
+    destroyed multi-token model names: Toyota's C-HR (190,836 tests) got filed
+    under "C" and Mazda's CX-30 under "CX", making both unreachable, while
+    also merging genuinely distinct models (CX-3 / CX-5 / CX-30) into one
+    bucket.
+
+    It also fixes the near-miss sibling problem for free, without any fuzzy
+    scoring: "CORSAVAN" is a single token, so it never contributes to the
+    "CORSA" key, and "AURIS" never contributes to "YARIS". Exact prefix
+    matching separates them where similarity scoring could not.
+    """
+    rows = con.execute(
+        "SELECT model, COUNT(*) c FROM mot_tests WHERE make = ? GROUP BY 1", [dvsa_make]
+    ).fetchall()
+
+    prefix_counts: dict[str, int] = defaultdict(int)
+    for raw_model, count in rows:
+        tokens = normalize(raw_model).split(" ")
+        for i in range(1, len(tokens) + 1):
+            prefix_counts[" ".join(tokens[:i])] += count
+    return dict(prefix_counts)
 
 
 def build_dvsa_index(con: duckdb.DuckDBPyConnection, dvsa_make: str):
@@ -94,9 +129,117 @@ def build_dvsa_index(con: duckdb.DuckDBPyConnection, dvsa_make: str):
     return code_counts, name_counts, family_series_counts
 
 
+def dmr_probes(dmr_model_norm: str, dmr_make_norm: str) -> tuple[list[str], list[str]]:
+    """Exact-match probe strings for one DMR model name, as (faithful, lossy).
+
+    DMR writes the same car several ways and which form matches DVSA differs
+    per make, so all plausible forms are tried rather than committing to one
+    transformation up front.
+
+    FAITHFUL probes still denote the whole model:
+      - as-is ("CORSA")
+      - make name stripped, whether glued ("MAZDA2" -> "2") or space-separated
+        ("Toyota C-HR" -> "C HR")
+      - de-spaced ("I 10" -> "I10", "DS 3" -> "DS3")
+    Keeping and stripping the make prefix are both offered because either can
+    be right: DVSA calls Toyota's crossover "C-HR" (prefix redundant) but calls
+    DS's hatchback "DS3" (make name is genuinely part of the model name).
+
+    LOSSY probes drop trailing tokens ("YARIS 5 DORS" -> "YARIS", "FABIA
+    COMBI" -> "FABIA") to shed Danish body-style suffixes. They are tried only
+    if no faithful probe lands, because truncation can silently widen a model
+    into its whole family: "CX 30" truncates to "CX", which would merge CX-3,
+    CX-5 and CX-30 into one bucket.
+
+    Returned unsorted; the caller ranks hits by test volume, not by string
+    length. Length ranking was tried first and picked tiny junk buckets over
+    real models -- "Toyota C-HR" matched a 60-test "TOYOTA" prefix instead of
+    the 190,836-test "C HR", and "MAZDA2" matched a 6-test "MAZDA2" instead of
+    the 313,689-test "2", purely because the wrong string was longer.
+    """
+    # the Danish "Ny " ("new") prefix is dropped here, not only in the fuzzy
+    # path, so "Ny Focus" can reach DVSA's "FOCUS" (2,291,752 tests) by exact
+    # identity instead of arriving as a similarity guess alongside typo buckets
+    # like "FOUCS" and "LOCUST".
+    dmr_model_norm = strip_ny_prefix(dmr_model_norm)
+
+    faithful: list[str] = [dmr_model_norm]
+
+    if dmr_model_norm.startswith(dmr_make_norm) and len(dmr_model_norm) > len(dmr_make_norm):
+        stripped = dmr_model_norm[len(dmr_make_norm):].strip()
+        if stripped:
+            faithful.append(stripped)
+
+    for p in list(faithful):
+        despaced = p.replace(" ", "")
+        if despaced != p:
+            faithful.append(despaced)
+
+    lossy: list[str] = []
+    tokens = dmr_model_norm.split(" ")
+    for i in range(len(tokens) - 1, 0, -1):
+        lossy.append(" ".join(tokens[:i]))
+
+    def dedupe(xs):
+        seen, out = set(), []
+        for x in xs:
+            if x and x not in seen:
+                seen.add(x)
+                out.append(x)
+        return out
+
+    faithful = dedupe(faithful)
+    return faithful, [p for p in dedupe(lossy) if p not in set(faithful)]
+
+
+def best_prefix_identity(
+    dmr_model_norm: str, dmr_make_norm: str, prefix_counts: dict[str, int], threshold: int
+) -> tuple[str, int] | None:
+    """Best exact token-prefix hit for a DMR model, or None.
+
+    Faithful probes are consulted before lossy ones, and within each group the
+    highest-volume hit wins. Hits below `threshold` are skipped rather than
+    accepted, because a match to a handful of tests is not evidence the model
+    was found -- it is usually a stray mis-keyed DVSA record that happens to
+    share the string. Kia's "CEE'D SW" is the worked example: it hits a 5-test
+    "CEED SW" among the faithful probes, which must be passed over so the lossy
+    "CEED" probe can reach the real 306,364-test model.
+    """
+    faithful, lossy = dmr_probes(dmr_model_norm, dmr_make_norm)
+
+    # Faithful probes are alternative spellings of the SAME name, so the best
+    # one is the highest-volume hit -- that is what skips junk buckets.
+    #
+    # Lossy probes are strictly nested truncations, so the best one is the
+    # LONGEST that clears the floor, because a longer prefix is a more specific
+    # claim. Ranking these by volume too was a real error: "Transit Custom
+    # Kombi" truncates to both "TRANSIT CUSTOM" (147,808 tests, the actual
+    # vehicle) and "TRANSIT" (734,085 tests, the larger unrelated van), and
+    # volume ranking confidently picked the van.
+    for group, key in ((faithful, lambda h: h[1]), (lossy, lambda h: len(h[0]))):
+        hits = [(p, prefix_counts[p]) for p in group if p in prefix_counts]
+        usable = [h for h in hits if h[1] >= threshold]
+        if usable:
+            return max(usable, key=key)
+
+    # nothing clears the bar; surface the best sub-threshold hit anyway so the
+    # row is visible and honestly flagged rather than silently absent.
+    all_hits = [(p, prefix_counts[p]) for p in faithful + lossy if p in prefix_counts]
+    return max(all_hits, key=lambda h: h[1]) if all_hits else None
+
+
 def match_model(dmr_model_norm: str, dmr_make_norm: str, code_counts, name_counts, family_series_counts):
-    """Returns a list of (dvsa_token, uk_count, confidence, rule_fired)."""
-    candidates: list[tuple[str, int, str, str]] = []
+    """Returns a list of (dvsa_token, uk_count, confidence, rule_fired, match_score).
+
+    match_score is 1.0 where the match is an identity or a structural fact (the
+    normalized strings are literally equal, or the candidate is a numbered
+    sibling of a resolved BMW-style family) and the actual string-similarity
+    ratio where an inference was made. That distinction is what makes it
+    possible to separate "no judgement was exercised here" from "a judgement
+    was exercised here", which is exactly the line auto-confirmation must not
+    cross.
+    """
+    candidates: list[tuple[str, int, str, str, float]] = []
 
     # strip the Danish "Ny " ("new") prefix before any classification, not just
     # inside the name-matching branch -- otherwise "Ny Clio" / "Ny Focus" never
@@ -123,12 +266,12 @@ def match_model(dmr_model_norm: str, dmr_make_norm: str, code_counts, name_count
     if family_digit:
         if family_digit in family_series_counts:
             candidates.append(
-                (f"{family_digit} SERIES", family_series_counts[family_digit], "high", "family_series_literal")
+                (f"{family_digit} SERIES", family_series_counts[family_digit], "high", "family_series_literal", 1.0)
             )
         prefix = family_digit
         for code, count in code_counts.items():
             if code[0] == prefix and code[1:2].isdigit():
-                candidates.append((code, count, "high", "family_series_sibling"))
+                candidates.append((code, count, "high", "family_series_sibling", 1.0))
         return candidates
 
     # whole-string short alpha/alnum code: the ENTIRE model name (not just its
@@ -146,9 +289,9 @@ def match_model(dmr_model_norm: str, dmr_make_norm: str, code_counts, name_count
         whole_code = dmr_model_norm
     if whole_code:
         if whole_code in code_counts:
-            return [(whole_code, code_counts[whole_code], "exact", "short_code_exact")]
+            return [(whole_code, code_counts[whole_code], "exact", "short_code_exact", 1.0)]
         if whole_code in name_counts:
-            return [(whole_code, name_counts[whole_code], "exact", "short_code_exact")]
+            return [(whole_code, name_counts[whole_code], "exact", "short_code_exact", 1.0)]
         # no exact target found -- fall through to numeric/name paths below
 
     dmr_code = leading_code(dmr_model_norm)
@@ -156,7 +299,7 @@ def match_model(dmr_model_norm: str, dmr_make_norm: str, code_counts, name_count
 
     if dmr_is_code and dmr_code:
         if dmr_code in code_counts:
-            candidates.append((dmr_code, code_counts[dmr_code], "exact", "code_exact"))
+            candidates.append((dmr_code, code_counts[dmr_code], "exact", "code_exact", 1.0))
         return candidates
 
     # name path: fuzzy, only against non-code DVSA tokens.
@@ -184,9 +327,9 @@ def match_model(dmr_model_norm: str, dmr_make_norm: str, code_counts, name_count
 
     for tok, count, ratio, rule in scored[:5]:
         if ratio >= NAME_HIGH_THRESHOLD:
-            candidates.append((tok, count, "high", rule))
+            candidates.append((tok, count, "high", rule, ratio))
         elif ratio >= NAME_MEDIUM_THRESHOLD:
-            candidates.append((tok, count, "medium", rule))
+            candidates.append((tok, count, "medium", rule, ratio))
     return candidates
 
 
@@ -205,6 +348,7 @@ def main() -> None:
     ).fetchall()
 
     dvsa_index_cache: dict[str, tuple] = {}
+    dvsa_prefix_cache: dict[str, dict[str, int]] = {}
 
     out_rows = []
     for make_id, make_name, model_id, model_name, dk_count in dmr_models:
@@ -222,10 +366,12 @@ def main() -> None:
         if not dvsa_make:
             out_rows.append(
                 dict(
+                    dmr_make_id=make_id, dmr_model_id=model_id,
                     dmr_make=make_name, dmr_model=model_name, dk_vehicle_count=dk_count,
                     dk_sample_variants=sample_variants, proposed_dvsa_make="",
                     proposed_dvsa_model_token="", uk_test_count=0,
-                    confidence="no-make-mapping", rule_fired="", decision="",
+                    confidence="no-make-mapping", rule_fired="", match_score="",
+                    decision="", decision_basis="",
                 )
             )
             continue
@@ -239,10 +385,12 @@ def main() -> None:
             ).fetchone()[0]
             out_rows.append(
                 dict(
+                    dmr_make_id=make_id, dmr_model_id=model_id,
                     dmr_make=make_name, dmr_model=model_name, dk_vehicle_count=dk_count,
                     dk_sample_variants=sample_variants, proposed_dvsa_make=known_make,
                     proposed_dvsa_model_token=known_token, uk_test_count=known_count,
-                    confidence="known-rename", rule_fired=basis, decision="",
+                    confidence="known-rename", rule_fired=basis, match_score=1.0,
+                    decision="", decision_basis="",
                 )
             )
             continue
@@ -250,39 +398,58 @@ def main() -> None:
         if dvsa_make not in dvsa_index_cache:
             dvsa_index_cache[dvsa_make] = build_dvsa_index(con, dvsa_make)
         code_counts, name_counts, family_series_counts = dvsa_index_cache[dvsa_make]
+        if dvsa_make not in dvsa_prefix_cache:
+            dvsa_prefix_cache[dvsa_make] = build_dvsa_prefix_index(con, dvsa_make)
+        prefix_counts = dvsa_prefix_cache[dvsa_make]
 
         dmr_norm = normalize(model_name)
-        candidates = match_model(dmr_norm, normalize(make_name), code_counts, name_counts, family_series_counts)
+        make_norm = normalize(make_name)
+
+        # Exact token-prefix identity is tried before anything else: if some
+        # form of the DMR model name IS literally a DVSA model-name prefix,
+        # no inference is being made and no similarity scoring should get a say.
+        identity_hit = best_prefix_identity(dmr_norm, make_norm, prefix_counts, STABILITY_THRESHOLD)
+
+        if identity_hit and not family_series_digit(strip_ny_prefix(dmr_norm)):
+            tok, count = identity_hit
+            candidates = [(tok, count, "exact", "prefix_identity", 1.0)]
+        else:
+            candidates = match_model(dmr_norm, make_norm, code_counts, name_counts, family_series_counts)
 
         if not candidates:
             out_rows.append(
                 dict(
+                    dmr_make_id=make_id, dmr_model_id=model_id,
                     dmr_make=make_name, dmr_model=model_name, dk_vehicle_count=dk_count,
                     dk_sample_variants=sample_variants, proposed_dvsa_make=dvsa_make,
                     proposed_dvsa_model_token="", uk_test_count=0,
-                    confidence="no-candidate", rule_fired="", decision="",
+                    confidence="no-candidate", rule_fired="", match_score="",
+                    decision="", decision_basis="",
                 )
             )
         else:
             seen_tokens = set()
-            for tok, count, confidence, rule in sorted(candidates, key=lambda c: -c[1]):
+            for tok, count, confidence, rule, score in sorted(candidates, key=lambda c: -c[1]):
                 if tok in seen_tokens:
                     continue
                 seen_tokens.add(tok)
                 out_rows.append(
                     dict(
+                        dmr_make_id=make_id, dmr_model_id=model_id,
                         dmr_make=make_name, dmr_model=model_name, dk_vehicle_count=dk_count,
                         dk_sample_variants=sample_variants, proposed_dvsa_make=dvsa_make,
                         proposed_dvsa_model_token=tok, uk_test_count=count,
-                        confidence=confidence, rule_fired=rule, decision="",
+                        confidence=confidence, rule_fired=rule, match_score=round(score, 4),
+                        decision="", decision_basis="",
                     )
                 )
 
     ALIASES_CSV.parent.mkdir(parents=True, exist_ok=True)
     fieldnames = [
+        "dmr_make_id", "dmr_model_id",
         "dmr_make", "dmr_model", "dk_vehicle_count", "dk_sample_variants",
         "proposed_dvsa_make", "proposed_dvsa_model_token", "uk_test_count",
-        "confidence", "rule_fired", "decision",
+        "confidence", "rule_fired", "match_score", "decision", "decision_basis",
     ]
     with open(REVIEW_CSV, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)

@@ -28,11 +28,21 @@ def strip_diacritics(s: str) -> str:
 
 
 def normalize(s: str) -> str:
-    """Uppercase, strip diacritics, collapse whitespace/hyphens/quotes to single
-    spaces. Used before any comparison, on both DMR and DVSA strings."""
+    """Uppercase, strip diacritics, drop decorative punctuation, and collapse
+    hyphens/whitespace to single spaces. Used before any comparison, on both
+    DMR and DVSA strings.
+
+    Apostrophes are REMOVED rather than turned into spaces, and '!' is dropped
+    entirely. Both were real matching failures found by inspecting output:
+    Kia's stylised "CEE'D" has to reach DVSA's "CEED" (apostrophe-to-space gave
+    "CEE D", which matched nothing), and VW's "UP!" has to reach DVSA's "UP"
+    (62,570 Danish vehicles, the single largest model in the review file, was
+    stuck as a fuzzy 0.8 guess purely because of the exclamation mark)."""
     s = strip_diacritics(s).upper()
     s = s.replace("`", "'")
-    s = re.sub(r"[\-']", " ", s)
+    s = s.replace("'", "")
+    s = s.replace("!", "")
+    s = re.sub(r"[\-/]", " ", s)
     s = _WS_RE.sub(" ", s).strip()
     return s
 

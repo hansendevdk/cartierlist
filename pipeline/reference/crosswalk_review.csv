@@ -1,587 +1,278 @@
-dmr_make,dmr_model,dk_vehicle_count,dk_sample_variants,proposed_dvsa_make,proposed_dvsa_model_token,uk_test_count,confidence,rule_fired,decision
-VOLKSWAGEN,UP!,62570,1.0 MPI BMT 60; 1.0 MPI 60; 1.0 MPI BMT 60 HK 5 dørs,VOLKSWAGEN,UP,290489,medium,name_similarity_firsttoken,
-VOLKSWAGEN,UP!,62570,1.0 MPI BMT 60; 1.0 MPI 60; 1.0 MPI BMT 60 HK 5 dørs,VOLKSWAGEN,UP!,56,high,name_similarity_firsttoken,
-PEUGEOT,208,52719,1.6 BlueHDI 100 hk 5D; BlueHDi 100 5D; 1.2 VTi 5D,PEUGEOT,208,521212,exact,code_exact,
-VOLKSWAGEN,POLO,44100,"1,0 TSI 95 DSG7; 1,0 TSI BlueMotion 95; 1,0 TSI 95",VOLKSWAGEN,POLO,1585668,exact,short_code_exact,
-TOYOTA,AYGO,43773,1.0 VVT-i; 1.0 benzin (72 hk); 1.0 VVT-i MMT,TOYOTA,AYGO,625248,exact,short_code_exact,
-TOYOTA,YARIS,39750,1.5Hybrid e-CVT; 1.5 Hybrid (116 hk) aut. gear; 1.0VVT-i,TOYOTA,YARIS,1114899,high,name_similarity_firsttoken,
-TOYOTA,YARIS,39750,1.5Hybrid e-CVT; 1.5 Hybrid (116 hk) aut. gear; 1.0VVT-i,TOYOTA,AURIS,359334,medium,name_similarity_firsttoken,
-TOYOTA,YARIS,39750,1.5Hybrid e-CVT; 1.5 Hybrid (116 hk) aut. gear; 1.0VVT-i,TOYOTA,YARIUS,2,high,name_similarity_firsttoken,
-TOYOTA,YARIS,39750,1.5Hybrid e-CVT; 1.5 Hybrid (116 hk) aut. gear; 1.0VVT-i,TOYOTA,YARRIS,2,high,name_similarity_firsttoken,
-TOYOTA,YARIS,39750,1.5Hybrid e-CVT; 1.5 Hybrid (116 hk) aut. gear; 1.0VVT-i,TOYOTA,AYRIS,2,medium,name_similarity_firsttoken,
-CITROËN,C3,38244,"1.2 PureTech 83 5D; 1.2 PureTech 82 4-dørs m. bagklap; 1,6 4-dørs m. bagklap",CITROEN,C3,574211,exact,code_exact,
-KIA,PICANTO,32895,"1.0 5-dørs Man. 5; 1.2 5-dørs Man. 5; 1,0 ISG",KIA,PICANTO,459638,high,name_similarity_firsttoken,
-KIA,PICANTO,32895,"1.0 5-dørs Man. 5; 1.2 5-dørs Man. 5; 1,0 ISG",KIA,PINCATO,4,medium,name_similarity_firsttoken,
-KIA,PICANTO,32895,"1.0 5-dørs Man. 5; 1.2 5-dørs Man. 5; 1,0 ISG",KIA,PACANTO,2,medium,name_similarity_firsttoken,
-CITROËN,C1,31991,"1,0 4-dørs m. bagklap; 1 4-dørs m. bagklap; 1.0 VTi 72 hk 5D",CITROEN,C1,407006,exact,code_exact,
-FORD,FIESTA,31965,"1.0 EcoBoost (100 HK) Hatchback, 5 dørs Forhjulstræk Manuel; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Manuel; 1.0 EcoBoost Hybrid (125 HK) 5-dørs FWD M6",FORD,FIESTA,3479593,high,name_similarity_firsttoken,
-FORD,FIESTA,31965,"1.0 EcoBoost (100 HK) Hatchback, 5 dørs Forhjulstræk Manuel; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Manuel; 1.0 EcoBoost Hybrid (125 HK) 5-dørs FWD M6",FORD,FEISTA,18,medium,name_similarity_firsttoken,
-FORD,FIESTA,31965,"1.0 EcoBoost (100 HK) Hatchback, 5 dørs Forhjulstræk Manuel; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Manuel; 1.0 EcoBoost Hybrid (125 HK) 5-dørs FWD M6",FORD,FIEST,4,high,name_similarity_firsttoken,
-FORD,FIESTA,31965,"1.0 EcoBoost (100 HK) Hatchback, 5 dørs Forhjulstræk Manuel; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Manuel; 1.0 EcoBoost Hybrid (125 HK) 5-dørs FWD M6",FORD,FEIESTA,2,high,name_similarity_firsttoken,
-FORD,FIESTA,31965,"1.0 EcoBoost (100 HK) Hatchback, 5 dørs Forhjulstræk Manuel; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Manuel; 1.0 EcoBoost Hybrid (125 HK) 5-dørs FWD M6",FORD,FISTA,1,high,name_similarity_firsttoken,
-VOLKSWAGEN,GOLF,29976,1.5 TSI EVO 150 DSG7; 1.4 TSI BMT 125; 1.4 TSI BMT 122 HK 5 DØRS,VOLKSWAGEN,GOLF,2127313,exact,short_code_exact,
-HYUNDAI,I10,29175,"1.0 (hatchback); 1.0 Hatchback; 1,2 FL",HYUNDAI,I10,599315,exact,code_exact,
-SKODA,CITIGO,27868,1.0 MPI 60 HK 5-Dørs Hatchback; 1.0 MPI 60  5-Dørs; 1.0 MPI 60 HK 3-Dørs Hatchback,SKODA,CITIGO,120830,high,name_similarity_firsttoken,
-SKODA,CITIGO,27868,1.0 MPI 60 HK 5-Dørs Hatchback; 1.0 MPI 60  5-Dørs; 1.0 MPI 60 HK 3-Dørs Hatchback,SKODA,CITI,3,medium,name_similarity_firsttoken,
-OPEL,CORSA,27644,"1,4 5-dørs; 1,2 5D; 1,4 90HK 5-dørs",VAUXHALL,CORSA,2306909,high,name_similarity_firsttoken,
-OPEL,CORSA,27644,"1,4 5-dørs; 1,2 5D; 1,4 90HK 5-dørs",VAUXHALL,CORSAVAN,8928,medium,name_similarity_firsttoken,
-OPEL,CORSA,27644,"1,4 5-dørs; 1,2 5D; 1,4 90HK 5-dørs",VAUXHALL,CRESTA,92,medium,name_similarity_firsttoken,
-OPEL,CORSA,27644,"1,4 5-dørs; 1,2 5D; 1,4 90HK 5-dørs",VAUXHALL,COSRA,4,medium,name_similarity_firsttoken,
-OPEL,CORSA,27644,"1,4 5-dørs; 1,2 5D; 1,4 90HK 5-dørs",VAUXHALL,CORSER,4,medium,name_similarity_firsttoken,
-RENAULT,Ny Clio,26976,TCe 90 Sport Tourer; TCe 90 5d; dCi 75 Sport Tourer,RENAULT,CLIO,848688,exact,short_code_exact,
-HYUNDAI,I20,25514,"1.25 5 dørs Hatchback; 1.2 5 dørs MPV; 1,2",HYUNDAI,I20,314701,exact,code_exact,
-SKODA,FABIA,25197,1.0 TSI 95  Combi; 1.2 TSI 90 HK STATIONCAR; 1.2 TSI 110 HK STATIONCAR,SKODA,FABIA,569705,high,name_similarity_firsttoken,
-SKODA,FABIA,25197,1.0 TSI 95  Combi; 1.2 TSI 90 HK STATIONCAR; 1.2 TSI 110 HK STATIONCAR,SKODA,FABIA3,4,high,name_similarity_firsttoken,
-SKODA,FABIA,25197,1.0 TSI 95  Combi; 1.2 TSI 90 HK STATIONCAR; 1.2 TSI 110 HK STATIONCAR,SKODA,FEBIA2,4,medium,name_similarity_firsttoken,
-SKODA,OCTAVIA,24510,1.5 TSI ACT 150 COMBI DSG7; 2.0 TDI 150 COMBI DSG7; 1.4 TSI 150 COMBI DSG,SKODA,OCTAVIA,484694,high,name_similarity_firsttoken,
-SKODA,OCTAVIA,24510,1.5 TSI ACT 150 COMBI DSG7; 2.0 TDI 150 COMBI DSG7; 1.4 TSI 150 COMBI DSG,SKODA,OCTIVIA,5,medium,name_similarity_firsttoken,
-SKODA,OCTAVIA,24510,1.5 TSI ACT 150 COMBI DSG7; 2.0 TDI 150 COMBI DSG7; 1.4 TSI 150 COMBI DSG,SKODA,OTAVIA,2,high,name_similarity_firsttoken,
-SKODA,OCTAVIA,24510,1.5 TSI ACT 150 COMBI DSG7; 2.0 TDI 150 COMBI DSG7; 1.4 TSI 150 COMBI DSG,SKODA,OCTVIA,1,high,name_similarity_firsttoken,
-NISSAN,QASHQAI,23722,DIG-T 160 DCT; DIG-T 140 6 M/T; DIG-T 115 2WD 6 M/T,NISSAN,QASHQAI,1469028,high,name_similarity_firsttoken,
-NISSAN,QASHQAI,23722,DIG-T 160 DCT; DIG-T 140 6 M/T; DIG-T 115 2WD 6 M/T,NISSAN,QUASHQAI,14,high,name_similarity_firsttoken,
-NISSAN,QASHQAI,23722,DIG-T 160 DCT; DIG-T 140 6 M/T; DIG-T 115 2WD 6 M/T,NISSAN,QASHQI,4,high,name_similarity_firsttoken,
-NISSAN,QASHQAI,23722,DIG-T 160 DCT; DIG-T 140 6 M/T; DIG-T 115 2WD 6 M/T,NISSAN,QASQAI,3,high,name_similarity_firsttoken,
-NISSAN,QASHQAI,23722,DIG-T 160 DCT; DIG-T 140 6 M/T; DIG-T 115 2WD 6 M/T,NISSAN,QASHQUAI,2,high,name_similarity_firsttoken,
-SUZUKI,SWIFT,22549,"1,2 5-dørs; 1,2 Hybrid 5-dørs; 1,2 Dualjet 5-dørs",SUZUKI,SWIFT,324246,high,name_similarity_firsttoken,
-SUZUKI,SWIFT,22549,"1,2 5-dørs; 1,2 Hybrid 5-dørs; 1,2 Dualjet 5-dørs",SUZUKI,SWITT,4,medium,name_similarity_firsttoken,
-KIA,RIO,21547,1.2 5-dørs Man. 5; 1.0 5-dørs Man. 5; 1.1 CRDI 5-dørs Man. 6,KIA,RIO,244472,exact,short_code_exact,
-PEUGEOT,308,20846,1.6 BlueHDi 120 hk SW; 1.6 BlueHDi 120 hk 5D; BlueHDi 130  SW,PEUGEOT,308,330852,exact,code_exact,
-RENAULT,Captur,18881,TCe 90; dCi 90; E-TECH 160,RENAULT,CAPTUR,377121,high,name_similarity_firsttoken,
-RENAULT,Captur,18881,TCe 90; dCi 90; E-TECH 160,RENAULT,CAMPER,327,medium,name_similarity_firsttoken,
-RENAULT,Captur,18881,TCe 90; dCi 90; E-TECH 160,RENAULT,CAPTURE,4,high,name_similarity_firsttoken,
-RENAULT,Captur,18881,TCe 90; dCi 90; E-TECH 160,RENAULT,CAR,4,medium,name_similarity_firsttoken,
-RENAULT,Captur,18881,TCe 90; dCi 90; E-TECH 160,RENAULT,KAPTUR,2,medium,name_similarity_firsttoken,
-VOLKSWAGEN,TOURAN,17682,1.5 TSI 150 DSG7; 1.4 TSI 150 DSG7; 1.6 TDI SCR 115 DSG7,VOLKSWAGEN,TOURAN,178099,high,name_similarity_firsttoken,
-VOLKSWAGEN,TOURAN,17682,1.5 TSI 150 DSG7; 1.4 TSI 150 DSG7; 1.6 TDI SCR 115 DSG7,VOLKSWAGEN,TOURAG,9,medium,name_similarity_firsttoken,
-VOLKSWAGEN,TOURAN,17682,1.5 TSI 150 DSG7; 1.4 TSI 150 DSG7; 1.6 TDI SCR 115 DSG7,VOLKSWAGEN,TOGUAN,5,medium,name_similarity_firsttoken,
-VOLKSWAGEN,TOURAN,17682,1.5 TSI 150 DSG7; 1.4 TSI 150 DSG7; 1.6 TDI SCR 115 DSG7,VOLKSWAGEN,TORAN,2,high,name_similarity_firsttoken,
-VOLKSWAGEN,TOURAN,17682,1.5 TSI 150 DSG7; 1.4 TSI 150 DSG7; 1.6 TDI SCR 115 DSG7,VOLKSWAGEN,TURAN,1,high,name_similarity_firsttoken,
-PEUGEOT,107,17674,"1,0 5-D 68 HK; 1,0 5-D; 1,0 I 5D 68HK",PEUGEOT,107,281814,exact,code_exact,
-FORD,KUGA,16767,2.5 Plug-in Hybrid (225 HK) SUV FWD CVT; 1.5 Ecoboost (150 HK) SUV FWD (forhjulstræk) Man; 1.5 EcoBoost (150 HK ) SUV FWD M6,FORD,KUGA,699530,exact,short_code_exact,
-PEUGEOT,2008,16677,1.6 BlueHDi 100 hk Crossover; PureTech 130  SUV; 1.2 e-THP 110 hk Crossover,PEUGEOT,2008,331689,exact,code_exact,
-PEUGEOT,108,15588,1.0 e-VTi 69 hk 5D; e-VTi 72 5D; 1.0 e-VTi 72 hk 5D,PEUGEOT,108,176432,exact,code_exact,
-VOLKSWAGEN,PASSAT,15030,1.4 TSI ACT 150  Variant DSG7; 2.0 TDI BMT 150 Variant DSG6; 1.4 TSI ACT 150  DSG7,VOLKSWAGEN,PASSAT,451005,high,name_similarity_firsttoken,
-VOLKSWAGEN,PASSAT,15030,1.4 TSI ACT 150  Variant DSG7; 2.0 TDI BMT 150 Variant DSG6; 1.4 TSI ACT 150  DSG7,VOLKSWAGEN,PAASAT,2,medium,name_similarity_firsttoken,
-VOLKSWAGEN,PASSAT,15030,1.4 TSI ACT 150  Variant DSG7; 2.0 TDI BMT 150 Variant DSG6; 1.4 TSI ACT 150  DSG7,VOLKSWAGEN,PASSET,2,medium,name_similarity_firsttoken,
-VOLKSWAGEN,PASSAT,15030,1.4 TSI ACT 150  Variant DSG7; 2.0 TDI BMT 150 Variant DSG6; 1.4 TSI ACT 150  DSG7,VOLKSWAGEN,PASSETT,2,medium,name_similarity_firsttoken,
-KIA,CEED,14992,1.6 CRDI Stationcar Man. 6; 1.6 GDI Plug-in Hybrid Stationscar DCT 6; 1.0 Stationcar Man. 6,KIA,CEED,306364,exact,short_code_exact,
-OPEL,ASTRA,14759,"1,0 Turbo 105HK Sports Tourer; 1,4 Turbo 150HK Sports Tourer; 1,0 Turbo 105HK 5-dørs",VAUXHALL,ASTRA,1545548,high,name_similarity_firsttoken,
-OPEL,ASTRA,14759,"1,0 Turbo 105HK Sports Tourer; 1,4 Turbo 150HK Sports Tourer; 1,0 Turbo 105HK 5-dørs",VAUXHALL,ASTRAVAN,18748,medium,name_similarity_firsttoken,
-OPEL,ASTRA,14759,"1,0 Turbo 105HK Sports Tourer; 1,4 Turbo 150HK Sports Tourer; 1,0 Turbo 105HK 5-dørs",VAUXHALL,ASTRAMAX,23,medium,name_similarity_firsttoken,
-OPEL,ASTRA,14759,"1,0 Turbo 105HK Sports Tourer; 1,4 Turbo 150HK Sports Tourer; 1,0 Turbo 105HK 5-dørs",VAUXHALL,ASTR,3,medium,name_similarity_firsttoken,
-OPEL,ASTRA,14759,"1,0 Turbo 105HK Sports Tourer; 1,4 Turbo 150HK Sports Tourer; 1,0 Turbo 105HK 5-dørs",VAUXHALL,ASTAR,3,medium,name_similarity_firsttoken,
-FORD,FOCUS,14472,1.0 EcoBoost (125 HK) Stationcar Forhjulstræk Manuel; 1.0 EcoBoost (125 HK) Stationcar FWD M6; 1.0 EcoBoost (125 HK ) Stationcar FWD M6,FORD,FOCUS,2291752,high,name_similarity_firsttoken,
-FORD,FOCUS,14472,1.0 EcoBoost (125 HK) Stationcar Forhjulstræk Manuel; 1.0 EcoBoost (125 HK) Stationcar FWD M6; 1.0 EcoBoost (125 HK ) Stationcar FWD M6,FORD,FOUCS,5,medium,name_similarity_firsttoken,
-FORD,FOCUS,14472,1.0 EcoBoost (125 HK) Stationcar Forhjulstræk Manuel; 1.0 EcoBoost (125 HK) Stationcar FWD M6; 1.0 EcoBoost (125 HK ) Stationcar FWD M6,FORD,FOLUS,4,medium,name_similarity_firsttoken,
-FORD,FOCUS,14472,1.0 EcoBoost (125 HK) Stationcar Forhjulstræk Manuel; 1.0 EcoBoost (125 HK) Stationcar FWD M6; 1.0 EcoBoost (125 HK ) Stationcar FWD M6,FORD,LOCUST,2,medium,name_similarity_firsttoken,
-FORD,FOCUS,14472,1.0 EcoBoost (125 HK) Stationcar Forhjulstræk Manuel; 1.0 EcoBoost (125 HK) Stationcar FWD M6; 1.0 EcoBoost (125 HK ) Stationcar FWD M6,FORD,FOCAS,1,medium,name_similarity_firsttoken,
-CHEVROLET,SPARK,12832,1.0 ESP 5D; 1.2 ESP 5D; 1.0 5D,CHEVROLET,SPARK,37235,high,name_similarity_firsttoken,
-CHEVROLET,SPARK,12832,1.0 ESP 5D; 1.2 ESP 5D; 1.0 5D,CHEVROLET,STAR,4,medium,name_similarity_firsttoken,
-FORD,KA,12679,"1.2 (69HK) Hatchback, 3 dørs Forhjulstræk Manuel; 1,2; 1,2 SE",FORD,KA,437995,exact,short_code_exact,
-MERCEDES-BENZ,C-Klasse,12063,220 d Stationcar 9G-TRONIC; 220 d Sedan 9G-TRONIC; 220 d St.Car 7G-TRONIC PLUS,MERCEDES-BENZ,C,879779,exact,short_code_exact,
-SEAT,MII,11905,1.0 60 HK 44 kw ECOMOTIVE 5-DØRS 5 trins manuel; 1.0 60 HK ECOMOTIVE 5-DØRS; 1.0 60 HK ECOMOTIVE 3-DØRS,SEAT,MII,44001,exact,short_code_exact,
-PEUGEOT,3008,11806,HYBRID 225 SUV EAT8; BlueHDi 130 SUV EAT8; 1.6 BlueHDi 120 hk SUV,PEUGEOT,3008,349581,exact,code_exact,
-FIAT,500,11378,"1.2 69; 1,2; 0.9 80",FIAT,500,1046964,exact,code_exact,
-TOYOTA,AURIS,10970,1.8 Hybrid Touring Sports; 1.8 Hybrid Hatchback; 1.6 Valvematic Hatchback,TOYOTA,YARIS,1114899,medium,name_similarity_firsttoken,
-TOYOTA,AURIS,10970,1.8 Hybrid Touring Sports; 1.8 Hybrid Hatchback; 1.6 Valvematic Hatchback,TOYOTA,AURIS,359334,high,name_similarity_firsttoken,
-TOYOTA,AURIS,10970,1.8 Hybrid Touring Sports; 1.8 Hybrid Hatchback; 1.6 Valvematic Hatchback,TOYOTA,AURUS,6,medium,name_similarity_firsttoken,
-TOYOTA,AURIS,10970,1.8 Hybrid Touring Sports; 1.8 Hybrid Hatchback; 1.6 Valvematic Hatchback,TOYOTA,AUIRS,2,medium,name_similarity_firsttoken,
-TOYOTA,AURIS,10970,1.8 Hybrid Touring Sports; 1.8 Hybrid Hatchback; 1.6 Valvematic Hatchback,TOYOTA,AYRIS,2,medium,name_similarity_firsttoken,
-SUZUKI,VITARA,9524,"1,6 5-dørs; 1,4 Hybrid 5-dørs; 1,4 Boosterjet 5-dørs",SUZUKI,VITARA,152723,high,name_similarity_firsttoken,
-SUZUKI,VITARA,9524,"1,6 5-dørs; 1,4 Hybrid 5-dørs; 1,4 Boosterjet 5-dørs",SUZUKI,GRANDVITARA,9,medium,name_similarity_firsttoken,
-SUZUKI,VITARA,9524,"1,6 5-dørs; 1,4 Hybrid 5-dørs; 1,4 Boosterjet 5-dørs",SUZUKI,VITRA,6,high,name_similarity_firsttoken,
-SUZUKI,VITARA,9524,"1,6 5-dørs; 1,4 Hybrid 5-dørs; 1,4 Boosterjet 5-dørs",SUZUKI,VITARIA,3,high,name_similarity_firsttoken,
-SUZUKI,VITARA,9524,"1,6 5-dørs; 1,4 Hybrid 5-dørs; 1,4 Boosterjet 5-dørs",SUZUKI,GRAND/VITARA,2,medium,name_similarity_firsttoken,
-RENAULT,MEGANE,9277,1.5 dCi ESM 110 Sport Tourer; E-TECH 160 Sport Tourer; 1.5 dCi ESM 110,RENAULT,MEGANE,270742,high,name_similarity_firsttoken,
-RENAULT,MEGANE,9277,1.5 dCi ESM 110 Sport Tourer; E-TECH 160 Sport Tourer; 1.5 dCi ESM 110,RENAULT,MEGAN,46,high,name_similarity_firsttoken,
-RENAULT,MEGANE,9277,1.5 dCi ESM 110 Sport Tourer; E-TECH 160 Sport Tourer; 1.5 dCi ESM 110,RENAULT,MAGANE,14,medium,name_similarity_firsttoken,
-RENAULT,MEGANE,9277,1.5 dCi ESM 110 Sport Tourer; E-TECH 160 Sport Tourer; 1.5 dCi ESM 110,RENAULT,MEGANNE,9,high,name_similarity_firsttoken,
-RENAULT,MEGANE,9277,1.5 dCi ESM 110 Sport Tourer; E-TECH 160 Sport Tourer; 1.5 dCi ESM 110,RENAULT,MAGAN,5,medium,name_similarity_firsttoken,
-SEAT,LEON,9206,1.5 TSI ACT 150 Stationcar DSG7; 1.4 TSI 150 HK ACT 110 kw ST. CAR DSG7; 1.4 TSI ACT 150 Stationcar DSG7,SEAT,LEON,442771,exact,short_code_exact,
-HYUNDAI,I30,9003,"1.6 CRDi 5 dørs Hatchback; 1,6 CRDI 90 ECO; 1.6 CRDi 5 dørs MPV",HYUNDAI,I30,264304,exact,code_exact,
-SUZUKI,SX4 S-Cross,8987,"1,0 Boosterjet 5-dørs; 1,6 5-dørs; 1,4 Hybrid 5-dørs",SUZUKI,SX4,103026,high,name_similarity_firsttoken,
-SUZUKI,SX4 S-Cross,8987,"1,0 Boosterjet 5-dørs; 1,6 5-dørs; 1,4 Hybrid 5-dørs",SUZUKI,SX,244,medium,name_similarity_firsttoken,
-SUZUKI,SX4 S-Cross,8987,"1,0 Boosterjet 5-dørs; 1,6 5-dørs; 1,4 Hybrid 5-dørs",SUZUKI,SZ4,10,medium,name_similarity_firsttoken,
-SUZUKI,SX4 S-Cross,8987,"1,0 Boosterjet 5-dørs; 1,6 5-dørs; 1,4 Hybrid 5-dørs",SUZUKI,SCROSS,3,medium,name_similarity_fullstring,
-SUZUKI,SX4 S-Cross,8987,"1,0 Boosterjet 5-dørs; 1,6 5-dørs; 1,4 Hybrid 5-dørs",SUZUKI,SX4S_CROSS,1,medium,name_similarity_fullstring,
-OPEL,KARL,8920,"1,0 75HK 5 dørs; 1,0 75HK 5 dørs Aut.",VAUXHALL,VIVA,87941,known-rename,Opel Karl is sold in the UK as the Vauxhall Viva; confirmed in Phase 2 strategy doc finding G.,
-SUZUKI,BALENO,8873,"1,2 Dualjet 5-dørs; 1,2 Dualjet SHVS 5-dørs; 1,0 Boosterjet 5-dørs",SUZUKI,BALENO,16238,high,name_similarity_firsttoken,
-VOLKSWAGEN,T-Roc,8548,1.5 TSI 150HK DSG7; 1.5 TSI EVO 150HK DSG7; 1.0 TSI 115HK,VOLKSWAGEN,T,243259,exact,code_exact,
-SKODA,OCTAVIA COMBI,8432,1.4 TSI 140 HK STATIONCAR; 1.2 TSI 105 HK Stationcar; 1.4 TSI 140 HK STATIONCAR DSG,SKODA,OCTAVIA,484694,high,name_similarity_firsttoken,
-SKODA,OCTAVIA COMBI,8432,1.4 TSI 140 HK STATIONCAR; 1.2 TSI 105 HK Stationcar; 1.4 TSI 140 HK STATIONCAR DSG,SKODA,OCTIVIA,5,medium,name_similarity_firsttoken,
-SKODA,OCTAVIA COMBI,8432,1.4 TSI 140 HK STATIONCAR; 1.2 TSI 105 HK Stationcar; 1.4 TSI 140 HK STATIONCAR DSG,SKODA,OTAVIA,2,high,name_similarity_firsttoken,
-SKODA,OCTAVIA COMBI,8432,1.4 TSI 140 HK STATIONCAR; 1.2 TSI 105 HK Stationcar; 1.4 TSI 140 HK STATIONCAR DSG,SKODA,OCTVIA,1,high,name_similarity_firsttoken,
-SUZUKI,Celerio,8391,"1,0 Dualjet 5-dørs; 1,0 5-dørs; 1,0 5-dørs Aut.",SUZUKI,CELERIO,60661,high,name_similarity_firsttoken,
-SUZUKI,Celerio,8391,"1,0 Dualjet 5-dørs; 1,0 5-dørs; 1,0 5-dørs Aut.",SUZUKI,CERVO,4,medium,name_similarity_firsttoken,
-RENAULT,CLIO,8289,"TCe 100 5d; TCe 90 5d; 1,2 16V 75",RENAULT,CLIO,848688,exact,short_code_exact,
-CITROËN,C4,8280,"1,6 4-dørs m. bagklap; 1.6 BlueHDi 100 hk 4-dørs m. bagklap Man.; 1,2 4-dørs m. bagklap",CITROEN,C4,451899,exact,code_exact,
-MERCEDES-BENZ,A-Klasse,8082,200 Hatchback 7G-DCT; A 200 Hatchback 7G-DCT; 200 d Hatchback 8G-DCT,MERCEDES-BENZ,A,839051,exact,short_code_exact,
-SKODA,FABIA COMBI,8079,"1.2 TSI 86 HK Stationcar; 1,2 TSI; 1.2 TSI 105 HK Stationcar",SKODA,FABIA,569705,high,name_similarity_firsttoken,
-SKODA,FABIA COMBI,8079,"1.2 TSI 86 HK Stationcar; 1,2 TSI; 1.2 TSI 105 HK Stationcar",SKODA,FABIA3,4,high,name_similarity_firsttoken,
-SKODA,FABIA COMBI,8079,"1.2 TSI 86 HK Stationcar; 1,2 TSI; 1.2 TSI 105 HK Stationcar",SKODA,FEBIA2,4,medium,name_similarity_firsttoken,
-FORD,C-MAX,8014,1.0 EcoBoost (125 HK ) 5-dørs FWD M6; 1.0 EcoBoost (125 HK) MPV Forhjulstræk Manuel; 1.0 EcoBoost (125 HK) 5-dørs FWD M6,FORD,C,271091,exact,code_exact,
-CITROËN,C4 Cactus,7882,"1,6 4-DØRS MED BAGKLAP 5 Man; 1,2 4-DØRS MED BAGKLAP 5 Man; 1.6 BlueHDi 100 HK 4-dørs m. bagklap Man.",CITROEN,C4,451899,exact,code_exact,
-NISSAN,MICRA,7864,"1.2; 1,2 5D. MAN.; IG-T Hatchback, 5 dørs 2WD 5M/T",NISSAN,MICRA,613092,high,name_similarity_firsttoken,
-NISSAN,MICRA,7864,"1.2; 1,2 5D. MAN.; IG-T Hatchback, 5 dørs 2WD 5M/T",NISSAN,MISTRAL,31,medium,name_similarity_firsttoken,
-NISSAN,MICRA,7864,"1.2; 1,2 5D. MAN.; IG-T Hatchback, 5 dørs 2WD 5M/T",NISSAN,MIRCA,9,medium,name_similarity_firsttoken,
-NISSAN,MICRA,7864,"1.2; 1,2 5D. MAN.; IG-T Hatchback, 5 dørs 2WD 5M/T",NISSAN,ALMIRA,3,medium,name_similarity_firsttoken,
-NISSAN,MICRA,7864,"1.2; 1,2 5D. MAN.; IG-T Hatchback, 5 dørs 2WD 5M/T",NISSAN,TICA,3,medium,name_similarity_firsttoken,
-FIAT,PANDA,7703,"1,2; 1.2 69; 0.9 60",FIAT,PANDA,223233,high,name_similarity_firsttoken,
-MAZDA,MAZDA2,7483,"1,5 SKYACTIV-G Hatchback Man.; 1,5 Hatchback Man.; 1.3 5 DØRS HB",MAZDA,2,313689,exact,code_exact,
-RENAULT,TWINGO,7445,"1.2 16V; SCe 70; 1,2 16V 75",RENAULT,TWINGO,64049,high,name_similarity_firsttoken,
-RENAULT,TWINGO,7445,"1.2 16V; SCe 70; 1,2 16V 75",RENAULT,WINNEBAGO,6,medium,name_similarity_firsttoken,
-RENAULT,TWINGO,7445,"1.2 16V; SCe 70; 1,2 16V 75",RENAULT,WINIBAGO,2,medium,name_similarity_firsttoken,
-BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,3 SERIES,872529,high,family_series_literal,
-BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,320,115212,high,family_series_sibling,
-BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,330,92441,high,family_series_sibling,
-BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,318,26213,high,family_series_sibling,
-BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,316,23914,high,family_series_sibling,
-BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,335,10905,high,family_series_sibling,
-BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,340,2018,high,family_series_sibling,
-BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,325,967,high,family_series_sibling,
-BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,328,290,high,family_series_sibling,
-BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,323,109,high,family_series_sibling,
-BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,3000,36,high,family_series_sibling,
-BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,32,1,high,family_series_sibling,
-BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,331,1,high,family_series_sibling,
-BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,3251,1,high,family_series_sibling,
-SUZUKI,IGNIS,7200,"1,2 Dualjet 5-dørs; 1,2 Hybrid 5-dørs; 1,2 Hybrid 5-dørs CVT",SUZUKI,IGNIS,70633,high,name_similarity_firsttoken,
-AUDI,A3 Sportback,7174,1.6 TDI 110 HK 5-DØRS; 40 TFSI e 5-dørs S tronic; 35 TFSI 150 hk 5-dørs S tronic,AUDI,A3,1007746,exact,code_exact,
-SEAT,IBIZA,7137,1.0 TSI 95; 1.0 TSI 115; 1.0 TSI 115 DSG7,SEAT,IBIZA,487807,high,name_similarity_firsttoken,
-SEAT,IBIZA,7137,1.0 TSI 95; 1.0 TSI 115; 1.0 TSI 115 DSG7,SEAT,IBZA,5,medium,name_similarity_firsttoken,
-SEAT,IBIZA,7137,1.0 TSI 95; 1.0 TSI 115; 1.0 TSI 115 DSG7,SEAT,IBEZA,3,medium,name_similarity_firsttoken,
-SEAT,IBIZA,7137,1.0 TSI 95; 1.0 TSI 115; 1.0 TSI 115 DSG7,SEAT,IBIXA,3,medium,name_similarity_firsttoken,
-MERCEDES-BENZ,E-Klasse,7135,220 d Sedan 9G-TRONIC; 220 d Staioncar 9G-TRONIC; 200 CDI  T 7G-TRONIC PLUS,MERCEDES-BENZ,E,556928,exact,short_code_exact,
-FORD,S-MAX,7026,"2,0 TDCI; 2,0 TDCI AUT.; EcoBlue 2.0 (190HK) MPV FWD A8",FORD,S,180426,exact,code_exact,
-MITSUBISHI,SPACE STAR,7009,1.2 5D; 1.2 5D CVT; 1.0 5D,MITSUBISHI,SPACE,3928,high,name_similarity_firsttoken,
-MITSUBISHI,SPACE STAR,7009,1.2 5D; 1.2 5D CVT; 1.0 5D,MITSUBISHI,SPACEGEAR,12,medium,name_similarity_fullstring,
-MITSUBISHI,SPACE STAR,7009,1.2 5D; 1.2 5D CVT; 1.0 5D,MITSUBISHI,SPACEWAGON,6,medium,name_similarity_firsttoken,
-MITSUBISHI,SPACE STAR,7009,1.2 5D; 1.2 5D CVT; 1.0 5D,MITSUBISHI,SPACESTAR,2,high,name_similarity_fullstring,
-MITSUBISHI,SPACE STAR,7009,1.2 5D; 1.2 5D CVT; 1.0 5D,MITSUBISHI,SPACEMAKER,2,medium,name_similarity_fullstring,
-SUZUKI,ALTO,6754,"1,0L M/T; 1,0 5-dørs; UOPLYST",SUZUKI,ALTO,116084,exact,short_code_exact,
-CITROËN,C 1,6597,"1,0 I; 1,0I AUT.; 1,0",CITROEN,C,4672,exact,code_exact,
-VOLKSWAGEN,T-Cross,6532,1.0 TSI 115HK DSG7; 1.0 TSI 110HK DSG7; 1.0 TSI 95HK,VOLKSWAGEN,T,243259,exact,code_exact,
-VOLKSWAGEN,TIGUAN,6412,2.0 TDI 150HK DSG7; 1.5 TSI 150HK DSG7; 1.4 TSI 150 4Motion DSG6,VOLKSWAGEN,TIGUAN,573558,high,name_similarity_firsttoken,
-VOLKSWAGEN,TIGUAN,6412,2.0 TDI 150HK DSG7; 1.5 TSI 150HK DSG7; 1.4 TSI 150 4Motion DSG6,VOLKSWAGEN,TOGUAN,5,medium,name_similarity_firsttoken,
-VOLKSWAGEN,TIGUAN,6412,2.0 TDI 150HK DSG7; 1.5 TSI 150HK DSG7; 1.4 TSI 150 4Motion DSG6,VOLKSWAGEN,TIGAN,3,high,name_similarity_firsttoken,
-VOLKSWAGEN,TIGUAN,6412,2.0 TDI 150HK DSG7; 1.5 TSI 150HK DSG7; 1.4 TSI 150 4Motion DSG6,VOLKSWAGEN,TIGWAN,3,medium,name_similarity_firsttoken,
-VOLKSWAGEN,TIGUAN,6412,2.0 TDI 150HK DSG7; 1.5 TSI 150HK DSG7; 1.4 TSI 150 4Motion DSG6,VOLKSWAGEN,TIGUAM,2,medium,name_similarity_firsttoken,
-CITROËN,GRAND C4 PICASSO,6346,"1,6 MPV 6 Aut.; 1,6 MPV; 2,0 MPV 6 Aut.",CITROEN,GRAND,11395,high,name_similarity_firsttoken,
-KIA,Niro,6209,1.6 GDI Plug-in Hybrid 5 dørs DCT 6; 1.6 GDI Hybrid 5 dørs DCT 6; C5P21,KIA,NIRO,200258,exact,short_code_exact,
-VOLKSWAGEN,PASSAT VARIANT,6038,"1.4 TSI 218HK DSG6 PHEV DSG6; 2,0 TDI; 2,0 TDI AUT.",VOLKSWAGEN,PASSAT,451005,high,name_similarity_firsttoken,
-VOLKSWAGEN,PASSAT VARIANT,6038,"1.4 TSI 218HK DSG6 PHEV DSG6; 2,0 TDI; 2,0 TDI AUT.",VOLKSWAGEN,VARIANT,21,medium,name_similarity_fullstring,
-VOLKSWAGEN,PASSAT VARIANT,6038,"1.4 TSI 218HK DSG6 PHEV DSG6; 2,0 TDI; 2,0 TDI AUT.",VOLKSWAGEN,PAASAT,2,medium,name_similarity_firsttoken,
-VOLKSWAGEN,PASSAT VARIANT,6038,"1.4 TSI 218HK DSG6 PHEV DSG6; 2,0 TDI; 2,0 TDI AUT.",VOLKSWAGEN,PASSET,2,medium,name_similarity_firsttoken,
-VOLKSWAGEN,PASSAT VARIANT,6038,"1.4 TSI 218HK DSG6 PHEV DSG6; 2,0 TDI; 2,0 TDI AUT.",VOLKSWAGEN,PASSETT,2,medium,name_similarity_firsttoken,
-FORD,FIESTA 5 DØRS,5987,"1,25; 1,6 TDCI ECONETIC; 1,4",FORD,FIESTA,3479593,high,name_similarity_firsttoken,
-FORD,FIESTA 5 DØRS,5987,"1,25; 1,6 TDCI ECONETIC; 1,4",FORD,FEISTA,18,medium,name_similarity_firsttoken,
-FORD,FIESTA 5 DØRS,5987,"1,25; 1,6 TDCI ECONETIC; 1,4",FORD,FIEST,4,high,name_similarity_firsttoken,
-FORD,FIESTA 5 DØRS,5987,"1,25; 1,6 TDCI ECONETIC; 1,4",FORD,FEIESTA,2,high,name_similarity_firsttoken,
-FORD,FIESTA 5 DØRS,5987,"1,25; 1,6 TDCI ECONETIC; 1,4",FORD,FISTA,1,high,name_similarity_firsttoken,
-TOYOTA,Toyota C-HR,5943,1.8 Hybrid; 1.8 Hybrid (122 hk) aut. gear; 2.0 hybrid (184 hk) aut. gear,TOYOTA,TOYOTA,60,high,name_similarity_firsttoken,
-TOYOTA,Toyota C-HR,5943,1.8 Hybrid; 1.8 Hybrid (122 hk) aut. gear; 2.0 hybrid (184 hk) aut. gear,TOYOTA,TOYOACE,5,medium,name_similarity_firsttoken,
-TOYOTA,Toyota C-HR,5943,1.8 Hybrid; 1.8 Hybrid (122 hk) aut. gear; 2.0 hybrid (184 hk) aut. gear,TOYOTA,TOYOTO,3,medium,name_similarity_firsttoken,
-TOYOTA,Toyota C-HR,5943,1.8 Hybrid; 1.8 Hybrid (122 hk) aut. gear; 2.0 hybrid (184 hk) aut. gear,TOYOTA,TOYO,3,medium,name_similarity_firsttoken,
-TOYOTA,Toyota C-HR,5943,1.8 Hybrid; 1.8 Hybrid (122 hk) aut. gear; 2.0 hybrid (184 hk) aut. gear,TOYOTA,"TOYOTA,",1,high,name_similarity_firsttoken,
-TOYOTA,AYGO 3/5-DØRS,5820,1.0 HB 5-DØRS; 1.0 HB AUT. 5-DØRS; 1.0 HB 3-DØRS,TOYOTA,AYGO,625248,high,name_similarity_firsttoken,
-TOYOTA,AYGO 3/5-DØRS,5820,1.0 HB 5-DØRS; 1.0 HB AUT. 5-DØRS; 1.0 HB 3-DØRS,TOYOTA,HYOGO,3,medium,name_similarity_firsttoken,
-TOYOTA,AYGO 3/5-DØRS,5820,1.0 HB 5-DØRS; 1.0 HB AUT. 5-DØRS; 1.0 HB 3-DØRS,TOYOTA,AGYO,2,medium,name_similarity_firsttoken,
-TOYOTA,AYGO 3/5-DØRS,5820,1.0 HB 5-DØRS; 1.0 HB AUT. 5-DØRS; 1.0 HB 3-DØRS,TOYOTA,WAGON,1,medium,name_similarity_firsttoken,
-NISSAN,NOTE,5684,1.2 5 M/T; 1.4; 80 5 M/T,NISSAN,NOTE,378948,exact,short_code_exact,
-VOLVO,V60,5670,D4 aut.; T6 Recharge Aut; D3,VOLVO,V60,96404,exact,code_exact,
-FORD,MONDEO,5626,2.0 TDCi (180 HK) Stationcar Forhjulstræk Automatisk; 2.0 EcoBlue (190 HK) Stationcar FWD A8; 2.0 TDCi (140 HK) Stationcar Forhjulstræk Manuel,FORD,MONDEO,456751,high,name_similarity_firsttoken,
-FORD,MONDEO,5626,2.0 TDCi (180 HK) Stationcar Forhjulstræk Automatisk; 2.0 EcoBlue (190 HK) Stationcar FWD A8; 2.0 TDCi (140 HK) Stationcar Forhjulstræk Manuel,FORD,MODEL,83,medium,name_similarity_firsttoken,
-FORD,MONDEO,5626,2.0 TDCi (180 HK) Stationcar Forhjulstræk Automatisk; 2.0 EcoBlue (190 HK) Stationcar FWD A8; 2.0 TDCi (140 HK) Stationcar Forhjulstræk Manuel,FORD,MONDOE,6,medium,name_similarity_firsttoken,
-FORD,MONDEO,5626,2.0 TDCi (180 HK) Stationcar Forhjulstræk Automatisk; 2.0 EcoBlue (190 HK) Stationcar FWD A8; 2.0 TDCi (140 HK) Stationcar Forhjulstræk Manuel,FORD,MONDAO,5,medium,name_similarity_firsttoken,
-FORD,MONDEO,5626,2.0 TDCi (180 HK) Stationcar Forhjulstræk Automatisk; 2.0 EcoBlue (190 HK) Stationcar FWD A8; 2.0 TDCi (140 HK) Stationcar Forhjulstræk Manuel,FORD,MONDEIO,1,high,name_similarity_firsttoken,
-TOYOTA,COROLLA,5346,1.8 Hybrid (122 hk) Touring Sports aut. Gear; 1.8 Hybrid (122 hk) Hatchback aut. Gear; 2.0 Hybrid (180 hk) Touring Sports aut. Gear,TOYOTA,COROLLA,282026,high,name_similarity_firsttoken,
-TOYOTA,COROLLA,5346,1.8 Hybrid (122 hk) Touring Sports aut. Gear; 1.8 Hybrid (122 hk) Hatchback aut. Gear; 2.0 Hybrid (180 hk) Touring Sports aut. Gear,TOYOTA,CORROLLA,13,high,name_similarity_firsttoken,
-TOYOTA,COROLLA,5346,1.8 Hybrid (122 hk) Touring Sports aut. Gear; 1.8 Hybrid (122 hk) Hatchback aut. Gear; 2.0 Hybrid (180 hk) Touring Sports aut. Gear,TOYOTA,CORROLA,4,medium,name_similarity_firsttoken,
-TOYOTA,COROLLA,5346,1.8 Hybrid (122 hk) Touring Sports aut. Gear; 1.8 Hybrid (122 hk) Hatchback aut. Gear; 2.0 Hybrid (180 hk) Touring Sports aut. Gear,TOYOTA,COROLA,3,high,name_similarity_firsttoken,
-TOYOTA,COROLLA,5346,1.8 Hybrid (122 hk) Touring Sports aut. Gear; 1.8 Hybrid (122 hk) Hatchback aut. Gear; 2.0 Hybrid (180 hk) Touring Sports aut. Gear,TOYOTA,CROLLA,2,high,name_similarity_firsttoken,
-RENAULT,GRAND SCENIC,5269,1.5 dCi ESM 110 7p; 1.6 dCi ESM 130 7p; 1.5 dCi 110 EDC,RENAULT,GRAND,65471,high,name_similarity_firsttoken,
-RENAULT,GRAND SCENIC,5269,1.5 dCi ESM 110 7p; 1.6 dCi ESM 130 7p; 1.5 dCi 110 EDC,RENAULT,GRD,967,medium,name_similarity_firsttoken,
-RENAULT,GRAND SCENIC,5269,1.5 dCi ESM 110 7p; 1.6 dCi ESM 130 7p; 1.5 dCi 110 EDC,RENAULT,GSCENIC,623,medium,name_similarity_fullstring,
-RENAULT,GRAND SCENIC,5269,1.5 dCi ESM 110 7p; 1.6 dCi ESM 130 7p; 1.5 dCi 110 EDC,RENAULT,GRSCENIC,262,medium,name_similarity_fullstring,
-RENAULT,GRAND SCENIC,5269,1.5 dCi ESM 110 7p; 1.6 dCi ESM 130 7p; 1.5 dCi 110 EDC,RENAULT,GRND,4,medium,name_similarity_firsttoken,
-SUZUKI,SPLASH,5129,"1,0 5-dørs; 1,0; 1,2",SUZUKI,SPLASH,45041,high,name_similarity_firsttoken,
-DACIA,Duster,5050,1.5 dCi 109; 1.5 dCi 90; 1.2 TCe 125,DACIA,DUSTER,184163,high,name_similarity_firsttoken,
-TOYOTA,RAV4,4915,2.5 Hybrid (218 hk) 4X2 aut. gear; 2.5 Hybrid 4X2; 2.5 Hybrid 4X4,TOYOTA,RAV4,234239,high,name_similarity_firsttoken,
-TOYOTA,RAV4,4915,2.5 Hybrid (218 hk) 4X2 aut. gear; 2.5 Hybrid 4X2; 2.5 Hybrid 4X4,TOYOTA,RAV,72023,medium,name_similarity_firsttoken,
-TOYOTA,RAV4,4915,2.5 Hybrid (218 hk) 4X2 aut. gear; 2.5 Hybrid 4X2; 2.5 Hybrid 4X4,TOYOTA,RV4,7,medium,name_similarity_firsttoken,
-TOYOTA,RAV4,4915,2.5 Hybrid (218 hk) 4X2 aut. gear; 2.5 Hybrid 4X2; 2.5 Hybrid 4X4,TOYOTA,RAVE,5,medium,name_similarity_firsttoken,
-TOYOTA,RAV4,4915,2.5 Hybrid (218 hk) 4X2 aut. gear; 2.5 Hybrid 4X2; 2.5 Hybrid 4X4,TOYOTA,REV4,2,medium,name_similarity_firsttoken,
-TOYOTA,AVENSIS,4889,1.8 VVT-i stationcar; 1.8 VVT-i Touring Sports; 1.8 VVT-i Touring Sports Multidrive S,TOYOTA,AVENSIS,146826,high,name_similarity_firsttoken,
-TOYOTA,AVENSIS,4889,1.8 VVT-i stationcar; 1.8 VVT-i Touring Sports; 1.8 VVT-i Touring Sports Multidrive S,TOYOTA,AVENIS,2,high,name_similarity_firsttoken,
-VOLKSWAGEN,Golf Sportsvan,4733,1.5 TSI EVO 150 DSG7; 1.4 TSI BMT 125 DSG7; 1.5 TSI EVO 130 DSG7,VOLKSWAGEN,GOLF,2127313,high,name_similarity_firsttoken,
-VOLKSWAGEN,Golf Sportsvan,4733,1.5 TSI EVO 150 DSG7; 1.4 TSI BMT 125 DSG7; 1.5 TSI EVO 130 DSG7,VOLKSWAGEN,GPLF,3,medium,name_similarity_firsttoken,
-VOLKSWAGEN,Golf Sportsvan,4733,1.5 TSI EVO 150 DSG7; 1.4 TSI BMT 125 DSG7; 1.5 TSI EVO 130 DSG7,VOLKSWAGEN,GL,3,medium,name_similarity_firsttoken,
-VOLKSWAGEN,Golf Sportsvan,4733,1.5 TSI EVO 150 DSG7; 1.4 TSI BMT 125 DSG7; 1.5 TSI EVO 130 DSG7,VOLKSWAGEN,GLOF,2,medium,name_similarity_firsttoken,
-VOLKSWAGEN,Golf Sportsvan,4733,1.5 TSI EVO 150 DSG7; 1.4 TSI BMT 125 DSG7; 1.5 TSI EVO 130 DSG7,VOLKSWAGEN,GOL,1,medium,name_similarity_firsttoken,
-MAZDA,MAZDA6,4712,"2.0 SKYACTIV-G 165 HK Stationcar; 2,0 STATIONSCAR; 2,2 SKYACTIV-D 150 hk Stationcar",MAZDA,6,146230,exact,code_exact,
-TOYOTA,YARIS 5-DØRS,4539,"1,3 MAN.6. 5D.; 1,4 D-4D MAN.6. 5D.; 1,0 MAN.5. 5D.",TOYOTA,YARIS,1114899,high,name_similarity_firsttoken,
-TOYOTA,YARIS 5-DØRS,4539,"1,3 MAN.6. 5D.; 1,4 D-4D MAN.6. 5D.; 1,0 MAN.5. 5D.",TOYOTA,AURIS,359334,medium,name_similarity_firsttoken,
-TOYOTA,YARIS 5-DØRS,4539,"1,3 MAN.6. 5D.; 1,4 D-4D MAN.6. 5D.; 1,0 MAN.5. 5D.",TOYOTA,YARIUS,2,high,name_similarity_firsttoken,
-TOYOTA,YARIS 5-DØRS,4539,"1,3 MAN.6. 5D.; 1,4 D-4D MAN.6. 5D.; 1,0 MAN.5. 5D.",TOYOTA,YARRIS,2,high,name_similarity_firsttoken,
-TOYOTA,YARIS 5-DØRS,4539,"1,3 MAN.6. 5D.; 1,4 D-4D MAN.6. 5D.; 1,0 MAN.5. 5D.",TOYOTA,AYRIS,2,medium,name_similarity_firsttoken,
-HONDA,JAZZ,4499,"1.3 i-VTEC; 1.4 i-VTEC; 1,4 COMFORT",HONDA,JAZZ,806162,exact,short_code_exact,
-HYUNDAI,I30CW,4476,"1.6 CRDi 5 dørs Stationcar; 1,6 CRDI 90 FL; 1.6 GDI 5 dørs Stationcar",HYUNDAI,I30,264304,exact,code_exact,
-TOYOTA,VERSO,4405,1.8 VVT-i 7 sæder; 2.0 D-4D DPF.MAN.6; 1.8 MAN.6,TOYOTA,VERSO,66146,high,name_similarity_firsttoken,
-TOYOTA,VERSO,4405,1.8 VVT-i 7 sæder; 2.0 D-4D DPF.MAN.6; 1.8 MAN.6,TOYOTA,VEROSSA,9,medium,name_similarity_firsttoken,
-TOYOTA,VERSO,4405,1.8 VVT-i 7 sæder; 2.0 D-4D DPF.MAN.6; 1.8 MAN.6,TOYOTA,VWERSO,2,high,name_similarity_firsttoken,
-OPEL,INSIGNIA,4352,"2,0CDTi 140HK Sports Tourer; 1,5T 165HK Sports Tourer Aut.; 1,5T 165HK 5-dørs Aut.",VAUXHALL,INSIGNIA,475883,high,name_similarity_firsttoken,
-OPEL,INSIGNIA,4352,"2,0CDTi 140HK Sports Tourer; 1,5T 165HK Sports Tourer Aut.; 1,5T 165HK 5-dørs Aut.",VAUXHALL,INSIGNIAA,5,high,name_similarity_firsttoken,
-OPEL,INSIGNIA,4352,"2,0CDTi 140HK Sports Tourer; 1,5T 165HK Sports Tourer Aut.; 1,5T 165HK 5-dørs Aut.",VAUXHALL,INSINIA,4,high,name_similarity_firsttoken,
-OPEL,INSIGNIA,4352,"2,0CDTi 140HK Sports Tourer; 1,5T 165HK Sports Tourer Aut.; 1,5T 165HK 5-dørs Aut.",VAUXHALL,INSIGNA,4,high,name_similarity_firsttoken,
-OPEL,INSIGNIA,4352,"2,0CDTi 140HK Sports Tourer; 1,5T 165HK Sports Tourer Aut.; 1,5T 165HK 5-dørs Aut.",VAUXHALL,ISIGNIA,2,high,name_similarity_firsttoken,
-RENAULT,Kadjar,4348,dCi 110; TCe 130; dCi 110 EDC,RENAULT,KADJAR,165317,high,name_similarity_firsttoken,
-PEUGEOT,207,4319,"1,6 HDI 92 HK ST.CAR; 1,6 HDI 92 HK 5-D; 1,6 HDI 16V 90HK.5D.",PEUGEOT,207,339797,exact,code_exact,
-DACIA,Logan MCV,4307,TCe 90; 1.5 dCi 90; TCe 90 BVR,DACIA,LOGAN,37606,high,name_similarity_firsttoken,
-DACIA,Logan MCV,4307,TCe 90; 1.5 dCi 90; TCe 90 BVR,DACIA,LOGAM,5,medium,name_similarity_firsttoken,
-DACIA,Logan MCV,4307,TCe 90; 1.5 dCi 90; TCe 90 BVR,DACIA,LAGAN,3,medium,name_similarity_firsttoken,
-CITROËN,C3 PICASSO,4293,"1,6 MPV; 1,6 HDI 90 FAP; 1,2 MPV",CITROEN,C3,574211,exact,code_exact,
-MAZDA,CX-5,4262,"2,0 Man.; 2,0 Aut.; 2,5 Aut.",MAZDA,CX,260208,high,name_similarity_firsttoken,
-MAZDA,CX-5,4262,"2,0 Man.; 2,0 Aut.; 2,5 Aut.",MAZDA,CX5,45,medium,name_similarity_fullstring,
-MAZDA,CX-5,4262,"2,0 Man.; 2,0 Aut.; 2,5 Aut.",MAZDA,CX9,11,medium,name_similarity_firsttoken,
-MAZDA,CX-5,4262,"2,0 Man.; 2,0 Aut.; 2,5 Aut.",MAZDA,CX8,8,medium,name_similarity_firsttoken,
-MAZDA,CX-5,4262,"2,0 Man.; 2,0 Aut.; 2,5 Aut.",MAZDA,CX3,5,medium,name_similarity_firsttoken,
-OPEL,Crossland X,4241,"1,2 T 110HK MPV; 1.2 T 110 HK MPV; 1,2 T 110HK MPV Aut.",VAUXHALL,CROSSLAND,165340,high,name_similarity_firsttoken,
-FIAT,500C,4232,1.2 69; 0.9 80; 1.0 70,FIAT,500,1046964,exact,code_exact,
-MAZDA,MAZDA3,4189,2.0 SKYACTIV-G 120 HK 5-dørs man.; 2.0 SKYACTIV-G 120 HK; 2.0 SKYACTIV-G 122 HK 5-dørs man.,MAZDA,3,265883,exact,code_exact,
-DACIA,SANDERO,4174,0.9 TCe 90; TCe 90 Manuel; 1.5 dCi 90 Stepway,DACIA,SANDERO,276289,high,name_similarity_firsttoken,
-AUDI,A4 AVANT,4144,"2,0 TDI; 2.0 TFSI 190 HK 5-dørs S tronic; 40 TFSI Avant S tronic",AUDI,A4,603927,exact,code_exact,
-PEUGEOT,206 +,4125,"1,4 HDI 68 HK 5-D; 1,4 73 HK 5-D; 1,4 HDI 5D 68HK",PEUGEOT,206,105356,exact,code_exact,
-CHEVROLET,AVEO,4123,1.2 5D; 1.2 ECO 5D; 1.2 4D,CHEVROLET,AVEO,22172,exact,short_code_exact,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,118,350249,high,family_series_sibling,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,116,248002,high,family_series_sibling,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,1 SERIES,184594,high,family_series_literal,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,120,98433,high,family_series_sibling,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,125,10306,high,family_series_sibling,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,114,7922,high,family_series_sibling,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,123,7730,high,family_series_sibling,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,128,4527,high,family_series_sibling,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,135,2551,high,family_series_sibling,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,130,2008,high,family_series_sibling,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,140,26,high,family_series_sibling,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,1600,17,high,family_series_sibling,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,1602,8,high,family_series_sibling,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,1502,7,high,family_series_sibling,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,16,4,high,family_series_sibling,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,1800,4,high,family_series_sibling,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,13,3,high,family_series_sibling,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,1802,2,high,family_series_sibling,
-BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,160,2,high,family_series_sibling,
-PEUGEOT,5008,4075,"BlueHDi 130 SUV EAT8; 1.6 BlueHDi 120 hk SUV; 1,6 HDI 112HK",PEUGEOT,5008,89404,exact,code_exact,
-BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,520,194933,high,family_series_sibling,
-BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,5 SERIES,164746,high,family_series_literal,
-BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,530,56912,high,family_series_sibling,
-BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,525,30447,high,family_series_sibling,
-BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,535,18374,high,family_series_sibling,
-BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,523,5376,high,family_series_sibling,
-BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,518,5147,high,family_series_sibling,
-BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,528,4426,high,family_series_sibling,
-BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,540,1926,high,family_series_sibling,
-BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,545,1056,high,family_series_sibling,
-BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,550,584,high,family_series_sibling,
-BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,503,2,high,family_series_sibling,
-HYUNDAI,KONA,3897,1.0 T-GDI MPV; HEV  MPV DCT; 1.0 T-GDI MPV DCT,HYUNDAI,KONA,119003,exact,short_code_exact,
-AUDI,Q3,3809,45 TFSI e 5-dørs S tronic; 35 TFSI 150 hk 5-dørs S tronic; 1.4 TFSI 150 HK 5-dørs S tronic,AUDI,Q3,312365,exact,code_exact,
-SKODA,SUPERB,3724,1.5 TSI ACT 150 COMBI DSG7; 2.0 TDI 150 COMBI DSG7; 1.4 TSI ACT 150 COMBI DSG7,SKODA,SUPERB,155398,high,name_similarity_firsttoken,
-SKODA,SUPERB,3724,1.5 TSI ACT 150 COMBI DSG7; 2.0 TDI 150 COMBI DSG7; 1.4 TSI ACT 150 COMBI DSG7,SKODA,SUPURB,3,medium,name_similarity_firsttoken,
-SKODA,SUPERB,3724,1.5 TSI ACT 150 COMBI DSG7; 2.0 TDI 150 COMBI DSG7; 1.4 TSI ACT 150 COMBI DSG7,SKODA,SUPERBTDI,1,medium,name_similarity_firsttoken,
-VOLVO,XC40,3659,T5 Recharge Aut; T4 Recharge Aut.; D4 AWD Aut.,VOLVO,XC60,270668,medium,name_similarity_firsttoken,
-VOLVO,XC40,3659,T5 Recharge Aut; T4 Recharge Aut.; D4 AWD Aut.,VOLVO,XC90,175329,medium,name_similarity_firsttoken,
-VOLVO,XC40,3659,T5 Recharge Aut; T4 Recharge Aut.; D4 AWD Aut.,VOLVO,XC40,174920,high,name_similarity_firsttoken,
-VOLVO,XC40,3659,T5 Recharge Aut; T4 Recharge Aut.; D4 AWD Aut.,VOLVO,XC70,42317,medium,name_similarity_firsttoken,
-VOLVO,XC40,3659,T5 Recharge Aut; T4 Recharge Aut.; D4 AWD Aut.,VOLVO,EX40,2,medium,name_similarity_firsttoken,
-SKODA,KAMIQ,3615,1.0 TSI 110  DSG; 1.5 TSI 150 DSG; 1.0 TSI 115  DSG,SKODA,KAMIQ,44816,high,name_similarity_firsttoken,
-HYUNDAI,Tucson,3585,1.6 PHEV MPV 4 WD 6 AT; 1.6 MPV DCT; 1.6 T-GDi MPV DCT,HYUNDAI,TUCSON,353908,high,name_similarity_firsttoken,
-HYUNDAI,Tucson,3585,1.6 PHEV MPV 4 WD 6 AT; 1.6 MPV DCT; 1.6 T-GDi MPV DCT,HYUNDAI,TUCSN,557,high,name_similarity_firsttoken,
-HYUNDAI,Tucson,3585,1.6 PHEV MPV 4 WD 6 AT; 1.6 MPV DCT; 1.6 T-GDi MPV DCT,HYUNDAI,TUSCON,13,medium,name_similarity_firsttoken,
-HYUNDAI,Tucson,3585,1.6 PHEV MPV 4 WD 6 AT; 1.6 MPV DCT; 1.6 T-GDi MPV DCT,HYUNDAI,TUSON,2,high,name_similarity_firsttoken,
-HYUNDAI,Tucson,3585,1.6 PHEV MPV 4 WD 6 AT; 1.6 MPV DCT; 1.6 T-GDi MPV DCT,HYUNDAI,TUSCUN,2,medium,name_similarity_firsttoken,
-HONDA,CIVIC,3578,1.6 i-DTEC Tourer; 1.8 i-VTEC; 1.6 i-DTEC,HONDA,CIVIC,667203,high,name_similarity_firsttoken,
-HONDA,CIVIC,3578,1.6 i-DTEC Tourer; 1.8 i-VTEC; 1.6 i-DTEC,HONDA,CIVCI,1,medium,name_similarity_firsttoken,
-MAZDA,CX-3,3555,2.0 SKYACTIV-G 120 HK Man.; 2.0 SKYACTIV-G 120 HK Aut.; 2.0 SKYACTIV-G 121 HK Aut.,MAZDA,CX,260208,high,name_similarity_firsttoken,
-MAZDA,CX-3,3555,2.0 SKYACTIV-G 120 HK Man.; 2.0 SKYACTIV-G 120 HK Aut.; 2.0 SKYACTIV-G 121 HK Aut.,MAZDA,CX5,45,medium,name_similarity_firsttoken,
-MAZDA,CX-3,3555,2.0 SKYACTIV-G 120 HK Man.; 2.0 SKYACTIV-G 120 HK Aut.; 2.0 SKYACTIV-G 121 HK Aut.,MAZDA,CX9,11,medium,name_similarity_firsttoken,
-MAZDA,CX-3,3555,2.0 SKYACTIV-G 120 HK Man.; 2.0 SKYACTIV-G 120 HK Aut.; 2.0 SKYACTIV-G 121 HK Aut.,MAZDA,CX8,8,medium,name_similarity_firsttoken,
-MAZDA,CX-3,3555,2.0 SKYACTIV-G 120 HK Man.; 2.0 SKYACTIV-G 120 HK Aut.; 2.0 SKYACTIV-G 121 HK Aut.,MAZDA,CX3,5,medium,name_similarity_fullstring,
-MERCEDES-BENZ,B-Klasse,3537,200 7G-DCT; 200 d 8G-DCT; 200 CDI BlueEFFICIENCY MPV,MERCEDES-BENZ,B,174271,exact,short_code_exact,
-VOLKSWAGEN,GOLF VARIANT,3463,"1,6 TDI; 1.4 TSI BMT 122 HK VARIANT; 1,4 TSI",VOLKSWAGEN,GOLF,2127313,high,name_similarity_firsttoken,
-VOLKSWAGEN,GOLF VARIANT,3463,"1,6 TDI; 1.4 TSI BMT 122 HK VARIANT; 1,4 TSI",VOLKSWAGEN,VARIANT,21,medium,name_similarity_fullstring,
-VOLKSWAGEN,GOLF VARIANT,3463,"1,6 TDI; 1.4 TSI BMT 122 HK VARIANT; 1,4 TSI",VOLKSWAGEN,GPLF,3,medium,name_similarity_firsttoken,
-VOLKSWAGEN,GOLF VARIANT,3463,"1,6 TDI; 1.4 TSI BMT 122 HK VARIANT; 1,4 TSI",VOLKSWAGEN,GLOF,2,medium,name_similarity_firsttoken,
-VOLKSWAGEN,GOLF VARIANT,3463,"1,6 TDI; 1.4 TSI BMT 122 HK VARIANT; 1,4 TSI",VOLKSWAGEN,GOL,1,medium,name_similarity_firsttoken,
-VOLVO,XC60,3445,T6 ReCh Aut.; D4 aut.; D4 AWD Aut.,VOLVO,XC60,270668,high,name_similarity_firsttoken,
-VOLVO,XC60,3445,T6 ReCh Aut.; D4 aut.; D4 AWD Aut.,VOLVO,XC90,175329,medium,name_similarity_firsttoken,
-VOLVO,XC60,3445,T6 ReCh Aut.; D4 aut.; D4 AWD Aut.,VOLVO,XC40,174920,medium,name_similarity_firsttoken,
-VOLVO,XC60,3445,T6 ReCh Aut.; D4 aut.; D4 AWD Aut.,VOLVO,XC70,42317,medium,name_similarity_firsttoken,
-VOLVO,XC60,3445,T6 ReCh Aut.; D4 aut.; D4 AWD Aut.,VOLVO,SC60,3,medium,name_similarity_firsttoken,
-VOLKSWAGEN,CADDY,3359,"1,2 TSI; 1.2 TSI 85 HK; 1.2 TSI 84",VOLKSWAGEN,CADDY,370476,high,name_similarity_firsttoken,
-VOLKSWAGEN,CADDY,3359,"1,2 TSI; 1.2 TSI 85 HK; 1.2 TSI 84",VOLKSWAGEN,CADY,4,medium,name_similarity_firsttoken,
-VOLKSWAGEN,CADDY,3359,"1,2 TSI; 1.2 TSI 85 HK; 1.2 TSI 84",VOLKSWAGEN,CADDI,2,medium,name_similarity_firsttoken,
-TOYOTA,AYGO 5-DØRS,3269,1.0 HB 5-DØRS; 1.0 HB AUT. 5-DØRS; KGB10(H),TOYOTA,AYGO,625248,high,name_similarity_firsttoken,
-TOYOTA,AYGO 5-DØRS,3269,1.0 HB 5-DØRS; 1.0 HB AUT. 5-DØRS; KGB10(H),TOYOTA,HYOGO,3,medium,name_similarity_firsttoken,
-TOYOTA,AYGO 5-DØRS,3269,1.0 HB 5-DØRS; 1.0 HB AUT. 5-DØRS; KGB10(H),TOYOTA,AGYO,2,medium,name_similarity_firsttoken,
-TOYOTA,AYGO 5-DØRS,3269,1.0 HB 5-DØRS; 1.0 HB AUT. 5-DØRS; KGB10(H),TOYOTA,WAGON,1,medium,name_similarity_firsttoken,
-MAZDA,3,3198,2.0 SKYACTIV-G 120 HK; 1.5 SKYACTIV-G 100 HK; 2.0 SKYACTIV-G 165 HK,MAZDA,3,265883,exact,code_exact,
-SEAT,Arona,3193,1.0 TSI 115 DSG7; 1.0 TSI 110 DSG7; 1.0 TSI 95,SEAT,ARONA,122137,high,name_similarity_firsttoken,
-SEAT,Arona,3193,1.0 TSI 115 DSG7; 1.0 TSI 110 DSG7; 1.0 TSI 95,SEAT,AROSA,4796,medium,name_similarity_firsttoken,
-AUDI,A6 AVANT,3021,2.0 TDI 190 HK 5-dørs S tronic; 40 TDI 204 HK 5-dørs S tronic; 3.0 TDI 218 HK 5-dørs S tronic,AUDI,A6,289140,exact,code_exact,
-CITROËN,C3 Aircross,3001,1.2 PureTech 110 SUV; 1.2 PureTech 110 hk SUV; 1.6 BlueHDi 100 hk SUV,CITROEN,C3,574211,exact,code_exact,
-CITROËN,C5 Aircross,2987,1.6 HYBRID 225 5D Aut.; 1.5 BlueHDi 130 hk SUV EAT8; 1.6 PHEV 225 SUV Aut.,CITROEN,C5,59240,exact,code_exact,
-AUDI,Q5,2982,"50 TFSI e 5-dørs quattro S tronic; 3,0 TDI QUATTRO AUT.; 2,0 TDI 190 hk 140 kW 5-dørs quattro S tronic",AUDI,Q5,259708,exact,code_exact,
-TOYOTA,RAV4 Plug in,2964,2.5 Plug in Hybrid (306 hk) aut. gear,TOYOTA,RAV4,234239,high,name_similarity_firsttoken,
-TOYOTA,RAV4 Plug in,2964,2.5 Plug in Hybrid (306 hk) aut. gear,TOYOTA,RAV,72023,medium,name_similarity_firsttoken,
-TOYOTA,RAV4 Plug in,2964,2.5 Plug in Hybrid (306 hk) aut. gear,TOYOTA,RV4,7,medium,name_similarity_firsttoken,
-TOYOTA,RAV4 Plug in,2964,2.5 Plug in Hybrid (306 hk) aut. gear,TOYOTA,RAVE,5,medium,name_similarity_firsttoken,
-TOYOTA,RAV4 Plug in,2964,2.5 Plug in Hybrid (306 hk) aut. gear,TOYOTA,REV4,2,medium,name_similarity_firsttoken,
-SKODA,KAROQ,2955,1.5 TSI ACT 150 DSG7; 1.6 TDI 115 DSG7; 1.0 TSI 115,SKODA,KAROQ,124535,high,name_similarity_firsttoken,
-MAZDA,2,2889,"1,3 Hatchback Man.; 1,5 Hatchback Man.; 1,5 Hatchback Aut.",MAZDA,2,313689,exact,code_exact,
-SKODA,RAPID,2881,1.2 TSI 105 HK Hatchback; 1.2 TSI 110 HK HATCHBACK; 1.2 TSI 86 HK Hatchback,SKODA,RAPID,53524,high,name_similarity_firsttoken,
-TOYOTA,Aygo X,2868,1.0 benzin (72 hk); 1.0 benzin (72 hk) aut. gear,TOYOTA,AYGO,625248,high,name_similarity_firsttoken,
-TOYOTA,Aygo X,2868,1.0 benzin (72 hk); 1.0 benzin (72 hk) aut. gear,TOYOTA,HYOGO,3,medium,name_similarity_firsttoken,
-TOYOTA,Aygo X,2868,1.0 benzin (72 hk); 1.0 benzin (72 hk) aut. gear,TOYOTA,AGYO,2,medium,name_similarity_firsttoken,
-TOYOTA,Aygo X,2868,1.0 benzin (72 hk); 1.0 benzin (72 hk) aut. gear,TOYOTA,WAGON,1,medium,name_similarity_firsttoken,
-BMW,X1,2862,25e SUV xDrive Steptronic; 18d SUV sDrive Steptronic; 20d SUV sDrive Steptronic,BMW,X1,250939,exact,code_exact,
-VOLVO,V40,2821,D2; T3; D3,VOLVO,V40,242125,exact,code_exact,
-TOYOTA,AVENSIS STW,2732,1.8 STW MAN.6; 2.0 STW D-4D.DPF.MAN; 1.6 STW MAN.6,TOYOTA,AVENSIS,146826,high,name_similarity_firsttoken,
-TOYOTA,AVENSIS STW,2732,1.8 STW MAN.6; 2.0 STW D-4D.DPF.MAN; 1.6 STW MAN.6,TOYOTA,AVENIS,2,high,name_similarity_firsttoken,
-NISSAN,JUKE,2719,DIG-T 115 6 M/T; DIG-T 117 DCT; 1.6,NISSAN,JUKE,802991,exact,short_code_exact,
-VOLVO,XC60,2698,D4 aut.; D5 AWD Aut.; D3 AUT.,VOLVO,XC60,270668,high,name_similarity_firsttoken,
-VOLVO,XC60,2698,D4 aut.; D5 AWD Aut.; D3 AUT.,VOLVO,XC90,175329,medium,name_similarity_firsttoken,
-VOLVO,XC60,2698,D4 aut.; D5 AWD Aut.; D3 AUT.,VOLVO,XC40,174920,medium,name_similarity_firsttoken,
-VOLVO,XC60,2698,D4 aut.; D5 AWD Aut.; D3 AUT.,VOLVO,XC70,42317,medium,name_similarity_firsttoken,
-VOLVO,XC60,2698,D4 aut.; D5 AWD Aut.; D3 AUT.,VOLVO,SC60,3,medium,name_similarity_firsttoken,
-OPEL,Grandland X,2675,"1.6 225 A8 SUV; 1,2T 130HK MPV; 1,2T 130HK MPV Aut.",VAUXHALL,GRANDLAND,161831,high,name_similarity_firsttoken,
-DACIA,Lodgy,2670,1.5 dCi 90 7p; 1.6 16V 7p; Blue dCi 95 7p,DACIA,LODGY,14,high,name_similarity_firsttoken,
-AUDI,Q2,2668,35 TFSI 5-dørs S tronic; 1.4 TFSI CoD 5-dørs S tronic; 35 TFSI CoD 150 HK 5-dørs S tronic,AUDI,Q2,171023,exact,code_exact,
-KIA,CEE'D SW,2612,"1,6 115HK DIESEL; 1,6 ISG DIESEL; 1,4",KIA,CEED,306364,medium,name_similarity_firsttoken,
-KIA,CEE'D SW,2612,"1,6 115HK DIESEL; 1,6 ISG DIESEL; 1,4",KIA,XCEED,45281,medium,name_similarity_firsttoken,
-KIA,CEE'D SW,2612,"1,6 115HK DIESEL; 1,6 ISG DIESEL; 1,4",KIA,CEE,38,high,name_similarity_firsttoken,
-KIA,CEE'D SW,2612,"1,6 115HK DIESEL; 1,6 ISG DIESEL; 1,4",KIA,"CEE,D",14,medium,name_similarity_firsttoken,
-KIA,CEE'D SW,2612,"1,6 115HK DIESEL; 1,6 ISG DIESEL; 1,4",KIA,CREED,6,medium,name_similarity_firsttoken,
-OPEL,MERIVA,2606,"1,4; 1,4 T; 1,4T  120HK",VAUXHALL,MERIVA,223587,high,name_similarity_firsttoken,
-OPEL,MERIVA,2606,"1,4; 1,4 T; 1,4T  120HK",VAUXHALL,MARIVA,15,medium,name_similarity_firsttoken,
-OPEL,MERIVA,2606,"1,4; 1,4 T; 1,4T  120HK",VAUXHALL,MEREVA,3,medium,name_similarity_firsttoken,
-OPEL,MERIVA,2606,"1,4; 1,4 T; 1,4T  120HK",VAUXHALL,MIRIVA,3,medium,name_similarity_firsttoken,
-OPEL,MERIVA,2606,"1,4; 1,4 T; 1,4T  120HK",VAUXHALL,MERIVIA,2,high,name_similarity_firsttoken,
-FORD,Focus,2582,"1.0 EcoBoost (125 HK) Stationcar Forhjulstræk Man.; 1.5 TDCi (120 HK) Stationcar Forhjulstræk Man.; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Man.",FORD,FOCUS,2291752,high,name_similarity_firsttoken,
-FORD,Focus,2582,"1.0 EcoBoost (125 HK) Stationcar Forhjulstræk Man.; 1.5 TDCi (120 HK) Stationcar Forhjulstræk Man.; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Man.",FORD,FOUCS,5,medium,name_similarity_firsttoken,
-FORD,Focus,2582,"1.0 EcoBoost (125 HK) Stationcar Forhjulstræk Man.; 1.5 TDCi (120 HK) Stationcar Forhjulstræk Man.; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Man.",FORD,FOLUS,4,medium,name_similarity_firsttoken,
-FORD,Focus,2582,"1.0 EcoBoost (125 HK) Stationcar Forhjulstræk Man.; 1.5 TDCi (120 HK) Stationcar Forhjulstræk Man.; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Man.",FORD,LOCUST,2,medium,name_similarity_firsttoken,
-FORD,Focus,2582,"1.0 EcoBoost (125 HK) Stationcar Forhjulstræk Man.; 1.5 TDCi (120 HK) Stationcar Forhjulstræk Man.; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Man.",FORD,FOCAS,1,medium,name_similarity_firsttoken,
-SEAT,TOLEDO,2576,1.2 TSI 110 HK 81 kw 5-DØRS 6 trins manuel; 1.2 TSI 105 HK START/STOP Hatchback; 1.4 TSI 125 HK 92 kw 5-DØRS DSG7,SEAT,TOLEDO,14100,high,name_similarity_firsttoken,
-CITROËN,BERLINGO,2539,"1,6 4-dørs m. bagklap; 1,6 HDI 110HK; 1.5 BlueHDI 100 hk MPV",CITROEN,BERLINGO,480365,high,name_similarity_firsttoken,
-CITROËN,BERLINGO,2539,"1,6 4-dørs m. bagklap; 1,6 HDI 110HK; 1.5 BlueHDI 100 hk MPV",CITROEN,BELINGO,22,high,name_similarity_firsttoken,
-CITROËN,BERLINGO,2539,"1,6 4-dørs m. bagklap; 1,6 HDI 110HK; 1.5 BlueHDI 100 hk MPV",CITROEN,BIRLINGO,2,medium,name_similarity_firsttoken,
-CITROËN,BERLINGO,2539,"1,6 4-dørs m. bagklap; 1,6 HDI 110HK; 1.5 BlueHDI 100 hk MPV",CITROEN,BERLINO,1,high,name_similarity_firsttoken,
-CITROËN,BERLINGO,2539,"1,6 4-dørs m. bagklap; 1,6 HDI 110HK; 1.5 BlueHDI 100 hk MPV",CITROEN,BERLIGO,1,high,name_similarity_firsttoken,
-MERCEDES-BENZ,C,2526,200T CDI BE; 200T CDI BE AUT.; 200 CDI BE,MERCEDES-BENZ,C,879779,exact,short_code_exact,
-KIA,VENGA,2486,"1.4 5-dørs Man. 5; 1,4; 1,4 DIESEL 90HK",KIA,VENGA,113598,high,name_similarity_firsttoken,
-SKODA,RAPID SPACEBACK,2456,1.2 TSI 105 HK SPACEBACK; 1.2 TSI 110 HK SPACEBACK; 1.2 TSI 86 HK SPACEBACK,SKODA,RAPID,53524,high,name_similarity_firsttoken,
-SKODA,RAPID SPACEBACK,2456,1.2 TSI 105 HK SPACEBACK; 1.2 TSI 110 HK SPACEBACK; 1.2 TSI 86 HK SPACEBACK,SKODA,SPACEBACK,2,medium,name_similarity_fullstring,
-FORD,MONDEO STATIONCAR,2444,"2,0 TDCI; 2,0 TDCI AUT.; 2,0",FORD,MONDEO,456751,high,name_similarity_firsttoken,
-FORD,MONDEO STATIONCAR,2444,"2,0 TDCI; 2,0 TDCI AUT.; 2,0",FORD,MODEL,83,medium,name_similarity_firsttoken,
-FORD,MONDEO STATIONCAR,2444,"2,0 TDCI; 2,0 TDCI AUT.; 2,0",FORD,MONDOE,6,medium,name_similarity_firsttoken,
-FORD,MONDEO STATIONCAR,2444,"2,0 TDCI; 2,0 TDCI AUT.; 2,0",FORD,MONDAO,5,medium,name_similarity_firsttoken,
-FORD,MONDEO STATIONCAR,2444,"2,0 TDCI; 2,0 TDCI AUT.; 2,0",FORD,MONDEIO,1,high,name_similarity_firsttoken,
-MITSUBISHI,OUTLANDER,2387,2.4PHEV 4WD; 2.2DI-D 4WD Aut; 2.0 4WD CVT,MITSUBISHI,OUTLANDER,181068,high,name_similarity_firsttoken,
-MITSUBISHI,OUTLANDER,2387,2.4PHEV 4WD; 2.2DI-D 4WD Aut; 2.0 4WD CVT,MITSUBISHI,LANCER,22984,medium,name_similarity_firsttoken,
-MITSUBISHI,OUTLANDER,2387,2.4PHEV 4WD; 2.2DI-D 4WD Aut; 2.0 4WD CVT,MITSUBISHI,LANSER,3,medium,name_similarity_firsttoken,
-MITSUBISHI,OUTLANDER,2387,2.4PHEV 4WD; 2.2DI-D 4WD Aut; 2.0 4WD CVT,MITSUBISHI,0UTLANDER,2,medium,name_similarity_firsttoken,
-MITSUBISHI,OUTLANDER,2387,2.4PHEV 4WD; 2.2DI-D 4WD Aut; 2.0 4WD CVT,MITSUBISHI,GEOLANDER,2,medium,name_similarity_firsttoken,
-SKODA,SCALA,2385,1.0 TSI 110 DSG; 1.0 TSI 115  DSG; 1.5 TSI 150 DSG,SKODA,SCALA,20107,high,name_similarity_firsttoken,
-KIA,SPORTAGE,2382,1.6 T-GDI Plug-in Hybrid 5-dørs Aut. 6; 1.6 CRDI 5-dørs 7DCT 7; 1.6 5-dørs Man. 6,KIA,SPORTAGE,688231,high,name_similarity_firsttoken,
-KIA,SPORTAGE,2382,1.6 T-GDI Plug-in Hybrid 5-dørs Aut. 6; 1.6 CRDI 5-dørs 7DCT 7; 1.6 5-dørs Man. 6,KIA,SPORTARGE,3,high,name_similarity_firsttoken,
-KIA,SPORTAGE,2382,1.6 T-GDI Plug-in Hybrid 5-dørs Aut. 6; 1.6 CRDI 5-dørs 7DCT 7; 1.6 5-dørs Man. 6,KIA,SPORTAE,3,high,name_similarity_firsttoken,
-KIA,SPORTAGE,2382,1.6 T-GDI Plug-in Hybrid 5-dørs Aut. 6; 1.6 CRDI 5-dørs 7DCT 7; 1.6 5-dørs Man. 6,KIA,SPOTAGE,2,high,name_similarity_firsttoken,
-HONDA,CR-V,2347,1.6 i-DTEC 2WD; 2.0 i-VTEC 2WD; 1.6 i-DTEC 4WD Aut.,HONDA,CR,476576,high,name_similarity_firsttoken,
-HONDA,CR-V,2347,1.6 i-DTEC 2WD; 2.0 i-VTEC 2WD; 1.6 i-DTEC 4WD Aut.,HONDA,CRX,813,medium,name_similarity_firsttoken,
-HONDA,CR-V,2347,1.6 i-DTEC 2WD; 2.0 i-VTEC 2WD; 1.6 i-DTEC 4WD Aut.,HONDA,CRZ,10,medium,name_similarity_firsttoken,
-HONDA,CR-V,2347,1.6 i-DTEC 2WD; 2.0 i-VTEC 2WD; 1.6 i-DTEC 4WD Aut.,HONDA,CRV,6,medium,name_similarity_fullstring,
-HONDA,CR-V,2347,1.6 i-DTEC 2WD; 2.0 i-VTEC 2WD; 1.6 i-DTEC 4WD Aut.,HONDA,CVR,3,medium,name_similarity_firsttoken,
-KIA,Optima,2341,"2.0 Plug-in Hybrid Stationcar Aut. 6; 2,0 Hybrid; 1.7 CRDI Stationcar Man. 6",KIA,OPTIMA,26161,high,name_similarity_firsttoken,
-SKODA,SUPERB COMBI,2282,"1,6 TDI GREENLINE; 1.4 TSI Hybrid 218 DSG6; 1.6 TDI 105 HK Stationcar",SKODA,SUPERB,155398,high,name_similarity_firsttoken,
-SKODA,SUPERB COMBI,2282,"1,6 TDI GREENLINE; 1.4 TSI Hybrid 218 DSG6; 1.6 TDI 105 HK Stationcar",SKODA,SUPURB,3,medium,name_similarity_firsttoken,
-SKODA,SUPERB COMBI,2282,"1,6 TDI GREENLINE; 1.4 TSI Hybrid 218 DSG6; 1.6 TDI 105 HK Stationcar",SKODA,SUPERBTDI,1,medium,name_similarity_firsttoken,
-HYUNDAI,i30 Stc.,2253,1.0 5 dørs stationcar; 1.0 T-GDI 5 dørs stationcar; 1.4 5 dørs stationcar  DCT,HYUNDAI,I30,264304,exact,code_exact,
-FORD,NY Focus,2243,"1.0 EcoBoost (125 HK) Stationcar Forhjulstræk Man.; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Man.; 1.6 TDCi (115 HK) Stationcar Forhjulstræk Man.",FORD,FOCUS,2291752,high,name_similarity_firsttoken,
-FORD,NY Focus,2243,"1.0 EcoBoost (125 HK) Stationcar Forhjulstræk Man.; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Man.; 1.6 TDCi (115 HK) Stationcar Forhjulstræk Man.",FORD,FOUCS,5,medium,name_similarity_firsttoken,
-FORD,NY Focus,2243,"1.0 EcoBoost (125 HK) Stationcar Forhjulstræk Man.; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Man.; 1.6 TDCi (115 HK) Stationcar Forhjulstræk Man.",FORD,FOLUS,4,medium,name_similarity_firsttoken,
-FORD,NY Focus,2243,"1.0 EcoBoost (125 HK) Stationcar Forhjulstræk Man.; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Man.; 1.6 TDCi (115 HK) Stationcar Forhjulstræk Man.",FORD,LOCUST,2,medium,name_similarity_firsttoken,
-FORD,NY Focus,2243,"1.0 EcoBoost (125 HK) Stationcar Forhjulstræk Man.; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Man.; 1.6 TDCi (115 HK) Stationcar Forhjulstræk Man.",FORD,FOCAS,1,medium,name_similarity_firsttoken,
-FORD,Transit Custom Kombi,2219,2.0TDCi - FWD (130 HK) Kombi FWD A6; 2.0TDCi - FWD (105 HK) Kombi FWD M6; 2.0TDCi - FWD (130 HK ) Kombi FWD A6,FORD,TRANSIT,1605434,high,name_similarity_firsttoken,
-FORD,Transit Custom Kombi,2219,2.0TDCi - FWD (130 HK) Kombi FWD A6; 2.0TDCi - FWD (105 HK) Kombi FWD M6; 2.0TDCi - FWD (130 HK ) Kombi FWD A6,FORD,"TRANSIT,",9,high,name_similarity_firsttoken,
-FORD,Transit Custom Kombi,2219,2.0TDCi - FWD (130 HK) Kombi FWD A6; 2.0TDCi - FWD (105 HK) Kombi FWD M6; 2.0TDCi - FWD (130 HK ) Kombi FWD A6,FORD,TRANSSIT,2,high,name_similarity_firsttoken,
-FORD,Transit Custom Kombi,2219,2.0TDCi - FWD (130 HK) Kombi FWD A6; 2.0TDCi - FWD (105 HK) Kombi FWD M6; 2.0TDCi - FWD (130 HK ) Kombi FWD A6,FORD,TRASNSIT,2,high,name_similarity_firsttoken,
-FORD,Transit Custom Kombi,2219,2.0TDCi - FWD (130 HK) Kombi FWD A6; 2.0TDCi - FWD (105 HK) Kombi FWD M6; 2.0TDCi - FWD (130 HK ) Kombi FWD A6,FORD,TRANTSIT,2,high,name_similarity_firsttoken,
-KIA,XCeed,2204,"1.6 GDI Plug-in Hybrid 5-dørs DCT 6; 1,6  Plug-in Hybrid; 1.6 5-dørs DCT 6",KIA,CEED,306364,medium,name_similarity_firsttoken,
-KIA,XCeed,2204,"1.6 GDI Plug-in Hybrid 5-dørs DCT 6; 1,6  Plug-in Hybrid; 1.6 5-dørs DCT 6",KIA,XCEED,45281,high,name_similarity_firsttoken,
-KIA,XCeed,2204,"1.6 GDI Plug-in Hybrid 5-dørs DCT 6; 1,6  Plug-in Hybrid; 1.6 5-dørs DCT 6",KIA,CEE,38,medium,name_similarity_firsttoken,
-KIA,XCeed,2204,"1.6 GDI Plug-in Hybrid 5-dørs DCT 6; 1,6  Plug-in Hybrid; 1.6 5-dørs DCT 6",KIA,"CEE,D",14,medium,name_similarity_firsttoken,
-KIA,XCeed,2204,"1.6 GDI Plug-in Hybrid 5-dørs DCT 6; 1,6  Plug-in Hybrid; 1.6 5-dørs DCT 6",KIA,CREED,6,medium,name_similarity_firsttoken,
-PEUGEOT,508,2195,HYBRID 225 SW EAT8; BlueHDi 130 SW EAT8; BlueHDi 130 4D EAT8,PEUGEOT,508,45170,exact,code_exact,
-AUDI,A5 SPORTBACK,2179,"1.8 TFSI 144 HK 5-DØRS MULTITRONIC; 40 TFSI Sportback S tronic; 2,0 TFSI 190 hk 140 kW 5-dørs Forhjulstræk S tronic",AUDI,A5,298367,exact,code_exact,
-KIA,Stonic,2134,1.0 5-dørs DCT 7; 1.0 5-dørs Man. 6; 1.0 5-dørs Man. 5,KIA,STONIC,65069,high,name_similarity_firsttoken,
-KIA,Stonic,2134,1.0 5-dørs DCT 7; 1.0 5-dørs Man. 6; 1.0 5-dørs Man. 5,KIA,STONIK,2,medium,name_similarity_firsttoken,
-MERCEDES-BENZ,E,2114,200T CDI BE AUT.; 200 CDI BE AUT.; 220 CDI BE AUT.,MERCEDES-BENZ,E,556928,exact,short_code_exact,
-MG,EHS Plug-in Hybrid,2109,"1.5 5-dørs Aut. 6; 1,5; 1,5 TGI",MG,HS,49179,medium,name_similarity_firsttoken,
-MG,EHS Plug-in Hybrid,2109,"1.5 5-dørs Aut. 6; 1,5; 1,5 TGI",MG,EHS,2,high,name_similarity_firsttoken,
-SKODA,KODIAQ,2109,2.0 TDI 150 DSG7; 1.5 TSI 150 DSG7; 2.0 TDI 190 4X4 DSG7,SKODA,KODIAQ,90533,high,name_similarity_firsttoken,
-SKODA,KODIAQ,2109,2.0 TDI 150 DSG7; 1.5 TSI 150 DSG7; 2.0 TDI 190 4X4 DSG7,SKODA,SKODA,8,medium,name_similarity_firsttoken,
-MITSUBISHI,ASX,2106,1.6; 1.8DI-D; 2.2DI-D 4WD Aut,MITSUBISHI,ASX,69713,exact,short_code_exact,
-SUZUKI,SX4 COMBIBACK,2103,"1,6; 1,6 AT; 1,6 4WD",SUZUKI,SX4,103026,high,name_similarity_firsttoken,
-SUZUKI,SX4 COMBIBACK,2103,"1,6; 1,6 AT; 1,6 4WD",SUZUKI,SX,244,medium,name_similarity_firsttoken,
-SUZUKI,SX4 COMBIBACK,2103,"1,6; 1,6 AT; 1,6 4WD",SUZUKI,SZ4,10,medium,name_similarity_firsttoken,
-SUZUKI,SX4 COMBIBACK,2103,"1,6; 1,6 AT; 1,6 4WD",SUZUKI,GSX400,2,medium,name_similarity_firsttoken,
-SUZUKI,SX4 COMBIBACK,2103,"1,6; 1,6 AT; 1,6 4WD",SUZUKI,SJ4,1,medium,name_similarity_firsttoken,
-MINI,COOPER,2097,"136 HK; 1,5 Cabriolet Steptronic; 1,5 Steptronic",MINI,COOPER,763963,high,name_similarity_firsttoken,
-MINI,COOPER,2097,"136 HK; 1,5 Cabriolet Steptronic; 1,5 Steptronic",MINI,COPPER,26,medium,name_similarity_firsttoken,
-MINI,COOPER,2097,"136 HK; 1,5 Cabriolet Steptronic; 1,5 Steptronic",MINI,COOPERS,5,high,name_similarity_firsttoken,
-MINI,COOPER,2097,"136 HK; 1,5 Cabriolet Steptronic; 1,5 Steptronic",MINI,COPER,4,high,name_similarity_firsttoken,
-MINI,COOPER,2097,"136 HK; 1,5 Cabriolet Steptronic; 1,5 Steptronic",MINI,COOPER4,3,high,name_similarity_firsttoken,
-MITSUBISHI,COLT,2076,1.3 ELEGANCE 5D CP C; 1.3 INTENSE CP CLEAR; 1.3 ELEGANCE 5D AM/T,MITSUBISHI,COLT,55799,exact,short_code_exact,
-MERCEDES-BENZ,GLC,2052,300 de SUV 4MATIC 9G-TRONIC; 220 d SUV 4MATIC 9G-TRONIC; 350 d SUV 4MATIC 9G-TRONIC,MERCEDES-BENZ,GLC,180481,exact,short_code_exact,
-SEAT,Ibiza GP2,2032,1.0 TSI 95 HK 5-DØRS; 1.0 TSI 110 HK 5-DØRS; 1.8 TSI 192 HK 3-DØRS,SEAT,IBIZA,487807,high,name_similarity_firsttoken,
-SEAT,Ibiza GP2,2032,1.0 TSI 95 HK 5-DØRS; 1.0 TSI 110 HK 5-DØRS; 1.8 TSI 192 HK 3-DØRS,SEAT,IBZA,5,medium,name_similarity_firsttoken,
-SEAT,Ibiza GP2,2032,1.0 TSI 95 HK 5-DØRS; 1.0 TSI 110 HK 5-DØRS; 1.8 TSI 192 HK 3-DØRS,SEAT,IBEZA,3,medium,name_similarity_firsttoken,
-SEAT,Ibiza GP2,2032,1.0 TSI 95 HK 5-DØRS; 1.0 TSI 110 HK 5-DØRS; 1.8 TSI 192 HK 3-DØRS,SEAT,IBIXA,3,medium,name_similarity_firsttoken,
-MERCEDES-BENZ,CLA,2030,200 Coupé 7G-DCT; 200 Shooting Brake Stationscar 7G-DCT; 200 d Shooting Brake Stationscar 7G-DCT,MERCEDES-BENZ,CLA,160338,exact,short_code_exact,
-AUDI,A1 SPORTBACK,2002,1.0 TFSI 95 HK 5-DØRS; 1.6 TDI 90 HK 5-DØRS; 1.2 86 HK 4-DØRS,AUDI,A1,548711,exact,code_exact,
-FIAT,500 C,1959,1.2; 875 TB; 1.2 AUT.,FIAT,500,1046964,exact,code_exact,
-MAZDA,Mazda CX-30,1948,2.0 SKYACTIV-G 150 HK 5-dørs aut.; 2.0 SKYACTIV-G 150 HK 5-dørs man.; 2.0 SKYACTIV-X 180 HK 5-dørs aut.,MAZDA,MAZDA,1315,high,name_similarity_firsttoken,
-MAZDA,Mazda CX-30,1948,2.0 SKYACTIV-G 150 HK 5-dørs aut.; 2.0 SKYACTIV-G 150 HK 5-dørs man.; 2.0 SKYACTIV-X 180 HK 5-dørs aut.,MAZDA,MAZDA3,14,high,name_similarity_firsttoken,
-MAZDA,Mazda CX-30,1948,2.0 SKYACTIV-G 150 HK 5-dørs aut.; 2.0 SKYACTIV-G 150 HK 5-dørs man.; 2.0 SKYACTIV-X 180 HK 5-dørs aut.,MAZDA,MAZDA5,9,high,name_similarity_firsttoken,
-MAZDA,Mazda CX-30,1948,2.0 SKYACTIV-G 150 HK 5-dørs aut.; 2.0 SKYACTIV-G 150 HK 5-dørs man.; 2.0 SKYACTIV-X 180 HK 5-dørs aut.,MAZDA,MAZDA2,6,high,name_similarity_firsttoken,
-MAZDA,Mazda CX-30,1948,2.0 SKYACTIV-G 150 HK 5-dørs aut.; 2.0 SKYACTIV-G 150 HK 5-dørs man.; 2.0 SKYACTIV-X 180 HK 5-dørs aut.,MAZDA,MAZDA6,2,high,name_similarity_firsttoken,
-TOYOTA,Yaris Cross,1939,1.5 hybrid (116 hk) aut. gear,TOYOTA,YARIS,1114899,high,name_similarity_firsttoken,
-TOYOTA,Yaris Cross,1939,1.5 hybrid (116 hk) aut. gear,TOYOTA,AURIS,359334,medium,name_similarity_firsttoken,
-TOYOTA,Yaris Cross,1939,1.5 hybrid (116 hk) aut. gear,TOYOTA,YARIUS,2,high,name_similarity_firsttoken,
-TOYOTA,Yaris Cross,1939,1.5 hybrid (116 hk) aut. gear,TOYOTA,YARRIS,2,high,name_similarity_firsttoken,
-TOYOTA,Yaris Cross,1939,1.5 hybrid (116 hk) aut. gear,TOYOTA,AYRIS,2,medium,name_similarity_firsttoken,
-PEUGEOT,508,1936,"2,0 HDI 163 HK SW; 1,6 HDI 112 HK SW; 1,6 HDI 114 HK SW",PEUGEOT,508,45170,exact,code_exact,
-BMW,4-serie,1925,420d Gran Coupé Steptronic; 420i Gran Coupé Steptronic; 430d Gran Coupé Steptronic,BMW,420,159348,high,family_series_sibling,
-BMW,4-serie,1925,420d Gran Coupé Steptronic; 420i Gran Coupé Steptronic; 430d Gran Coupé Steptronic,BMW,430,32755,high,family_series_sibling,
-BMW,4-serie,1925,420d Gran Coupé Steptronic; 420i Gran Coupé Steptronic; 430d Gran Coupé Steptronic,BMW,435,29029,high,family_series_sibling,
-BMW,4-serie,1925,420d Gran Coupé Steptronic; 420i Gran Coupé Steptronic; 430d Gran Coupé Steptronic,BMW,440,10622,high,family_series_sibling,
-BMW,4-serie,1925,420d Gran Coupé Steptronic; 420i Gran Coupé Steptronic; 430d Gran Coupé Steptronic,BMW,428,6494,high,family_series_sibling,
-BMW,4-serie,1925,420d Gran Coupé Steptronic; 420i Gran Coupé Steptronic; 430d Gran Coupé Steptronic,BMW,4 SERIES,2853,high,family_series_literal,
-BMW,4-serie,1925,420d Gran Coupé Steptronic; 420i Gran Coupé Steptronic; 430d Gran Coupé Steptronic,BMW,418,2267,high,family_series_sibling,
-BMW,4-serie,1925,420d Gran Coupé Steptronic; 420i Gran Coupé Steptronic; 430d Gran Coupé Steptronic,BMW,425,539,high,family_series_sibling,
-CITROËN,C4 PICASSO,1915,"1,6 MPV; 1,6 MPV 6 Aut.; 1.6 BlueHDi 120 HK  MPV Man.",CITROEN,C4,451899,exact,code_exact,
-CITROËN,DS3,1908,"HDI 90; 1,6 2-dørs m. bagklap; 1,2 2-dørs med bagklap 5 Man",CITROEN,DS3,193113,high,name_similarity_firsttoken,
-CITROËN,DS3,1908,"HDI 90; 1,6 2-dørs m. bagklap; 1,2 2-dørs med bagklap 5 Man",CITROEN,DS4,26843,medium,name_similarity_firsttoken,
-CITROËN,DS3,1908,"HDI 90; 1,6 2-dørs m. bagklap; 1,2 2-dørs med bagklap 5 Man",CITROEN,DS5,10754,medium,name_similarity_firsttoken,
-CITROËN,DS3,1908,"HDI 90; 1,6 2-dørs m. bagklap; 1,2 2-dørs med bagklap 5 Man",CITROEN,DS,237,medium,name_similarity_firsttoken,
-CITROËN,DS3,1908,"HDI 90; 1,6 2-dørs m. bagklap; 1,2 2-dørs med bagklap 5 Man",CITROEN,DS7,11,medium,name_similarity_firsttoken,
-RENAULT,SCENIC,1877,1.5 dCi ESM 110; 1.5 dCi 110; 1.5 dCi 110 EDC,RENAULT,SCENIC,93139,high,name_similarity_firsttoken,
-RENAULT,SCENIC,1877,1.5 dCi ESM 110; 1.5 dCi 110; 1.5 dCi 110 EDC,RENAULT,GSCENIC,623,high,name_similarity_firsttoken,
-RENAULT,SCENIC,1877,1.5 dCi ESM 110; 1.5 dCi 110; 1.5 dCi 110 EDC,RENAULT,GRSCENIC,262,medium,name_similarity_firsttoken,
-RENAULT,SCENIC,1877,1.5 dCi ESM 110; 1.5 dCi 110; 1.5 dCi 110 EDC,RENAULT,SENIC,8,high,name_similarity_firsttoken,
-RENAULT,SCENIC,1877,1.5 dCi ESM 110; 1.5 dCi 110; 1.5 dCi 110 EDC,RENAULT,SCIENIC,1,high,name_similarity_firsttoken,
-NISSAN,Qashqai J11A,1840,DIG-T 115 2WD 6 M/T; 1.5 dCi 2WD 6 M/T; dCi 110 2WD 6 M/T,NISSAN,QASHQAI,1469028,high,name_similarity_firsttoken,
-NISSAN,Qashqai J11A,1840,DIG-T 115 2WD 6 M/T; 1.5 dCi 2WD 6 M/T; dCi 110 2WD 6 M/T,NISSAN,QUASHQAI,14,high,name_similarity_firsttoken,
-NISSAN,Qashqai J11A,1840,DIG-T 115 2WD 6 M/T; 1.5 dCi 2WD 6 M/T; dCi 110 2WD 6 M/T,NISSAN,QASHQI,4,high,name_similarity_firsttoken,
-NISSAN,Qashqai J11A,1840,DIG-T 115 2WD 6 M/T; 1.5 dCi 2WD 6 M/T; dCi 110 2WD 6 M/T,NISSAN,QASQAI,3,high,name_similarity_firsttoken,
-NISSAN,Qashqai J11A,1840,DIG-T 115 2WD 6 M/T; 1.5 dCi 2WD 6 M/T; dCi 110 2WD 6 M/T,NISSAN,QASHQUAI,2,high,name_similarity_firsttoken,
-HYUNDAI,Ioniq,1839,PHEV Hatchback  DCT; HEV DCT; B5P21,HYUNDAI,IONIQ,115275,high,name_similarity_firsttoken,
-HYUNDAI,Ioniq,1839,PHEV Hatchback  DCT; HEV DCT; B5P21,HYUNDAI,"IONIQ,",4,high,name_similarity_firsttoken,
-HYUNDAI,Ioniq,1839,PHEV Hatchback  DCT; HEV DCT; B5P21,HYUNDAI,IONQ,3,medium,name_similarity_firsttoken,
-MERCEDES-BENZ,GLA,1831,250 e 8G-DCT; 200 7G-DCT; 200 d 8G-DCT,MERCEDES-BENZ,GLA,202186,exact,short_code_exact,
-FORD,FOCUS STATIONSVOGN,1801,"1,6 TDCI; 1,6 TDCI ECONETIC; 1,6",FORD,FOCUS,2291752,high,name_similarity_firsttoken,
-FORD,FOCUS STATIONSVOGN,1801,"1,6 TDCI; 1,6 TDCI ECONETIC; 1,6",FORD,FOUCS,5,medium,name_similarity_firsttoken,
-FORD,FOCUS STATIONSVOGN,1801,"1,6 TDCI; 1,6 TDCI ECONETIC; 1,6",FORD,FOLUS,4,medium,name_similarity_firsttoken,
-FORD,FOCUS STATIONSVOGN,1801,"1,6 TDCI; 1,6 TDCI ECONETIC; 1,6",FORD,LOCUST,2,medium,name_similarity_firsttoken,
-FORD,FOCUS STATIONSVOGN,1801,"1,6 TDCI; 1,6 TDCI ECONETIC; 1,6",FORD,FOCAS,1,medium,name_similarity_firsttoken,
-FORD,PUMA,1795,1.0 EcoBoost Hybrid (125 HK) 5-dørs FWD M6; 1.0 EcoBoost (125 HK) 5-dørs FWD DCT; 1.0 mHEV (125 HK) 5-dørs FWD M6,FORD,PUMA,163504,exact,short_code_exact,
-SEAT,Ateca,1775,1.5 TSI 150 SUV DSG7; 1.4 TSI ACT 150  DSG7; 1.4 TSI ACT 150  6 trins manuel,SEAT,ATECA,109528,high,name_similarity_firsttoken,
-SEAT,Ateca,1775,1.5 TSI 150 SUV DSG7; 1.4 TSI ACT 150  DSG7; 1.4 TSI ACT 150  6 trins manuel,SEAT,ALTEA,35254,medium,name_similarity_firsttoken,
-SEAT,Ateca,1775,1.5 TSI 150 SUV DSG7; 1.4 TSI ACT 150  DSG7; 1.4 TSI ACT 150  6 trins manuel,SEAT,ATCEA,3,medium,name_similarity_firsttoken,
-SEAT,Ateca,1775,1.5 TSI 150 SUV DSG7; 1.4 TSI ACT 150  DSG7; 1.4 TSI ACT 150  6 trins manuel,SEAT,ALTTEA,3,medium,name_similarity_firsttoken,
-BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,218,159274,high,family_series_sibling,
-BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,220,54327,high,family_series_sibling,
-BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,2 SERIES,46725,high,family_series_literal,
-BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,216,13129,high,family_series_sibling,
-BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,225,13008,high,family_series_sibling,
-BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,228,1267,high,family_series_sibling,
-BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,223,433,high,family_series_sibling,
-BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,230,302,high,family_series_sibling,
-BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,2002,185,high,family_series_sibling,
-BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,2000,29,high,family_series_sibling,
-BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,240,13,high,family_series_sibling,
-BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,2500,10,high,family_series_sibling,
-BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,235,7,high,family_series_sibling,
-BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,2800,5,high,family_series_sibling,
-BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,20,2,high,family_series_sibling,
-FORD,B-MAX,1774,"1.0 EcoBoost (100 HK) Hatchback, 5 dørs Forhjulstræk Manuel; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Manuel; 1.6 Powershift (105 HK)  Hatchback, 5 dørs Forhjulstræk Automatisk",FORD,B,132815,exact,code_exact,
-BMW,X5,1767,45e SUV xDrive Steptronic; XDRIVE45e; xDrive 45e,BMW,X5,213387,exact,code_exact,
-CITROËN,Grand C4 SpaceTourer,1762,1.2 PureTech 130 MPV; 1.2 PureTech 130 hk MPV; 1.5 BlueHDi 130 MPV Aut.,CITROEN,GRAND,11395,high,name_similarity_firsttoken,
-CITROËN,Grand C4 SpaceTourer,1762,1.2 PureTech 130 MPV; 1.2 PureTech 130 hk MPV; 1.5 BlueHDi 130 MPV Aut.,CITROEN,SPACETOURER,7314,medium,name_similarity_fullstring,
-AUDI,A3,1760,"2,0 TDI; 1,6 TDI; 1,6",AUDI,A3,1007746,exact,code_exact,
-VOLVO,V70,1756,D4 aut.; D3 AUT.; D3 Man.,VOLVO,V70,101425,exact,code_exact,
-FORD,GALAXY,1725,"2,0 TDCI; 2,0 TDCI AUT; 2.0 TDCi (163 HK) MPV Forhjulstræk Manuel",FORD,GALAXY,146513,high,name_similarity_firsttoken,
-FORD,GALAXY,1725,"2,0 TDCI; 2,0 TDCI AUT; 2.0 TDCi (163 HK) MPV Forhjulstræk Manuel",FORD,GALAXIE,28,medium,name_similarity_firsttoken,
-FORD,GALAXY,1725,"2,0 TDCI; 2,0 TDCI AUT; 2.0 TDCi (163 HK) MPV Forhjulstræk Manuel",FORD,GALXAY,4,medium,name_similarity_firsttoken,
-FORD,GALAXY,1725,"2,0 TDCI; 2,0 TDCI AUT; 2.0 TDCi (163 HK) MPV Forhjulstræk Manuel",FORD,GALAXEY,1,high,name_similarity_firsttoken,
-FIAT,Punto S7,1690,0.9 100; 1.2 69; 0.9 85,FIAT,PUNTO,148776,high,name_similarity_firsttoken,
-FIAT,Punto S7,1690,0.9 100; 1.2 69; 0.9 85,FIAT,AUTO,23487,medium,name_similarity_firsttoken,
-FIAT,Punto S7,1690,0.9 100; 1.2 69; 0.9 85,FIAT,UNO,393,medium,name_similarity_firsttoken,
-FIAT,Punto S7,1690,0.9 100; 1.2 69; 0.9 85,FIAT,SUNTOR,2,medium,name_similarity_firsttoken,
-FIAT,Punto S7,1690,0.9 100; 1.2 69; 0.9 85,FIAT,SUNTOUR,2,medium,name_similarity_firsttoken,
-OPEL,Mokka,1686,"1.2 130 SUV AT; 1,4 Turbo 140HK MPV; 1,4 Turbo 140HK MPV Aut.",VAUXHALL,MOKKA,603417,high,name_similarity_firsttoken,
-RENAULT,MEGANE SPORT TOURER,1658,"1,5 DCI 110; 1,5 DCI 90; 1,6 16V 110",RENAULT,MEGANE,270742,high,name_similarity_firsttoken,
-RENAULT,MEGANE SPORT TOURER,1658,"1,5 DCI 110; 1,5 DCI 90; 1,6 16V 110",RENAULT,MEGAN,46,high,name_similarity_firsttoken,
-RENAULT,MEGANE SPORT TOURER,1658,"1,5 DCI 110; 1,5 DCI 90; 1,6 16V 110",RENAULT,MAGANE,14,medium,name_similarity_firsttoken,
-RENAULT,MEGANE SPORT TOURER,1658,"1,5 DCI 110; 1,5 DCI 90; 1,6 16V 110",RENAULT,MEGANNE,9,high,name_similarity_firsttoken,
-RENAULT,MEGANE SPORT TOURER,1658,"1,5 DCI 110; 1,5 DCI 90; 1,6 16V 110",RENAULT,MAGAN,5,medium,name_similarity_firsttoken,
-HYUNDAI,I 10,1642,"1,2; 1,1; 1,2 AUT.",HYUNDAI,I,41,exact,code_exact,
-HYUNDAI,IX20,1641,"1.4 5 dørs MPV; 1,4; 1.4 CRDi 5 dørs MPV",HYUNDAI,IX20,71084,high,name_similarity_firsttoken,
-HYUNDAI,IX20,1641,"1.4 5 dørs MPV; 1,4; 1.4 CRDi 5 dørs MPV",HYUNDAI,1X20,10,medium,name_similarity_firsttoken,
-HYUNDAI,IX20,1641,"1.4 5 dørs MPV; 1,4; 1.4 CRDi 5 dørs MPV",HYUNDAI,IX,9,medium,name_similarity_firsttoken,
-HYUNDAI,IX20,1641,"1.4 5 dørs MPV; 1,4; 1.4 CRDi 5 dørs MPV",HYUNDAI,LX20,2,medium,name_similarity_firsttoken,
-HYUNDAI,IX20,1641,"1.4 5 dørs MPV; 1,4; 1.4 CRDi 5 dørs MPV",HYUNDAI,IX25,1,medium,name_similarity_firsttoken,
-SUZUKI,SX4,1616,"1,6 5-dørs; 1,6; 1,6 SEDAN",SUZUKI,SX4,103026,high,name_similarity_firsttoken,
-SUZUKI,SX4,1616,"1,6 5-dørs; 1,6; 1,6 SEDAN",SUZUKI,SX,244,medium,name_similarity_firsttoken,
-SUZUKI,SX4,1616,"1,6 5-dørs; 1,6; 1,6 SEDAN",SUZUKI,SZ4,10,medium,name_similarity_firsttoken,
-SUZUKI,SX4,1616,"1,6 5-dørs; 1,6; 1,6 SEDAN",SUZUKI,GSX400,2,medium,name_similarity_firsttoken,
-SUZUKI,SX4,1616,"1,6 5-dørs; 1,6; 1,6 SEDAN",SUZUKI,SJ4,1,medium,name_similarity_firsttoken,
-BMW,X3,1583,30e SAV xDrive Steptronic; xDrive30e; 30d SAV xDrive Steptronic,BMW,X3,246200,exact,code_exact,
-AUDI,A3 Limousine,1525,2.0 TDI 150 HK 4-DØRS; 35 TFSI 150 hk 4-dørs S tronic; 1.6 TDI 110 HK 4-DØRS,AUDI,A3,1007746,exact,code_exact,
-NISSAN,X-TRAIL,1513,DIG-T 163 SUV 2WD 6 M/T; dCi 130 SUV 2WD 6 M/T; dCi 130 SUV 2WD Xtronic Aut.,NISSAN,X,224355,exact,code_exact,
-MERCEDES-BENZ,GLE,1502,350 de SUV 4MATIC 9G-TRONIC; 350 de 4MATIC; 350 d SUV 4MATIC 9G-TRONIC,MERCEDES-BENZ,GLE,70695,exact,short_code_exact,
-VOLVO,V90,1476,D4 Aut.; T6 Recharge Aut.; D5 AWD Aut.,VOLVO,V90,36936,exact,code_exact,
-VOLVO,XC90,1470,D5 AWD Aut.; T8 Recharge Aut.; D5 AUT AWD,VOLVO,XC60,270668,medium,name_similarity_firsttoken,
-VOLVO,XC90,1470,D5 AWD Aut.; T8 Recharge Aut.; D5 AUT AWD,VOLVO,XC90,175329,high,name_similarity_firsttoken,
-VOLVO,XC90,1470,D5 AWD Aut.; T8 Recharge Aut.; D5 AUT AWD,VOLVO,XC40,174920,medium,name_similarity_firsttoken,
-VOLVO,XC90,1470,D5 AWD Aut.; T8 Recharge Aut.; D5 AUT AWD,VOLVO,XC70,42317,medium,name_similarity_firsttoken,
-VOLVO,XC90,1470,D5 AWD Aut.; T8 Recharge Aut.; D5 AUT AWD,VOLVO,XC,7,medium,name_similarity_firsttoken,
-AUDI,A3 CABRIOLET,1419,35 TFSI 150 hk 2-dørs S tronic; 1.4 TFSI CoD 150 HK 2-dørs S tronic; 1.4 TFSI 125 HK 2-dørs,AUDI,A3,1007746,exact,code_exact,
-HYUNDAI,I40,1400,1.7 CRDi 5 dørs Stationcar; 1.7 CRDi 4 dørs Sedan; 1.7 CRDi 5 dørs Stationcar AT,HYUNDAI,I40,50399,exact,code_exact,
-OPEL,ZAFIRA,1383,"1,8; 1,6CDTi 136HK Tourer; 2,0CDTi 130HK Tourer",VAUXHALL,ZAFIRA,482890,high,name_similarity_firsttoken,
-OPEL,ZAFIRA,1383,"1,8; 1,6CDTi 136HK Tourer; 2,0CDTi 130HK Tourer",VAUXHALL,ZAFRIA,9,medium,name_similarity_firsttoken,
-OPEL,ZAFIRA,1383,"1,8; 1,6CDTi 136HK Tourer; 2,0CDTi 130HK Tourer",VAUXHALL,ZAFERA,6,medium,name_similarity_firsttoken,
-OPEL,ZAFIRA,1383,"1,8; 1,6CDTi 136HK Tourer; 2,0CDTi 130HK Tourer",VAUXHALL,ZAFIA,5,high,name_similarity_firsttoken,
-OPEL,ZAFIRA,1383,"1,8; 1,6CDTi 136HK Tourer; 2,0CDTi 130HK Tourer",VAUXHALL,ZAFFIRA,1,high,name_similarity_firsttoken,
-VOLKSWAGEN,CALIFORNIA,1382,2.0 TDI 150  Campingbil DSG7; 2.0 TDI 110 Campingbil; 2.0 TDI 150  Campingbil 4MOTION DSG7,VOLKSWAGEN,CALIFORNIA,25256,high,name_similarity_firsttoken,
-VOLKSWAGEN,CALIFORNIA,1382,2.0 TDI 150  Campingbil DSG7; 2.0 TDI 110 Campingbil; 2.0 TDI 150  Campingbil 4MOTION DSG7,VOLKSWAGEN,CALIFONIA,11,high,name_similarity_firsttoken,
-VOLKSWAGEN,CALIFORNIA,1382,2.0 TDI 150  Campingbil DSG7; 2.0 TDI 110 Campingbil; 2.0 TDI 150  Campingbil 4MOTION DSG7,VOLKSWAGEN,CALIFORN,2,medium,name_similarity_firsttoken,
-HYUNDAI,i10 AC3,1356,1.0 Hatchback; 1.0 Hatchback  Automatisk; 1.0 T-GDi Hatchback,HYUNDAI,I10,599315,exact,code_exact,
-ALFA ROMEO,GIULIETTA,1350,"1,4 M-AIR; 1.4 Multiair 170 TCT; 1.4 Multiair 170",ALFA ROMEO,GIULIETTA,63590,high,name_similarity_firsttoken,
-ALFA ROMEO,GIULIETTA,1350,"1,4 M-AIR; 1.4 Multiair 170 TCT; 1.4 Multiair 170",ALFA ROMEO,GIULIA,15923,medium,name_similarity_firsttoken,
-ALFA ROMEO,GIULIETTA,1350,"1,4 M-AIR; 1.4 Multiair 170 TCT; 1.4 Multiair 170",ALFA ROMEO,GIULLIA,126,medium,name_similarity_firsttoken,
-ALFA ROMEO,GIULIETTA,1350,"1,4 M-AIR; 1.4 Multiair 170 TCT; 1.4 Multiair 170",ALFA ROMEO,GUILIETTA,5,medium,name_similarity_firsttoken,
-ALFA ROMEO,GIULIETTA,1350,"1,4 M-AIR; 1.4 Multiair 170 TCT; 1.4 Multiair 170",ALFA ROMEO,GULIETTA,2,high,name_similarity_firsttoken,
-VOLVO,V50,1331,"DRIVE S/S; D2; 1,6",VOLVO,V50,76365,exact,code_exact,
-OPEL,ASTRA SPORTS TOURER,1323,"1,4 T; 1,7 CDTI; 1,6",VAUXHALL,ASTRA,1545548,high,name_similarity_firsttoken,
-OPEL,ASTRA SPORTS TOURER,1323,"1,4 T; 1,7 CDTI; 1,6",VAUXHALL,ASTRAVAN,18748,medium,name_similarity_firsttoken,
-OPEL,ASTRA SPORTS TOURER,1323,"1,4 T; 1,7 CDTI; 1,6",VAUXHALL,ASTRAMAX,23,medium,name_similarity_firsttoken,
-OPEL,ASTRA SPORTS TOURER,1323,"1,4 T; 1,7 CDTI; 1,6",VAUXHALL,ASTR,3,medium,name_similarity_firsttoken,
-OPEL,ASTRA SPORTS TOURER,1323,"1,4 T; 1,7 CDTI; 1,6",VAUXHALL,ASTAR,3,medium,name_similarity_firsttoken,
-MERCEDES-BENZ,GLB,1319,200 d 8G-DCT; 220 d 8G-DCT; 220 d 4MATIC 8G-DCT,MERCEDES-BENZ,GLB,20440,exact,short_code_exact,
-DS,DS 3,1313,"1,6 2-dørs m. bagklap; 1.6 BlueHDi 100 HK 2-dørs m. bagklap Man; 1.6 BlueHDi 100 hk 2-dørs m. bagklap",DS,DS3,84562,medium,name_similarity_fullstring,
-DS,DS 3,1313,"1,6 2-dørs m. bagklap; 1.6 BlueHDi 100 HK 2-dørs m. bagklap Man; 1.6 BlueHDi 100 hk 2-dørs m. bagklap",DS,DS4,12321,medium,name_similarity_firsttoken,
-DS,DS 3,1313,"1,6 2-dørs m. bagklap; 1.6 BlueHDi 100 HK 2-dørs m. bagklap Man; 1.6 BlueHDi 100 hk 2-dørs m. bagklap",DS,DS7,8845,medium,name_similarity_firsttoken,
-DS,DS 3,1313,"1,6 2-dørs m. bagklap; 1.6 BlueHDi 100 HK 2-dørs m. bagklap Man; 1.6 BlueHDi 100 hk 2-dørs m. bagklap",DS,DS,4169,high,name_similarity_firsttoken,
-DS,DS 3,1313,"1,6 2-dørs m. bagklap; 1.6 BlueHDi 100 HK 2-dørs m. bagklap Man; 1.6 BlueHDi 100 hk 2-dørs m. bagklap",DS,DS5,3258,medium,name_similarity_firsttoken,
+dmr_make_id,dmr_model_id,dmr_make,dmr_model,dk_vehicle_count,dk_sample_variants,proposed_dvsa_make,proposed_dvsa_model_token,uk_test_count,confidence,rule_fired,match_score,decision,decision_basis
+10279,10279294,VOLKSWAGEN,UP!,62570,1.0 MPI BMT 60; 1.0 MPI 60; 1.0 MPI BMT 60 HK 5 dørs,VOLKSWAGEN,UP,290545,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 290,545 UK tests"
+10203,10203116,PEUGEOT,208,52719,1.6 BlueHDI 100 hk 5D; BlueHDi 100 5D; 1.2 VTi 5D,PEUGEOT,208,521212,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 521,212 UK tests"
+10279,10279021,VOLKSWAGEN,POLO,44100,"1,0 TSI 95 DSG7; 1,0 TSI BlueMotion 95; 1,0 TSI 95",VOLKSWAGEN,POLO,1585668,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 1,585,668 UK tests"
+10265,10265042,TOYOTA,AYGO,43773,1.0 VVT-i; 1.0 benzin (72 hk); 1.0 VVT-i MMT,TOYOTA,AYGO,625248,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 625,248 UK tests"
+10265,10265030,TOYOTA,YARIS,39750,1.5Hybrid e-CVT; 1.5 Hybrid (116 hk) aut. gear; 1.0VVT-i,TOYOTA,YARIS,1114899,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 1,114,899 UK tests"
+10045,10045107,CITROËN,C3,38244,"1.2 PureTech 83 5D; 1.2 PureTech 82 4-dørs m. bagklap; 1,6 4-dørs m. bagklap",CITROEN,C3,574211,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 574,211 UK tests"
+10349,10349019,KIA,PICANTO,32895,"1.0 5-dørs Man. 5; 1.2 5-dørs Man. 5; 1,0 ISG",KIA,PICANTO,459638,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 459,638 UK tests"
+10045,70000015,CITROËN,C1,31991,"1,0 4-dørs m. bagklap; 1 4-dørs m. bagklap; 1.0 VTi 72 hk 5D",CITROEN,C1,407006,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 407,006 UK tests"
+10083,10083039,FORD,FIESTA,31965,"1.0 EcoBoost (100 HK) Hatchback, 5 dørs Forhjulstræk Manuel; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Manuel; 1.0 EcoBoost Hybrid (125 HK) 5-dørs FWD M6",FORD,FIESTA,3479593,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 3,479,593 UK tests"
+10279,10279010,VOLKSWAGEN,GOLF,29976,1.5 TSI EVO 150 DSG7; 1.4 TSI BMT 125; 1.4 TSI BMT 122 HK 5 DØRS,VOLKSWAGEN,GOLF,2127313,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 2,127,313 UK tests"
+10323,10323055,HYUNDAI,I10,29175,"1.0 (hatchback); 1.0 Hatchback; 1,2 FL",HYUNDAI,I10,599315,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 599,315 UK tests"
+10242,10242054,SKODA,CITIGO,27868,1.0 MPI 60 HK 5-Dørs Hatchback; 1.0 MPI 60  5-Dørs; 1.0 MPI 60 HK 3-Dørs Hatchback,SKODA,CITIGO,120830,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 120,830 UK tests"
+10193,10193015,OPEL,CORSA,27644,"1,4 5-dørs; 1,2 5D; 1,4 90HK 5-dørs",VAUXHALL,CORSA,2306909,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 2,306,909 UK tests"
+10216,70001092,RENAULT,Ny Clio,26976,TCe 90 Sport Tourer; TCe 90 5d; dCi 75 Sport Tourer,RENAULT,CLIO,848688,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 848,688 UK tests"
+10323,10323043,HYUNDAI,I20,25514,"1.25 5 dørs Hatchback; 1.2 5 dørs MPV; 1,2",HYUNDAI,I20,314701,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 314,701 UK tests"
+10242,10242028,SKODA,FABIA,25197,1.0 TSI 95  Combi; 1.2 TSI 90 HK STATIONCAR; 1.2 TSI 110 HK STATIONCAR,SKODA,FABIA,569705,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 569,705 UK tests"
+10242,10242005,SKODA,OCTAVIA,24510,1.5 TSI ACT 150 COMBI DSG7; 2.0 TDI 150 COMBI DSG7; 1.4 TSI 150 COMBI DSG,SKODA,OCTAVIA,484694,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 484,694 UK tests"
+10188,10188065,NISSAN,QASHQAI,23722,DIG-T 160 DCT; DIG-T 140 6 M/T; DIG-T 115 2WD 6 M/T,NISSAN,QASHQAI,1469028,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 1,469,028 UK tests"
+10254,10254005,SUZUKI,SWIFT,22549,"1,2 5-dørs; 1,2 Hybrid 5-dørs; 1,2 Dualjet 5-dørs",SUZUKI,SWIFT,324246,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 324,246 UK tests"
+10349,10349012,KIA,RIO,21547,1.2 5-dørs Man. 5; 1.0 5-dørs Man. 5; 1.1 CRDI 5-dørs Man. 6,KIA,RIO,244472,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 244,472 UK tests"
+10203,10203096,PEUGEOT,308,20846,1.6 BlueHDi 120 hk SW; 1.6 BlueHDi 120 hk 5D; BlueHDi 130  SW,PEUGEOT,308,330850,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 330,850 UK tests"
+10216,70002154,RENAULT,Captur,18881,TCe 90; dCi 90; E-TECH 160,RENAULT,CAPTUR,377121,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 377,121 UK tests"
+10279,10279167,VOLKSWAGEN,TOURAN,17682,1.5 TSI 150 DSG7; 1.4 TSI 150 DSG7; 1.6 TDI SCR 115 DSG7,VOLKSWAGEN,TOURAN,178099,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 178,099 UK tests"
+10203,10203052,PEUGEOT,107,17674,"1,0 5-D 68 HK; 1,0 5-D; 1,0 I 5D 68HK",PEUGEOT,107,281814,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 281,814 UK tests"
+10083,10083290,FORD,KUGA,16767,2.5 Plug-in Hybrid (225 HK) SUV FWD CVT; 1.5 Ecoboost (150 HK) SUV FWD (forhjulstræk) Man; 1.5 EcoBoost (150 HK ) SUV FWD M6,FORD,KUGA,699530,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 699,530 UK tests"
+10203,70001779,PEUGEOT,2008,16677,1.6 BlueHDi 100 hk Crossover; PureTech 130  SUV; 1.2 e-THP 110 hk Crossover,PEUGEOT,2008,331689,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 331,689 UK tests"
+10203,70003823,PEUGEOT,108,15588,1.0 e-VTi 69 hk 5D; e-VTi 72 5D; 1.0 e-VTi 72 hk 5D,PEUGEOT,108,176432,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 176,432 UK tests"
+10279,10279020,VOLKSWAGEN,PASSAT,15030,1.4 TSI ACT 150  Variant DSG7; 2.0 TDI BMT 150 Variant DSG6; 1.4 TSI ACT 150  DSG7,VOLKSWAGEN,PASSAT,451005,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 451,005 UK tests"
+10349,10349024,KIA,CEED,14992,1.6 CRDI Stationcar Man. 6; 1.6 GDI Plug-in Hybrid Stationscar DCT 6; 1.0 Stationcar Man. 6,KIA,CEED,306401,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 306,401 UK tests"
+10193,10193049,OPEL,ASTRA,14759,"1,0 Turbo 105HK Sports Tourer; 1,4 Turbo 150HK Sports Tourer; 1,0 Turbo 105HK 5-dørs",VAUXHALL,ASTRA,1545548,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 1,545,548 UK tests"
+10083,10083155,FORD,FOCUS,14472,1.0 EcoBoost (125 HK) Stationcar Forhjulstræk Manuel; 1.0 EcoBoost (125 HK) Stationcar FWD M6; 1.0 EcoBoost (125 HK ) Stationcar FWD M6,FORD,FOCUS,2291752,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 2,291,752 UK tests"
+10043,10043136,CHEVROLET,SPARK,12832,1.0 ESP 5D; 1.2 ESP 5D; 1.0 5D,CHEVROLET,SPARK,37235,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 37,235 UK tests"
+10083,10083148,FORD,KA,12679,"1.2 (69HK) Hatchback, 3 dørs Forhjulstræk Manuel; 1,2; 1,2 SE",FORD,KA,437995,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 437,995 UK tests"
+10168,70000048,MERCEDES-BENZ,C-Klasse,12063,220 d Stationcar 9G-TRONIC; 220 d Sedan 9G-TRONIC; 220 d St.Car 7G-TRONIC PLUS,MERCEDES-BENZ,C,879779,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 879,779 UK tests"
+10233,10233041,SEAT,MII,11905,1.0 60 HK 44 kw ECOMOTIVE 5-DØRS 5 trins manuel; 1.0 60 HK ECOMOTIVE 5-DØRS; 1.0 60 HK ECOMOTIVE 3-DØRS,SEAT,MII,44001,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 44,001 UK tests"
+10203,10203091,PEUGEOT,3008,11806,HYBRID 225 SUV EAT8; BlueHDi 130 SUV EAT8; 1.6 BlueHDi 120 hk SUV,PEUGEOT,3008,349581,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 349,581 UK tests"
+10079,10079049,FIAT,500,11378,"1.2 69; 1,2; 0.9 80",FIAT,500,859378,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 859,378 UK tests"
+10265,10265053,TOYOTA,AURIS,10970,1.8 Hybrid Touring Sports; 1.8 Hybrid Hatchback; 1.6 Valvematic Hatchback,TOYOTA,AURIS,359334,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 359,334 UK tests"
+10254,10254006,SUZUKI,VITARA,9524,"1,6 5-dørs; 1,4 Hybrid 5-dørs; 1,4 Boosterjet 5-dørs",SUZUKI,VITARA,152723,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 152,723 UK tests"
+10216,10216085,RENAULT,MEGANE,9277,1.5 dCi ESM 110 Sport Tourer; E-TECH 160 Sport Tourer; 1.5 dCi ESM 110,RENAULT,MEGANE,270742,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 270,742 UK tests"
+10233,10233020,SEAT,LEON,9206,1.5 TSI ACT 150 Stationcar DSG7; 1.4 TSI 150 HK ACT 110 kw ST. CAR DSG7; 1.4 TSI ACT 150 Stationcar DSG7,SEAT,LEON,442771,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 442,771 UK tests"
+10323,10323044,HYUNDAI,I30,9003,"1.6 CRDi 5 dørs Hatchback; 1,6 CRDI 90 ECO; 1.6 CRDi 5 dørs MPV",HYUNDAI,I30,264301,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 264,301 UK tests"
+10254,70002496,SUZUKI,SX4 S-Cross,8987,"1,0 Boosterjet 5-dørs; 1,6 5-dørs; 1,4 Hybrid 5-dørs",SUZUKI,SX4 S CROSS,7664,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 7,664 UK tests"
+10193,70005463,OPEL,KARL,8920,"1,0 75HK 5 dørs; 1,0 75HK 5 dørs Aut.",VAUXHALL,VIVA,87941,known-rename,Opel Karl is sold in the UK as the Vauxhall Viva; confirmed in Phase 2 strategy doc finding G.,1.0,y,"researched model-level rename recorded in source, not a string guess"
+10254,10254011,SUZUKI,BALENO,8873,"1,2 Dualjet 5-dørs; 1,2 Dualjet SHVS 5-dørs; 1,0 Boosterjet 5-dørs",SUZUKI,BALENO,16238,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 16,238 UK tests"
+10279,70010601,VOLKSWAGEN,T-Roc,8548,1.5 TSI 150HK DSG7; 1.5 TSI EVO 150HK DSG7; 1.0 TSI 115HK,VOLKSWAGEN,T ROC,182206,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 182,206 UK tests"
+10242,10242035,SKODA,OCTAVIA COMBI,8432,1.4 TSI 140 HK STATIONCAR; 1.2 TSI 105 HK Stationcar; 1.4 TSI 140 HK STATIONCAR DSG,SKODA,OCTAVIA,484694,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 484,694 UK tests"
+10254,70004538,SUZUKI,Celerio,8391,"1,0 Dualjet 5-dørs; 1,0 5-dørs; 1,0 5-dørs Aut.",SUZUKI,CELERIO,60661,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 60,661 UK tests"
+10216,10216058,RENAULT,CLIO,8289,"TCe 100 5d; TCe 90 5d; 1,2 16V 75",RENAULT,CLIO,848688,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 848,688 UK tests"
+10045,10045103,CITROËN,C4,8280,"1,6 4-dørs m. bagklap; 1.6 BlueHDi 100 hk 4-dørs m. bagklap Man.; 1,2 4-dørs m. bagklap",CITROEN,C4,451899,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 451,899 UK tests"
+10168,70000086,MERCEDES-BENZ,A-Klasse,8082,200 Hatchback 7G-DCT; A 200 Hatchback 7G-DCT; 200 d Hatchback 8G-DCT,MERCEDES-BENZ,A,839051,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 839,051 UK tests"
+10242,10242029,SKODA,FABIA COMBI,8079,"1.2 TSI 86 HK Stationcar; 1,2 TSI; 1.2 TSI 105 HK Stationcar",SKODA,FABIA,569705,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 569,705 UK tests"
+10083,10083237,FORD,C-MAX,8014,1.0 EcoBoost (125 HK ) 5-dørs FWD M6; 1.0 EcoBoost (125 HK) MPV Forhjulstræk Manuel; 1.0 EcoBoost (125 HK) 5-dørs FWD M6,FORD,C MAX,271087,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 271,087 UK tests"
+10045,70003798,CITROËN,C4 Cactus,7882,"1,6 4-DØRS MED BAGKLAP 5 Man; 1,2 4-DØRS MED BAGKLAP 5 Man; 1.6 BlueHDi 100 HK 4-dørs m. bagklap Man.",CITROEN,C4 CACTUS,51553,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 51,553 UK tests"
+10188,10188010,NISSAN,MICRA,7864,"1.2; 1,2 5D. MAN.; IG-T Hatchback, 5 dørs 2WD 5M/T",NISSAN,MICRA,613092,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 613,092 UK tests"
+10079,10079011,FIAT,PANDA,7703,"1,2; 1.2 69; 0.9 60",FIAT,PANDA,223233,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 223,233 UK tests"
+10166,10166051,MAZDA,MAZDA2,7483,"1,5 SKYACTIV-G Hatchback Man.; 1,5 Hatchback Man.; 1.3 5 DØRS HB",MAZDA,2,313689,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 313,689 UK tests"
+10216,10216071,RENAULT,TWINGO,7445,"1.2 16V; SCe 70; 1,2 16V 75",RENAULT,TWINGO,64049,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 64,049 UK tests"
+10026,70000085,BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,3 SERIES,872529,high,family_series_literal,1.0,y,"structural family membership (family_series_literal), 872,529 UK tests"
+10026,70000085,BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,320,115212,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 115,212 UK tests"
+10026,70000085,BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,330,92441,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 92,441 UK tests"
+10026,70000085,BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,318,26213,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 26,213 UK tests"
+10026,70000085,BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,316,23914,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 23,914 UK tests"
+10026,70000085,BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,335,10905,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 10,905 UK tests"
+10026,70000085,BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,340,2018,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 2,018 UK tests"
+10026,70000085,BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,325,967,high,family_series_sibling,1.0,n,"exact match but only 967 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70000085,BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,328,290,high,family_series_sibling,1.0,n,"exact match but only 290 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70000085,BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,323,109,high,family_series_sibling,1.0,n,"exact match but only 109 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70000085,BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,3000,36,high,family_series_sibling,1.0,n,"exact match but only 36 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70000085,BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,3251,1,high,family_series_sibling,1.0,n,"exact match but only 1 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70000085,BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,32,1,high,family_series_sibling,1.0,n,"exact match but only 1 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70000085,BMW,3-Serie,7390,320d Touring Steptronic; 330e Touring Steptronic; 320d Gran Turismo Steptronic,BMW,331,1,high,family_series_sibling,1.0,n,"exact match but only 1 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10254,10254019,SUZUKI,IGNIS,7200,"1,2 Dualjet 5-dørs; 1,2 Hybrid 5-dørs; 1,2 Hybrid 5-dørs CVT",SUZUKI,IGNIS,70633,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 70,633 UK tests"
+10015,70000052,AUDI,A3 Sportback,7174,1.6 TDI 110 HK 5-DØRS; 40 TFSI e 5-dørs S tronic; 35 TFSI 150 hk 5-dørs S tronic,AUDI,A3,1007746,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 1,007,746 UK tests"
+10233,10233003,SEAT,IBIZA,7137,1.0 TSI 95; 1.0 TSI 115; 1.0 TSI 115 DSG7,SEAT,IBIZA,487807,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 487,807 UK tests"
+10168,70000042,MERCEDES-BENZ,E-Klasse,7135,220 d Sedan 9G-TRONIC; 220 d Staioncar 9G-TRONIC; 200 CDI  T 7G-TRONIC PLUS,MERCEDES-BENZ,E,556928,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 556,928 UK tests"
+10083,10083214,FORD,S-MAX,7026,"2,0 TDCI; 2,0 TDCI AUT.; EcoBlue 2.0 (190HK) MPV FWD A8",FORD,S MAX,180418,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 180,418 UK tests"
+10177,10177024,MITSUBISHI,SPACE STAR,7009,1.2 5D; 1.2 5D CVT; 1.0 5D,MITSUBISHI,SPACE STAR,3423,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 3,423 UK tests"
+10254,10254010,SUZUKI,ALTO,6754,"1,0L M/T; 1,0 5-dørs; UOPLYST",SUZUKI,ALTO,116084,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 116,084 UK tests"
+10045,10045087,CITROËN,C 1,6597,"1,0 I; 1,0I AUT.; 1,0",CITROEN,C1,407006,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 407,006 UK tests"
+10279,70013847,VOLKSWAGEN,T-Cross,6532,1.0 TSI 115HK DSG7; 1.0 TSI 110HK DSG7; 1.0 TSI 95HK,VOLKSWAGEN,T CROSS,60318,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 60,318 UK tests"
+10279,10279254,VOLKSWAGEN,TIGUAN,6412,2.0 TDI 150HK DSG7; 1.5 TSI 150HK DSG7; 1.4 TSI 150 4Motion DSG6,VOLKSWAGEN,TIGUAN,573558,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 573,558 UK tests"
+10045,10045096,CITROËN,GRAND C4 PICASSO,6346,"1,6 MPV 6 Aut.; 1,6 MPV; 2,0 MPV 6 Aut.",CITROEN,GRAND C4 PICASSO,10665,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 10,665 UK tests"
+10349,70008327,KIA,Niro,6209,1.6 GDI Plug-in Hybrid 5 dørs DCT 6; 1.6 GDI Hybrid 5 dørs DCT 6; C5P21,KIA,NIRO,200258,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 200,258 UK tests"
+10279,10279187,VOLKSWAGEN,PASSAT VARIANT,6038,"1.4 TSI 218HK DSG6 PHEV DSG6; 2,0 TDI; 2,0 TDI AUT.",VOLKSWAGEN,PASSAT,451005,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 451,005 UK tests"
+10083,10083300,FORD,FIESTA 5 DØRS,5987,"1,25; 1,6 TDCI ECONETIC; 1,4",FORD,FIESTA,3479593,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 3,479,593 UK tests"
+10265,70008476,TOYOTA,Toyota C-HR,5943,1.8 Hybrid; 1.8 Hybrid (122 hk) aut. gear; 2.0 hybrid (184 hk) aut. gear,TOYOTA,C HR,207538,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 207,538 UK tests"
+10265,10265082,TOYOTA,AYGO 3/5-DØRS,5820,1.0 HB 5-DØRS; 1.0 HB AUT. 5-DØRS; 1.0 HB 3-DØRS,TOYOTA,AYGO,625248,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 625,248 UK tests"
+10188,10188060,NISSAN,NOTE,5684,1.2 5 M/T; 1.4; 80 5 M/T,NISSAN,NOTE,378948,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 378,948 UK tests"
+10280,10280392,VOLVO,V60,5670,D4 aut.; T6 Recharge Aut; D3,VOLVO,V60,96404,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 96,404 UK tests"
+10083,10083124,FORD,MONDEO,5626,2.0 TDCi (180 HK) Stationcar Forhjulstræk Automatisk; 2.0 EcoBlue (190 HK) Stationcar FWD A8; 2.0 TDCi (140 HK) Stationcar Forhjulstræk Manuel,FORD,MONDEO,456751,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 456,751 UK tests"
+10265,10265005,TOYOTA,COROLLA,5346,1.8 Hybrid (122 hk) Touring Sports aut. Gear; 1.8 Hybrid (122 hk) Hatchback aut. Gear; 2.0 Hybrid (180 hk) Touring Sports aut. Gear,TOYOTA,COROLLA,282026,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 282,026 UK tests"
+10216,10216131,RENAULT,GRAND SCENIC,5269,1.5 dCi ESM 110 7p; 1.6 dCi ESM 130 7p; 1.5 dCi 110 EDC,RENAULT,GRAND SCENIC,53432,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 53,432 UK tests"
+10254,10254033,SUZUKI,SPLASH,5129,"1,0 5-dørs; 1,0; 1,2",SUZUKI,SPLASH,45041,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 45,041 UK tests"
+10050,70003187,DACIA,Duster,5050,1.5 dCi 109; 1.5 dCi 90; 1.2 TCe 125,DACIA,DUSTER,184163,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 184,163 UK tests"
+10265,10265054,TOYOTA,RAV4,4915,2.5 Hybrid (218 hk) 4X2 aut. gear; 2.5 Hybrid 4X2; 2.5 Hybrid 4X4,TOYOTA,RAV4,234239,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 234,239 UK tests"
+10265,10265028,TOYOTA,AVENSIS,4889,1.8 VVT-i stationcar; 1.8 VVT-i Touring Sports; 1.8 VVT-i Touring Sports Multidrive S,TOYOTA,AVENSIS,146826,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 146,826 UK tests"
+10279,70003677,VOLKSWAGEN,Golf Sportsvan,4733,1.5 TSI EVO 150 DSG7; 1.4 TSI BMT 125 DSG7; 1.5 TSI EVO 130 DSG7,VOLKSWAGEN,GOLF,2127313,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 2,127,313 UK tests"
+10166,10166054,MAZDA,MAZDA6,4712,"2.0 SKYACTIV-G 165 HK Stationcar; 2,0 STATIONSCAR; 2,2 SKYACTIV-D 150 hk Stationcar",MAZDA,6,146229,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 146,229 UK tests"
+10265,10265063,TOYOTA,YARIS 5-DØRS,4539,"1,3 MAN.6. 5D.; 1,4 D-4D MAN.6. 5D.; 1,0 MAN.5. 5D.",TOYOTA,YARIS,1114899,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 1,114,899 UK tests"
+10106,10106024,HONDA,JAZZ,4499,"1.3 i-VTEC; 1.4 i-VTEC; 1,4 COMFORT",HONDA,JAZZ,806162,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 806,162 UK tests"
+10323,10323047,HYUNDAI,I30CW,4476,"1.6 CRDi 5 dørs Stationcar; 1,6 CRDI 90 FL; 1.6 GDI 5 dørs Stationcar",HYUNDAI,I30,264304,exact,code_exact,1.0,y,"literal string identity (code_exact), 264,304 UK tests"
+10265,10265072,TOYOTA,VERSO,4405,1.8 VVT-i 7 sæder; 2.0 D-4D DPF.MAN.6; 1.8 MAN.6,TOYOTA,VERSO,66146,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 66,146 UK tests"
+10193,10193109,OPEL,INSIGNIA,4352,"2,0CDTi 140HK Sports Tourer; 1,5T 165HK Sports Tourer Aut.; 1,5T 165HK 5-dørs Aut.",VAUXHALL,INSIGNIA,475883,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 475,883 UK tests"
+10216,70005602,RENAULT,Kadjar,4348,dCi 110; TCe 130; dCi 110 EDC,RENAULT,KADJAR,165317,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 165,317 UK tests"
+10203,10203056,PEUGEOT,207,4319,"1,6 HDI 92 HK ST.CAR; 1,6 HDI 92 HK 5-D; 1,6 HDI 16V 90HK.5D.",PEUGEOT,207,339792,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 339,792 UK tests"
+10050,70003076,DACIA,Logan MCV,4307,TCe 90; 1.5 dCi 90; TCe 90 BVR,DACIA,LOGAN,37606,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 37,606 UK tests"
+10045,10045108,CITROËN,C3 PICASSO,4293,"1,6 MPV; 1,6 HDI 90 FAP; 1,2 MPV",CITROEN,C3 PICASSO,16007,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 16,007 UK tests"
+10166,10166063,MAZDA,CX-5,4262,"2,0 Man.; 2,0 Aut.; 2,5 Aut.",MAZDA,CX 5,160966,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 160,966 UK tests"
+10193,70009557,OPEL,Crossland X,4241,"1,2 T 110HK MPV; 1.2 T 110 HK MPV; 1,2 T 110HK MPV Aut.",VAUXHALL,CROSSLAND X,37335,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 37,335 UK tests"
+10079,70000017,FIAT,500C,4232,1.2 69; 0.9 80; 1.0 70,FIAT,500C,43800,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 43,800 UK tests"
+10166,10166056,MAZDA,MAZDA3,4189,2.0 SKYACTIV-G 120 HK 5-dørs man.; 2.0 SKYACTIV-G 120 HK; 2.0 SKYACTIV-G 122 HK 5-dørs man.,MAZDA,3,265879,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 265,879 UK tests"
+10050,10050009,DACIA,SANDERO,4174,0.9 TCe 90; TCe 90 Manuel; 1.5 dCi 90 Stepway,DACIA,SANDERO,276289,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 276,289 UK tests"
+10015,10015057,AUDI,A4 AVANT,4144,"2,0 TDI; 2.0 TFSI 190 HK 5-dørs S tronic; 40 TFSI Avant S tronic",AUDI,A4,603927,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 603,927 UK tests"
+10203,10203093,PEUGEOT,206 +,4125,"1,4 HDI 68 HK 5-D; 1,4 73 HK 5-D; 1,4 HDI 5D 68HK",PEUGEOT,206,105356,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 105,356 UK tests"
+10043,10043103,CHEVROLET,AVEO,4123,1.2 5D; 1.2 ECO 5D; 1.2 4D,CHEVROLET,AVEO,22172,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 22,172 UK tests"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,118,350249,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 350,249 UK tests"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,116,248002,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 248,002 UK tests"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,1 SERIES,184594,high,family_series_literal,1.0,y,"structural family membership (family_series_literal), 184,594 UK tests"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,120,98433,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 98,433 UK tests"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,125,10306,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 10,306 UK tests"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,114,7922,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 7,922 UK tests"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,123,7730,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 7,730 UK tests"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,128,4527,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 4,527 UK tests"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,135,2551,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 2,551 UK tests"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,130,2008,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 2,008 UK tests"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,140,26,high,family_series_sibling,1.0,n,"exact match but only 26 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,1600,17,high,family_series_sibling,1.0,n,"exact match but only 17 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,1602,8,high,family_series_sibling,1.0,n,"exact match but only 8 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,1502,7,high,family_series_sibling,1.0,n,"exact match but only 7 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,16,4,high,family_series_sibling,1.0,n,"exact match but only 4 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,1800,4,high,family_series_sibling,1.0,n,"exact match but only 4 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,13,3,high,family_series_sibling,1.0,n,"exact match but only 3 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,1802,2,high,family_series_sibling,1.0,n,"exact match but only 2 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70000069,BMW,1-Serie,4105,118d 5-dørs hatchback Steptronic; 118i 5-dørs hatchback Steptronic; 118d 5-dørs hatchback,BMW,160,2,high,family_series_sibling,1.0,n,"exact match but only 2 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10203,10203099,PEUGEOT,5008,4075,"BlueHDi 130 SUV EAT8; 1.6 BlueHDi 120 hk SUV; 1,6 HDI 112HK",PEUGEOT,5008,89404,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 89,404 UK tests"
+10026,70000088,BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,520,194933,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 194,933 UK tests"
+10026,70000088,BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,5 SERIES,164746,high,family_series_literal,1.0,y,"structural family membership (family_series_literal), 164,746 UK tests"
+10026,70000088,BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,530,56912,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 56,912 UK tests"
+10026,70000088,BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,525,30447,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 30,447 UK tests"
+10026,70000088,BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,535,18374,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 18,374 UK tests"
+10026,70000088,BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,523,5376,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 5,376 UK tests"
+10026,70000088,BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,518,5147,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 5,147 UK tests"
+10026,70000088,BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,528,4426,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 4,426 UK tests"
+10026,70000088,BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,540,1926,high,family_series_sibling,1.0,n,"exact match but only 1,926 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70000088,BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,545,1056,high,family_series_sibling,1.0,n,"exact match but only 1,056 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70000088,BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,550,584,high,family_series_sibling,1.0,n,"exact match but only 584 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70000088,BMW,5-Serie,4027,520d Touring Steptronic; 530e Touring Steptronic; 520d Sedan Steptronic,BMW,503,2,high,family_series_sibling,1.0,n,"exact match but only 2 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10323,70010718,HYUNDAI,KONA,3897,1.0 T-GDI MPV; HEV  MPV DCT; 1.0 T-GDI MPV DCT,HYUNDAI,KONA,119003,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 119,003 UK tests"
+10015,10015124,AUDI,Q3,3809,45 TFSI e 5-dørs S tronic; 35 TFSI 150 hk 5-dørs S tronic; 1.4 TFSI 150 HK 5-dørs S tronic,AUDI,Q3,312365,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 312,365 UK tests"
+10242,10242034,SKODA,SUPERB,3724,1.5 TSI ACT 150 COMBI DSG7; 2.0 TDI 150 COMBI DSG7; 1.4 TSI ACT 150 COMBI DSG7,SKODA,SUPERB,155398,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 155,398 UK tests"
+10280,70010957,VOLVO,XC40,3659,T5 Recharge Aut; T4 Recharge Aut.; D4 AWD Aut.,VOLVO,XC40,174920,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 174,920 UK tests"
+10242,70015218,SKODA,KAMIQ,3615,1.0 TSI 110  DSG; 1.5 TSI 150 DSG; 1.0 TSI 115  DSG,SKODA,KAMIQ,44816,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 44,816 UK tests"
+10323,70006169,HYUNDAI,Tucson,3585,1.6 PHEV MPV 4 WD 6 AT; 1.6 MPV DCT; 1.6 T-GDi MPV DCT,HYUNDAI,TUCSON,353908,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 353,908 UK tests"
+10106,10106003,HONDA,CIVIC,3578,1.6 i-DTEC Tourer; 1.8 i-VTEC; 1.6 i-DTEC,HONDA,CIVIC,667203,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 667,203 UK tests"
+10166,70005476,MAZDA,CX-3,3555,2.0 SKYACTIV-G 120 HK Man.; 2.0 SKYACTIV-G 120 HK Aut.; 2.0 SKYACTIV-G 121 HK Aut.,MAZDA,CX 3,56990,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 56,990 UK tests"
+10168,70000027,MERCEDES-BENZ,B-Klasse,3537,200 7G-DCT; 200 d 8G-DCT; 200 CDI BlueEFFICIENCY MPV,MERCEDES-BENZ,B,174271,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 174,271 UK tests"
+10279,10279237,VOLKSWAGEN,GOLF VARIANT,3463,"1,6 TDI; 1.4 TSI BMT 122 HK VARIANT; 1,4 TSI",VOLKSWAGEN,GOLF,2127313,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 2,127,313 UK tests"
+10280,10280407,VOLVO,XC60,3445,T6 ReCh Aut.; D4 aut.; D4 AWD Aut.,VOLVO,XC60,270668,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 270,668 UK tests"
+10279,10279007,VOLKSWAGEN,CADDY,3359,"1,2 TSI; 1.2 TSI 85 HK; 1.2 TSI 84",VOLKSWAGEN,CADDY,370476,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 370,476 UK tests"
+10265,10265064,TOYOTA,AYGO 5-DØRS,3269,1.0 HB 5-DØRS; 1.0 HB AUT. 5-DØRS; KGB10(H),TOYOTA,AYGO,625248,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 625,248 UK tests"
+10166,10166039,MAZDA,3,3198,2.0 SKYACTIV-G 120 HK; 1.5 SKYACTIV-G 100 HK; 2.0 SKYACTIV-G 165 HK,MAZDA,3,265879,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 265,879 UK tests"
+10233,70010581,SEAT,Arona,3193,1.0 TSI 115 DSG7; 1.0 TSI 110 DSG7; 1.0 TSI 95,SEAT,ARONA,122137,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 122,137 UK tests"
+10015,10015067,AUDI,A6 AVANT,3021,2.0 TDI 190 HK 5-dørs S tronic; 40 TDI 204 HK 5-dørs S tronic; 3.0 TDI 218 HK 5-dørs S tronic,AUDI,A6,289140,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 289,140 UK tests"
+10045,70010453,CITROËN,C3 Aircross,3001,1.2 PureTech 110 SUV; 1.2 PureTech 110 hk SUV; 1.6 BlueHDi 100 hk SUV,CITROEN,C3 AIRCROSS,73578,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 73,578 UK tests"
+10045,70013526,CITROËN,C5 Aircross,2987,1.6 HYBRID 225 5D Aut.; 1.5 BlueHDi 130 hk SUV EAT8; 1.6 PHEV 225 SUV Aut.,CITROEN,C5 AIRCROSS,10857,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 10,857 UK tests"
+10015,10015101,AUDI,Q5,2982,"50 TFSI e 5-dørs quattro S tronic; 3,0 TDI QUATTRO AUT.; 2,0 TDI 190 hk 140 kW 5-dørs quattro S tronic",AUDI,Q5,259708,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 259,708 UK tests"
+10265,70016866,TOYOTA,RAV4 Plug in,2964,2.5 Plug in Hybrid (306 hk) aut. gear,TOYOTA,RAV4,234239,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 234,239 UK tests"
+10242,70010741,SKODA,KAROQ,2955,1.5 TSI ACT 150 DSG7; 1.6 TDI 115 DSG7; 1.0 TSI 115,SKODA,KAROQ,124535,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 124,535 UK tests"
+10166,10166037,MAZDA,2,2889,"1,3 Hatchback Man.; 1,5 Hatchback Man.; 1,5 Hatchback Aut.",MAZDA,2,313689,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 313,689 UK tests"
+10242,10242007,SKODA,RAPID,2881,1.2 TSI 105 HK Hatchback; 1.2 TSI 110 HK HATCHBACK; 1.2 TSI 86 HK Hatchback,SKODA,RAPID,53524,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 53,524 UK tests"
+10265,70020671,TOYOTA,Aygo X,2868,1.0 benzin (72 hk); 1.0 benzin (72 hk) aut. gear,TOYOTA,AYGO X,13593,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 13,593 UK tests"
+10026,10026299,BMW,X1,2862,25e SUV xDrive Steptronic; 18d SUV sDrive Steptronic; 20d SUV sDrive Steptronic,BMW,X1,250939,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 250,939 UK tests"
+10280,70000433,VOLVO,V40,2821,D2; T3; D3,VOLVO,V40,242125,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 242,125 UK tests"
+10265,10265067,TOYOTA,AVENSIS STW,2732,1.8 STW MAN.6; 2.0 STW D-4D.DPF.MAN; 1.6 STW MAN.6,TOYOTA,AVENSIS,146826,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 146,826 UK tests"
+10188,10188078,NISSAN,JUKE,2719,DIG-T 115 6 M/T; DIG-T 117 DCT; 1.6,NISSAN,JUKE,802991,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 802,991 UK tests"
+10280,10280350,VOLVO,XC60,2698,D4 aut.; D5 AWD Aut.; D3 AUT.,VOLVO,XC60,270668,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 270,668 UK tests"
+10193,70010466,OPEL,Grandland X,2675,"1.6 225 A8 SUV; 1,2T 130HK MPV; 1,2T 130HK MPV Aut.",VAUXHALL,GRANDLAND X,71491,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 71,491 UK tests"
+10050,70001755,DACIA,Lodgy,2670,1.5 dCi 90 7p; 1.6 16V 7p; Blue dCi 95 7p,DACIA,LODGY,14,exact,prefix_identity,1.0,n,"exact match but only 14 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10015,70008143,AUDI,Q2,2668,35 TFSI 5-dørs S tronic; 1.4 TFSI CoD 5-dørs S tronic; 35 TFSI CoD 150 HK 5-dørs S tronic,AUDI,Q2,171023,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 171,023 UK tests"
+10349,10349028,KIA,CEE'D SW,2612,"1,6 115HK DIESEL; 1,6 ISG DIESEL; 1,4",KIA,CEED,306401,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 306,401 UK tests"
+10193,10193069,OPEL,MERIVA,2606,"1,4; 1,4 T; 1,4T  120HK",VAUXHALL,MERIVA,223587,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 223,587 UK tests"
+10083,70005921,FORD,Focus,2582,"1.0 EcoBoost (125 HK) Stationcar Forhjulstræk Man.; 1.5 TDCi (120 HK) Stationcar Forhjulstræk Man.; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Man.",FORD,FOCUS,2291752,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 2,291,752 UK tests"
+10233,10233013,SEAT,TOLEDO,2576,1.2 TSI 110 HK 81 kw 5-DØRS 6 trins manuel; 1.2 TSI 105 HK START/STOP Hatchback; 1.4 TSI 125 HK 92 kw 5-DØRS DSG7,SEAT,TOLEDO,14100,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 14,100 UK tests"
+10045,10045061,CITROËN,BERLINGO,2539,"1,6 4-dørs m. bagklap; 1,6 HDI 110HK; 1.5 BlueHDI 100 hk MPV",CITROEN,BERLINGO,480365,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 480,365 UK tests"
+10168,10168196,MERCEDES-BENZ,C,2526,200T CDI BE; 200T CDI BE AUT.; 200 CDI BE,MERCEDES-BENZ,C,879779,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 879,779 UK tests"
+10349,10349031,KIA,VENGA,2486,"1.4 5-dørs Man. 5; 1,4; 1,4 DIESEL 90HK",KIA,VENGA,113598,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 113,598 UK tests"
+10242,70002873,SKODA,RAPID SPACEBACK,2456,1.2 TSI 105 HK SPACEBACK; 1.2 TSI 110 HK SPACEBACK; 1.2 TSI 86 HK SPACEBACK,SKODA,RAPID,53524,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 53,524 UK tests"
+10083,10083249,FORD,MONDEO STATIONCAR,2444,"2,0 TDCI; 2,0 TDCI AUT.; 2,0",FORD,MONDEO,456751,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 456,751 UK tests"
+10177,10177028,MITSUBISHI,OUTLANDER,2387,2.4PHEV 4WD; 2.2DI-D 4WD Aut; 2.0 4WD CVT,MITSUBISHI,OUTLANDER,181068,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 181,068 UK tests"
+10242,70014112,SKODA,SCALA,2385,1.0 TSI 110 DSG; 1.0 TSI 115  DSG; 1.5 TSI 150 DSG,SKODA,SCALA,20107,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 20,107 UK tests"
+10349,10349003,KIA,SPORTAGE,2382,1.6 T-GDI Plug-in Hybrid 5-dørs Aut. 6; 1.6 CRDI 5-dørs 7DCT 7; 1.6 5-dørs Man. 6,KIA,SPORTAGE,688231,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 688,231 UK tests"
+10106,10106025,HONDA,CR-V,2347,1.6 i-DTEC 2WD; 2.0 i-VTEC 2WD; 1.6 i-DTEC 4WD Aut.,HONDA,CR V,467500,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 467,500 UK tests"
+10349,70004129,KIA,Optima,2341,"2.0 Plug-in Hybrid Stationcar Aut. 6; 2,0 Hybrid; 1.7 CRDI Stationcar Man. 6",KIA,OPTIMA,26161,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 26,161 UK tests"
+10242,10242051,SKODA,SUPERB COMBI,2282,"1,6 TDI GREENLINE; 1.4 TSI Hybrid 218 DSG6; 1.6 TDI 105 HK Stationcar",SKODA,SUPERB,155398,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 155,398 UK tests"
+10323,70009712,HYUNDAI,i30 Stc.,2253,1.0 5 dørs stationcar; 1.0 T-GDI 5 dørs stationcar; 1.4 5 dørs stationcar  DCT,HYUNDAI,I30,264301,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 264,301 UK tests"
+10083,70004432,FORD,NY Focus,2243,"1.0 EcoBoost (125 HK) Stationcar Forhjulstræk Man.; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Man.; 1.6 TDCi (115 HK) Stationcar Forhjulstræk Man.",FORD,FOCUS,2291752,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 2,291,752 UK tests"
+10083,70009259,FORD,Transit Custom Kombi,2219,2.0TDCi - FWD (130 HK) Kombi FWD A6; 2.0TDCi - FWD (105 HK) Kombi FWD M6; 2.0TDCi - FWD (130 HK ) Kombi FWD A6,FORD,TRANSIT CUSTOM,377388,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 377,388 UK tests"
+10349,70015050,KIA,XCeed,2204,"1.6 GDI Plug-in Hybrid 5-dørs DCT 6; 1,6  Plug-in Hybrid; 1.6 5-dørs DCT 6",KIA,XCEED,45281,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 45,281 UK tests"
+10203,70012761,PEUGEOT,508,2195,HYBRID 225 SW EAT8; BlueHDi 130 SW EAT8; BlueHDi 130 4D EAT8,PEUGEOT,508,45170,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 45,170 UK tests"
+10015,10015106,AUDI,A5 SPORTBACK,2179,"1.8 TFSI 144 HK 5-DØRS MULTITRONIC; 40 TFSI Sportback S tronic; 2,0 TFSI 190 hk 140 kW 5-dørs Forhjulstræk S tronic",AUDI,A5,298367,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 298,367 UK tests"
+10349,70010480,KIA,Stonic,2134,1.0 5-dørs DCT 7; 1.0 5-dørs Man. 6; 1.0 5-dørs Man. 5,KIA,STONIC,65069,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 65,069 UK tests"
+10168,10168184,MERCEDES-BENZ,E,2114,200T CDI BE AUT.; 200 CDI BE AUT.; 220 CDI BE AUT.,MERCEDES-BENZ,E,556928,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 556,928 UK tests"
+10171,70017725,MG,EHS Plug-in Hybrid,2109,"1.5 5-dørs Aut. 6; 1,5; 1,5 TGI",MG,EHS,2,exact,prefix_identity,1.0,n,"exact match but only 2 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10242,70008752,SKODA,KODIAQ,2109,2.0 TDI 150 DSG7; 1.5 TSI 150 DSG7; 2.0 TDI 190 4X4 DSG7,SKODA,KODIAQ,90533,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 90,533 UK tests"
+10177,10177036,MITSUBISHI,ASX,2106,1.6; 1.8DI-D; 2.2DI-D 4WD Aut,MITSUBISHI,ASX,69713,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 69,713 UK tests"
+10254,10254035,SUZUKI,SX4 COMBIBACK,2103,"1,6; 1,6 AT; 1,6 4WD",SUZUKI,SX4,103026,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 103,026 UK tests"
+10363,10363059,MINI,COOPER,2097,"136 HK; 1,5 Cabriolet Steptronic; 1,5 Steptronic",MINI,COOPER,763963,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 763,963 UK tests"
+10177,10177004,MITSUBISHI,COLT,2076,1.3 ELEGANCE 5D CP C; 1.3 INTENSE CP CLEAR; 1.3 ELEGANCE 5D AM/T,MITSUBISHI,COLT,55799,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 55,799 UK tests"
+10168,70005862,MERCEDES-BENZ,GLC,2052,300 de SUV 4MATIC 9G-TRONIC; 220 d SUV 4MATIC 9G-TRONIC; 350 d SUV 4MATIC 9G-TRONIC,MERCEDES-BENZ,GLC,180481,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 180,481 UK tests"
+10233,70005793,SEAT,Ibiza GP2,2032,1.0 TSI 95 HK 5-DØRS; 1.0 TSI 110 HK 5-DØRS; 1.8 TSI 192 HK 3-DØRS,SEAT,IBIZA,487807,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 487,807 UK tests"
+10168,70003140,MERCEDES-BENZ,CLA,2030,200 Coupé 7G-DCT; 200 Shooting Brake Stationscar 7G-DCT; 200 d Shooting Brake Stationscar 7G-DCT,MERCEDES-BENZ,CLA,160338,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 160,338 UK tests"
+10015,10015127,AUDI,A1 SPORTBACK,2002,1.0 TFSI 95 HK 5-DØRS; 1.6 TDI 90 HK 5-DØRS; 1.2 86 HK 4-DØRS,AUDI,A1,548711,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 548,711 UK tests"
+10079,10079194,FIAT,500 C,1959,1.2; 875 TB; 1.2 AUT.,FIAT,500C,43800,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 43,800 UK tests"
+10166,70014823,MAZDA,Mazda CX-30,1948,2.0 SKYACTIV-G 150 HK 5-dørs aut.; 2.0 SKYACTIV-G 150 HK 5-dørs man.; 2.0 SKYACTIV-X 180 HK 5-dørs aut.,MAZDA,CX 30,38101,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 38,101 UK tests"
+10265,70019609,TOYOTA,Yaris Cross,1939,1.5 hybrid (116 hk) aut. gear,TOYOTA,YARIS CROSS,22110,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 22,110 UK tests"
+10203,10203108,PEUGEOT,508,1936,"2,0 HDI 163 HK SW; 1,6 HDI 112 HK SW; 1,6 HDI 114 HK SW",PEUGEOT,508,45170,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 45,170 UK tests"
+10026,70002468,BMW,4-serie,1925,420d Gran Coupé Steptronic; 420i Gran Coupé Steptronic; 430d Gran Coupé Steptronic,BMW,420,159348,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 159,348 UK tests"
+10026,70002468,BMW,4-serie,1925,420d Gran Coupé Steptronic; 420i Gran Coupé Steptronic; 430d Gran Coupé Steptronic,BMW,430,32755,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 32,755 UK tests"
+10026,70002468,BMW,4-serie,1925,420d Gran Coupé Steptronic; 420i Gran Coupé Steptronic; 430d Gran Coupé Steptronic,BMW,435,29029,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 29,029 UK tests"
+10026,70002468,BMW,4-serie,1925,420d Gran Coupé Steptronic; 420i Gran Coupé Steptronic; 430d Gran Coupé Steptronic,BMW,440,10622,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 10,622 UK tests"
+10026,70002468,BMW,4-serie,1925,420d Gran Coupé Steptronic; 420i Gran Coupé Steptronic; 430d Gran Coupé Steptronic,BMW,428,6494,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 6,494 UK tests"
+10026,70002468,BMW,4-serie,1925,420d Gran Coupé Steptronic; 420i Gran Coupé Steptronic; 430d Gran Coupé Steptronic,BMW,4 SERIES,2853,high,family_series_literal,1.0,y,"structural family membership (family_series_literal), 2,853 UK tests"
+10026,70002468,BMW,4-serie,1925,420d Gran Coupé Steptronic; 420i Gran Coupé Steptronic; 430d Gran Coupé Steptronic,BMW,418,2267,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 2,267 UK tests"
+10026,70002468,BMW,4-serie,1925,420d Gran Coupé Steptronic; 420i Gran Coupé Steptronic; 430d Gran Coupé Steptronic,BMW,425,539,high,family_series_sibling,1.0,n,"exact match but only 539 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10045,10045115,CITROËN,C4 PICASSO,1915,"1,6 MPV; 1,6 MPV 6 Aut.; 1.6 BlueHDi 120 HK  MPV Man.",CITROEN,C4 PICASSO,16834,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 16,834 UK tests"
+10045,10045113,CITROËN,DS3,1908,"HDI 90; 1,6 2-dørs m. bagklap; 1,2 2-dørs med bagklap 5 Man",CITROEN,DS3,193113,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 193,113 UK tests"
+10216,10216096,RENAULT,SCENIC,1877,1.5 dCi ESM 110; 1.5 dCi 110; 1.5 dCi 110 EDC,RENAULT,SCENIC,93139,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 93,139 UK tests"
+10188,70003460,NISSAN,Qashqai J11A,1840,DIG-T 115 2WD 6 M/T; 1.5 dCi 2WD 6 M/T; dCi 110 2WD 6 M/T,NISSAN,QASHQAI,1469028,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 1,469,028 UK tests"
+10323,70008406,HYUNDAI,Ioniq,1839,PHEV Hatchback  DCT; HEV DCT; B5P21,HYUNDAI,IONIQ,115275,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 115,275 UK tests"
+10168,70003166,MERCEDES-BENZ,GLA,1831,250 e 8G-DCT; 200 7G-DCT; 200 d 8G-DCT,MERCEDES-BENZ,GLA,202186,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 202,186 UK tests"
+10083,10083207,FORD,FOCUS STATIONSVOGN,1801,"1,6 TDCI; 1,6 TDCI ECONETIC; 1,6",FORD,FOCUS,2291752,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 2,291,752 UK tests"
+10083,10083151,FORD,PUMA,1795,1.0 EcoBoost Hybrid (125 HK) 5-dørs FWD M6; 1.0 EcoBoost (125 HK) 5-dørs FWD DCT; 1.0 mHEV (125 HK) 5-dørs FWD M6,FORD,PUMA,163504,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 163,504 UK tests"
+10233,70007848,SEAT,Ateca,1775,1.5 TSI 150 SUV DSG7; 1.4 TSI ACT 150  DSG7; 1.4 TSI ACT 150  6 trins manuel,SEAT,ATECA,109528,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 109,528 UK tests"
+10026,70003179,BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,218,159274,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 159,274 UK tests"
+10026,70003179,BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,220,54327,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 54,327 UK tests"
+10026,70003179,BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,2 SERIES,46725,high,family_series_literal,1.0,y,"structural family membership (family_series_literal), 46,725 UK tests"
+10026,70003179,BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,216,13129,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 13,129 UK tests"
+10026,70003179,BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,225,13008,high,family_series_sibling,1.0,y,"structural family membership (family_series_sibling), 13,008 UK tests"
+10026,70003179,BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,228,1267,high,family_series_sibling,1.0,n,"exact match but only 1,267 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70003179,BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,223,433,high,family_series_sibling,1.0,n,"exact match but only 433 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70003179,BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,230,302,high,family_series_sibling,1.0,n,"exact match but only 302 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70003179,BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,2002,185,high,family_series_sibling,1.0,n,"exact match but only 185 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70003179,BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,2000,29,high,family_series_sibling,1.0,n,"exact match but only 29 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70003179,BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,240,13,high,family_series_sibling,1.0,n,"exact match but only 13 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70003179,BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,2500,10,high,family_series_sibling,1.0,n,"exact match but only 10 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70003179,BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,235,7,high,family_series_sibling,1.0,n,"exact match but only 7 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70003179,BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,2800,5,high,family_series_sibling,1.0,n,"exact match but only 5 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10026,70003179,BMW,2-Serie,1774,218d Gran Tourer Steptronic; 218i Active Tourer Steptronic; 218d Active Tourer,BMW,20,2,high,family_series_sibling,1.0,n,"exact match but only 2 UK tests, below the 2,000 stability floor -- unusable downstream, not necessarily wrong"
+10083,70000875,FORD,B-MAX,1774,"1.0 EcoBoost (100 HK) Hatchback, 5 dørs Forhjulstræk Manuel; 1.0 EcoBoost (125 HK) Hatchback, 5 dørs Forhjulstræk Manuel; 1.6 Powershift (105 HK)  Hatchback, 5 dørs Forhjulstræk Automatisk",FORD,B MAX,132805,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 132,805 UK tests"
+10026,10026081,BMW,X5,1767,45e SUV xDrive Steptronic; XDRIVE45e; xDrive 45e,BMW,X5,213384,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 213,384 UK tests"
+10045,70011957,CITROËN,Grand C4 SpaceTourer,1762,1.2 PureTech 130 MPV; 1.2 PureTech 130 hk MPV; 1.5 BlueHDi 130 MPV Aut.,CITROEN,GRAND C4,11373,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 11,373 UK tests"
+10015,10015052,AUDI,A3,1760,"2,0 TDI; 1,6 TDI; 1,6",AUDI,A3,1007746,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 1,007,746 UK tests"
+10280,10280316,VOLVO,V70,1756,D4 aut.; D3 AUT.; D3 Man.,VOLVO,V70,101408,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 101,408 UK tests"
+10083,10083150,FORD,GALAXY,1725,"2,0 TDCI; 2,0 TDCI AUT; 2.0 TDCi (163 HK) MPV Forhjulstræk Manuel",FORD,GALAXY,146513,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 146,513 UK tests"
+10079,70001821,FIAT,Punto S7,1690,0.9 100; 1.2 69; 0.9 85,FIAT,PUNTO,148776,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 148,776 UK tests"
+10193,70001357,OPEL,Mokka,1686,"1.2 130 SUV AT; 1,4 Turbo 140HK MPV; 1,4 Turbo 140HK MPV Aut.",VAUXHALL,MOKKA,603417,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 603,417 UK tests"
+10216,10216181,RENAULT,MEGANE SPORT TOURER,1658,"1,5 DCI 110; 1,5 DCI 90; 1,6 16V 110",RENAULT,MEGANE,270742,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 270,742 UK tests"
+10323,10323039,HYUNDAI,I 10,1642,"1,2; 1,1; 1,2 AUT.",HYUNDAI,I10,599315,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 599,315 UK tests"
+10323,10323052,HYUNDAI,IX20,1641,"1.4 5 dørs MPV; 1,4; 1.4 CRDi 5 dørs MPV",HYUNDAI,IX20,71084,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 71,084 UK tests"
+10254,10254029,SUZUKI,SX4,1616,"1,6 5-dørs; 1,6; 1,6 SEDAN",SUZUKI,SX4,103026,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 103,026 UK tests"
+10026,10026093,BMW,X3,1583,30e SAV xDrive Steptronic; xDrive30e; 30d SAV xDrive Steptronic,BMW,X3,246199,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 246,199 UK tests"
+10015,70002521,AUDI,A3 Limousine,1525,2.0 TDI 150 HK 4-DØRS; 35 TFSI 150 hk 4-dørs S tronic; 1.6 TDI 110 HK 4-DØRS,AUDI,A3,1007746,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 1,007,746 UK tests"
+10188,10188047,NISSAN,X-TRAIL,1513,DIG-T 163 SUV 2WD 6 M/T; dCi 130 SUV 2WD 6 M/T; dCi 130 SUV 2WD Xtronic Aut.,NISSAN,X TRAIL,224341,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 224,341 UK tests"
+10168,70005868,MERCEDES-BENZ,GLE,1502,350 de SUV 4MATIC 9G-TRONIC; 350 de 4MATIC; 350 d SUV 4MATIC 9G-TRONIC,MERCEDES-BENZ,GLE,70695,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 70,695 UK tests"
+10280,70007786,VOLVO,V90,1476,D4 Aut.; T6 Recharge Aut.; D5 AWD Aut.,VOLVO,V90,36936,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 36,936 UK tests"
+10280,10280336,VOLVO,XC90,1470,D5 AWD Aut.; T8 Recharge Aut.; D5 AUT AWD,VOLVO,XC90,175329,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 175,329 UK tests"
+10015,10015091,AUDI,A3 CABRIOLET,1419,35 TFSI 150 hk 2-dørs S tronic; 1.4 TFSI CoD 150 HK 2-dørs S tronic; 1.4 TFSI 125 HK 2-dørs,AUDI,A3,1007746,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 1,007,746 UK tests"
+10323,10323057,HYUNDAI,I40,1400,1.7 CRDi 5 dørs Stationcar; 1.7 CRDi 4 dørs Sedan; 1.7 CRDi 5 dørs Stationcar AT,HYUNDAI,I40,50399,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 50,399 UK tests"
+10193,10193060,OPEL,ZAFIRA,1383,"1,8; 1,6CDTi 136HK Tourer; 2,0CDTi 130HK Tourer",VAUXHALL,ZAFIRA,482890,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 482,890 UK tests"
+10279,10279083,VOLKSWAGEN,CALIFORNIA,1382,2.0 TDI 150  Campingbil DSG7; 2.0 TDI 110 Campingbil; 2.0 TDI 150  Campingbil 4MOTION DSG7,VOLKSWAGEN,CALIFORNIA,25256,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 25,256 UK tests"
+10323,70015988,HYUNDAI,i10 AC3,1356,1.0 Hatchback; 1.0 Hatchback  Automatisk; 1.0 T-GDi Hatchback,HYUNDAI,I10,599315,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 599,315 UK tests"
+10007,10007007,ALFA ROMEO,GIULIETTA,1350,"1,4 M-AIR; 1.4 Multiair 170 TCT; 1.4 Multiair 170",ALFA ROMEO,GIULIETTA,63590,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 63,590 UK tests"
+10280,10280305,VOLVO,V50,1331,"DRIVE S/S; D2; 1,6",VOLVO,V50,76365,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 76,365 UK tests"
+10193,10193115,OPEL,ASTRA SPORTS TOURER,1323,"1,4 T; 1,7 CDTI; 1,6",VAUXHALL,ASTRA,1545548,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 1,545,548 UK tests"
+10168,70015591,MERCEDES-BENZ,GLB,1319,200 d 8G-DCT; 220 d 8G-DCT; 220 d 4MATIC 8G-DCT,MERCEDES-BENZ,GLB,20440,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 20,440 UK tests"
+70269,70005525,DS,DS 3,1313,"1,6 2-dørs m. bagklap; 1.6 BlueHDi 100 HK 2-dørs m. bagklap Man; 1.6 BlueHDi 100 hk 2-dørs m. bagklap",DS,DS3,84562,exact,prefix_identity,1.0,y,"literal string identity (prefix_identity), 84,562 UK tests"

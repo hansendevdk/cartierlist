@@ -20,9 +20,12 @@ from crosswalk_normalize import (
 )
 
 failures = []
+n_checks = 0
 
 
 def check(label, actual, expected):
+    global n_checks
+    n_checks += 1
     if actual != expected:
         failures.append(f"{label}: expected {expected!r}, got {actual!r}")
 
@@ -89,10 +92,35 @@ check("is_code_like('X5')", is_code_like("X5"), True)
 check("is_code_like('X1')", is_code_like("X1"), True)
 check("leading_code('X5') != leading_code('X1')", leading_code("X5") != leading_code("X1"), True)
 
+# --- lossy-prefix specificity: a longer truncation must beat a bigger one ---
+# "Transit Custom Kombi" must reach "TRANSIT CUSTOM" (a real distinct DVSA
+# model) and not fall through to the much larger "TRANSIT" full-size van bucket.
+from build_crosswalk_review import best_prefix_identity  # noqa: E402
+
+_fake_counts = {"TRANSIT": 734085, "TRANSIT CUSTOM": 147808, "TRANSIT CONNECT": 405323}
+check(
+    "Transit Custom Kombi picks the specific TRANSIT CUSTOM, not the bigger TRANSIT",
+    best_prefix_identity(normalize("Transit Custom Kombi"), "FORD", _fake_counts, 2000),
+    ("TRANSIT CUSTOM", 147808),
+)
+# but a genuine plain Transit still lands on TRANSIT
+check(
+    "plain Transit still maps to TRANSIT",
+    best_prefix_identity(normalize("TRANSIT"), "FORD", _fake_counts, 2000),
+    ("TRANSIT", 734085),
+)
+# sub-threshold junk must be passed over in favour of a usable shorter prefix
+_fake_ceed = {"CEED": 306401, "CEED SW": 5}
+check(
+    "CEE'D SW skips the 5-test exact hit and reaches CEED",
+    best_prefix_identity(normalize("CEE'D SW"), "KIA", _fake_ceed, 2000),
+    ("CEED", 306401),
+)
+
 if failures:
     print(f"{len(failures)} FIXTURE FAILURES:")
     for f in failures:
         print(f"  FAIL: {f}")
     sys.exit(1)
 else:
-    print(f"all fixtures passed ({33} checks)")
+    print(f"all fixtures passed ({n_checks} checks)")
