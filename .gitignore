@@ -19,3 +19,4 @@ dist/
 
 # claude code harness state
 .claude/
+.serena/

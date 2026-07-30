@@ -1,6 +1,6 @@
 # Phase 0 — Schema report
 
-Status: DVSA section complete. DMR section pending (large FTP download in progress).
+Status: complete. Both sources downloaded and characterised.
 
 ## DVSA anonymised MOT data
 
@@ -138,8 +138,219 @@ post-May-2018.
 
 ## DMR statistics extract
 
-Status: **pending** — the file is a ~6.7 GB zip on a low-throughput, unsupported FTP
-server (observed ~2 MB/s, and the first attempt stalled silently at 99.9998% complete
-with no error, so the download script now has a socket timeout and byte-offset resume
-built in). This section will be filled in once the file finishes downloading and has
-been stream-parsed with `lxml.etree.iterparse`.
+Source: FTP drop at `5.44.137.84`, file `ESStatistikListeModtag-20260726-153441.zip`
+(this week's Monday refresh, downloaded 2026-07-30). The zip is 6.7 GB compressed but
+holds a single **127.8 GB uncompressed XML file** — far too large to extract to disk
+(185 GB free on the machine) or hold in memory. All inspection here streams directly
+out of the zip with `lxml.etree.iterparse`, clearing each element after processing.
+
+The download itself was unreliable: the FTP server stalled silently (open socket, no
+data, no error) at 99.9998% complete on the first attempt, and a background-task
+interruption (unrelated: the machine was shut down mid-run) killed a second attempt.
+Neither lost any downloaded bytes — `download_dmr.py` now sets a socket timeout and
+resumes from the last written byte offset on retry, and the final file's size was
+verified against the FTP server's reported size before being treated as complete.
+This matches the brief's warning that this host has "no support, no uptime guarantee."
+
+### Structure
+
+One XML document, root `<ns:ESStatistikListeModtag_I>`, namespace
+`http://skat.dk/dmr/2007/05/31/`, containing a flat sequence of repeating
+`<ns:Statistik>` elements — **one element per vehicle**, not per model. This is a
+materially different grain from what Phase 1's `dk_fleet` table wants ("one row per
+Danish variant, with count of registered vehicles") — Phase 1 will need to aggregate
+by (make, model, variant) and count, not load rows 1:1.
+
+Each `Statistik` element is deeply nested. Fields relevant to the brief, with their
+path from `Statistik` (namespace prefix omitted for readability):
+
+| brief field | actual XML path | notes |
+|---|---|---|
+| vehicle type | `KoeretoejArtNavn` | e.g. "Personbil" — see distinct values below, **the file is not passenger-cars-only** |
+| make | `.../KoeretoejBetegnelseStruktur/KoeretoejMaerkeTypeNavn` | free text, e.g. "CITROËN", "BMW" |
+| model | `.../KoeretoejBetegnelseStruktur/Model/KoeretoejModelTypeNavn` | e.g. "XANTIA", "3 SERIE" |
+| variant | `.../KoeretoejBetegnelseStruktur/Variant/KoeretoejVariantTypeNavn` | e.g. "2,0 HDI", "320I AUT." — Danish decimal commas, mixed trim/engine/gearbox text similar to DVSA's `model` field |
+| first registration date | `.../KoeretoejOplysningFoersteRegistreringDato` | date, e.g. `1999-12-08+01:00` (has explicit UTC offset) |
+| fuel type | `.../DrivmiddelStruktur/DrivkraftTypeStruktur/DrivkraftTypeNavn` | e.g. "Diesel", "Benzin" (petrol) — see distinct values below |
+| fuel consumption | `.../DrivmiddelStruktur/KoeretoejBraendstofStruktur/KoeretoejMotorKmPerLiter` | **already km/l**, no mpg conversion needed for this source |
+| CO2 | not found in ~2.3M sampled records | not observed in any sampled record; may be present only for newer type-approvals, or under a tag not yet seen. Needs a targeted search before Phase 1, not assumed absent |
+| kerb weight | `.../KoeretoejOplysningEgenVaegt` | kg |
+| engine power | `.../KoeretoejMotorStruktur/KoeretoejMotorStoersteEffekt` | unit not confirmed from data alone (likely kW) — cross-check against a known model in Phase 1 |
+| cylinder count | `.../KoeretoejMotorStruktur/KoeretoejMotorCylinderAntal` | integer |
+| door count | not found in ~2.3M sampled records | not observed; may not exist in this source at all — flag to you rather than assume |
+| Euro NCAP flag | `.../KoeretoejOplysningNCAPTest` | boolean, matches brief directly |
+
+A vehicle can have **multiple** `DrivmiddelStruktur` entries (a repeating group), each
+flagged `KoeretoejMotorDrivmiddelPrimaer` true/false — this is almost certainly how
+hybrids are represented (primary + secondary fuel), not a separate "Hybrid" fuel-type
+label. No fuel-type value literally says "Hybrid" in the sample. This needs confirming
+against real hybrid vehicles in Phase 1/2, flagged here rather than assumed.
+
+Each vehicle also carries a repeating `SynResultatStruktur` (Denmark's periodic
+vehicle inspection, "syn" — the closest domestic equivalent to the UK's MOT, though
+the brief's reliability backbone is DVSA, not this) and a repeating equipment list
+(`KoeretoejUdstyrSamlingStruktur`) with things like ABS, airbags, ESP — a possible
+future input for the engagement/equipment scoring but out of scope for the metrics
+listed in the brief.
+
+### Row counts and sampling
+
+A full single-pass count was not run in Phase 0 — at the sustained throughput
+measured (~7,300 records/sec), a full pass over the estimated ~15M records would take
+roughly 35 minutes of pure parsing time, which is Phase 1's job (building the actual
+Parquet-backed tables), not schema reconnaissance. Instead:
+
+- Timed a clean 2,000,000-record sample (273.8s, 7,303 rec/s sustained, no slowdown
+  across four 500k checkpoints — the rate looks stable, not front-loaded).
+- Estimated total record count by dividing the file's known uncompressed size
+  (127,779,440,161 bytes) by the average bytes/record measured over a 300,000-record
+  sample (8,566 bytes/record): **≈ 14.9 million vehicle records total**, of which
+  **≈ 61% are `Personbil`** in the sampled proportion (61.4% in the 2M sample) →
+  **≈ 9.1 million passenger-car records**, spanning all history (active,
+  deregistered, scrapped, exported) — not 9.1 million *available* used cars.
+
+This estimate is good enough to confirm DuckDB is the right tool (brief already
+assumed "30M+ rows," this is in the same order of magnitude) and to size Phase 1's
+ingestion job. Phase 1 will produce the exact count as a byproduct of loading.
+
+### Null rates for fields of interest
+
+Measured over the 2,000,000-record sample, both across all vehicle types and
+restricted to `Personbil` only (the restriction matters a lot — trailers and mopeds
+don't have engines, so pooling them with cars understates how complete the *car* data
+actually is):
+
+| field | null rate, all types | null rate, Personbil only |
+|---|---|---|
+| first registration date | 0.008% | 0.009% |
+| make | 0.000% | 0.000% |
+| model | 0.000% | 0.000% |
+| variant | 0.000% | 0.000% |
+| fuel type | 5.927% | 0.000% |
+| fuel consumption (km/l) | 47.783% | 25.164% |
+| kerb weight | 42.270% | 48.858% |
+| engine power | 53.510% | 42.186% |
+| cylinder count | 58.565% | 47.989% |
+| Euro NCAP flag | 62.844% | 46.048% |
+
+**This is the single biggest risk surfaced in Phase 0.** Even restricted to
+passenger cars, kerb weight, engine power, cylinder count, and the NCAP flag are each
+missing on roughly **half** of all records. Fuel consumption (needed for the fuel-cost
+and ejerafgift metrics) is missing on a quarter of Personbil records. This is very
+likely concentrated in older vehicles (data entry requirements tightened over time —
+note record 1 in the manual sample, a 1999 Citroën, is missing several of these
+fields that record 2, a 2006 Citroën, has), which may be tolerable if the v1 model-year
+scope (2010–2022) is much more complete than the full historical dump. **This needs to
+be re-measured restricted to 2010–2022 first-registration dates before Phase 3 metrics
+are built on top of it** — flagging now rather than discovering it after the crosswalk
+work in Phase 2 is done.
+
+### Distinct values found
+
+`KoeretoejArtNavn` (vehicle type), 2M sample — **the raw file is not passenger-cars-only**,
+Phase 1/2 must filter on this field:
+
+```
+Personbil (passenger car): 1,228,678 (61.4%)
+Varebil (van): 216,069
+Paahaengsvogn (trailer): 275,184
+Motorcykel (motorcycle): 49,235
+Traktor: 40,833
+Campingvogn (caravan): 42,857
+Lastbil (truck): 36,747
+Saettevogn (semi-trailer): 28,559
+Lille knallert (small moped): 34,788
+Stor knallert (large moped): 26,299
+Stor personbil (large passenger car): 7,288
+Paahaengsredskab: 8,882
+Traktorpaahaengsvogn: 2,771
+Motorredskab: 1,479
+Blokvogn: 230
+Motordrevet blokvogn: 101
+```
+
+`DrivkraftTypeNavn` (fuel type), 2M sample:
+
+```
+Benzin (petrol): 1,267,243
+Diesel: 544,760
+El (electric — excluded from v1 per brief): 122,230
+F-Gas (LPG): 498
+Brint (hydrogen): 78
+N-Gas (natural gas): 175
+Petroleum: 23
+```
+
+`KoeretoejOplysningStatus` (record lifecycle status), 2M sample — only `Registreret`
+is a currently-active vehicle; the rest are historical:
+
+```
+Registreret (active): 867,166 (43.4%)
+Afmeldt (deregistered): 781,173
+Skrottet (scrapped): 233,149
+Eksporteret (exported): 118,305
+Oprettet (created, not yet active): 135
+HarGennemfoertRegistreringssyn: 72
+```
+
+The full historical dump (registered/deregistered/scrapped/exported all mixed
+together) means Phase 1/2 must filter to `Registreret` to represent cars actually
+available in the Danish market today — using the raw record count would badly
+overstate current fleet size.
+
+### 20 real make/model/variant examples
+
+```
+('BMW', '3 SERIE', '320I')
+('CHRYSLER', 'GRAND VOYAGER VAN', '2,5 CRD')
+('AUDI', 'A4', '2,6 AUT.')
+('BMW', '5`ER', '525 I AUT.')
+('CITROËN', 'GRAND C4 PICASSO', 'HDI 110 AUT.')
+('FIAT', 'MULTIPLA', '1,6')
+('CHEVROLET', 'CRUZE', '1,6')
+('CITROËN', 'ZX', '1,4')
+('AUDI', 'A4 AVANT', '2,5 TDI')
+('BMW', "3'ER-SERIE", '320 I')
+('CITROËN', 'C5', 'HDI 140')
+('FIAT', 'PUNTO', 'CABRIO 90')
+('FIAT', 'RITMO', 'UOPLYST')
+('CITROËN', 'C 4', '1,6 HDI AUT.')
+('FIAT', 'CROMA', 'I.E. KAT.')
+('AUDI', 'A6', '3,0 TDI AVANT')
+('ALFA ROMEO', '159 SPORT WAGON', '1,9 JTDM AUT.')
+('AUDI', 'A 4', '1,6 LIMOUSINE')
+('CITROËN', 'C3', 'E-HDI 70 AUT.')
+('AUSTIN', 'METRO', 'UOPLYST')
+```
+
+Notable for Phase 2 (crosswalk): make spelling is inconsistent even within one
+source — "BMW 3 SERIE" vs "BMW 3'ER-SERIE" vs "BMW 3`ER" (three different strings
+for the same model line, including a stray backtick used as an apostrophe).
+`UOPLYST` ("not specified") appears as a variant value meaning "unknown," not a real
+trim name — needs to be treated as null, not as data, in Phase 2/3. Danish decimal
+commas in variant strings (`2,5 CRD`, `1,9 JTDM`) will need locale-aware parsing if
+displacement is ever extracted from free text.
+
+### Encoding
+
+Confirmed clean UTF-8 **at the byte level** — verified by reading raw bytes around
+Danish characters (ø, æ, Ë) and finding correct UTF-8 sequences (e.g. `\xc3\x8b` for
+Ë). Important caveat for anyone re-running this inspection: **printing to a Windows
+git-bash console renders these as `�` even though the underlying data is correct** —
+the mangled output seen during interactive inspection was a terminal/codepage
+artifact, not a real encoding problem. Don't trust what the console shows for
+non-ASCII text; check bytes directly if in doubt.
+
+### What's not yet confirmed
+
+- **CO2 and door count**: not observed in ~2.3M sampled records combined across two
+  inspection runs. Either genuinely absent from this source (plausible — Denmark's
+  vehicle tax has historically been based on km/l and weight, not CO2 directly, unlike
+  many EU markets) or present under a tag name not yet triggered by the sample. Needs
+  a targeted full-tag-vocabulary scan before concluding CO2 must come from elsewhere.
+- **Engine power units**: assumed kW from context (Danish/EU convention) but not
+  confirmed against a known reference vehicle.
+- **Hybrid representation**: inferred from the repeating `DrivmiddelStruktur` +
+  primary-fuel-flag structure, not confirmed against an actual hybrid vehicle record.
+- **Exact full-file row count**: only extrapolated from a byte-size sample, not
+  measured by a full pass (see Row counts section above).
