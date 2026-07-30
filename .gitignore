@@ -1,6 +1,8 @@
 # raw and intermediate data — large, not source, not pushed to git
 data/raw/
 data/interim/
+data/warehouse.duckdb
+data/warehouse.duckdb.wal
 *.zip
 *.parquet
 
