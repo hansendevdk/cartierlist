@@ -1,0 +1,68 @@
+"""Writes reference/make_aliases.csv via the csv module so basis text with commas
+is quoted correctly -- hand-editing this as raw text caused an unquoted-comma bug
+where "exact match, N DVSA tests" split into an extra column.
+"""
+
+import csv
+from pathlib import Path
+
+OUT = Path(__file__).resolve().parents[1] / "reference" / "make_aliases.csv"
+
+# (dmr_make_name, dvsa_make, basis)
+ROWS = [
+    ("ALFA ROMEO", "ALFA ROMEO", "exact match (173,474 DVSA tests)"),
+    ("AUDI", "AUDI", "exact match (4,093,049 DVSA tests)"),
+    ("BMW", "BMW", "exact match (4,363,216 DVSA tests)"),
+    ("CHEVROLET", "CHEVROLET", "exact match (141,990 DVSA tests)"),
+    ("CITROËN", "CITROEN", "diacritic only -- DVSA spells it without the accent (2,547,166 DVSA tests)"),
+    ("DACIA", "DACIA", "exact match (502,310 DVSA tests)"),
+    ("DS", "DS", "exact match (113,267 DVSA tests)"),
+    ("FIAT", "FIAT", "exact match (1,966,790 DVSA tests)"),
+    ("FORD", "FORD", "exact match (10,855,988 DVSA tests)"),
+    ("HONDA", "HONDA", "exact match (2,182,760 DVSA tests)"),
+    ("HYUNDAI", "HYUNDAI", "exact match (2,236,015 DVSA tests)"),
+    ("KIA", "KIA", "exact match (2,381,551 DVSA tests)"),
+    ("MAZDA", "MAZDA", "exact match (1,294,347 DVSA tests)"),
+    ("MERCEDES-BENZ", "MERCEDES-BENZ", "exact match (4,094,035 DVSA tests)"),
+    ("MG", "MG", "exact match (334,116 DVSA tests)"),
+    ("MINI", "MINI", "exact match (1,906,538 DVSA tests)"),
+    ("MITSUBISHI", "MITSUBISHI", "exact match (687,222 DVSA tests)"),
+    ("NISSAN", "NISSAN", "exact match (4,150,663 DVSA tests)"),
+    (
+        "OPEL",
+        "VAUXHALL",
+        "REBRAND, not a spelling variant. DVSA's own literal 'OPEL' make is grey-import "
+        "noise (2,526 tests); Opel-badged cars sold in Denmark are the same vehicles as UK "
+        "Vauxhalls (7,270,458 tests). Verified model-name overlap: CORSA/ASTRA/ZAFIRA/"
+        "INSIGNIA/VIVARO/MERIVA/COMBO/ADAM/AGILA/CROSSLAND/VECTRA/ANTARA all appear under "
+        "both DVSA makes, volume overwhelmingly under VAUXHALL. See phase2_crosswalk_strategy.md.",
+    ),
+    ("PEUGEOT", "PEUGEOT", "exact match (3,528,696 DVSA tests)"),
+    ("RENAULT", "RENAULT", "exact match (2,521,814 DVSA tests)"),
+    ("SEAT", "SEAT", "exact match (1,359,335 DVSA tests)"),
+    ("SKODA", "SKODA", "exact match (1,910,589 DVSA tests)"),
+    ("SUZUKI", "SUZUKI", "exact match (1,038,286 DVSA tests)"),
+    ("TOYOTA", "TOYOTA", "exact match (4,047,838 DVSA tests)"),
+    ("VOLKSWAGEN", "VOLKSWAGEN", "exact match (7,503,693 DVSA tests)"),
+    ("VOLVO", "VOLVO", "exact match (1,442,271 DVSA tests)"),
+    (
+        "VW",
+        "VOLKSWAGEN",
+        "DMR-internal inconsistency: DMR carries both VOLKSWAGEN (225,002 vehicles) and "
+        "VW (4,632 vehicles) as separate make strings for the same manufacturer. Not a "
+        "DVSA-side issue -- both map to the same DVSA make.",
+    ),
+]
+
+
+def main() -> None:
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    with open(OUT, "w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        w.writerow(["dmr_make_name", "dvsa_make", "basis"])
+        w.writerows(ROWS)
+    print(f"wrote {len(ROWS)} rows to {OUT}")
+
+
+if __name__ == "__main__":
+    main()
