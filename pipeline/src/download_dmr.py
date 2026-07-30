@@ -77,7 +77,9 @@ def main() -> None:
                 ftp.retrbinary(f"RETR {remote_path}", progress, rest=resume_at or None)
             print()
             break
-        except (socket.timeout, ftplib.all_errors, ConnectionError, EOFError) as e:
+        # ftplib.all_errors is itself a tuple; Python 3.11+ except clauses no
+        # longer allow a tuple nested inside another tuple, so flatten it.
+        except (socket.timeout, ConnectionError, EOFError, *ftplib.all_errors) as e:
             print(f"\ntransfer stalled/failed ({e!r}); reconnecting to resume")
             try:
                 ftp.close()
