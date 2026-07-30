@@ -8,7 +8,21 @@ Where the same chassis has multiple snapshots, the most recent by status_dato
 is kept; make/model/variant don't vary across a single chassis's snapshots.
 
 Scope: registration_status = 'Registreret' (currently active/available),
-first_registration_year in [2010, 2022], per the brief's v1 scope.
+first_registration_year in [2010, 2022], fuel_type_primary != 'El' (the brief
+excludes BEV from v1), per the brief's v1 scope.
+
+IMPORTANT, flagged for Phase 3: this source has no literal "Hybrid" fuel-type
+label, and a targeted check found zero vehicles with one El and one combustion
+DrivmiddelStruktur entry -- hybrids are apparently recorded under their
+combustion fuel type alone (e.g. a plug-in hybrid shows as fuel_type_primary =
+'Benzin', identical to a non-hybrid petrol car; the only clue is free text in
+variant_name, e.g. "2.5 Plug-in Hybrid (225 HK)"). This means petrol/diesel and
+hybrid variants of the same model are NOT distinguishable via fuel_type_primary
+in dk_fleet as built here -- the brief's "petrol / diesel / hybrid" scope is
+satisfied (nothing hybrid is excluded), but hybrids cannot currently be pulled
+out as their own category. Isolating hybrids would need free-text matching on
+variant_name, which is exactly the kind of fuzzy judgement call the brief says
+to flag rather than silently do -- deferring to Phase 3 for a decision.
 
 Also emits, for Opus's Phase 2 handoff: top-150 models counted two ways --
 grouped by (make_id, model_id) vs by (make_name, model_name) -- since DMR's
@@ -38,8 +52,24 @@ def main() -> None:
     n_total = con.execute("SELECT COUNT(*) FROM dmr_vehicles").fetchone()[0]
     print(f"dmr_vehicles: {n_total:,} rows (Personbil, all history)")
 
-    con.execute(
+    SCOPE_WHERE = """
+        registration_status = 'Registreret'
+        AND first_registration_year BETWEEN 2010 AND 2022
+        AND fuel_type_primary != 'El'
+    """
+
+    n_bev = con.execute(
+        f"""
+        SELECT COUNT(*) FROM dmr_vehicles
+        WHERE registration_status = 'Registreret'
+          AND first_registration_year BETWEEN 2010 AND 2022
+          AND fuel_type_primary = 'El'
         """
+    ).fetchone()[0]
+    print(f"BEV vehicles excluded per brief's v1 scope (fuel_type_primary = 'El'): {n_bev:,}")
+
+    con.execute(
+        f"""
         CREATE OR REPLACE VIEW dmr_vehicles_scoped AS
         WITH deduped AS (
             SELECT *,
@@ -48,8 +78,7 @@ def main() -> None:
                        ORDER BY status_dato DESC NULLS LAST
                    ) AS rn
             FROM dmr_vehicles
-            WHERE registration_status = 'Registreret'
-              AND first_registration_year BETWEEN 2010 AND 2022
+            WHERE {SCOPE_WHERE}
               AND chassis_number IS NOT NULL
         )
         SELECT * EXCLUDE (rn) FROM deduped WHERE rn = 1
@@ -57,14 +86,13 @@ def main() -> None:
     )
     n_scoped = con.execute("SELECT COUNT(*) FROM dmr_vehicles_scoped").fetchone()[0]
     n_no_chassis = con.execute(
-        """
+        f"""
         SELECT COUNT(*) FROM dmr_vehicles
-        WHERE registration_status = 'Registreret'
-          AND first_registration_year BETWEEN 2010 AND 2022
+        WHERE {SCOPE_WHERE}
           AND chassis_number IS NULL
         """
     ).fetchone()[0]
-    print(f"in-scope deduped vehicles (Registreret, 2010-2022, unique chassis): {n_scoped:,}")
+    print(f"in-scope deduped vehicles (Registreret, 2010-2022, non-BEV, unique chassis): {n_scoped:,}")
     print(f"in-scope rows dropped for missing chassis_number: {n_no_chassis:,} "
           f"({n_no_chassis / (n_scoped + n_no_chassis) * 100:.3f}%)")
 
