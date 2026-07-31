@@ -1,0 +1,29 @@
+make,parts_cost_multiplier,tier,basis
+DACIA,0.7,budget,"brief's lower anchor; Renault mechanicals, deliberately low-spec, deep parts supply"
+MG,0.85,budget,"value positioning, simple mechanicals, but thinner UK/DK aftermarket than Dacia"
+SUZUKI,0.9,budget,"small simple cars, low parts prices, modest labour hours"
+KIA,0.9,volume,shares platforms with Hyundai; parts cheap and widely stocked
+HYUNDAI,0.92,volume,as Kia; slightly wider model range pushes average up marginally
+SKODA,0.95,volume,VW group mechanicals at lower parts pricing than the VW badge
+TOYOTA,0.95,volume,"high parts availability, long service intervals, conservative engineering"
+SEAT,1.0,volume,reference point: mainstream European volume car
+FIAT,1.0,volume,reference point; cheap parts offset by more frequent small failures
+CITROEN,1.0,volume,reference point; PSA parts commonality keeps prices flat
+PEUGEOT,1.02,volume,"as Citroen, marginally higher on diesel-specific components"
+RENAULT,1.02,volume,"broad aftermarket, some model-specific electrical parts priced higher"
+OPEL,1.05,volume,GM-era and PSA-era parts split raises average sourcing cost
+FORD,1.05,volume,"very deep aftermarket, but more labour-intensive on later diesels"
+NISSAN,1.05,volume,CVT and dual-clutch components lift the average above pure volume brands
+CHEVROLET,1.05,volume,withdrawn from Europe; parts supply thinning raises real cost despite budget positioning
+MITSUBISHI,1.08,volume,"shrinking European presence, narrower parts supply"
+HONDA,1.1,volume,reliable but OEM-priced parts and limited third-party alternatives
+MAZDA,1.1,volume,"OEM-heavy parts supply, higher list prices than Toyota equivalents"
+VOLKSWAGEN,1.15,volume,volume brand at premium parts pricing; high labour hours on TSI/DSG work
+DS,1.3,premium,PSA mechanicals with premium-priced trim and electronics
+VOLVO,1.35,premium,"premium parts pricing, though simpler to work on than German rivals"
+MINI,1.45,premium,BMW parts and labour rates on a small car; packaging raises labour hours
+ALFA ROMEO,1.45,premium,"low volume, OEM-only for many components, high diagnostic burden"
+AUDI,1.75,premium,"premium German: high OEM prices, heavy labour hours, tooling requirements"
+BMW,1.85,premium,"as Audi, with more model-specific components and higher electrical complexity"
+MERCEDES-BENZ,1.85,premium,as BMW; air suspension and electronics on larger models push the tail higher
+LAND ROVER,2.6,premium,brief's upper anchor; retained to fix the scale though absent from the crosswalk
