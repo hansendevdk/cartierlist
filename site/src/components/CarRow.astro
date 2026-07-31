@@ -1,0 +1,142 @@
+---
+import TierBadge from "./TierBadge.astro";
+import { kr, krPerYear } from "../lib/data";
+import type { RankedCar } from "../lib/data";
+
+interface Props {
+  car: RankedCar;
+  rank: number;
+  mode: "cost" | "value" | "running";
+}
+const { car, rank, mode } = Astro.props;
+
+const tier = mode === "cost" ? car.cost_tier : mode === "value" ? car.value_for_money_tier : car.running_cost_tier;
+
+// primary = the number that actually decided this row's position; secondary
+// = the other useful figure, shown smaller so two close candidates are easy
+// to tell apart on the number that matters for this list.
+const primaryLabel = mode === "cost" ? "total cost" : mode === "value" ? "value score" : "running cost";
+const primaryValue =
+  mode === "cost" ? krPerYear(car.tco_per_year)
+  : mode === "value" ? `${Math.round((car.value_for_money_score ?? 0) * 100)} pts`
+  : krPerYear(car.running_cost_per_year);
+
+const secondaryLabel = mode === "value" ? "cost/year" : mode === "running" ? "total cost/year" : "value score";
+const secondaryValue =
+  mode === "value" ? krPerYear(car.tco_per_year)
+  : mode === "running" ? (car.depreciation_available ? krPerYear(car.tco_per_year) : null)
+  : car.value_for_money_score !== null ? `${Math.round(car.value_for_money_score * 100)} pts` : null;
+---
+
+<a
+  class="car-row"
+  href={`/cars/${car.slug}/`}
+  data-hybrid={car.is_hybrid ? "1" : "0"}
+  data-diesel={car.is_diesel_dominant ? "1" : "0"}
+>
+  <span class="rank num">{rank}</span>
+  <TierBadge tier={tier} />
+  <span class="name">
+    <strong>{car.makeDisplay} {car.modelDisplay}</strong>
+    <span class="sub">{car.band_years} &middot; buy around {kr(car.entry_price_dkk)}</span>
+  </span>
+  {car.is_hybrid && (
+    <span class="confidence-flag hybrid-flag" title="Trim name mentions hybrid or plug-in. Official fuel figures for these tend to run optimistic, see methodology.">
+      hybrid
+    </span>
+  )}
+  {car.is_diesel_dominant && (
+    <span class="confidence-flag" title="Over half the registered cars behind this row are diesel.">
+      diesel
+    </span>
+  )}
+  {car.price_confidence !== "high" && (
+    <span class="confidence-flag" title={`Price estimate confidence: ${car.price_confidence}`}>
+      {car.price_confidence} confidence
+    </span>
+  )}
+  <span class="scores">
+    <span class="score-primary num">
+      {primaryValue}
+      {mode !== "running" && !car.depreciation_available && <span class="asterisk" title="Running costs only, no resale data available">*</span>}
+    </span>
+    <span class="score-label">{primaryLabel}</span>
+    {secondaryValue && (
+      <span class="score-secondary">
+        <span class="num">{secondaryValue}</span> {secondaryLabel}
+      </span>
+    )}
+  </span>
+</a>
+
+<style>
+  .car-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .car-row:hover {
+    background: var(--accent-soft);
+  }
+  .rank {
+    width: 22px;
+    color: var(--ink-faint);
+    font-size: 0.9rem;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .name {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+  .name strong {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--ink);
+  }
+  .name .sub {
+    font-size: 0.83rem;
+    color: var(--ink-faint);
+  }
+  .confidence-flag {
+    font-family: var(--font-data);
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    background: var(--line);
+    padding: 3px 7px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .scores {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    white-space: nowrap;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .score-primary {
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .score-label {
+    font-size: 0.7rem;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .score-secondary {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin-top: 2px;
+  }
+  .asterisk { color: var(--accent); }
+  .hybrid-flag { color: var(--accent); background: var(--accent-soft); }
+</style>

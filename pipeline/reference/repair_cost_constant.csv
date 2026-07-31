@@ -1,0 +1,4 @@
+dkk_per_burden_unit_per_year,basis,note
+3000,primary,"Judgement, not a measurement -- no Danish parts/labour cost dataset exists to fit against. Puts a median car (repair_burden_index ~0.76) near 2,300 DKK/yr of repairs, which is low but defensible given the index counts MOT failure items, not all workshop visits. See phase4_scoring_spec.md section 1.4."
+1500,sensitivity_low,"Low bound for the published sensitivity check -- repair cost roughly halved."
+6000,sensitivity_high,"High bound for the published sensitivity check -- at this level repair cost starts reordering brackets (~23% of median TCO vs ~7% at the primary constant)."

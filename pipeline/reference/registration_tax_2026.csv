@@ -1,0 +1,8 @@
+component,threshold_from,threshold_to,rate_or_amount,unit,note,verified_date,source_url
+value_bracket,0,72900,0.25,fraction_of_value,25 pct of afgiftspligtig vaerdi up to 72900 DKK,2026-07-31,https://skm.dk/tal-og-metode/satser/satser-og-beloebsgraenser-i-lovgivningen/gaeldende-satser-for-registreringsafgiften
+value_bracket,72900,226500,0.85,fraction_of_value,85 pct of the portion between 72900 and 226500 DKK,2026-07-31,https://skm.dk/tal-og-metode/satser/satser-og-beloebsgraenser-i-lovgivningen/gaeldende-satser-for-registreringsafgiften
+value_bracket,226500,,1.5,fraction_of_value,150 pct of the portion above 226500 DKK,2026-07-31,https://skm.dk/tal-og-metode/satser/satser-og-beloebsgraenser-i-lovgivningen/gaeldende-satser-for-registreringsafgiften
+co2_surcharge,0,107,294,dkk_per_gram,low rate on the first 107 g CO2/km,2026-07-31,https://skm.dk/tal-og-metode/satser/satser-og-beloebsgraenser-i-lovgivningen/gaeldende-satser-for-registreringsafgiften
+co2_surcharge,107,137,587,dkk_per_gram,medium rate on the next 30 g CO2/km (107-137),2026-07-31,https://skm.dk/tal-og-metode/satser/satser-og-beloebsgraenser-i-lovgivningen/gaeldende-satser-for-registreringsafgiften
+co2_surcharge,137,,1115,dkk_per_gram,high rate on CO2/km above 137,2026-07-31,https://skm.dk/tal-og-metode/satser/satser-og-beloebsgraenser-i-lovgivningen/gaeldende-satser-for-registreringsafgiften
+bundfradrag,,,25500,dkk_flat,flat deduction from total computed tax; floor total tax at 0,2026-07-31,https://skm.dk/tal-og-metode/satser/satser-og-beloebsgraenser-i-lovgivningen/gaeldende-satser-for-registreringsafgiften

@@ -1,0 +1,111 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · Bilregnskab</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container-wide site-header-inner">
+        <a href="/" class="wordmark">
+          <span class="wordmark-mark">kr</span>Bilregnskab
+        </a>
+        <nav aria-label="Main">
+          <a href="/#brackets">Price brackets</a>
+          <a href="/running-costs/">Cheapest to run</a>
+          <a href="/methodology">Methodology</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container-wide">
+        <p>
+          Built from public Danish vehicle registration data and UK DVSA MOT test
+          results. Not financial advice. See the <a href="/methodology">methodology page</a>{" "}
+          for sources, licences and known limitations.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .site-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--ink);
+    text-decoration: none;
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+  }
+  .wordmark:hover { color: var(--ink); }
+  .wordmark-mark {
+    font-family: var(--font-data);
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 2px 5px;
+    border-radius: 2px;
+    margin-right: 6px;
+  }
+  nav {
+    display: flex;
+    gap: 24px;
+  }
+  nav a {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+  nav a:hover { color: var(--accent); }
+
+  .site-footer {
+    border-top: 1px solid var(--line);
+    padding: 28px 0 60px;
+    margin-top: 60px;
+  }
+  .site-footer p {
+    color: var(--ink-faint);
+    font-size: 0.88rem;
+    max-width: 640px;
+    margin: 0;
+  }
+</style>

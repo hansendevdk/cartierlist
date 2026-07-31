@@ -1,0 +1,15 @@
+fact,value,source,date
+"Danish vehicles in scope (2010-2022, petrol/diesel/hybrid)",1778307,phase1_warehouse_report.md,2026-07-31
+Eligible DVSA MOT tests after filters,48220796,phase3_metrics_report.md,2026-07-31
+Physical DVSA NT tests before filters,48626203,phase3_metrics_report.md,2026-07-31
+Crosswalked models (share of DK fleet by count),244 (96.9%),crosswalk.csv,2026-07-31
+Model/age-band cells with Phase 3 running-cost metrics,684,model_age_band_metrics.csv,2026-07-31
+Model/age-band cells with a calibrated price estimate,780,price_estimates_calibrated.csv,2026-07-31
+Cells with both price and running-cost data (Rule 0 base),653,build_phase4_rankings.py,2026-07-31
+Real Danish listings used to calibrate prices,27,calibration_prices.csv,2026-07-31
+"Rows in the final bracket ranking, rank-eligible",528 of 653,model_bracket_rankings.csv,2026-07-31
+Suzuki/DS models excluded (no price data),11,phase4_scoring_spec.md section 4.3,2026-07-31
+Repair cost constant (DKK per burden-unit-year),3000.0,repair_cost_constant.csv,2026-07-31
+Rows flagged hybrid (trim name mentions hybrid/plug-in/PHEV),36,model_age_band_fuel_flags.csv,2026-07-31
+Rows flagged diesel-dominant (over half the cell is diesel),258,model_age_band_fuel_flags.csv,2026-07-31
+"Mileage adjustment slope (%/10,000 km)",3.91,price_estimates_calibrated.csv,2026-07-31

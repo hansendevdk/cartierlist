@@ -1,0 +1,3 @@
+fuel_type,price_dkk_per_litre,station_count,source,fetch_date_utc,build_date
+Benzin,16.69,405,circlek_live_api,2026-07-31T09:59:34.097748+00:00,2026-07-31
+Diesel,17.49,399,circlek_live_api,2026-07-31T09:59:34.097748+00:00,2026-07-31

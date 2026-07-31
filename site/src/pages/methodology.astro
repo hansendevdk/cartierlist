@@ -1,0 +1,212 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { methodology, sources, coverage } from "../lib/data";
+
+const fact = (label: string) => methodology.find((m) => m.fact.startsWith(label))?.value ?? "";
+function fmt(n: string | number) {
+  return Number(n).toLocaleString("da-DK").replace(/,/g, ".");
+}
+const fuelBenzin = sources.fuelPrices.find((f) => f.fuel_type === "Benzin");
+const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
+---
+
+<Layout
+  title="Methodology"
+  description="Where the numbers on this site come from, what we assume, and where we might be wrong."
+>
+  <div class="container">
+    <p class="eyebrow">The fine print, in plain language</p>
+    <h1>How this site works, and where it could be wrong</h1>
+    <p class="lede">
+      Every number here comes from public data or a source we can point to. Where we had to
+      make a judgement call instead of measuring something directly, we say so on this page,
+      not just in a footnote.
+    </p>
+
+    <h2>Where the data comes from</h2>
+    <ul class="source-list">
+      <li>
+        <strong>Danish vehicle registrations.</strong> The Danish Motor Registry's (DMR) public
+        statistics extract: make, model, first registration date, fuel type, fuel consumption,
+        CO2, weight and engine power for every registered car. We kept petrol, diesel and hybrid
+        passenger cars first registered between 2010 and 2022, {fmt(fact("Danish vehicles in scope"))} cars
+        in total.
+      </li>
+      <li>
+        <strong>Reliability.</strong> The UK's public MOT test archive (Ministry of Transport
+        test, the UK's version of Denmark's "syn"), covering {fmt(fact("Eligible DVSA MOT tests"))} eligible
+        tests. Published by the UK Driver and Vehicle Standards Agency under the{" "}
+        <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" target="_blank" rel="noopener">Open Government Licence v3.0</a>,
+        which permits this kind of use with attribution. This is UK data, see the caveat below.
+      </li>
+      <li>
+        <strong>Fuel prices.</strong> Circle K's public price API, fetched fresh at build time.
+        Latest figures: petrol {fuelBenzin?.price_dkk_per_litre} kr/l, diesel {fuelDiesel?.price_dkk_per_litre} kr/l
+        (fetched {fuelBenzin?.build_date}).
+      </li>
+      <li>
+        <strong>Danish taxes.</strong> Registration tax (registreringsafgift) and ownership tax
+        (grøn ejerafgift) rates, transcribed by hand from{" "}
+        <a href="https://skm.dk/tal-og-metode/satser/satser-og-beloebsgraenser-i-lovgivningen/gaeldende-satser-for-registreringsafgiften" target="_blank" rel="noopener">the Danish Ministry of Taxation's published rate tables</a>,
+        verified 2026-07-31. Danish tax law changes most years. If you're reading this a while
+        after that date, treat the exact kroner figures as roughly right, not current.
+      </li>
+      <li id="pricing">
+        <strong>Prices.</strong> See the pricing section below, it's the part of this project
+        with the most judgement calls in it.
+      </li>
+    </ul>
+
+    <h2>The UK reliability data is a stand-in, not a perfect match</h2>
+    <p>
+      We don't have a public, model-level Danish equivalent of the UK's MOT archive, so
+      reliability comes from UK-market cars: UK roads, UK weather, UK road salt. A model's
+      reliability <em>relative to other models</em> should carry over reasonably well, since it's
+      mostly about how the car itself is built. The exact failure rate might not, since Danish
+      winters, Danish roads and Danish driving habits differ from the UK's. Treat the ranking
+      between cars as more trustworthy than the exact percentage for any one car.
+    </p>
+    <p>
+      We adjust for how far a car has typically been driven, so a model that's usually driven
+      hard isn't unfairly compared to one that's usually driven gently. We only publish a
+      reliability figure where there were enough tests to be confident in it. Where there weren't
+      enough, we say so rather than show a shaky number.
+    </p>
+
+    <h2>The repair cost estimate is a rough index, not a garage quote</h2>
+    <p>
+      We count how often each part of a car fails its MOT test, then weight that by a
+      per-brand multiplier for how expensive that brand's parts and labour tend to be. A failed
+      headlamp bulb and a failed suspension arm currently count the same, which is a real
+      simplification since a suspension repair costs far more. We turn that index into kroner
+      using a flat rate of {fmt(sources.repairConstant[0].dkk_per_burden_unit_per_year)} kr per
+      point per year, a judgement call, not a measurement, because no public dataset of Danish
+      repair costs by model exists. At that rate, repairs are a modest slice of most cars' total
+      cost. If the true rate is much higher, the ranking within a bracket could shift, though the
+      overall shape of the site's findings should hold.
+    </p>
+
+    <h2 id="pricing-heading">How we estimate a used price without scraping Danish listing sites</h2>
+    <p>
+      We don't have permission to pull prices from Bilbasen or DBA, and Denmark doesn't publish
+      a public database of used car prices. So we built an estimate instead of leaving prices out
+      entirely, and then checked that estimate against reality.
+    </p>
+    <ol class="method-steps">
+      <li>
+        <strong>Started from a market with almost no car tax.</strong> Poland's used car tax is
+        negligible, so asking prices there are a reasonable stand-in for what a car is actually
+        worth, before any country's tax is added. We used a public dataset of Polish used car
+        listings (released into the public domain, no scraping needed) to see how each model's
+        price changes with age.
+      </li>
+      <li>
+        <strong>Converted to a Danish price using Denmark's real tax formula.</strong> We
+        transcribed the actual registration tax formula from the Danish tax authority's published
+        rate tables and applied it. This is where our estimate is weakest: Danish law technically
+        wants a used car's tax scaled down by how much it's depreciated from new, and we don't
+        have a reliable new price for every model to base that on. We approximate around this
+        rather than inventing a new-car price. See "known limits" below.
+      </li>
+      <li>
+        <strong>Checked the result against the real Danish market</strong>: real asking prices
+        we looked up by hand across a spread of common models and price levels, and corrected
+        the whole estimate by the gap we found. Cars under 150,000 kr were corrected separately
+        from cars above it, since the gap wasn't quite the same size at both ends.
+      </li>
+    </ol>
+    <p>
+      <strong>This calibration is honest but limited.</strong> We measured how well the
+      correction fits the same real prices we used to build it, which will always look better
+      than how it performs on a car we haven't checked. Treat "calibrated against real Danish
+      listings" as true, and "accurate to within some exact percentage" as not yet proven.
+    </p>
+    <p>
+      Every price on this site also carries a confidence flag, low, medium or high, based on how
+      many comparable foreign listings backed it up, and whether we had to borrow a whole brand's
+      price pattern because one specific model didn't have enough listings of its own. You'll see
+      this flag on any car page where it isn't "high."
+    </p>
+
+    <h3>Mileage matters too, and we adjust for it</h3>
+    <p>
+      A price estimate is anchored to a "typical" mileage for that car's age, not any specific
+      odometer reading. We measured how much price actually moves with mileage from real Danish
+      listings (about {(Number(fact("Mileage adjustment slope")) || 0).toFixed(1)}% for every extra
+      10,000 km), and use that to adjust a resale value when we compare a car bought at one age to
+      the same car sold years later.
+    </p>
+
+    <h3>Cars we couldn't price at all</h3>
+    <p>
+      Suzuki and DS models are common on Danish roads but barely present in the foreign listings
+      data we use, so we have nothing solid to build a price estimate from. Rather than guess,
+      we show their reliability and running-cost data with no price and no ranking, clearly
+      marked. This affects {fact("Suzuki/DS models excluded")} models.
+    </p>
+
+    <h2>What "most car for the money" means</h2>
+    <p>
+      Every bracket page has two lists. "Cheapest to own" ranks purely on money. "Most car for
+      the money" blends that cost ranking with an engagement score built from power-to-weight,
+      cylinder count and kerb weight, an equal 50/50 split, disclosed here rather than buried in
+      the code. We measured that these two things pull in opposite directions more often than
+      not: cars that are more fun to drive tend to cost more to run. Neither list is "more
+      correct" than the other, they answer different questions.
+    </p>
+
+    <h2>What we won't do</h2>
+    <ul>
+      <li>We don't scrape Bilbasen, DBA or any other classifieds site. Their listing databases are protected by EU database right law, and there's no public API.</li>
+      <li>We don't pull TÜV Report or ADAC Pannenstatistik tables. Those are copyrighted; we can mention their published headline findings in prose, not reproduce their data.</li>
+      <li>We don't rank battery electric cars in this version. There isn't enough age-band data yet to do it fairly.</li>
+    </ul>
+
+    <h2>Known limits, all in one place</h2>
+    <ul class="limits-list">
+      <li>Reliability figures are from UK-market cars driven on UK roads. See above.</li>
+      <li>The repair cost figure uses a flat, judgement-based rate per point, not real Danish repair invoices.</li>
+      <li>Price calibration is checked against the same listings used to build it, not a separate held-out set.</li>
+      <li>Suzuki and DS models have no price data and aren't ranked, though their reliability and running-cost figures are shown.</li>
+      <li>The mileage adjustment uses one flat rate for every car, from the cheapest city car to the most expensive SUV, when in reality mileage probably matters more in kroner terms for an expensive car.</li>
+      <li>Cars first registered 2010 to 2013 (our oldest age band) have no later resale point in our data, so their cost figure is running costs only, not a full buy-and-sell total. These are marked with an asterisk wherever they appear.</li>
+      <li>Fuel efficiency figures straddle a 2018 change in how the EU measures fuel consumption (NEDC to WLTP), which makes some older cars look slightly better on paper than they really are. Comparisons within the same age band are largely unaffected.</li>
+      <li>
+        Hybrids aren't recorded as their own fuel type in the registry, they're filed under
+        petrol or diesel. We flag a car as hybrid when at least 3 in 10 of the registered cars
+        behind that row have a trim name mentioning "hybrid" or "plug-in", a lower bar than a
+        strict majority because not every hybrid trim spells it out in its name. This still
+        misses a few and occasionally flags a model that's only partly hybrid. Their official
+        fuel-consumption figures also tend to run optimistic (the test allows battery assist),
+        so a hybrid's real running cost is probably a bit higher than shown. Use the "hide
+        hybrids" filter on any list to set them aside.
+      </li>
+      <li>
+        The "hide diesel" filter works the same way, flagging a car when over half the
+        registered vehicles behind that row are diesel. A handful of rows mix both fuels
+        under one line, so this filter is a strong indicator, not a perfect split.
+      </li>
+    </ul>
+
+    <hr class="hairline" />
+    <p class="closing">
+      Something on this page look wrong, or missing? The full pipeline and every reference file
+      behind these numbers live in this project's repository. Nothing here is generated on
+      request, every figure was computed ahead of time from the sources listed above.
+    </p>
+  </div>
+</Layout>
+
+<style>
+  .lede { max-width: 68ch; color: var(--ink-soft); font-size: 1.08rem; }
+  h2 { margin-top: 2.2em; }
+  h3 { margin-top: 1.6em; }
+  .source-list, .limits-list, ul { max-width: 74ch; }
+  .source-list li, .limits-list li { margin-bottom: 0.7em; }
+  .method-steps { max-width: 74ch; padding-left: 1.2em; }
+  .method-steps li { margin-bottom: 0.8em; }
+  p, li { color: var(--ink); }
+  .source-list li, .limits-list li, .method-steps li { color: var(--ink-soft); }
+  .source-list strong, .limits-list strong, .method-steps strong { color: var(--ink); }
+  .closing { color: var(--ink-faint); font-size: 0.9rem; padding-bottom: 60px; max-width: 68ch; }
+</style>

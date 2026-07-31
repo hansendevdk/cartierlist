@@ -1,0 +1,95 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CarRow from "../../components/CarRow.astro";
+import FuelFilterToggle from "../../components/FuelFilterToggle.astro";
+import { BRACKETS, carsInBracket, BAND_LABEL } from "../../lib/data";
+
+export function getStaticPaths() {
+  return BRACKETS.map((b) => ({ params: { id: b.id }, props: { bracket: b } }));
+}
+
+const { bracket } = Astro.props;
+const cars = carsInBracket(bracket.id);
+
+const byCost = [...cars].sort((a, b) => (a.cost_rank_in_group ?? 999) - (b.cost_rank_in_group ?? 999));
+const byValue = [...cars]
+  .filter((c) => c.value_for_money_rank_in_group !== null)
+  .sort((a, b) => (a.value_for_money_rank_in_group ?? 999) - (b.value_for_money_rank_in_group ?? 999));
+
+const bandsPresent = ["1", "2", "3", "4"].filter((b) => cars.some((c) => c.age_band === b));
+const hasRunningCostOnly = cars.some((c) => !c.depreciation_available);
+---
+
+<Layout
+  title={`Best value cars, ${bracket.label}`}
+  description={`Used cars in Denmark for around ${bracket.label}, ranked by total cost of ownership.`}
+>
+  <div class="container-wide">
+    <p class="eyebrow"><a href="/">All budgets</a> / Price bracket</p>
+    <h1>{bracket.label}</h1>
+    <p class="lede">
+      {cars.length} cars in our data sell for about this much, across ages{" "}
+      {bandsPresent.map((b) => BAND_LABEL[b]).join(", ")}.
+      Ranked by total cost to own, not just the price tag.
+    </p>
+
+    {hasRunningCostOnly && (
+      <p class="note">
+        Rows marked <span class="asterisk">*</span> are old enough that we have no later resale
+        price to compare against, so their number is running costs per year only (fuel, tax,
+        repairs), not a full buy-and-sell total. See the <a href="/methodology">methodology page</a>.
+      </p>
+    )}
+
+    <FuelFilterToggle />
+
+    <div class="lists">
+      <div class="list-block">
+        <h2>Cheapest to own</h2>
+        <p class="list-sub">Ranked purely on money: purchase minus resale, plus fuel, tax and repairs, per year.</p>
+        <div class="card list-card">
+          {byCost.map((c, i) => <CarRow car={c} rank={i + 1} mode="cost" />)}
+        </div>
+      </div>
+
+      <div class="list-block">
+        <h2>Most car for the money</h2>
+        <p class="list-sub">
+          Half cost, half how engaging the car is to drive (power-to-weight, cylinders, kerb
+          weight), an equal, disclosed blend, not hidden in the score.
+        </p>
+        <div class="card list-card">
+          {byValue.map((c, i) => <CarRow car={c} rank={i + 1} mode="value" />)}
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .eyebrow a { color: var(--ink-faint); text-decoration: none; }
+  .eyebrow a:hover { color: var(--accent); }
+  .lede { max-width: 68ch; color: var(--ink-soft); font-size: 1.05rem; }
+  .note {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    max-width: 68ch;
+  }
+  .asterisk { color: var(--accent); font-weight: 700; }
+  .lists {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 32px;
+    padding-bottom: 72px;
+  }
+  .list-block h2 { font-size: 1.2rem; margin-bottom: 0.2em; }
+  .list-sub { color: var(--ink-faint); font-size: 0.88rem; margin-bottom: 14px; max-width: 46ch; }
+  .list-card { padding: 4px 0; max-height: 720px; overflow-y: auto; }
+  @media (max-width: 900px) {
+    .lists { grid-template-columns: 1fr; }
+  }
+</style>

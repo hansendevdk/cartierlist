@@ -1,0 +1,30 @@
+---
+interface Props {
+  tier: "S" | "A" | "B" | "C" | "D" | null;
+}
+const { tier } = Astro.props;
+const colorVar: Record<string, string> = {
+  S: "var(--tier-s)", A: "var(--tier-a)", B: "var(--tier-b)", C: "var(--tier-c)", D: "var(--tier-d)",
+};
+---
+
+{tier && (
+  <span class="tier-badge" style={`--tier-color: ${colorVar[tier]}`}>{tier}</span>
+)}
+
+<style>
+  .tier-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    background: var(--tier-color);
+    color: var(--surface);
+    font-family: var(--font-data);
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+</style>

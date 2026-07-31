@@ -4,8 +4,11 @@ Written before implementation, grounded in queries against the built warehouse.
 Implementation follows this document. Deviations are decisions, not details, and
 should come back for review.
 
-**One metric is blocked and needs your decision before Phase 4 can proceed. See
-"Depreciation" below. Everything else is fully specified.**
+**Decision recorded 2026-07-31: depreciation (metric 5) is dropped for v1 --
+option 3 below. No price axis, no brackets from a price dimension. Ranking
+runs on annual running cost alone (reliability + repair burden + fuel +
+ejerafgift). Revisit if a price source turns up later. Metrics 1, 2, 3, 4, and
+6 are implemented; see `phase3_metrics_report.md` for results.**
 
 ## Verified inputs (previously assumed)
 
@@ -209,7 +212,12 @@ Sanity check to run after transcription: a 2018 petrol car at 19 km/l should
 come to roughly **1,110 DKK per half-year** on the 2025 rates. If the
 transcribed table disagrees, the transcription is wrong.
 
-## 5. Depreciation — BLOCKED, needs your decision
+## 5. Depreciation — DROPPED FOR v1 (decided 2026-07-31)
+
+You chose option 3 below: drop the price axis for v1, rank on annual running
+cost only, revisit brackets/price later if a source turns up. Not implemented.
+The analysis that led to the three options is kept as-written below for the
+record.
 
 **DMR contains no price field of any kind.** I checked the full 180-tag
 vocabulary: the only value-like fields are `Nyttelastvaerdi` (payload in kg)
@@ -288,17 +296,26 @@ that component rather than imputing a value.
   filter, odometer filters, and the reliability `unstable` flag all report
   counts rather than dropping quietly.
 
-## Handover to Sonnet
+## Handover to Sonnet -- completed 2026-07-31
 
-Settled and not to be re-litigated during implementation: the per-vehicle-then-
+Settled and not re-litigated during implementation: the per-vehicle-then-
 aggregate rule, the miles-to-km conversion, direct standardisation for odometer
 normalisation, NT-only with PRS-as-failure, the 2,000-test floor, the weight
 field choice, the engagement weights, and the parts multiplier table.
 
-Sonnet's work:
-1. Transcribe the ejerafgift bands from the official source into
-   `reference/ejerafgift_rates.csv`, with verification dates, and run the
-   1,110 DKK sanity check.
-2. Wire up a working fuel price fetch (Circle K or OK; `fuelprices.dk` is dead).
-3. Implement metrics 1, 2, 3, 4, 6 as specified.
-4. Leave metric 5 (depreciation) unimplemented pending the decision above.
+1. Transcribed the ejerafgift bands from the raw HTML of the official source
+   (not an LLM summary of it -- a first-pass summary silently swapped two
+   columns) into `reference/ejerafgift_rates.csv`, with verification dates and
+   the 1,220 DKK sanity check. See `phase3_metrics_report.md` for the check.
+2. Wired up a working fuel price fetch against Circle K's public
+   `api.circlek.com/eu/prices` endpoint (found via a linked API doc PDF, not a
+   scrape), with a committed fallback constant. `fetch_fuel_prices.py`.
+3. Built `build_crosswalk_dvsa_match.py`, a resolver that reproduces Stage B's
+   exact matching rules to turn each crosswalk row's token into the real DVSA
+   (make, model) rows it covers, with a reconciliation check against
+   crosswalk.csv's own recorded test counts (passed, zero mismatches across
+   244 rows) -- needed because `proposed_dvsa_model_token` is a prefix/code,
+   not a literal DVSA model string, in most rows.
+4. Implemented metrics 1, 2, 3, 4, 6 in `build_phase3_metrics.py`. Output:
+   `reference/model_age_band_metrics.csv`.
+5. Left metric 5 (depreciation) unimplemented per your decision above.

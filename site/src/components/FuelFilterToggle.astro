@@ -1,0 +1,90 @@
+---
+// Client-side show/hide filter over CarRow elements already rendered in the
+// page, not a new data fetch or a rebuild. Checked state is remembered in
+// localStorage so a reader who says "hide diesel" doesn't have to say it
+// again on the next page.
+---
+
+<div class="fuel-filter">
+  <span class="fuel-filter-label">Filter this list</span>
+  <label>
+    <input type="checkbox" id="hide-hybrid-toggle" />
+    Hide hybrids
+  </label>
+  <label>
+    <input type="checkbox" id="hide-diesel-toggle" />
+    Hide diesel
+  </label>
+  <span class="fuel-filter-note">
+    Hybrids are found by trim name (e.g. "Plug-in Hybrid"), not a clean data field, so this can
+    miss a few. <a href="/methodology#pricing">Why, on the methodology page.</a>
+  </span>
+</div>
+
+<style>
+  .fuel-filter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 18px;
+    margin: 18px 0 8px;
+    padding: 10px 14px;
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+    font-size: 0.88rem;
+  }
+  .fuel-filter-label {
+    font-family: var(--font-data);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+  }
+  .fuel-filter label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .fuel-filter input {
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+  .fuel-filter-note {
+    color: var(--ink-faint);
+    font-size: 0.78rem;
+    flex-basis: 100%;
+  }
+  .fuel-filter-note a {
+    color: var(--ink-soft);
+  }
+</style>
+
+<script>
+  function applyFuelFilters() {
+    const hideHybrid = localStorage.getItem("hideHybrid") === "1";
+    const hideDiesel = localStorage.getItem("hideDiesel") === "1";
+    document.querySelectorAll<HTMLElement>(".car-row").forEach((row) => {
+      const isHybrid = row.dataset.hybrid === "1";
+      const isDiesel = row.dataset.diesel === "1";
+      row.style.display = (hideHybrid && isHybrid) || (hideDiesel && isDiesel) ? "none" : "";
+    });
+  }
+
+  function initToggle(id: string, storageKey: string) {
+    const box = document.getElementById(id) as HTMLInputElement | null;
+    if (!box) return;
+    box.checked = localStorage.getItem(storageKey) === "1";
+    box.addEventListener("change", () => {
+      localStorage.setItem(storageKey, box.checked ? "1" : "0");
+      applyFuelFilters();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    initToggle("hide-hybrid-toggle", "hideHybrid");
+    initToggle("hide-diesel-toggle", "hideDiesel");
+    applyFuelFilters();
+  });
+</script>

@@ -1,0 +1,63 @@
+---
+import Layout from "../layouts/Layout.astro";
+import CarRow from "../components/CarRow.astro";
+import FuelFilterToggle from "../components/FuelFilterToggle.astro";
+import { RUNNING_COST_ELIGIBLE, kr } from "../lib/data";
+
+const cars = RUNNING_COST_ELIGIBLE;
+const cheapCarBeatsExpensive = cars.slice(0, 30).some((c) => c.entry_price_dkk > 150000);
+---
+
+<Layout
+  title="Cheapest to run, purchase price ignored"
+  description="Cars ranked purely on fuel, tax and repair costs, with what they cost to buy left out entirely."
+>
+  <div class="container-wide">
+    <p class="eyebrow"><a href="/">All budgets</a> / Running cost only</p>
+    <h1>Cheapest to run, no matter what it costs to buy</h1>
+    <p class="lede">
+      This list ignores the price tag completely. It's fuel, ownership tax and repairs only,
+      per year. Some genuinely cheap cars to buy are expensive to keep, and some expensive cars
+      pay part of themselves back every year at the pump. This is where you'd spot that.
+    </p>
+
+    {cheapCarBeatsExpensive && (
+      <p class="note">
+        A number of cars here that cost well over 150,000 kr to buy still land near the top:
+        a lower running cost doesn't need a cheap car, it needs an efficient one. If you're
+        thinking about paying more upfront for a car like that, compare its "total cost" figure
+        (which does include the price tag) on its own page before deciding, since the extra
+        purchase price still has to be recovered somehow.
+      </p>
+    )}
+
+    <p class="note hybrid-note">
+      A number of the cars at the very top are plug-in hybrids. Their official fuel-consumption
+      figures run optimistic (the test allows battery assist), so their real running cost is
+      probably a bit higher than shown here. See the <a href="/methodology">methodology page</a>.
+    </p>
+
+    <FuelFilterToggle />
+
+    <div class="card list-card">
+      {cars.map((c, i) => <CarRow car={c} rank={i + 1} mode="running" />)}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .eyebrow a { color: var(--ink-faint); text-decoration: none; }
+  .eyebrow a:hover { color: var(--accent); }
+  .lede { max-width: 68ch; color: var(--ink-soft); font-size: 1.05rem; }
+  .note {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    max-width: 68ch;
+    margin-bottom: 12px;
+  }
+  .hybrid-note { background: var(--line); }
+  .list-card { padding: 4px 0; margin-top: 24px; margin-bottom: 72px; }
+</style>

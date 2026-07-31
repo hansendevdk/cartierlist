@@ -1,0 +1,153 @@
+/* Design tokens. Grounded in the subject: this site is an honest accounting
+   of what a car costs, so the palette borrows from ledger paper and ink,
+   not a generic SaaS gradient. Red reads as cost, green as value recovered,
+   brass as the pick worth noticing, exactly the way a person already reads
+   a paper statement. */
+:root {
+  --paper: #f3f6ee;
+  --surface: #fbfcf8;
+  --ink: #1e2a20;
+  --ink-soft: #4c5b4f;
+  --ink-faint: #7c8a7c;
+  --line: #d8e0cd;
+  --line-strong: #b9c5ab;
+
+  --accent: #a9761f;
+  --accent-soft: #f0e4c8;
+  --cost: #a2402b;
+  --cost-soft: #f3ded7;
+  --cost-2: #b56a4c;
+  --cost-3: #c68e6c;
+  --cost-4: #d7ab8f;
+  --value: #3c6b4d;
+  --value-soft: #dce9dd;
+
+  --tier-s: #a9761f;
+  --tier-a: #3c6b4d;
+  --tier-b: #4c5b4f;
+  --tier-c: #8a7c4c;
+  --tier-d: #a2402b;
+
+  --font-display: "Archivo", "Arial Narrow", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+
+  --radius: 3px;
+  --shadow-card: 0 1px 0 var(--line-strong);
+  --content-width: 880px;
+  --wide-width: 1180px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5em;
+  color: var(--ink);
+}
+
+h1 { font-size: clamp(2rem, 4.5vw, 3.4rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
+h3 { font-size: 1.25rem; }
+
+p { margin: 0 0 1em; }
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+a:hover { color: var(--cost); }
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.num {
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.eyebrow {
+  font-family: var(--font-data);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  margin: 0 0 0.6em;
+}
+
+.container {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.container-wide {
+  max-width: var(--wide-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.hairline {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 2.5rem 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.95rem;
+}
+
+th {
+  font-family: var(--font-data);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  font-weight: 500;
+}
+
+td.num, th.num { text-align: right; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}

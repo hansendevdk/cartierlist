@@ -1,0 +1,151 @@
+---
+// The site's signature element: every price claim resolves to this same
+// itemized statement, so a reader learns to read it once and can then read
+// any car on the site. Bar segment widths are proportional to their kroner
+// share of total cost, not decorative.
+import { kr, krPerYear } from "../lib/data";
+import type { RankedCar } from "../lib/data";
+
+interface Props {
+  car: RankedCar;
+  compact?: boolean;
+}
+const { car, compact = false } = Astro.props;
+
+const hasDep = car.depreciation_available;
+const segments = hasDep
+  ? [
+      { label: "Value lost (depreciation)", value: car.depreciation_dkk ?? 0, color: "var(--cost)" },
+      { label: "Fuel", value: car.fuel_total_dkk ?? 0, color: "var(--cost-2)" },
+      { label: "Ownership tax", value: car.ejerafgift_total_dkk ?? 0, color: "var(--cost-3)" },
+      { label: "Repairs", value: car.repair_total_dkk ?? 0, color: "var(--cost-4)" },
+    ]
+  : [
+      { label: "Fuel", value: car.fuel_total_dkk ?? 0, color: "var(--cost-2)" },
+      { label: "Ownership tax", value: car.ejerafgift_total_dkk ?? 0, color: "var(--cost-3)" },
+      { label: "Repairs", value: car.repair_total_dkk ?? 0, color: "var(--cost-4)" },
+    ];
+const total = segments.reduce((s, x) => s + x.value, 0);
+---
+
+<div class:list={["ledger", { compact }]}>
+  {!hasDep && (
+    <p class="ledger-note">
+      This car is old enough that we have no later resale price to compare against, so this
+      is running costs only (fuel, tax, repairs), not a full buy-and-sell total.
+    </p>
+  )}
+
+  <div class="ledger-bar" role="img" aria-label={`Cost breakdown: ${segments.map(s => `${s.label} ${kr(s.value)}`).join(", ")}`}>
+    {segments.map((s) => (
+      s.value > 0 && (
+        <div class="ledger-bar-segment" style={`flex-grow: ${Math.max(s.value, 1)}; background: ${s.color};`} />
+      )
+    ))}
+  </div>
+
+  <dl class="ledger-list">
+    {hasDep && (
+      <>
+        <div class="ledger-row">
+          <dt>Buy at {car.band_years}</dt>
+          <dd class="num">{kr(car.entry_price_dkk)}</dd>
+        </div>
+        <div class="ledger-row credit">
+          <dt>Sell {car.hold_years} years later</dt>
+          <dd class="num">&minus;{kr(car.resale_price_dkk)}</dd>
+        </div>
+        <div class="ledger-row subtotal">
+          <dt>Value lost</dt>
+          <dd class="num">{kr(car.depreciation_dkk)}</dd>
+        </div>
+      </>
+    )}
+    <div class="ledger-row">
+      <dt><span class="swatch" style="background: var(--cost-2)"></span>Fuel{hasDep ? `, ${car.hold_years} years` : "/year"}</dt>
+      <dd class="num">{kr(car.fuel_total_dkk)}</dd>
+    </div>
+    <div class="ledger-row">
+      <dt><span class="swatch" style="background: var(--cost-3)"></span>Ownership tax{hasDep ? `, ${car.hold_years} years` : "/year"}</dt>
+      <dd class="num">{kr(car.ejerafgift_total_dkk)}</dd>
+    </div>
+    <div class="ledger-row">
+      <dt><span class="swatch" style="background: var(--cost-4)"></span>Repairs{hasDep ? `, ${car.hold_years} years` : "/year"}</dt>
+      <dd class="num">{kr(car.repair_total_dkk)}</dd>
+    </div>
+    <div class="ledger-row total">
+      <dt>{hasDep ? `Total, ${car.hold_years} years` : "Total, per year"}</dt>
+      <dd class="num">{kr(hasDep ? car.tco_total_dkk : total)}</dd>
+    </div>
+    <div class="ledger-row per-year">
+      <dt>Per year</dt>
+      <dd class="num">{krPerYear(car.tco_per_year)}</dd>
+    </div>
+  </dl>
+</div>
+
+<style>
+  .ledger-note {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    margin-bottom: 14px;
+  }
+  .ledger-bar {
+    display: flex;
+    width: 100%;
+    height: 14px;
+    border-radius: 3px;
+    overflow: hidden;
+    background: var(--line);
+    margin-bottom: 18px;
+  }
+  .ledger-bar-segment {
+    height: 100%;
+  }
+  .ledger-list {
+    margin: 0;
+  }
+  .ledger-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 7px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 0.95rem;
+  }
+  .ledger-row dt { color: var(--ink-soft); display: flex; align-items: center; gap: 8px; }
+  .ledger-row dd { margin: 0; }
+  .ledger-row.credit dd { color: var(--value); }
+  .ledger-row.subtotal {
+    border-bottom: 1px solid var(--line-strong);
+    font-weight: 600;
+  }
+  .ledger-row.subtotal dt, .ledger-row.subtotal dd { color: var(--ink); }
+  .ledger-row.total {
+    border-bottom: none;
+    border-top: 2px solid var(--ink);
+    margin-top: 4px;
+    padding-top: 10px;
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+  .ledger-row.per-year {
+    border-bottom: none;
+    padding-top: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .ledger-row.per-year dt { color: var(--accent); }
+  .swatch {
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+  .compact .ledger-row { font-size: 0.85rem; padding: 5px 0; }
+  .compact .ledger-bar { height: 10px; margin-bottom: 12px; }
+</style>

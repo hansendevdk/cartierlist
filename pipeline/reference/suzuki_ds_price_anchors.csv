@@ -1,0 +1,9 @@
+dmr_make,dmr_model,age_band,real_price_dkk,real_mileage_km,source_note
+SUZUKI,SWIFT,2,50000,249000,real listing, high mileage
+SUZUKI,SWIFT,2,110000,51000,real listing, low mileage
+SUZUKI,BALENO,2,47500,223000,real listing, high mileage
+SUZUKI,BALENO,2,130000,12000,real listing, low mileage
+SUZUKI,IGNIS,2,60000,248000,real listing, high mileage
+SUZUKI,IGNIS,2,110000,29000,real listing, low mileage
+SUZUKI,Celerio,2,45000,180000,real listing, high mileage
+SUZUKI,Celerio,2,80000,48000,real listing, low mileage

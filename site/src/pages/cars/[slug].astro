@@ -1,0 +1,199 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import LedgerBreakdown from "../../components/LedgerBreakdown.astro";
+import TierBadge from "../../components/TierBadge.astro";
+import { rankings, unpriced, BAND_LABEL, kr, pct, km } from "../../lib/data";
+import type { RankedCar } from "../../lib/data";
+
+export function getStaticPaths() {
+  const priced = rankings.map((car) => ({ params: { slug: car.slug }, props: { car, priced: true } }));
+  const noPriced = unpriced.map((car) => ({ params: { slug: car.slug }, props: { car, priced: false } }));
+  return [...priced, ...noPriced];
+}
+
+const { car, priced } = Astro.props as { car: any; priced: boolean };
+
+const siblingAges = priced
+  ? rankings.filter((r) => r.modelSlug === car.modelSlug && r.slug !== car.slug)
+  : rankings.filter((r) => r.modelSlug === car.modelSlug);
+
+function reliabilityNote(rate: number | null) {
+  if (rate === null) return "not enough MOT tests to measure reliably";
+  if (rate >= 0.85) return "clearly above average for its age";
+  if (rate >= 0.75) return "close to average for its age";
+  return "below average for its age";
+}
+---
+
+<Layout
+  title={`${car.makeDisplay} ${car.modelDisplay}, ${car.band_years}`}
+  description={`Cost of ownership, reliability and repair data for a ${car.makeDisplay} ${car.modelDisplay} first registered ${car.band_years}.`}
+>
+  <div class="container">
+    <p class="eyebrow">
+      {priced ? <a href={`/brackets/${car.price_bracket_id}/`}>{car.price_bracket_label}</a> : "No price estimate"}
+      {" / "}{car.band_years}
+    </p>
+    <div class="title-row">
+      <h1>{car.makeDisplay} {car.modelDisplay}</h1>
+      {priced && (
+        <div class="badges">
+          <div class="badge-item"><TierBadge tier={car.cost_tier} /><span>cost</span></div>
+          <div class="badge-item"><TierBadge tier={car.value_for_money_tier} /><span>value</span></div>
+        </div>
+      )}
+    </div>
+    {(car.is_hybrid || car.is_diesel_dominant) && (
+      <p class="fuel-tags">
+        {car.is_hybrid && (
+          <span class="fuel-tag" title="Trim name mentions hybrid or plug-in.">hybrid</span>
+        )}
+        {car.is_diesel_dominant && (
+          <span class="fuel-tag" title="Over half the registered cars behind this row are diesel.">diesel</span>
+        )}
+      </p>
+    )}
+    <p class="sub">First registered {car.band_years}, about {car.approx_age_years} years old today. Based on {car.dk_vehicle_count?.toLocaleString("da-DK")} of these registered in Denmark.</p>
+
+    {priced ? (
+      <div class="card ledger-card">
+        <LedgerBreakdown car={car} />
+      </div>
+    ) : (
+      <div class="card no-price-card">
+        <p class="eyebrow">Why there's no price here</p>
+        <p>
+          {car.makeDisplay} isn't sold in large enough numbers in the used-car marketplace we use
+          to estimate prices (Poland's used market, used as a tax-free stand-in for a car's real
+          value; see the <a href="/methodology#pricing">methodology page</a>). Rather than guess,
+          we're showing what we do know: reliability and running costs, with no price or ranking.
+        </p>
+      </div>
+    )}
+
+    <div class="stat-grid">
+      <div class="stat card">
+        <p class="eyebrow">Reliability</p>
+        {car.standardized_pass_rate !== null ? (
+          <>
+            <p class="stat-value">{pct(car.standardized_pass_rate)}</p>
+            <p class="stat-detail">passed its UK MOT test first time, {reliabilityNote(car.standardized_pass_rate)}. Adjusted for how far these cars are typically driven.</p>
+          </>
+        ) : (
+          <p class="stat-detail">Not enough MOT tests on record to measure this reliably.</p>
+        )}
+      </div>
+      <div class="stat card">
+        <p class="eyebrow">Repair burden</p>
+        {car.repair_burden_index !== null ? (
+          <>
+            <p class="stat-value">{Number(car.repair_burden_index).toFixed(2)}</p>
+            <p class="stat-detail">an index of how often things break and how costly {car.makeDisplay} parts tend to be. Around 0.7 to 1.0 is typical; higher means more.</p>
+          </>
+        ) : (
+          <p class="stat-detail">Not enough data to estimate this.</p>
+        )}
+      </div>
+      <div class="stat card">
+        <p class="eyebrow">Fuel cost</p>
+        <p class="stat-value">{kr(car.median_annual_fuel_cost_dkk)}<span class="stat-unit">/year</span></p>
+        <p class="stat-detail">at 15,000 km a year and current Danish pump prices.</p>
+      </div>
+      <div class="stat card">
+        <p class="eyebrow">Ownership tax</p>
+        <p class="stat-value">{kr(car.median_annual_ejerafgift_dkk)}<span class="stat-unit">/year</span></p>
+        <p class="stat-detail">grøn ejerafgift, from this car's fuel consumption or CO2 figure.</p>
+      </div>
+    </div>
+
+    {priced && (
+      <div class="confidence card">
+        <p class="eyebrow">How sure are we about the price?</p>
+        <p>
+          <strong class="cap">{car.price_confidence}</strong> confidence.
+          Based on {car.price_n_listings} comparable foreign listings
+          {car.price_pooled_at_brand ? ", pooled across the whole brand rather than this specific model (fewer listings meant we had to borrow the brand's overall price pattern)" : ""}.
+          The final number is adjusted with a correction factor of {Number(car.price_calibration_factor).toFixed(2)}x
+          found by checking a sample of real Danish asking prices against our raw estimate.
+          Read more on the <a href="/methodology#pricing">methodology page</a>.
+        </p>
+      </div>
+    )}
+
+    {siblingAges.length > 0 && (
+      <div class="siblings">
+        <h2>This model at other ages</h2>
+        <div class="sibling-grid">
+          {siblingAges.map((s) => (
+            <a class="sibling card" href={`/cars/${s.slug}/`}>
+              <span class="sibling-band">{s.band_years}</span>
+              {"entry_price_dkk" in s ? <span class="num">{kr((s as RankedCar).entry_price_dkk)}</span> : <span class="sibling-no-price">no price data</span>}
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</Layout>
+
+<style>
+  .eyebrow a { color: var(--ink-faint); }
+  .eyebrow a:hover { color: var(--accent); }
+  .title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .badges { display: flex; gap: 18px; }
+  .badge-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .badge-item span { font-size: 0.7rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.04em; }
+  .fuel-tags { display: flex; gap: 8px; margin: 4px 0 8px; }
+  .fuel-tag {
+    font-family: var(--font-data);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    background: var(--accent-soft);
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+  .sub { color: var(--ink-faint); font-size: 0.95rem; margin-top: -0.4em; }
+
+  .ledger-card, .no-price-card { padding: 24px 26px; margin: 28px 0 40px; }
+  .no-price-card p { margin: 0; color: var(--ink-soft); }
+  .no-price-card .eyebrow { margin-bottom: 0.6em; }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .stat { padding: 18px 20px; }
+  .stat-value { font-family: var(--font-display); font-size: 1.7rem; font-weight: 800; margin: 0 0 6px; }
+  .stat-unit { font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; color: var(--ink-faint); }
+  .stat-detail { font-size: 0.85rem; color: var(--ink-faint); margin: 0; }
+
+  .confidence { padding: 18px 22px; margin-bottom: 40px; }
+  .confidence p { margin: 0; color: var(--ink-soft); }
+  .cap { text-transform: capitalize; color: var(--accent); }
+
+  .siblings { padding-bottom: 64px; }
+  .siblings h2 { font-size: 1.1rem; }
+  .sibling-grid { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+  .sibling {
+    padding: 12px 18px;
+    text-decoration: none;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 130px;
+  }
+  .sibling:hover { border-color: var(--accent); }
+  .sibling-band { font-size: 0.8rem; color: var(--ink-faint); }
+  .sibling-no-price { font-size: 0.85rem; color: var(--ink-faint); font-style: italic; }
+</style>
