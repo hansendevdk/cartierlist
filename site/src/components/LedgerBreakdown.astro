@@ -52,8 +52,8 @@ const total = segments.reduce((s, x) => s + x.value, 0);
           <dd class="num">{kr(car.entry_price_dkk)}</dd>
         </div>
         <div class="ledger-row credit">
-          <dt>Sell {car.hold_years} years later</dt>
-          <dd class="num">&minus;{kr(car.resale_price_dkk)}</dd>
+          <dt>Sell {car.hold_years} years later, you get back</dt>
+          <dd class="num">+{kr(car.resale_price_dkk)}</dd>
         </div>
         <div class="ledger-row subtotal">
           <dt>Value lost</dt>
