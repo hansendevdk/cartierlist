@@ -1,0 +1,185 @@
+---
+import type { RankedCar } from "../lib/data";
+import { kr } from "../lib/data";
+
+interface Props {
+  cars: RankedCar[];
+}
+const { cars } = Astro.props;
+
+// Cars past this price are too few and too spread out to plot meaningfully
+// on a shared scale (see the note below the chart for the exact count).
+const X_MAX = 600_000;
+const Y_MAX = 40_000;
+const shown = cars.filter((c) => c.entry_price_dkk <= X_MAX);
+const hiddenCount = cars.length - shown.length;
+
+const W = 900;
+const H = 460;
+const MARGIN = { top: 16, right: 20, bottom: 44, left: 64 };
+const plotW = W - MARGIN.left - MARGIN.right;
+const plotH = H - MARGIN.top - MARGIN.bottom;
+
+function xPos(price: number) {
+  return MARGIN.left + (price / X_MAX) * plotW;
+}
+function yPos(cost: number) {
+  return MARGIN.top + plotH - (Math.min(cost, Y_MAX) / Y_MAX) * plotH;
+}
+
+// Median running cost per 30,000 kr price band, drawn only where a band has
+// enough cars behind it (n >= 10) to trust the median rather than a couple
+// of outliers. This is the same "don't show a shaky number" rule the site
+// already applies to reliability figures with too few MOT tests.
+const BAND_WIDTH = 30_000;
+const MIN_BAND_N = 10;
+const bands = new Map<number, number[]>();
+for (const c of shown) {
+  const b = Math.floor(c.entry_price_dkk / BAND_WIDTH);
+  if (!bands.has(b)) bands.set(b, []);
+  bands.get(b)!.push(c.running_cost_per_year);
+}
+function median(vals: number[]) {
+  const s = [...vals].sort((a, b) => a - b);
+  const mid = Math.floor(s.length / 2);
+  return s.length % 2 ? s[mid] : (s[mid - 1] + s[mid]) / 2;
+}
+const trendPoints = [...bands.entries()]
+  .filter(([, vals]) => vals.length >= MIN_BAND_N)
+  .sort(([a], [b]) => a - b)
+  .map(([b, vals]) => ({
+    price: b * BAND_WIDTH + BAND_WIDTH / 2,
+    cost: median(vals),
+    n: vals.length,
+  }));
+
+const cheapestBand = trendPoints.length
+  ? trendPoints.reduce((best, p) => (p.cost < best.cost ? p : best))
+  : null;
+
+const xTicks = [0, 100_000, 200_000, 300_000, 400_000, 500_000, 600_000];
+const yTicks = [0, 10_000, 20_000, 30_000, 40_000];
+
+const polyline = trendPoints.map((p) => `${xPos(p.price)},${yPos(p.cost)}`).join(" ");
+---
+
+<div class="chart-wrap">
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Scatter chart of buying price against yearly running cost, with a trend line showing the median running cost at each price band">
+    {yTicks.map((t) => (
+      <line x1={MARGIN.left} x2={W - MARGIN.right} y1={yPos(t)} y2={yPos(t)} class="grid-line" />
+    ))}
+    {yTicks.map((t) => (
+      <text x={MARGIN.left - 10} y={yPos(t)} class="axis-label y-label">{kr(t)}</text>
+    ))}
+    {xTicks.map((t) => (
+      <text x={xPos(t)} y={H - MARGIN.bottom + 22} class="axis-label x-label">{kr(t)}</text>
+    ))}
+    <line x1={MARGIN.left} x2={W - MARGIN.right} y1={H - MARGIN.bottom} y2={H - MARGIN.bottom} class="axis-line" />
+
+    {shown.map((c) => (
+      <g class="point">
+        <circle cx={xPos(c.entry_price_dkk)} cy={yPos(c.running_cost_per_year)} r="10" class="hit-area" />
+        <circle cx={xPos(c.entry_price_dkk)} cy={yPos(c.running_cost_per_year)} r="4" class="dot" />
+        <title>{`${c.makeDisplay} ${c.modelDisplay}, ${c.band_years}: buy around ${kr(c.entry_price_dkk)}, ${kr(c.running_cost_per_year)}/year to run`}</title>
+      </g>
+    ))}
+
+    {trendPoints.length > 1 && <polyline points={polyline} class="trend-line" />}
+    {trendPoints.map((p) => (
+      <circle cx={xPos(p.price)} cy={yPos(p.cost)} r="3" class="trend-dot" />
+    ))}
+
+    {cheapestBand && (
+      <g class="callout">
+        <circle cx={xPos(cheapestBand.price)} cy={yPos(cheapestBand.cost)} r="6" class="callout-dot" />
+        <text
+          x={xPos(cheapestBand.price)}
+          y={yPos(cheapestBand.cost) - 14}
+          class="callout-label"
+          text-anchor={cheapestBand.price > X_MAX * 0.7 ? "end" : "middle"}
+        >
+          lowest median: {kr(cheapestBand.cost)}/year
+        </text>
+      </g>
+    )}
+  </svg>
+  <p class="chart-caption">
+    Each dot is one car: where it sits left-to-right is what it costs to buy, where it sits up-and-down
+    is what it costs to run every year after that (fuel, tax, repairs, no purchase price or resale in
+    this number). The line traces the typical (median) running cost in each 30,000 kr price band, only
+    drawn where at least {MIN_BAND_N} cars back it up.
+    {hiddenCount > 0 && ` ${hiddenCount} cars over ${kr(X_MAX)} aren't shown, the price axis would mostly be empty space to fit them in.`}
+  </p>
+</div>
+
+<style>
+  .chart-wrap {
+    margin: 24px 0 40px;
+  }
+  svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .grid-line {
+    stroke: var(--line);
+    stroke-width: 1;
+  }
+  .axis-line {
+    stroke: var(--line-strong);
+    stroke-width: 1;
+  }
+  .axis-label {
+    font-family: var(--font-data);
+    font-size: 11px;
+    fill: var(--ink-faint);
+  }
+  .y-label {
+    text-anchor: end;
+    dominant-baseline: middle;
+  }
+  .x-label {
+    text-anchor: middle;
+  }
+  .dot {
+    fill: var(--ink-soft);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .hit-area {
+    fill: transparent;
+  }
+  .point:hover .dot {
+    opacity: 0.9;
+    fill: var(--accent);
+  }
+  .trend-line {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+  .trend-dot {
+    fill: var(--surface);
+    stroke: var(--accent);
+    stroke-width: 2;
+  }
+  .callout-dot {
+    fill: var(--accent);
+    stroke: var(--surface);
+    stroke-width: 2;
+  }
+  .callout-label {
+    font-family: var(--font-data);
+    font-size: 12px;
+    font-weight: 600;
+    fill: var(--ink);
+  }
+  .chart-caption {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    max-width: 68ch;
+  }
+</style>

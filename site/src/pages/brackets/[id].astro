@@ -82,14 +82,28 @@ const hasRunningCostOnly = cars.some((c) => !c.depreciation_available);
   .lists {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    grid-template-rows: auto auto 1fr;
+    grid-auto-flow: column;
+    column-gap: 32px;
     margin-top: 32px;
     padding-bottom: 72px;
   }
+  /* display: contents unwraps each list-block so its h2/intro/card become
+     direct grid items -- grid-template-rows names exactly 3 rows so
+     grid-auto-flow: column knows where to wrap into the second column,
+     putting one block's three pieces in row 1/2/3 of column 1 and the
+     other's in column 2. Without an explicit row count here, column
+     auto-flow has no wrap point and every item's height gets counted into
+     one collapsed row instead of three, which is what caused the
+     misalignment in the first place. Row 2 (the intro paragraph) sizes to
+     whichever is taller and both cards in row 3 start at the same height,
+     however many lines either intro wraps to. */
+  .list-block { display: contents; }
   .list-block h2 { font-size: 1.2rem; margin-bottom: 0.2em; }
   .list-sub { color: var(--ink-faint); font-size: 0.88rem; margin-bottom: 14px; max-width: 46ch; }
   .list-card { padding: 4px 0; max-height: 720px; overflow-y: auto; }
   @media (max-width: 900px) {
-    .lists { grid-template-columns: 1fr; }
+    .lists { grid-template-columns: 1fr; grid-auto-flow: row; }
+    .list-block { display: block; margin-bottom: 32px; }
   }
 </style>

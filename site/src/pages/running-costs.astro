@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import CarRow from "../components/CarRow.astro";
 import FuelFilterToggle from "../components/FuelFilterToggle.astro";
+import RunningCostChart from "../components/RunningCostChart.astro";
 import { RUNNING_COST_ELIGIBLE, kr } from "../lib/data";
 
 const cars = RUNNING_COST_ELIGIBLE;
@@ -20,6 +21,8 @@ const cheapCarBeatsExpensive = cars.slice(0, 30).some((c) => c.entry_price_dkk >
       per year. Some genuinely cheap cars to buy are expensive to keep, and some expensive cars
       pay part of themselves back every year at the pump. This is where you'd spot that.
     </p>
+
+    <RunningCostChart cars={cars} />
 
     {cheapCarBeatsExpensive && (
       <p class="note">
