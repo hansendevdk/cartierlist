@@ -139,10 +139,14 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
 
     <h3>Cars we couldn't price at all</h3>
     <p>
-      Suzuki and DS models are common on Danish roads but barely present in the foreign listings
-      data we use, so we have nothing solid to build a price estimate from. Rather than guess,
-      we show their reliability and running-cost data with no price and no ranking, clearly
-      marked. This affects {fact("Suzuki/DS models excluded")} models.
+      Suzuki and DS models are barely present in the foreign listings data we use, so most of
+      them have nothing solid to build a price estimate from. For a few (Swift, Baleno, Ignis,
+      Celerio) we found real Danish asking prices by hand and used the same shape-from-a-similar-car
+      method as Skoda Citigo above, borrowing a same-segment model's depreciation curve and
+      scaling it to that real price, marked "low confidence" since it rests on one or two real
+      listings rather than a full curve. The rest still show reliability and running-cost data
+      with no price and no ranking, clearly marked. {fact("Suzuki/DS models still unpriced")} models
+      are still unpriced.
     </p>
 
     <h2>What "most car for the money" means</h2>
@@ -167,10 +171,17 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
       <li>Reliability figures are from UK-market cars driven on UK roads. See above.</li>
       <li>The repair cost figure uses a flat, judgement-based rate per point, not real Danish repair invoices.</li>
       <li>Price calibration is checked against the same listings used to build it, not a separate held-out set.</li>
-      <li>Suzuki and DS models have no price data and aren't ranked, though their reliability and running-cost figures are shown.</li>
+      <li>
+        Skoda Citigo has almost no listings of its own in the foreign data we use, so its price
+        curve is borrowed from Volkswagen Up!, the same car on the same platform sold under a
+        different badge (Seat Mii is the third badge, and does have enough of its own listings
+        to price directly). Its registration tax is still calculated from Citigo's own measured
+        CO2 figure, only the underlying market value is shared.
+      </li>
       <li>The mileage adjustment uses one flat rate for every car, from the cheapest city car to the most expensive SUV, when in reality mileage probably matters more in kroner terms for an expensive car.</li>
       <li>Cars first registered 2010 to 2013 (our oldest age band) have no later resale point in our data, so their cost figure is running costs only, not a full buy-and-sell total. These are marked with an asterisk wherever they appear.</li>
       <li>Fuel efficiency figures straddle a 2018 change in how the EU measures fuel consumption (NEDC to WLTP), which makes some older cars look slightly better on paper than they really are. Comparisons within the same age band are largely unaffected.</li>
+      <li>A model name can span more than one real generation inside a single 3-year age band, if it had a mid-cycle facelift or engine change. Most generations last longer than 3 years, so this is the exception rather than the rule, but where it happens, that row blends specs from what a buyer would actually experience as two different cars.</li>
       <li>
         Hybrids aren't recorded as their own fuel type in the registry, they're filed under
         petrol or diesel. We flag a car as hybrid when at least 3 in 10 of the registered cars

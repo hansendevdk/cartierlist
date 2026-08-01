@@ -396,6 +396,10 @@ def main() -> None:
     crosswalk_vehicle_count = sum(int(r["dk_vehicle_count"]) for r in crosswalk_rows)
     crosswalk_pct = crosswalk_vehicle_count / TOTAL_SCOPED_FLEET * 100
 
+    suzuki_ds_models = {(m, mo) for (m, mo, b) in metrics_idx if m in ("SUZUKI", "DS")}
+    suzuki_ds_priced_models = {(m, mo) for (m, mo, b) in price_idx if m in ("SUZUKI", "DS")}
+    n_suzuki_ds_unpriced = len(suzuki_ds_models - suzuki_ds_priced_models)
+
     methodology = [
         {"fact": "Danish vehicles in scope (2010-2022, petrol/diesel/hybrid)", "value": TOTAL_SCOPED_FLEET, "source": "phase1_warehouse_report.md", "date": "2026-07-31"},
         {"fact": "Eligible DVSA MOT tests after filters", "value": 48220796, "source": "phase3_metrics_report.md", "date": "2026-07-31"},

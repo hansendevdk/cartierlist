@@ -155,6 +155,51 @@ def matches(dmr_norm: str, polish_norm: str) -> bool:
     return False
 
 
+# Some DMR model names have no Polish-side match under the rule above even
+# though Poland's data has thousands of real listings for the car -- the
+# naming CONVENTION differs, not just spelling. Found by checking why every
+# BMW/Mercedes/Volvo model except the plainest ones (X1, X3, GLC, V70, ...)
+# was falling back to a whole-brand pooled price: DMR spells these "1-Serie",
+# "A-Klasse", "XC60"; Poland's listings (after load_poland_listings() strips
+# the leading brand name) read "Seria 1", "Klasa A", "XC 60" -- reversed word
+# order for the first two, a missing space for the third. Each entry is one
+# more accepted spelling for that DMR model, checked with the same prefix
+# rule as matches() above so trim suffixes ("Seria 1 118i M Sport") still
+# match. This is the model-name equivalent of the make-alias table Phase 2
+# built for brand names; same fix, one level down.
+MODEL_MATCH_ALIASES: dict[tuple[str, str], list[str]] = {
+    ("BMW", "1-Serie"): ["SERIA 1"],
+    ("BMW", "2-Serie"): ["SERIA 2"],
+    ("BMW", "3-Serie"): ["SERIA 3"],
+    ("BMW", "4-serie"): ["SERIA 4"],
+    ("BMW", "5-Serie"): ["SERIA 5"],
+    ("MERCEDES-BENZ", "A-Klasse"): ["KLASA A"],
+    ("MERCEDES-BENZ", "B-Klasse"): ["KLASA B"],
+    ("MERCEDES-BENZ", "C"): ["KLASA C"],
+    ("MERCEDES-BENZ", "C-Klasse"): ["KLASA C"],
+    ("MERCEDES-BENZ", "E"): ["KLASA E"],
+    ("MERCEDES-BENZ", "E-Klasse"): ["KLASA E"],
+    ("VOLVO", "XC40"): ["XC 40"],
+    ("VOLVO", "XC60"): ["XC 60"],
+    ("VOLVO", "XC90"): ["XC 90"],
+}
+
+# A different problem from the aliasing above: not a spelling mismatch, just
+# too little real data. Skoda Citigo has 2 Poland listings total (one with
+# an implausible 1968cc "Diesel" spec this car never shipped with) -- far
+# below MIN_LISTINGS_FOR_MODEL_FIT, so it would fall back to a whole-Skoda
+# brand pool, which is dominated by much bigger, pricier models (Octavia,
+# Superb, Kodiaq) and prices a cheap city car like an executive saloon.
+# Citigo, VW Up! and Seat Mii are the same car built on the same line (VW
+# Group's "New Small Family" platform, sold under three badges) so this
+# borrows VW Up!'s real, well-populated Poland curve as Citigo's market-value
+# signal. Only that curve is borrowed -- the registration tax below is still
+# computed from Citigo's own measured CO2 figure, not VW's.
+PLATFORM_SHARED_LISTINGS: dict[tuple[str, str], tuple[str, str]] = {
+    ("SKODA", "CITIGO"): ("volkswagen", "UP"),
+}
+
+
 def build_age_price_curve(points: list[tuple[float, float]]) -> list[tuple[float, float]] | None:
     """points: list of (age_years, price_dkk). Buckets by age and returns
     [(mean_age_in_bucket, median_price), ...] sorted by age, median per
@@ -255,10 +300,13 @@ def main() -> None:
             continue
 
         dmr_norm = normalize(dmr_model)
-        brand_listings = by_brand.get(brand_slug, [])
+        aliases = MODEL_MATCH_ALIASES.get((dmr_make, dmr_model), [])
+        match_brand_slug, match_norm = PLATFORM_SHARED_LISTINGS.get((dmr_make, dmr_model), (brand_slug, dmr_norm))
+        brand_listings = by_brand.get(match_brand_slug, [])
         matched = [
             (r["age_2026"], r["price_dkk"]) for r in brand_listings
-            if matches(dmr_norm, polish_model_normalized(brand_slug, r["model_raw"]))
+            if matches(match_norm, polish_model_normalized(match_brand_slug, r["model_raw"]))
+            or any(matches(alias, polish_model_normalized(match_brand_slug, r["model_raw"])) for alias in aliases)
         ]
 
         pooled_at_brand = False
