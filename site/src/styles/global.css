@@ -8,11 +8,11 @@
   --surface: #fbfcf8;
   --ink: #1e2a20;
   --ink-soft: #4c5b4f;
-  --ink-faint: #7c8a7c;
+  --ink-faint: #5d685d;
   --line: #d8e0cd;
   --line-strong: #b9c5ab;
 
-  --accent: #a9761f;
+  --accent: #7f5917;
   --accent-soft: #f0e4c8;
   --cost: #a2402b;
   --cost-soft: #f3ded7;
@@ -22,10 +22,10 @@
   --value: #3c6b4d;
   --value-soft: #dce9dd;
 
-  --tier-s: #a9761f;
+  --tier-s: #7f5917;
   --tier-a: #3c6b4d;
   --tier-b: #4c5b4f;
-  --tier-c: #8a7c4c;
+  --tier-c: #7f7246;
   --tier-d: #a2402b;
 
   --font-display: "Archivo", "Arial Narrow", sans-serif;
