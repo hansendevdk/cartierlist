@@ -133,7 +133,7 @@ const cheapestBracket = bracketStats
         <a class="bracket-card card" href={`/brackets/${b.id}/`}>
           <span class="bracket-label">{b.label}</span>
           <span class="bracket-count num">{b.count} cars ranked</span>
-          {b.median && <span class="bracket-median">from about <strong class="num">{fmt(Math.round(b.median))} kr</strong>/year for a top-ranked car</span>}
+          {b.median && <span class="bracket-median">from about <strong class="num">{fmt(Math.round(b.median))} kr</strong>/year to own</span>}
         </a>
       ))}
     </div>
