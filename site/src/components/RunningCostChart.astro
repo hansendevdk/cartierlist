@@ -16,7 +16,7 @@ const hiddenCount = cars.length - shown.length;
 
 const W = 900;
 const H = 460;
-const MARGIN = { top: 16, right: 20, bottom: 64, left: 78 };
+const MARGIN = { top: 16, right: 20, bottom: 64, left: 112 };
 const plotW = W - MARGIN.left - MARGIN.right;
 const plotH = H - MARGIN.top - MARGIN.bottom;
 
@@ -80,11 +80,11 @@ const polyline = trendPoints.map((p) => `${xPos(p.price)},${yPos(p.cost)}`).join
       Purchase price (kr)
     </text>
     <text
-      x={16}
+      x={12}
       y={MARGIN.top + plotH / 2}
       class="axis-title"
       text-anchor="middle"
-      transform={`rotate(-90, 16, ${MARGIN.top + plotH / 2})`}
+      transform={`rotate(-90, 12, ${MARGIN.top + plotH / 2})`}
     >
       Running cost (kr/year)
     </text>
