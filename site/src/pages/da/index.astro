@@ -1,10 +1,10 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import LedgerBreakdown from "../components/LedgerBreakdown.astro";
-import { rankings, methodology, getBracketStats } from "../lib/data";
+import Layout from "../../layouts/Layout.astro";
+import LedgerBreakdown from "../../components/LedgerBreakdown.astro";
+import { rankings, methodology, getBracketStats } from "../../lib/data";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
-const lang = "en" as const;
+const lang = "da" as const;
 const heroCar = rankings.find((r) => r.slug === "peugeot-108--band1")!;
 
 const fact = (label: string) => methodology.find((m) => m.fact.startsWith(label))?.value ?? "";
@@ -20,80 +20,79 @@ const { bracketStats, cheapestBracket } = getBracketStats(lang);
 ---
 
 <Layout
-  title="Best value used cars in Denmark, by budget"
-  description="A cost-of-ownership ranking of used cars sold in Denmark, built from vehicle registration and MOT test data, sorted into price brackets."
+  title="Bedste brugte biler i Danmark, efter budget"
+  description="En rangering af brugte biler solgt i Danmark efter hvad de koster at eje, bygget på køretøjsregister- og synsdata og sorteret i prisklasser."
   lang={lang}
   path="/"
 >
   <section class="hero">
     <div class="container-wide hero-inner">
       <div class="hero-copy">
-        <p class="eyebrow">A car costs more than its price tag</p>
-        <h1>What will a used car cost you, not just to buy, but to own?</h1>
+        <p class="eyebrow">En bil koster mere end sin pris</p>
+        <h1>Hvad koster en brugt bil dig, ikke bare at købe, men at eje?</h1>
         <p class="hero-lede">
-          Every price on this site adds up the same way a real receipt would: what you pay,
-          minus what you get back when you sell, plus fuel, tax and repairs in between.
-          Here is one real example, using our data for a {heroCar.makeDisplay} {heroCar.modelDisplay}{" "}
-          first registered {heroCar.band_years}.
+          Alle priser på siden er lagt sammen som på en kvittering: hvad du betaler, minus hvad
+          du får igen ved salg, plus brændstof, afgift og reparationer undervejs. Her er et
+          eksempel med vores tal for en {heroCar.makeDisplay} {heroCar.modelDisplay}{" "}
+          første gang indregistreret {heroCar.band_years}.
         </p>
-        <a class="cta" href="#brackets">Find your budget &darr;</a>
+        <a class="cta" href="#brackets">Find dit budget &darr;</a>
       </div>
       <div class="hero-example card">
         <p class="eyebrow">{heroCar.makeDisplay} {heroCar.modelDisplay}, {heroCar.band_years}</p>
         <LedgerBreakdown car={heroCar} lang={lang} />
-        <a class="hero-example-link" href={getRelativeLocaleUrl(lang, `/cars/${heroCar.slug}/`)}>See the full breakdown &rarr;</a>
+        <a class="hero-example-link" href={getRelativeLocaleUrl(lang, `/cars/${heroCar.slug}/`)}>Se hele regnskabet &rarr;</a>
       </div>
     </div>
   </section>
 
   <section class="process">
     <div class="container">
-      <p class="eyebrow">How we got here</p>
-      <h2>We turned two large public datasets into one number per car</h2>
+      <p class="eyebrow">Sådan er vi nået frem til det</p>
+      <h2>Vi har lavet to store offentlige datasæt om til ét tal per bil</h2>
       <ol class="steps">
         <li>
           <span class="step-num">1</span>
           <div>
-            <h3>Started from {fmt(scopedFleet)} Danish cars</h3>
+            <h3>Startet med {fmt(scopedFleet)} danske biler</h3>
             <p>
-              We pulled the Danish Motor Registry's public vehicle data, kept petrol, diesel
-              and hybrid passenger cars first registered between 2010 and 2022, and matched{" "}
-              {fmt(crosswalkFact.toString().split(" ")[0])} models against UK MOT test records
-              to measure how often each one breaks down.
+              Vi hentede Motorregistrets offentlige køretøjsdata, beholdt benzin-, diesel- og
+              hybridpersonbiler første gang indregistreret mellem 2010 og 2022, og koblede{" "}
+              {fmt(crosswalkFact.toString().split(" ")[0])} modeller sammen med britiske
+              MOT-synsdata for at måle, hvor tit de går i stykker.
             </p>
           </div>
         </li>
         <li>
           <span class="step-num">2</span>
           <div>
-            <h3>{fmt(motTests)} MOT tests, mined for failure patterns</h3>
+            <h3>{fmt(motTests)} MOT-syn gennemgået for fejlmønstre</h3>
             <p>
-              Reliability comes from the UK's public MOT test archive, adjusted so a
-              heavily-driven car isn't unfairly compared to a lightly-driven one of the same age.
+              Pålideligheden kommer fra det britiske offentlige MOT-synsarkiv, justeret så en
+              bil der er kørt meget, ikke bliver sammenlignet urimeligt med en jævnaldrende der
+              er kørt lidt.
             </p>
           </div>
         </li>
         <li>
           <span class="step-num">3</span>
           <div>
-            <h3>Priced each car and checked it against the Danish market</h3>
+            <h3>Prissat hver bil og holdt den op mod det danske marked</h3>
             <p>
-              We built a price estimate for each model at four different ages, then checked it
-              against asking prices we looked up on Danish listing sites by hand and
-              corrected for the gap.{" "}
-              <a href={getRelativeLocaleUrl(lang, "/methodology") + "#pricing"}>Full pricing method</a>
+              Vi lavede et prisestimat for hver model i fire aldre og holdt det op mod
+              udbudspriser, vi selv slog op på danske bilsider, og korrigerede for forskellen.{" "}
+              <a href={getRelativeLocaleUrl(lang, "/methodology") + "#pricing"}>Hele prismetoden</a>
             </p>
           </div>
         </li>
         <li>
           <span class="step-num">4</span>
           <div>
-            <h3>What you'd pay, once fuel, tax and repairs are added up</h3>
+            <h3>Hvad du ender med at betale, når brændstof, afgift og reparationer er lagt sammen</h3>
             <p>
-              Fuel cost, Danish ownership tax and an estimated repair cost combine with resale
-              value to give one total cost of ownership per car. Cars are grouped into five price
-              brackets and ranked inside each one, so you're only ever comparing cars you could
-              afford.
+              Brændstof, grøn ejerafgift og et estimat for reparationer lægges sammen med
+              gensalgsværdien til én samlet ejeromkostning per bil. Bilerne er delt i fem
+              prisklasser og rangeret inden for hver, så du kun sammenligner biler, du kan betale.
             </p>
           </div>
         </li>
@@ -104,12 +103,12 @@ const { bracketStats, cheapestBracket } = getBracketStats(lang);
   <section class="finding">
     <div class="container">
       <div class="finding-card card">
-        <p class="eyebrow">What the numbers say</p>
+        <p class="eyebrow">Hvad tallene siger</p>
         {cheapestBracket && (
           <p class="finding-text">
-            Among the best-ranked cars in each bracket, <strong>{cheapestBracket.label}</strong>{" "}
-            has the lowest cost per year to own, about <strong class="num">{fmt(Math.round(cheapestBracket.median!))} kr</strong>{" "}
-            a year. Cheap can mean cheap to buy. Here, it also means cheap to keep.
+            Blandt de bedst placerede biler i hver prisklasse er <strong>{cheapestBracket.label}</strong>{" "}
+            billigst at eje per år, omkring <strong class="num">{fmt(Math.round(cheapestBracket.median!))} kr</strong>{" "}
+            om året. Billig kan betyde billig at købe. Her betyder det også billig at beholde.
           </p>
         )}
       </div>
@@ -118,16 +117,16 @@ const { bracketStats, cheapestBracket } = getBracketStats(lang);
 
   <section id="brackets" class="brackets">
     <div class="container">
-      <p class="eyebrow">Find your budget</p>
-      <h2>Pick a price bracket</h2>
-      <p class="section-lede">Each bracket ranks cars you could buy for that budget, best value first.</p>
+      <p class="eyebrow">Find dit budget</p>
+      <h2>Vælg en prisklasse</h2>
+      <p class="section-lede">Hver prisklasse rangerer de biler, du kan købe for pengene, med bedste værdi først.</p>
     </div>
     <div class="container-wide bracket-grid">
       {bracketStats.map((b) => (
         <a class="bracket-card card" href={getRelativeLocaleUrl(lang, `/brackets/${b.id}/`)}>
           <span class="bracket-label">{b.label}</span>
-          <span class="bracket-count num">{b.count} cars ranked</span>
-          {b.median && <span class="bracket-median">from about <strong class="num">{fmt(Math.round(b.median))} kr</strong>/year to own</span>}
+          <span class="bracket-count num">{b.count} biler rangeret</span>
+          {b.median && <span class="bracket-median">fra omkring <strong class="num">{fmt(Math.round(b.median))} kr</strong>/år at eje</span>}
         </a>
       ))}
     </div>
@@ -136,10 +135,11 @@ const { bracketStats, cheapestBracket } = getBracketStats(lang);
   <section class="running-cost-callout">
     <div class="container">
       <div class="card callout-card">
-        <p class="eyebrow">Or ignore the price tag</p>
+        <p class="eyebrow">Eller se bort fra prisen</p>
         <p>
-          Some cars cost more to buy but pay part of it back every year in fuel and tax.{" "}
-          <a href={getRelativeLocaleUrl(lang, "/running-costs/")}>See every car ranked by running cost alone</a>
+          Nogle biler koster mere at købe, men betaler noget af det tilbage hvert år på
+          brændstof og afgift.{" "}
+          <a href={getRelativeLocaleUrl(lang, "/running-costs/")}>Se alle biler rangeret alene efter driftsomkostninger</a>
         </p>
       </div>
     </div>

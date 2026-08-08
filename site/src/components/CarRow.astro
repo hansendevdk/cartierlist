@@ -1,31 +1,37 @@
 ---
 import TierBadge from "./TierBadge.astro";
-import { kr, krPerYear } from "../lib/data";
+import { kr, krPerYear, confidenceLabel } from "../lib/data";
 import type { RankedCar } from "../lib/data";
+import { UI, type Lang } from "../i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
 interface Props {
   car: RankedCar;
   rank: number;
   mode: "cost" | "value" | "running";
+  lang?: Lang;
 }
-const { car, rank, mode } = Astro.props;
+const { car, rank, mode, lang = "en" } = Astro.props;
+const s = UI[lang].carRow;
 
 const tier = mode === "cost" ? car.cost_tier : mode === "value" ? car.value_for_money_tier : car.running_cost_tier;
 
 // primary = the number that actually decided this row's position; secondary
 // = the other useful figure, shown smaller so two close candidates are easy
 // to tell apart on the number that matters for this list.
-const primaryLabel = mode === "cost" ? "total cost" : mode === "value" ? "value score" : "running cost";
+const primaryLabel = mode === "cost" ? s.totalCost : mode === "value" ? s.valueScore : s.runningCost;
 const primaryValue =
-  mode === "cost" ? krPerYear(car.tco_per_year)
-  : mode === "value" ? `${Math.round((car.value_for_money_score ?? 0) * 100)} pts`
-  : krPerYear(car.running_cost_per_year);
+  mode === "cost" ? krPerYear(car.tco_per_year, lang)
+  : mode === "value" ? s.pts(Math.round((car.value_for_money_score ?? 0) * 100))
+  : krPerYear(car.running_cost_per_year, lang);
 
-const secondaryLabel = mode === "value" ? "cost/year" : mode === "running" ? "total cost/year" : "value score";
+const secondaryLabel = mode === "value" ? s.costPerYear : mode === "running" ? s.totalCostPerYear : s.valueScore;
 const secondaryValue =
-  mode === "value" ? krPerYear(car.tco_per_year)
-  : mode === "running" ? (car.depreciation_available ? krPerYear(car.tco_per_year) : null)
-  : car.value_for_money_score !== null ? `${Math.round(car.value_for_money_score * 100)} pts` : null;
+  mode === "value" ? krPerYear(car.tco_per_year, lang)
+  : mode === "running" ? (car.depreciation_available ? krPerYear(car.tco_per_year, lang) : null)
+  : car.value_for_money_score !== null ? s.pts(Math.round(car.value_for_money_score * 100)) : null;
+
+const confidenceDisplay = confidenceLabel(car.price_confidence, lang);
 
 // Which quantity each score slot holds, so the mileage control (if present
 // on the page) knows what to recompute and overwrite when the reader picks
@@ -45,7 +51,7 @@ const annualRepair =
 
 <a
   class="car-row"
-  href={`/cars/${car.slug}/`}
+  href={getRelativeLocaleUrl(lang, `/cars/${car.slug}/`)}
   data-hybrid={car.is_hybrid ? "1" : "0"}
   data-diesel={car.is_diesel_dominant ? "1" : "0"}
   data-entry={car.entry_price_dkk}
@@ -61,27 +67,27 @@ const annualRepair =
   <TierBadge tier={tier} />
   <span class="name">
     <strong>{car.makeDisplay} {car.modelDisplay}</strong>
-    <span class="sub">{car.band_years} &middot; buy around {kr(car.entry_price_dkk)}</span>
+    <span class="sub">{car.band_years} &middot; {s.buyAround} {kr(car.entry_price_dkk)}</span>
   </span>
   {car.is_hybrid && (
-    <span class="confidence-flag hybrid-flag" title="Trim name mentions hybrid or plug-in. Official fuel figures for these tend to run optimistic, see methodology.">
-      hybrid
+    <span class="confidence-flag hybrid-flag" title={s.hybridTitle}>
+      {s.hybridLabel}
     </span>
   )}
   {car.is_diesel_dominant && (
-    <span class="confidence-flag" title="Over half the registered cars behind this row are diesel.">
-      diesel
+    <span class="confidence-flag" title={s.dieselTitle}>
+      {s.dieselLabel}
     </span>
   )}
   {car.price_confidence !== "high" && (
-    <span class="confidence-flag" title={`Price estimate confidence: ${car.price_confidence}`}>
-      {car.price_confidence} confidence
+    <span class="confidence-flag" title={s.confidenceTitle(confidenceDisplay)}>
+      {confidenceDisplay} {s.confidenceSuffix}
     </span>
   )}
   <span class="scores">
     <span class="score-primary num" data-field={primaryField}>
       <span class="score-value">{primaryValue}</span>
-      {mode !== "running" && !car.depreciation_available && <span class="asterisk" title="Running costs only, no resale data available">*</span>}
+      {mode !== "running" && !car.depreciation_available && <span class="asterisk" title={s.runningOnlyTitle}>*</span>}
     </span>
     <span class="score-label">{primaryLabel}</span>
     {secondaryValue && (
@@ -162,4 +168,17 @@ const annualRepair =
   }
   .asterisk { color: var(--accent); }
   .hybrid-flag { color: var(--accent); background: var(--accent-soft); }
+
+  @media (max-width: 480px) {
+    .car-row {
+      flex-wrap: wrap;
+      row-gap: 8px;
+    }
+    .name {
+      flex-basis: 120px;
+    }
+    .scores {
+      flex-basis: 100%;
+    }
+  }
 </style>

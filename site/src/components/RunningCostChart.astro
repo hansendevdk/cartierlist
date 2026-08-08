@@ -1,11 +1,14 @@
 ---
 import type { RankedCar } from "../lib/data";
 import { kr } from "../lib/data";
+import { UI, type Lang } from "../i18n";
 
 interface Props {
   cars: RankedCar[];
+  lang?: Lang;
 }
-const { cars } = Astro.props;
+const { cars, lang = "en" } = Astro.props;
+const s = UI[lang].chart;
 
 // Cars past this price are too few and too spread out to plot meaningfully
 // on a shared scale (see the note below the chart for the exact count).
@@ -64,7 +67,7 @@ const polyline = trendPoints.map((p) => `${xPos(p.price)},${yPos(p.cost)}`).join
 ---
 
 <div class="chart-wrap">
-  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Scatter chart of buying price against yearly running cost, with a trend line showing the median running cost at each price band">
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={s.ariaLabel}>
     {yTicks.map((t) => (
       <line x1={MARGIN.left} x2={W - MARGIN.right} y1={yPos(t)} y2={yPos(t)} class="grid-line" />
     ))}
@@ -77,7 +80,7 @@ const polyline = trendPoints.map((p) => `${xPos(p.price)},${yPos(p.cost)}`).join
     <line x1={MARGIN.left} x2={W - MARGIN.right} y1={H - MARGIN.bottom} y2={H - MARGIN.bottom} class="axis-line" />
 
     <text x={MARGIN.left + plotW / 2} y={H - 10} class="axis-title" text-anchor="middle">
-      Purchase price (kr)
+      {s.xTitle}
     </text>
     <text
       x={12}
@@ -86,14 +89,14 @@ const polyline = trendPoints.map((p) => `${xPos(p.price)},${yPos(p.cost)}`).join
       text-anchor="middle"
       transform={`rotate(-90, 12, ${MARGIN.top + plotH / 2})`}
     >
-      Running cost (kr/year)
+      {s.yTitle}
     </text>
 
     {shown.map((c) => (
       <g class="point">
         <circle cx={xPos(c.entry_price_dkk)} cy={yPos(c.running_cost_per_year)} r="10" class="hit-area" />
         <circle cx={xPos(c.entry_price_dkk)} cy={yPos(c.running_cost_per_year)} r="4" class="dot" />
-        <title>{`${c.makeDisplay} ${c.modelDisplay}, ${c.band_years}: buy around ${kr(c.entry_price_dkk)}, ${kr(c.running_cost_per_year)}/year to run`}</title>
+        <title>{s.tooltip(c.makeDisplay, c.modelDisplay, c.band_years, kr(c.entry_price_dkk), kr(c.running_cost_per_year))}</title>
       </g>
     ))}
 
@@ -111,17 +114,14 @@ const polyline = trendPoints.map((p) => `${xPos(p.price)},${yPos(p.cost)}`).join
           class="callout-label"
           text-anchor={cheapestBand.price > X_MAX * 0.7 ? "end" : "middle"}
         >
-          lowest median: {kr(cheapestBand.cost)}/year
+          {s.lowestMedian(kr(cheapestBand.cost))}
         </text>
       </g>
     )}
   </svg>
   <p class="chart-caption">
-    Each dot is one car: where it sits left-to-right is what it costs to buy, where it sits up-and-down
-    is what it costs to run every year after that (fuel, tax, repairs, no purchase price or resale in
-    this number). The line traces the typical (median) running cost in each 30,000 kr price band, only
-    drawn where at least {MIN_BAND_N} cars back it up.
-    {hiddenCount > 0 && ` ${hiddenCount} cars over ${kr(X_MAX)} aren't shown, the price axis would mostly be empty space to fit them in.`}
+    {s.captionStart(MIN_BAND_N)}
+    {hiddenCount > 0 && s.hiddenNote(hiddenCount, kr(X_MAX))}
   </p>
 </div>
 

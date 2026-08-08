@@ -5,7 +5,9 @@ import FuelFilterToggle from "../components/FuelFilterToggle.astro";
 import MileageControl from "../components/MileageControl.astro";
 import RunningCostChart from "../components/RunningCostChart.astro";
 import { RUNNING_COST_ELIGIBLE, kr } from "../lib/data";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
+const lang = "en" as const;
 const cars = RUNNING_COST_ELIGIBLE;
 const cheapCarBeatsExpensive = cars.slice(0, 30).some((c) => c.entry_price_dkk > 150000);
 ---
@@ -13,9 +15,11 @@ const cheapCarBeatsExpensive = cars.slice(0, 30).some((c) => c.entry_price_dkk >
 <Layout
   title="Cheapest to run, purchase price ignored"
   description="Cars ranked purely on fuel, tax and repair costs, with what they cost to buy left out entirely."
+  lang={lang}
+  path="/running-costs/"
 >
   <div class="container-wide">
-    <p class="eyebrow"><a href="/">All budgets</a> / Running cost only</p>
+    <p class="eyebrow"><a href={getRelativeLocaleUrl(lang, "/")}>All budgets</a> / Running cost only</p>
     <h1>Cheapest to run, no matter what it costs to buy</h1>
     <p class="lede">
       This list ignores the price tag completely. It's fuel, ownership tax and repairs only,
@@ -23,7 +27,7 @@ const cheapCarBeatsExpensive = cars.slice(0, 30).some((c) => c.entry_price_dkk >
       pay part of themselves back every year at the pump. This is where you'd spot that.
     </p>
 
-    <RunningCostChart cars={cars} />
+    <RunningCostChart cars={cars} lang={lang} />
 
     {cheapCarBeatsExpensive && (
       <p class="note">
@@ -38,14 +42,14 @@ const cheapCarBeatsExpensive = cars.slice(0, 30).some((c) => c.entry_price_dkk >
     <p class="note hybrid-note">
       A number of the cars at the very top are plug-in hybrids. Their official fuel-consumption
       figures run optimistic (the test allows battery assist), so their real running cost is
-      probably a bit higher than shown here. See the <a href="/methodology">methodology page</a>.
+      probably a bit higher than shown here. See the <a href={getRelativeLocaleUrl(lang, "/methodology")}>methodology page</a>.
     </p>
 
-    <FuelFilterToggle />
-    <MileageControl />
+    <FuelFilterToggle lang={lang} />
+    <MileageControl lang={lang} />
 
     <div class="card list-card" data-list-mode="running">
-      {cars.map((c, i) => <CarRow car={c} rank={i + 1} mode="running" />)}
+      {cars.map((c, i) => <CarRow car={c} rank={i + 1} mode="running" lang={lang} />)}
     </div>
   </div>
 </Layout>

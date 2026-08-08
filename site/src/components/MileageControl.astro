@@ -13,29 +13,35 @@
 // would promise a precision the underlying model doesn't have. Five
 // buttons make it a scenario, not a quote.
 import { methodology, km } from "../lib/data";
+import { UI, type Lang } from "../i18n";
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = "en" } = Astro.props;
+const s = UI[lang].mileage;
 
 const slopeFact = methodology.find((m) => m.fact.startsWith("Mileage adjustment slope"));
 const MILEAGE_SLOPE = Number(slopeFact?.value ?? "0") / 100;
 
 const PRESETS = [5000, 10000, 15000, 20000, 30000];
 const DEFAULT_KM = 15000;
+const YEAR_SUFFIX = s.perYearSuffix;
 ---
 
 <div class="mileage-control">
-  <span class="mileage-control-label">Assume how far you drive per year</span>
+  <span class="mileage-control-label">{s.label}</span>
   <div class="mileage-options">
     {PRESETS.map((kmVal) => (
       <label class="mileage-option">
         <input type="radio" name="annual-km" value={kmVal} checked={kmVal === DEFAULT_KM} />
         {km(kmVal)}
-        {kmVal === DEFAULT_KM && <span class="mileage-default-tag">(default)</span>}
+        {kmVal === DEFAULT_KM && <span class="mileage-default-tag">{s.default}</span>}
       </label>
     ))}
   </div>
   <span class="mileage-control-note">
-    Changes fuel cost and how much resale value erodes with distance. Ownership tax and the
-    repair estimate stay flat per year regardless of mileage, so a high-mileage pick understates
-    cost a little. Ranks and tiers below update to match.
+    {s.note}
   </span>
 </div>
 
@@ -85,7 +91,7 @@ const DEFAULT_KM = 15000;
   }
 </style>
 
-<script define:vars={{ MILEAGE_SLOPE, DEFAULT_KM }}>
+<script define:vars={{ MILEAGE_SLOPE, DEFAULT_KM, YEAR_SUFFIX }}>
   const BASE_KM = 15000;
   const SLOPE = MILEAGE_SLOPE;
 
@@ -95,7 +101,7 @@ const DEFAULT_KM = 15000;
   }
   function krPerYear(n) {
     if (n === null || n === undefined || Number.isNaN(n)) return "-";
-    return kr(n) + "/year";
+    return kr(n) + YEAR_SUFFIX;
   }
 
   function num(row, key) {

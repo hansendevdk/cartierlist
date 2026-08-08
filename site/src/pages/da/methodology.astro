@@ -1,0 +1,247 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { methodology, sources, coverage } from "../../lib/data";
+
+const lang = "da" as const;
+const fact = (label: string) => methodology.find((m) => m.fact.startsWith(label))?.value ?? "";
+function fmt(n: string | number) {
+  return Number(n).toLocaleString("da-DK").replace(/,/g, ".");
+}
+const fuelBenzin = sources.fuelPrices.find((f) => f.fuel_type === "Benzin");
+const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
+---
+
+<Layout
+  title="Metode"
+  description="Hvor tallene på siden kommer fra, hvad vi antager, og hvor vi kan tage fejl."
+  lang={lang}
+  path="/methodology"
+>
+  <div class="container">
+    <p class="eyebrow">Det med småt, i klar tale</p>
+    <h1>Sådan virker siden, og hvor den kan tage fejl</h1>
+    <p class="lede">
+      Alle tal her stammer fra offentlige data eller en kilde, vi kan pege på. Hvor vi har
+      måttet skønne i stedet for at måle direkte, skriver vi det på denne side, ikke bare i en
+      fodnote.
+    </p>
+
+    <h2>Hvor data kommer fra</h2>
+    <ul class="source-list">
+      <li>
+        <strong>Danske køretøjsregistreringer.</strong> Motorregistrets (DMR) offentlige
+        statistikudtræk: mærke, model, første indregistreringsdato, drivmiddel,
+        brændstofforbrug, CO2, vægt og motoreffekt for hver indregistreret bil. Vi beholdt
+        benzin-, diesel- og hybridpersonbiler første gang indregistreret mellem 2010 og 2022, i
+        alt {fmt(fact("Danish vehicles in scope"))} biler.
+      </li>
+      <li>
+        <strong>Pålidelighed.</strong> Det britiske offentlige MOT-synsarkiv
+        (Ministry of Transport-test, den britiske pendant til dansk syn) med{" "}
+        {fmt(fact("Eligible DVSA MOT tests"))} anvendelige syn. Udgivet af Driver and Vehicle
+        Standards Agency under{" "}
+        <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" target="_blank" rel="noopener">Open Government Licence v3.0</a>,
+        som tillader denne brug med kildeangivelse. Det er britiske data, se forbeholdet nedenfor.
+      </li>
+      <li>
+        <strong>Brændstofpriser.</strong> Circle K's offentlige pris-API, hentet på ny hver gang
+        siden bygges. Seneste tal: benzin {fuelBenzin?.price_dkk_per_litre} kr/l, diesel {fuelDiesel?.price_dkk_per_litre} kr/l
+        (hentet {fuelBenzin?.build_date}).
+      </li>
+      <li>
+        <strong>Danske afgifter.</strong> Satser for registreringsafgift og grøn ejerafgift,
+        indtastet i hånden fra{" "}
+        <a href="https://skm.dk/tal-og-metode/satser/satser-og-beloebsgraenser-i-lovgivningen/gaeldende-satser-for-registreringsafgiften" target="_blank" rel="noopener">Skatteministeriets offentliggjorte satstabeller</a>,
+        kontrolleret 31-07-2026. Dansk afgiftslovgivning ændrer sig næsten hvert år. Læser du
+        det her et stykke tid efter den dato, så tag kronebeløbene som omtrent rigtige, ikke
+        aktuelle.
+      </li>
+      <li id="pricing">
+        <strong>Priser.</strong> Se prisafsnittet nedenfor. Det er den del af projektet med
+        flest skøn i.
+      </li>
+    </ul>
+
+    <h2 id="reliability">Pålideligheden kommer fra britiske biler på britiske veje</h2>
+    <p>
+      Der findes ikke et offentligt dansk arkiv på modelniveau svarende til det britiske
+      MOT-arkiv, så pålideligheden kommer fra biler på det britiske marked: britiske veje,
+      britisk vejr, britisk vejsalt. En models pålidelighed <em>i forhold til andre modeller</em>{" "}
+      burde kunne overføres nogenlunde, for den handler mest om, hvordan bilen er bygget. Den
+      præcise fejlrate gør ikke nødvendigvis, for danske vintre og danske veje er ikke de samme
+      som de britiske. Stol mere på rækkefølgen mellem bilerne end på den præcise procent for en
+      enkelt bil.
+    </p>
+    <p>
+      Vi justerer for, hvor langt en bil typisk er kørt, så en model der normalt køres hårdt,
+      ikke sammenlignes urimeligt med en der køres nænsomt. Vi offentliggør kun et
+      pålidelighedstal, hvor der var syn nok til at stole på det. Hvor der ikke var nok, skriver
+      vi det i stedet for at vise et usikkert tal.
+    </p>
+
+    <h2 id="repair-cost">Reparationsestimatet er et groft indeks, ikke et værkstedstilbud</h2>
+    <p>
+      Vi tæller, hvor tit hver del af en bil dumper til MOT-syn, og vægter det med en faktor per
+      mærke for, hvor dyre det mærkes reservedele og timer plejer at være. En sprunget
+      forlygtepære og en defekt bærearm tæller lige meget lige nu, en forenkling, for et
+      undervognsarbejde koster langt mere. Vi laver indekset om til kroner med en fast sats på{" "}
+      {fmt(sources.repairConstant[0].dkk_per_burden_unit_per_year)} kr per point per år. Det er
+      et skøn, ikke en måling, for der findes ikke noget offentligt datasæt over danske
+      reparationspriser per model. Med den sats fylder reparationer en beskeden del af de fleste
+      bilers samlede pris. Er den rigtige sats meget højere, kan rækkefølgen inden for en
+      prisklasse rykke sig, men det overordnede billede burde holde.
+    </p>
+
+    <h2 id="pricing-heading">Sådan estimerer vi en brugtpris uden at scrape danske bilsider</h2>
+    <p>
+      Vi har ikke lov til at hente priser fra Bilbasen eller DBA, og Danmark udgiver ikke en
+      offentlig database over brugtbilpriser. Så vi byggede et estimat i stedet for at droppe
+      priser helt, og holdt derefter estimatet op mod virkeligheden.
+    </p>
+    <ol class="method-steps">
+      <li>
+        <strong>Startet i et marked næsten uden bilafgift.</strong> Polens brugtbilafgift er
+        forsvindende lille, så udbudspriserne der er en rimelig stedfortræder for, hvad en bil
+        er værd, før noget lands afgift lægges oveni. Vi brugte et offentligt datasæt med
+        polske brugtbilannoncer (frigivet til fri afbenyttelse, ingen scraping nødvendig) til at
+        se, hvordan hver models pris ændrer sig med alderen.
+      </li>
+      <li>
+        <strong>Omregnet til dansk pris med Danmarks faktiske afgiftsformel.</strong> Vi
+        indtastede registreringsafgiftsformlen fra Skatteministeriets offentliggjorte
+        satstabeller og anvendte den. Det er her, estimatet er svagest: dansk lovgivning vil
+        strengt taget have en brugt bils afgift skrevet ned efter, hvor meget den har tabt i
+        værdi siden ny, og vi har ikke en pålidelig nypris for hver model at regne det ud fra.
+        Vi tilnærmer os uden om det i stedet for at opfinde en nypris. Se "kendte
+        begrænsninger" nedenfor.
+      </li>
+      <li>
+        <strong>Holdt resultatet op mod det danske marked</strong>: udbudspriser vi slog op i
+        hånden på tværs af en række almindelige modeller og prisniveauer, og korrigerede hele
+        estimatet med den forskel, vi fandt. Biler under 150.000 kr blev korrigeret for sig og
+        biler over for sig, for forskellen var ikke helt lige stor i begge ender.
+      </li>
+    </ol>
+    <p>
+      Det sammenkoblingstrin har allerede fanget en rigtig fejl. Alle BMW-, Mercedes-Benz- og
+      Volvo-modeller på nær de enkleste navne (X1, X3, GLC, V70) faldt stille og roligt tilbage
+      på en gennemsnitspris for hele mærket, fordi Motorregistret staver modellerne "1-Serie",
+      "A-Klasse", "XC60", mens de polske annoncer staver de samme biler "Seria 1", "Klasa A",
+      "XC 60": omvendt ordstilling i de to første, et manglende mellemrum i den tredje. Intet
+      match på modelniveau, men heller ingen fejlmeddelelse, bare et forkert tal der så
+      plausibelt ud. Rettet med en tabel over accepterede alternative stavemåder, og nu
+      prissættes hver BMW-, Mercedes- og Volvo-model ud fra sine egne annoncer.
+    </p>
+    <p>
+      <strong>Kalibreringen har sine grænser.</strong> Vi målte, hvor godt korrektionen passer
+      på de samme priser, vi byggede den ud fra, og det vil altid se bedre ud end resultatet på
+      en bil, vi ikke har tjekket. Tag "kalibreret mod danske annoncer" for pålydende, og
+      "præcis inden for en bestemt procent" som noget, der endnu ikke er bevist.
+    </p>
+    <p>
+      Hver pris på siden har også en sikkerhedsmarkering, lav, middel eller høj, ud fra hvor
+      mange sammenlignelige udenlandske annoncer der lå bag, og om vi måtte låne hele mærkets
+      prismønster, fordi en bestemt model havde færre end 15 annoncer af sine egne at bygge et
+      fair estimat på. Den grænse betyder noget: en samlet Skoda-pris bliver for eksempel lagt i
+      gennemsnit med Octavia, Superb og Kodiaq, så en billig bybil kan ende med at blive
+      prissat som en mellemklassesedan, medmindre den klarer grænsen selv. Du ser
+      sikkerhedsmarkeringen på enhver bilside, hvor den ikke er "høj".
+    </p>
+
+    <h3>Kilometertallet betyder også noget, og det justerer vi for</h3>
+    <p>
+      Et prisestimat er forankret i et "typisk" kilometertal for bilens alder, ikke en bestemt
+      udlæsning på tælleren. Vi målte ud fra danske annoncer, hvor meget prisen flytter sig med
+      kilometrene (omkring {(Number(fact("Mileage adjustment slope")) || 0).toFixed(1)}% for
+      hver ekstra 10.000 km), og bruger det til at justere en gensalgsværdi, når vi sammenligner
+      en bil købt i én alder med den samme bil solgt år senere.
+    </p>
+
+    <h3>Biler vi slet ikke kunne prissætte</h3>
+    <p>
+      Suzuki- og DS-modeller er næsten ikke til stede i de udenlandske annoncedata, vi bruger,
+      så de fleste af dem har ikke noget solidt at bygge et prisestimat på. For nogle få (Swift,
+      Baleno, Ignis, Celerio) fandt vi danske udbudspriser i hånden og brugte samme metode med
+      kurveform fra en tilsvarende bil, som vi bruger til Skoda Citigo (se kendte begrænsninger
+      nedenfor): vi låner værditabskurven fra en model i samme segment og skalerer den til den
+      pris. De er markeret "lav sikkerhed", da de hviler på en eller to annoncer frem for en hel
+      kurve. Resten viser stadig pålidelighed og driftsomkostninger uden pris og uden placering,
+      tydeligt markeret. {fact("Suzuki/DS models still unpriced")} modeller er stadig uden pris.
+    </p>
+
+    <h2>Hvad "mest bil for pengene" betyder</h2>
+    <p>
+      Hver prisklasseside har to lister. "Billigst at eje" rangerer rent på penge. "Mest bil for
+      pengene" blander den rangering med en køreglædescore bygget på effekt per vægt, antal
+      cylindre og egenvægt, en lige 50/50-fordeling, oplyst her frem for gemt væk i koden. Vi
+      har målt, at de to ting trækker i hver sin retning oftere end ikke: biler der er sjovere
+      at køre, koster typisk mere i drift. Ingen af listerne er "mere rigtig" end den anden, de
+      svarer på hver sit spørgsmål.
+    </p>
+
+    <h2>Hvad vi ikke gør</h2>
+    <ul>
+      <li>Vi scraper ikke Bilbasen, DBA eller andre annoncesider. Deres annoncedatabaser er beskyttet af EU's databaseret, og der findes ikke noget offentligt API.</li>
+      <li>Vi henter ikke tabeller fra TÜV Report eller ADAC Pannenstatistik. De er ophavsretligt beskyttet. Vi må omtale deres offentliggjorte hovedkonklusioner i tekst, ikke gengive deres data.</li>
+      <li>Vi rangerer ikke elbiler i denne version. Der er endnu ikke data nok på tværs af aldersgrupper til at gøre det fair.</li>
+    </ul>
+
+    <h2>Kendte begrænsninger, samlet ét sted</h2>
+    <ul class="limits-list">
+      <li>Pålidelighedstal kommer fra biler på det britiske marked, ikke danske. Se <a href="#reliability">ovenfor</a>.</li>
+      <li>Reparationstallet er en skønsbaseret sats per point, ikke målte regninger. Se <a href="#repair-cost">ovenfor</a>.</li>
+      <li>Priskalibreringen er ikke testet mod et sæt annoncer, den ikke er bygget på. Se <a href="#pricing-heading">ovenfor</a>.</li>
+      <li>
+        Skoda Citigo har to annoncer af sine egne i de udenlandske data, vi bruger, og den ene
+        angiver en 1968 ccm dieselmotor, en Citigo der aldrig er bygget. Derfor er dens
+        priskurve lånt fra Volkswagen Up!, den samme bil på den samme platform solgt under et
+        andet mærke (Seat Mii er det tredje mærke og har annoncer nok til at blive prissat
+        direkte). Registreringsafgiften regnes stadig ud fra Citigoens eget målte CO2-tal, det
+        er kun den underliggende markedsværdi, der deles.
+      </li>
+      <li>Kilometerjusteringen bruger én fast sats for alle biler, fra den billigste bybil til den dyreste SUV, selvom kilometertallet nok betyder mere i kroner for en dyr bil.</li>
+      <li>Alle lister kan sorteres om efter et andet årligt kilometertal end udgangspunktet på 15.000 km. Kun brændstofudgiften og hvor meget gensalgsværdien falder, følger med tallet. Grøn ejerafgift er fast per år, uanset hvor langt du kører, og det samme er reparationsestimatet, så et højt valg undervurderer den sande pris en smule.</li>
+      <li>Biler første gang indregistreret 2010 til 2013 (vores ældste aldersgruppe) har ikke et senere gensalgspunkt i vores data, så deres tal er kun driftsomkostninger, ikke et fuldt køb-og-salg-regnskab. De er markeret med en stjerne, hvor de optræder.</li>
+      <li>Brændstoftallene går på tværs af en ændring i 2018 af, hvordan EU måler brændstofforbrug (NEDC til WLTP), hvilket får nogle ældre biler til at se en anelse bedre ud på papiret, end de er. Sammenligninger inden for samme aldersgruppe er stort set upåvirkede.</li>
+      <li>Et modelnavn kan dække mere end én generation inden for en enkelt treårig aldersgruppe, hvis modellen fik et facelift eller en motorændring undervejs. De fleste generationer holder længere end tre år, så det er undtagelsen frem for reglen, men hvor det sker, blander rækken specifikationer fra det, en køber ville opleve som to forskellige biler.</li>
+      <li>
+        Hybridbiler er ikke registreret som deres eget drivmiddel i registret, de står under
+        benzin eller diesel. Vi markerer en bil som hybrid, når mindst 3 ud af 10 af de
+        registrerede biler bag rækken har et variantnavn, der nævner "hybrid" eller "plug-in",
+        en lavere grænse end et rent flertal. Vi havde brug for den lavere: Hyundai Ioniq, der
+        næsten udelukkende er solgt som hybrid, plug-in eller el i denne generation, rammer
+        stadig kun 44 til 49 procent af variantnavnene, fordi ikke alle hybridvarianter skriver
+        det. Det misser stadig nogle og markerer af og til en model, der kun delvist er hybrid.
+        Deres officielle forbrugstal er desuden typisk optimistiske (testen tillader hjælp fra
+        batteriet), så en hybrids faktiske driftspris er nok lidt højere end vist. Brug filteret
+        "Skjul hybridbiler" på en liste for at sætte dem til side.
+      </li>
+      <li>
+        Filteret "Skjul diesel" virker på samme måde og markerer en bil, når over halvdelen af
+        de registrerede køretøjer bag rækken er diesel. Nogle få rækker blander begge
+        drivmidler under én linje, så filteret er en stærk indikator, ikke en perfekt opdeling.
+      </li>
+    </ul>
+
+    <hr class="hairline" />
+    <p class="closing">
+      Ser noget på denne side forkert ud, eller mangler der noget? Hele databehandlingen og
+      alle referencefiler bag tallene ligger i projektets kodelager. Intet her genereres på
+      forespørgsel, hvert tal er regnet ud på forhånd fra de kilder, der er nævnt ovenfor.
+    </p>
+  </div>
+</Layout>
+
+<style>
+  .lede { max-width: 68ch; color: var(--ink-soft); font-size: 1.08rem; }
+  h2 { margin-top: 2.2em; }
+  h3 { margin-top: 1.6em; }
+  .source-list, .limits-list, ul { max-width: 74ch; }
+  .source-list li, .limits-list li { margin-bottom: 0.7em; }
+  .method-steps { max-width: 74ch; padding-left: 1.2em; }
+  .method-steps li { margin-bottom: 0.8em; }
+  p, li { color: var(--ink); }
+  .source-list li, .limits-list li, .method-steps li { color: var(--ink-soft); }
+  .source-list strong, .limits-list strong, .method-steps strong { color: var(--ink); }
+  .closing { color: var(--ink-faint); font-size: 0.9rem; padding-bottom: 60px; max-width: 68ch; }
+</style>

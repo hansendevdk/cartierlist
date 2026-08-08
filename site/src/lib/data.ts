@@ -3,6 +3,7 @@ import unpricedJson from "../data/unpriced.json";
 import methodologyJson from "../data/methodology.json";
 import sourcesJson from "../data/sources.json";
 import coverageJson from "../data/coverage.json";
+import type { Lang } from "../i18n";
 
 export interface RankedCar {
   dmr_make: string;
@@ -77,20 +78,58 @@ export const RUNNING_COST_ELIGIBLE = rankings
   .filter((r) => !r.excluded_from_running_cost_rank)
   .sort((a, b) => (a.running_cost_rank_overall ?? 0) - (b.running_cost_rank_overall ?? 0));
 
-export const BRACKETS = [
-  { id: "1", label: "Up to 50,000 DKK" },
-  { id: "2", label: "50,000 to 90,000 DKK" },
-  { id: "3", label: "90,000 to 150,000 DKK" },
-  { id: "4", label: "150,000 to 250,000 DKK" },
-  { id: "5", label: "Above 250,000 DKK" },
-];
+// Price brackets and age bands are printed straight into prose on both
+// locales, so they're locale-keyed functions rather than a single English
+// label. BRACKET_IDS carries the stable ordering/ids; bracketLabel supplies
+// the text per language. Rendering car.price_bracket_id through this table
+// (rather than printing the pipeline's own car.price_bracket_label field)
+// also fixes a pre-existing inconsistency: the JSON stores "50,000-90,000
+// DKK" with a hyphen while this file used to say "50,000 to 90,000 DKK", so
+// the same bracket read two different ways depending on the page.
+export const BRACKET_IDS = ["1", "2", "3", "4", "5"] as const;
 
-export const BAND_LABEL: Record<string, string> = {
-  "1": "2020 to 2022",
-  "2": "2017 to 2019",
-  "3": "2014 to 2016",
-  "4": "2010 to 2013",
+const BRACKET_LABELS: Record<Lang, Record<string, string>> = {
+  en: {
+    "1": "Up to 50,000 DKK",
+    "2": "50,000 to 90,000 DKK",
+    "3": "90,000 to 150,000 DKK",
+    "4": "150,000 to 250,000 DKK",
+    "5": "Above 250,000 DKK",
+  },
+  da: {
+    "1": "Op til 50.000 kr",
+    "2": "50.000 til 90.000 kr",
+    "3": "90.000 til 150.000 kr",
+    "4": "150.000 til 250.000 kr",
+    "5": "Over 250.000 kr",
+  },
 };
+
+export function bracketLabel(id: string, lang: Lang): string {
+  return BRACKET_LABELS[lang][id];
+}
+
+export function bracketsForLang(lang: Lang): { id: string; label: string }[] {
+  return BRACKET_IDS.map((id) => ({ id, label: bracketLabel(id, lang) }));
+}
+
+const BAND_LABELS: Record<Lang, Record<string, string>> = {
+  en: { "1": "2020 to 2022", "2": "2017 to 2019", "3": "2014 to 2016", "4": "2010 to 2013" },
+  da: { "1": "2020 til 2022", "2": "2017 til 2019", "3": "2014 til 2016", "4": "2010 til 2013" },
+};
+
+export function bandLabel(band: string, lang: Lang): string {
+  return BAND_LABELS[lang][band];
+}
+
+const CONFIDENCE_LABELS: Record<Lang, Record<"low" | "medium" | "high", string>> = {
+  en: { low: "low", medium: "medium", high: "high" },
+  da: { low: "lav", medium: "middel", high: "høj" },
+};
+
+export function confidenceLabel(level: "low" | "medium" | "high", lang: Lang): string {
+  return CONFIDENCE_LABELS[lang][level];
+}
 
 export function kr(value: number | null | undefined, opts: { decimals?: number } = {}): string {
   if (value === null || value === undefined) return "-";
@@ -98,9 +137,9 @@ export function kr(value: number | null | undefined, opts: { decimals?: number }
   return n.toLocaleString("da-DK").replace(/,/g, ".") + " kr";
 }
 
-export function krPerYear(value: number | null | undefined): string {
+export function krPerYear(value: number | null | undefined, lang: Lang = "en"): string {
   if (value === null || value === undefined) return "-";
-  return kr(value) + "/year";
+  return kr(value) + (lang === "da" ? "/år" : "/year");
 }
 
 export function pct(value: number | null | undefined): string {
@@ -120,4 +159,60 @@ export function carsInBracket(bracketId: string): RankedCar[] {
 export function bandsInBracket(bracketId: string): string[] {
   const bands = new Set(carsInBracket(bracketId).map((r) => r.age_band));
   return ["1", "2", "3", "4"].filter((b) => bands.has(b));
+}
+
+// Shared frontmatter logic, factored out so the English and Danish copies of
+// each page duplicate only markup, not the sorting/filtering that decides
+// what that markup shows. A bug fixed here fixes both locales at once.
+
+export interface BracketStat {
+  id: string;
+  label: string;
+  count: number;
+  median: number | null;
+}
+
+export function getBracketStats(lang: Lang): { bracketStats: BracketStat[]; cheapestBracket: BracketStat | undefined } {
+  const bracketStats = bracketsForLang(lang).map((b) => {
+    const cars = carsInBracket(b.id);
+    const sTier = cars.filter((c) => c.cost_tier === "S" || c.cost_tier === "A");
+    const median = sTier.length
+      ? sTier.map((c) => c.tco_per_year).sort((a, b2) => a - b2)[Math.floor(sTier.length / 2)]
+      : null;
+    return { ...b, count: cars.length, median };
+  });
+  const cheapestBracket = bracketStats
+    .filter((b) => b.median !== null)
+    .sort((a, b) => (a.median! - b.median!))[0];
+  return { bracketStats, cheapestBracket };
+}
+
+export function getBracketLists(bracketId: string) {
+  const cars = carsInBracket(bracketId);
+  const byCost = [...cars].sort((a, b) => (a.cost_rank_in_group ?? 999) - (b.cost_rank_in_group ?? 999));
+  const byValue = [...cars]
+    .filter((c) => c.value_for_money_rank_in_group !== null)
+    .sort((a, b) => (a.value_for_money_rank_in_group ?? 999) - (b.value_for_money_rank_in_group ?? 999));
+  const bandsPresent = ["1", "2", "3", "4"].filter((b) => cars.some((c) => c.age_band === b));
+  const hasRunningCostOnly = cars.some((c) => !c.depreciation_available);
+  return { cars, byCost, byValue, bandsPresent, hasRunningCostOnly };
+}
+
+export function getSiblingAges(car: { modelSlug: string; slug: string }, priced: boolean) {
+  return priced
+    ? rankings.filter((r) => r.modelSlug === car.modelSlug && r.slug !== car.slug)
+    : rankings.filter((r) => r.modelSlug === car.modelSlug);
+}
+
+export function reliabilityNote(rate: number | null, lang: Lang): string {
+  if (lang === "da") {
+    if (rate === null) return "for få MOT-syn til at måle pålideligt";
+    if (rate >= 0.85) return "klart over gennemsnittet for sin alder";
+    if (rate >= 0.75) return "tæt på gennemsnittet for sin alder";
+    return "under gennemsnittet for sin alder";
+  }
+  if (rate === null) return "not enough MOT tests to measure reliably";
+  if (rate >= 0.85) return "clearly above average for its age";
+  if (rate >= 0.75) return "close to average for its age";
+  return "below average for its age";
 }

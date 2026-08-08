@@ -1,0 +1,73 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CarRow from "../../components/CarRow.astro";
+import FuelFilterToggle from "../../components/FuelFilterToggle.astro";
+import MileageControl from "../../components/MileageControl.astro";
+import RunningCostChart from "../../components/RunningCostChart.astro";
+import { RUNNING_COST_ELIGIBLE, kr } from "../../lib/data";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const lang = "da" as const;
+const cars = RUNNING_COST_ELIGIBLE;
+const cheapCarBeatsExpensive = cars.slice(0, 30).some((c) => c.entry_price_dkk > 150000);
+---
+
+<Layout
+  title="Billigst i drift, købsprisen ignoreret"
+  description="Biler rangeret alene på brændstof, afgift og reparationer, hvor købsprisen er holdt helt udenfor."
+  lang={lang}
+  path="/running-costs/"
+>
+  <div class="container-wide">
+    <p class="eyebrow"><a href={getRelativeLocaleUrl(lang, "/")}>Alle budgetter</a> / Kun driftsomkostninger</p>
+    <h1>Billigst i drift, uanset hvad den koster at købe</h1>
+    <p class="lede">
+      Denne liste ser helt bort fra prisen. Det er kun brændstof, grøn ejerafgift og
+      reparationer, per år. Nogle biler der er billige at købe, er dyre at beholde, og nogle
+      dyre biler betaler noget af sig selv tilbage hvert år ved pumpen. Det er her, du kan få
+      øje på det.
+    </p>
+
+    <RunningCostChart cars={cars} lang={lang} />
+
+    {cheapCarBeatsExpensive && (
+      <p class="note">
+        Flere biler her, der koster et godt stykke over 150.000 kr at købe, ligger stadig i
+        toppen: lave driftsomkostninger kræver ikke en billig bil, men en økonomisk en.
+        Overvejer du at betale mere op front for sådan en bil, så sammenlign dens tal for
+        "samlet pris" (som medregner prisen) på dens egen side først, for den ekstra
+        købspris skal stadig tjenes hjem.
+      </p>
+    )}
+
+    <p class="note hybrid-note">
+      En del af bilerne helt i toppen er plug-in hybridbiler. Deres officielle forbrugstal er
+      optimistiske (testen tillader hjælp fra batteriet), så deres faktiske driftspris er nok
+      lidt højere end vist her. Se <a href={getRelativeLocaleUrl(lang, "/methodology")}>metodesiden</a>.
+    </p>
+
+    <FuelFilterToggle lang={lang} />
+    <MileageControl lang={lang} />
+
+    <div class="card list-card" data-list-mode="running">
+      {cars.map((c, i) => <CarRow car={c} rank={i + 1} mode="running" lang={lang} />)}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .eyebrow a { color: var(--ink-faint); text-decoration: none; }
+  .eyebrow a:hover { color: var(--accent); }
+  .lede { max-width: 68ch; color: var(--ink-soft); font-size: 1.05rem; }
+  .note {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    max-width: 68ch;
+    margin-bottom: 12px;
+  }
+  .hybrid-note { background: var(--line); }
+  .list-card { padding: 4px 0; margin-top: 24px; margin-bottom: 72px; }
+</style>

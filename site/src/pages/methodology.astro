@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { methodology, sources, coverage } from "../lib/data";
 
+const lang = "en" as const;
 const fact = (label: string) => methodology.find((m) => m.fact.startsWith(label))?.value ?? "";
 function fmt(n: string | number) {
   return Number(n).toLocaleString("da-DK").replace(/,/g, ".");
@@ -13,6 +14,8 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
 <Layout
   title="Methodology"
   description="Where the numbers on this site come from, what we assume, and where we might be wrong."
+  lang={lang}
+  path="/methodology"
 >
   <div class="container">
     <p class="eyebrow">The fine print, in plain language</p>

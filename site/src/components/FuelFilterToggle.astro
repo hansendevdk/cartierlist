@@ -2,22 +2,31 @@
 // Client-side show/hide filter over CarRow elements already rendered in the
 // page, not a new data fetch or a rebuild. Checked state is remembered in
 // localStorage so a reader who says "hide diesel" doesn't have to say it
-// again on the next page.
+// again on the next page. localStorage keys are shared across locales on
+// purpose: switching language shouldn't reset the filter.
+import { UI, type Lang } from "../i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = "en" } = Astro.props;
+const s = UI[lang].fuelFilter;
+const methodologyHref = getRelativeLocaleUrl(lang, "/methodology") + "#pricing";
 ---
 
 <div class="fuel-filter">
-  <span class="fuel-filter-label">Filter this list</span>
+  <span class="fuel-filter-label">{s.filterThisList}</span>
   <label>
     <input type="checkbox" id="hide-hybrid-toggle" />
-    Hide hybrids
+    {s.hideHybrids}
   </label>
   <label>
     <input type="checkbox" id="hide-diesel-toggle" />
-    Hide diesel
+    {s.hideDiesel}
   </label>
   <span class="fuel-filter-note">
-    Hybrids are found by trim name (e.g. "Plug-in Hybrid"), not a clean data field, so this can
-    miss a few. <a href="/methodology#pricing">Why, on the methodology page.</a>
+    {s.note} <a href={methodologyHref}>{s.noteLink}</a>
   </span>
 </div>
 

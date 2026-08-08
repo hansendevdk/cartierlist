@@ -1,21 +1,36 @@
 ---
 import "../styles/global.css";
+import { getRelativeLocaleUrl, getAbsoluteLocaleUrl } from "astro:i18n";
+import { UI, type Lang } from "../i18n";
+import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 
 interface Props {
   title: string;
   description: string;
+  lang?: Lang;
+  path?: string;
 }
-const { title, description } = Astro.props;
+const { title, description, lang = "en", path = "/" } = Astro.props;
+const s = UI[lang];
+const homeHref = getRelativeLocaleUrl(lang, "/");
+const bracketsHref = getRelativeLocaleUrl(lang, "/") + "#brackets";
+const runningCostsHref = getRelativeLocaleUrl(lang, "/running-costs/");
+const methodologyHref = getRelativeLocaleUrl(lang, "/methodology");
+const enUrl = getAbsoluteLocaleUrl("en", path);
+const daUrl = getAbsoluteLocaleUrl("da", path);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} · Bilregnskab</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="da" href={daUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,13 +41,14 @@ const { title, description } = Astro.props;
   <body>
     <header class="site-header">
       <div class="container-wide site-header-inner">
-        <a href="/" class="wordmark">
+        <a href={homeHref} class="wordmark">
           <span class="wordmark-mark">kr</span>Bilregnskab
         </a>
         <nav aria-label="Main">
-          <a href="/#brackets">Price brackets</a>
-          <a href="/running-costs/">Cheapest to run</a>
-          <a href="/methodology">Methodology</a>
+          <a href={bracketsHref}>{s.nav.brackets}</a>
+          <a href={runningCostsHref}>{s.nav.runningCosts}</a>
+          <a href={methodologyHref}>{s.nav.methodology}</a>
+          <LanguageSwitcher lang={lang} path={path} />
         </nav>
       </div>
     </header>
@@ -42,9 +58,8 @@ const { title, description } = Astro.props;
     <footer class="site-footer">
       <div class="container-wide">
         <p>
-          Built from public Danish vehicle registration data and UK DVSA MOT test
-          results. Not financial advice. See the <a href="/methodology">methodology page</a>{" "}
-          for sources, licences and known limitations.
+          {s.footerText} <a href={methodologyHref}>{s.footerLinkText}</a>{" "}
+          {s.footerTextEnd}
         </p>
       </div>
     </footer>
@@ -86,6 +101,7 @@ const { title, description } = Astro.props;
   }
   nav {
     display: flex;
+    align-items: center;
     gap: 24px;
   }
   nav a {
@@ -96,6 +112,18 @@ const { title, description } = Astro.props;
     text-decoration: none;
   }
   nav a:hover { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .site-header-inner {
+      flex-wrap: wrap;
+      row-gap: 10px;
+    }
+    nav {
+      flex-basis: 100%;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+    }
+  }
 
   .site-footer {
     border-top: 1px solid var(--line);

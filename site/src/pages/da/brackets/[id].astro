@@ -1,12 +1,12 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import CarRow from "../../components/CarRow.astro";
-import FuelFilterToggle from "../../components/FuelFilterToggle.astro";
-import MileageControl from "../../components/MileageControl.astro";
-import { BRACKET_IDS, bracketLabel, bandLabel, getBracketLists } from "../../lib/data";
+import Layout from "../../../layouts/Layout.astro";
+import CarRow from "../../../components/CarRow.astro";
+import FuelFilterToggle from "../../../components/FuelFilterToggle.astro";
+import MileageControl from "../../../components/MileageControl.astro";
+import { BRACKET_IDS, bracketLabel, bandLabel, getBracketLists } from "../../../lib/data";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
-const lang = "en" as const;
+const lang = "da" as const;
 
 export function getStaticPaths() {
   return BRACKET_IDS.map((id) => ({ params: { id }, props: { bracketId: id } }));
@@ -18,25 +18,27 @@ const { cars, byCost, byValue, bandsPresent, hasRunningCostOnly } = getBracketLi
 ---
 
 <Layout
-  title={`Best value cars, ${label}`}
-  description={`Used cars in Denmark for around ${label}, ranked by total cost of ownership.`}
+  title={`Bedste biler, ${label}`}
+  description={`Brugte biler i Danmark til omkring ${label}, rangeret efter samlet ejeromkostning.`}
   lang={lang}
   path={`/brackets/${bracketId}/`}
 >
   <div class="container-wide">
-    <p class="eyebrow"><a href={getRelativeLocaleUrl(lang, "/")}>All budgets</a> / Price bracket</p>
+    <p class="eyebrow"><a href={getRelativeLocaleUrl(lang, "/")}>Alle budgetter</a> / Prisklasse</p>
     <h1>{label}</h1>
     <p class="lede">
-      {cars.length} cars in our data sell for about this much, across ages{" "}
+      {cars.length} biler i vores data ligger omkring det her prisniveau, på tværs af
+      årgangene{" "}
       {bandsPresent.map((b) => bandLabel(b, lang)).join(", ")}.
-      Ranked by total cost to own, not just the price tag.
+      Rangeret efter hvad de samlet koster at eje, ikke bare prisen.
     </p>
 
     {hasRunningCostOnly && (
       <p class="note">
-        The <span class="asterisk">*</span> marks cars old enough that we have no later resale
-        price to compare against, so their number is running costs per year only. See the{" "}
-        <a href={getRelativeLocaleUrl(lang, "/methodology")}>methodology page</a> for the full picture.
+        <span class="asterisk">*</span> markerer biler, der er gamle nok til, at vi ikke har en
+        senere gensalgspris at holde dem op mod, så deres tal er kun driftsomkostninger per år.
+        Se{" "}
+        <a href={getRelativeLocaleUrl(lang, "/methodology")}>metodesiden</a> for det fulde billede.
       </p>
     )}
 
@@ -45,18 +47,18 @@ const { cars, byCost, byValue, bandsPresent, hasRunningCostOnly } = getBracketLi
 
     <div class="lists">
       <div class="list-block">
-        <h2>Cheapest to own</h2>
-        <p class="list-sub">Ranked purely on money: purchase minus resale, plus fuel, tax and repairs, per year.</p>
+        <h2>Billigst at eje</h2>
+        <p class="list-sub">Rangeret rent på penge: købspris minus gensalg, plus brændstof, afgift og reparationer, per år.</p>
         <div class="card list-card" data-list-mode="cost">
           {byCost.map((c, i) => <CarRow car={c} rank={i + 1} mode="cost" lang={lang} />)}
         </div>
       </div>
 
       <div class="list-block">
-        <h2>Most car for the money</h2>
+        <h2>Mest bil for pengene</h2>
         <p class="list-sub">
-          Half cost, half how engaging the car is to drive (power-to-weight, cylinders, kerb
-          weight), an equal, disclosed blend, not hidden in the score.
+          Halvt pris, halvt hvor sjov bilen er at køre (effekt per vægt, cylindre, egenvægt),
+          en lige fordeling der er oplyst, ikke gemt i scoren.
         </p>
         <div class="card list-card" data-list-mode="value">
           {byValue.map((c, i) => <CarRow car={c} rank={i + 1} mode="value" lang={lang} />)}

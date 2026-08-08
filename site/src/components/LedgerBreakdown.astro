@@ -5,41 +5,43 @@
 // share of total cost, not decorative.
 import { kr, krPerYear } from "../lib/data";
 import type { RankedCar } from "../lib/data";
+import { UI, type Lang } from "../i18n";
 
 interface Props {
   car: RankedCar;
   compact?: boolean;
+  lang?: Lang;
 }
-const { car, compact = false } = Astro.props;
+const { car, compact = false, lang = "en" } = Astro.props;
+const s = UI[lang].ledger;
 
 const hasDep = car.depreciation_available;
 const segments = hasDep
   ? [
-      { label: "Value lost (depreciation)", value: car.depreciation_dkk ?? 0, color: "var(--cost)" },
-      { label: "Fuel", value: car.fuel_total_dkk ?? 0, color: "var(--cost-2)" },
-      { label: "Ownership tax", value: car.ejerafgift_total_dkk ?? 0, color: "var(--cost-3)" },
-      { label: "Repairs", value: car.repair_total_dkk ?? 0, color: "var(--cost-4)" },
+      { label: s.valueLostDep, value: car.depreciation_dkk ?? 0, color: "var(--cost)" },
+      { label: s.fuel, value: car.fuel_total_dkk ?? 0, color: "var(--cost-2)" },
+      { label: s.ownershipTax, value: car.ejerafgift_total_dkk ?? 0, color: "var(--cost-3)" },
+      { label: s.repairs, value: car.repair_total_dkk ?? 0, color: "var(--cost-4)" },
     ]
   : [
-      { label: "Fuel", value: car.fuel_total_dkk ?? 0, color: "var(--cost-2)" },
-      { label: "Ownership tax", value: car.ejerafgift_total_dkk ?? 0, color: "var(--cost-3)" },
-      { label: "Repairs", value: car.repair_total_dkk ?? 0, color: "var(--cost-4)" },
+      { label: s.fuel, value: car.fuel_total_dkk ?? 0, color: "var(--cost-2)" },
+      { label: s.ownershipTax, value: car.ejerafgift_total_dkk ?? 0, color: "var(--cost-3)" },
+      { label: s.repairs, value: car.repair_total_dkk ?? 0, color: "var(--cost-4)" },
     ];
-const total = segments.reduce((s, x) => s + x.value, 0);
+const total = segments.reduce((sum, x) => sum + x.value, 0);
 ---
 
 <div class:list={["ledger", { compact }]}>
   {!hasDep && (
     <p class="ledger-note">
-      This car is old enough that we have no later resale price to compare against, so this
-      is running costs only: fuel, tax, repairs.
+      {s.note}
     </p>
   )}
 
-  <div class="ledger-bar" role="img" aria-label={`Cost breakdown: ${segments.map(s => `${s.label} ${kr(s.value)}`).join(", ")}`}>
-    {segments.map((s) => (
-      s.value > 0 && (
-        <div class="ledger-bar-segment" style={`flex-grow: ${Math.max(s.value, 1)}; background: ${s.color};`} />
+  <div class="ledger-bar" role="img" aria-label={s.breakdownAria(segments.map(seg => `${seg.label} ${kr(seg.value)}`).join(", "))}>
+    {segments.map((seg) => (
+      seg.value > 0 && (
+        <div class="ledger-bar-segment" style={`flex-grow: ${Math.max(seg.value, 1)}; background: ${seg.color};`} />
       )
     ))}
   </div>
@@ -48,38 +50,38 @@ const total = segments.reduce((s, x) => s + x.value, 0);
     {hasDep && (
       <>
         <div class="ledger-row">
-          <dt>Buy at {car.band_years}</dt>
+          <dt>{s.buyAt(car.band_years)}</dt>
           <dd class="num">{kr(car.entry_price_dkk)}</dd>
         </div>
         <div class="ledger-row credit">
-          <dt>Sell {car.hold_years} years later, you get back</dt>
+          <dt>{s.sellLater(car.hold_years ?? "")}</dt>
           <dd class="num">+{kr(car.resale_price_dkk)}</dd>
         </div>
         <div class="ledger-row subtotal">
-          <dt>Value lost</dt>
+          <dt>{s.valueLost}</dt>
           <dd class="num">{kr(car.depreciation_dkk)}</dd>
         </div>
       </>
     )}
     <div class="ledger-row">
-      <dt><span class="swatch" style="background: var(--cost-2)"></span>Fuel{hasDep ? `, ${car.hold_years} years` : "/year"}</dt>
+      <dt><span class="swatch" style="background: var(--cost-2)"></span>{s.fuel}{hasDep ? s.years(car.hold_years ?? "") : s.perYearSuffix}</dt>
       <dd class="num">{kr(car.fuel_total_dkk)}</dd>
     </div>
     <div class="ledger-row">
-      <dt><span class="swatch" style="background: var(--cost-3)"></span>Ownership tax{hasDep ? `, ${car.hold_years} years` : "/year"}</dt>
+      <dt><span class="swatch" style="background: var(--cost-3)"></span>{s.ownershipTax}{hasDep ? s.years(car.hold_years ?? "") : s.perYearSuffix}</dt>
       <dd class="num">{kr(car.ejerafgift_total_dkk)}</dd>
     </div>
     <div class="ledger-row">
-      <dt><span class="swatch" style="background: var(--cost-4)"></span>Repairs{hasDep ? `, ${car.hold_years} years` : "/year"}</dt>
+      <dt><span class="swatch" style="background: var(--cost-4)"></span>{s.repairs}{hasDep ? s.years(car.hold_years ?? "") : s.perYearSuffix}</dt>
       <dd class="num">{kr(car.repair_total_dkk)}</dd>
     </div>
     <div class="ledger-row total">
-      <dt>{hasDep ? `Total, ${car.hold_years} years` : "Total, per year"}</dt>
+      <dt>{hasDep ? s.totalYears(car.hold_years ?? "") : s.totalPerYear}</dt>
       <dd class="num">{kr(hasDep ? car.tco_total_dkk : total)}</dd>
     </div>
     <div class="ledger-row per-year">
-      <dt>Per year</dt>
-      <dd class="num">{krPerYear(car.tco_per_year)}</dd>
+      <dt>{s.perYear}</dt>
+      <dd class="num">{krPerYear(car.tco_per_year, lang)}</dd>
     </div>
   </dl>
 </div>

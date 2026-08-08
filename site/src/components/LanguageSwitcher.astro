@@ -1,0 +1,36 @@
+---
+// Switches to the equivalent page in the other language, not the homepage,
+// so a reader on a car page stays on that same car page after switching.
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { UI, type Lang } from "../i18n";
+
+interface Props {
+  lang: Lang;
+  path: string;
+}
+const { lang, path } = Astro.props;
+const otherLang: Lang = lang === "en" ? "da" : "en";
+const s = UI[lang].switcher;
+const href = getRelativeLocaleUrl(otherLang, path);
+---
+
+<a class="lang-switch" href={href} aria-label={`${s.label}: ${otherLang === "da" ? s.da : s.en}`}>
+  {otherLang === "da" ? s.da : s.en}
+</a>
+
+<style>
+  .lang-switch {
+    font-family: var(--font-data);
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    padding: 4px 9px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  .lang-switch:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+</style>

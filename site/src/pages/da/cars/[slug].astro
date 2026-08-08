@@ -1,12 +1,12 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import LedgerBreakdown from "../../components/LedgerBreakdown.astro";
-import TierBadge from "../../components/TierBadge.astro";
-import { rankings, unpriced, bracketLabel, getSiblingAges, reliabilityNote, kr, pct, km } from "../../lib/data";
-import type { RankedCar } from "../../lib/data";
+import Layout from "../../../layouts/Layout.astro";
+import LedgerBreakdown from "../../../components/LedgerBreakdown.astro";
+import TierBadge from "../../../components/TierBadge.astro";
+import { rankings, unpriced, bracketLabel, getSiblingAges, reliabilityNote, kr, pct, km } from "../../../lib/data";
+import type { RankedCar } from "../../../lib/data";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
-const lang = "en" as const;
+const lang = "da" as const;
 
 export function getStaticPaths() {
   const priced = rankings.map((car) => ({ params: { slug: car.slug }, props: { car, priced: true } }));
@@ -21,35 +21,35 @@ const siblingAges = getSiblingAges(car, priced);
 
 <Layout
   title={`${car.makeDisplay} ${car.modelDisplay}, ${car.band_years}`}
-  description={`Cost of ownership, reliability and repair data for a ${car.makeDisplay} ${car.modelDisplay} first registered ${car.band_years}.`}
+  description={`Ejeromkostninger, pålidelighed og reparationsdata for en ${car.makeDisplay} ${car.modelDisplay} første gang indregistreret ${car.band_years}.`}
   lang={lang}
   path={`/cars/${car.slug}/`}
 >
   <div class="container">
     <p class="eyebrow">
-      {priced ? <a href={getRelativeLocaleUrl(lang, `/brackets/${car.price_bracket_id}/`)}>{bracketLabel(car.price_bracket_id, lang)}</a> : "No price estimate"}
+      {priced ? <a href={getRelativeLocaleUrl(lang, `/brackets/${car.price_bracket_id}/`)}>{bracketLabel(car.price_bracket_id, lang)}</a> : "Intet prisestimat"}
       {" / "}{car.band_years}
     </p>
     <div class="title-row">
       <h1>{car.makeDisplay} {car.modelDisplay}</h1>
       {priced && (
         <div class="badges">
-          <div class="badge-item"><TierBadge tier={car.cost_tier} /><span>cost</span></div>
-          <div class="badge-item"><TierBadge tier={car.value_for_money_tier} /><span>value</span></div>
+          <div class="badge-item"><TierBadge tier={car.cost_tier} /><span>pris</span></div>
+          <div class="badge-item"><TierBadge tier={car.value_for_money_tier} /><span>værdi</span></div>
         </div>
       )}
     </div>
     {(car.is_hybrid || car.is_diesel_dominant) && (
       <p class="fuel-tags">
         {car.is_hybrid && (
-          <span class="fuel-tag" title="Trim name mentions hybrid or plug-in.">hybrid</span>
+          <span class="fuel-tag" title="Variantnavnet nævner hybrid eller plug-in.">hybrid</span>
         )}
         {car.is_diesel_dominant && (
-          <span class="fuel-tag" title="Over half the registered cars behind this row are diesel.">diesel</span>
+          <span class="fuel-tag" title="Over halvdelen af de registrerede biler bag denne række er diesel.">diesel</span>
         )}
       </p>
     )}
-    <p class="sub">First registered {car.band_years}, about {car.approx_age_years} years old today. Based on {car.dk_vehicle_count?.toLocaleString("da-DK")} of these registered in Denmark.</p>
+    <p class="sub">Første gang indregistreret {car.band_years}, omkring {car.approx_age_years} år gammel i dag. Baseret på {car.dk_vehicle_count?.toLocaleString("da-DK")} af dem indregistreret i Danmark.</p>
 
     {priced ? (
       <div class="card ledger-card">
@@ -57,73 +57,73 @@ const siblingAges = getSiblingAges(car, priced);
       </div>
     ) : (
       <div class="card no-price-card">
-        <p class="eyebrow">Why there's no price here</p>
+        <p class="eyebrow">Hvorfor der ikke er en pris her</p>
         <p>
-          {car.makeDisplay} isn't sold in large enough numbers in the used-car marketplace we use
-          to estimate prices (Poland's used market, used as a tax-free stand-in for a car's real
-          value; see the <a href={getRelativeLocaleUrl(lang, "/methodology") + "#pricing"}>methodology page</a>). Rather than guess,
-          we're showing what we do know: reliability and running costs, with no price or ranking.
+          {car.makeDisplay} sælges ikke i store nok antal på det brugtbilmarked, vi bruger til
+          at estimere priser (det polske brugtmarked, brugt som afgiftsfri stedfortræder for en
+          bils værdi, se <a href={getRelativeLocaleUrl(lang, "/methodology") + "#pricing"}>metodesiden</a>). I stedet for at gætte
+          viser vi det, vi ved: pålidelighed og driftsomkostninger, uden pris og uden placering.
         </p>
       </div>
     )}
 
     <div class="stat-grid">
       <div class="stat card">
-        <p class="eyebrow">Reliability</p>
+        <p class="eyebrow">Pålidelighed</p>
         {car.standardized_pass_rate !== null ? (
           <>
             <p class="stat-value">{pct(car.standardized_pass_rate)}</p>
-            <p class="stat-detail">passed its UK MOT test first time, {reliabilityNote(car.standardized_pass_rate, lang)}. Adjusted for how far these cars are typically driven.</p>
+            <p class="stat-detail">bestod sit britiske MOT-syn i første forsøg, {reliabilityNote(car.standardized_pass_rate, lang)}. Justeret for hvor langt disse biler typisk køres.</p>
           </>
         ) : (
-          <p class="stat-detail">Not enough MOT tests on record to measure this reliably.</p>
+          <p class="stat-detail">For få registrerede MOT-syn til at måle det her pålideligt.</p>
         )}
       </div>
       <div class="stat card">
-        <p class="eyebrow">Repair burden</p>
+        <p class="eyebrow">Reparationsbelastning</p>
         {car.repair_burden_index !== null ? (
           <>
             <p class="stat-value">{Number(car.repair_burden_index).toFixed(2)}</p>
-            <p class="stat-detail">an index of how often things break and how costly {car.makeDisplay} parts tend to be. Around 0.7 to 1.0 is typical; higher means more.</p>
+            <p class="stat-detail">et indeks over hvor tit ting går i stykker, og hvor dyre {car.makeDisplay}-reservedele plejer at være. Omkring 0,7 til 1,0 er typisk, højere betyder mere.</p>
           </>
         ) : (
-          <p class="stat-detail">Not enough data to estimate this.</p>
+          <p class="stat-detail">For lidt data til at estimere det her.</p>
         )}
       </div>
       <div class="stat card">
-        <p class="eyebrow">Fuel cost</p>
-        <p class="stat-value">{kr(car.median_annual_fuel_cost_dkk)}<span class="stat-unit">/year</span></p>
-        <p class="stat-detail">at 15,000 km a year and current Danish pump prices.</p>
+        <p class="eyebrow">Brændstofudgift</p>
+        <p class="stat-value">{kr(car.median_annual_fuel_cost_dkk)}<span class="stat-unit">/år</span></p>
+        <p class="stat-detail">ved 15.000 km om året og aktuelle danske pumpepriser.</p>
       </div>
       <div class="stat card">
-        <p class="eyebrow">Ownership tax</p>
-        <p class="stat-value">{kr(car.median_annual_ejerafgift_dkk)}<span class="stat-unit">/year</span></p>
-        <p class="stat-detail">grøn ejerafgift, from this car's fuel consumption or CO2 figure.</p>
+        <p class="eyebrow">Grøn ejerafgift</p>
+        <p class="stat-value">{kr(car.median_annual_ejerafgift_dkk)}<span class="stat-unit">/år</span></p>
+        <p class="stat-detail">grøn ejerafgift, ud fra bilens forbrugs- eller CO2-tal.</p>
       </div>
     </div>
 
     {priced && (
       <div class="confidence card">
-        <p class="eyebrow">How sure are we about the price?</p>
+        <p class="eyebrow">Hvor sikre er vi på prisen?</p>
         <p>
-          <strong class="cap">{car.price_confidence}</strong> confidence.
-          Based on {car.price_n_listings} comparable foreign listings
-          {car.price_pooled_at_brand ? ", pooled across the whole brand rather than this specific model (fewer listings meant we had to borrow the brand's overall price pattern)" : ""}.
-          The final number is adjusted with a correction factor of {Number(car.price_calibration_factor).toFixed(2)}x
-          found by checking a sample of Danish asking prices against our raw estimate.
-          Read more on the <a href={getRelativeLocaleUrl(lang, "/methodology") + "#pricing"}>methodology page</a>.
+          <strong class="cap">{car.price_confidence === "low" ? "lav" : car.price_confidence === "medium" ? "middel" : "høj"}</strong> sikkerhed.
+          Baseret på {car.price_n_listings} sammenlignelige udenlandske annoncer
+          {car.price_pooled_at_brand ? ", samlet på tværs af hele mærket frem for denne bestemte model (for få annoncer betød, at vi måtte låne mærkets samlede prismønster)" : ""}.
+          Det endelige tal er justeret med en korrektionsfaktor på {Number(car.price_calibration_factor).toFixed(2)}x,
+          fundet ved at holde en stikprøve af danske udbudspriser op mod vores rå estimat.
+          Læs mere på <a href={getRelativeLocaleUrl(lang, "/methodology") + "#pricing"}>metodesiden</a>.
         </p>
       </div>
     )}
 
     {siblingAges.length > 0 && (
       <div class="siblings">
-        <h2>This model at other ages</h2>
+        <h2>Denne model i andre aldre</h2>
         <div class="sibling-grid">
           {siblingAges.map((s) => (
             <a class="sibling card" href={getRelativeLocaleUrl(lang, `/cars/${s.slug}/`)}>
               <span class="sibling-band">{s.band_years}</span>
-              {"entry_price_dkk" in s ? <span class="num">{kr((s as RankedCar).entry_price_dkk)}</span> : <span class="sibling-no-price">no price data</span>}
+              {"entry_price_dkk" in s ? <span class="num">{kr((s as RankedCar).entry_price_dkk)}</span> : <span class="sibling-no-price">ingen prisdata</span>}
             </a>
           ))}
         </div>
