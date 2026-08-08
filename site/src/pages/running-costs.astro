@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import CarRow from "../components/CarRow.astro";
 import FuelFilterToggle from "../components/FuelFilterToggle.astro";
+import MileageControl from "../components/MileageControl.astro";
 import RunningCostChart from "../components/RunningCostChart.astro";
 import { RUNNING_COST_ELIGIBLE, kr } from "../lib/data";
 
@@ -18,7 +19,7 @@ const cheapCarBeatsExpensive = cars.slice(0, 30).some((c) => c.entry_price_dkk >
     <h1>Cheapest to run, no matter what it costs to buy</h1>
     <p class="lede">
       This list ignores the price tag completely. It's fuel, ownership tax and repairs only,
-      per year. Some genuinely cheap cars to buy are expensive to keep, and some expensive cars
+      per year. Some cheap cars to buy are expensive to keep, and some expensive cars
       pay part of themselves back every year at the pump. This is where you'd spot that.
     </p>
 
@@ -41,8 +42,9 @@ const cheapCarBeatsExpensive = cars.slice(0, 30).some((c) => c.entry_price_dkk >
     </p>
 
     <FuelFilterToggle />
+    <MileageControl />
 
-    <div class="card list-card">
+    <div class="card list-card" data-list-mode="running">
       {cars.map((c, i) => <CarRow car={c} rank={i + 1} mode="running" />)}
     </div>
   </div>

@@ -1,0 +1,257 @@
+---
+// Client-side re-rank over CarRow elements already rendered in the page,
+// same pattern as FuelFilterToggle: no new data fetch, no rebuild. Every
+// list this control touches is tagged with data-list-mode="cost" | "value"
+// | "running" on its container, and every CarRow carries the raw kroner
+// and km figures needed to recompute its own cost at a different distance
+// (see CarRow.astro's data-entry/resale/hold/dep/fuel/ejer/repair/eng
+// attributes). Picked km is remembered in localStorage.
+//
+// Presets rather than a free-text box: the mileage slope below is one flat
+// rate applied to every car, from city car to SUV (a disclosed limitation,
+// see methodology.astro). A box accepting an exact figure like "14.200"
+// would promise a precision the underlying model doesn't have. Five
+// buttons make it a scenario, not a quote.
+import { methodology, km } from "../lib/data";
+
+const slopeFact = methodology.find((m) => m.fact.startsWith("Mileage adjustment slope"));
+const MILEAGE_SLOPE = Number(slopeFact?.value ?? "0") / 100;
+
+const PRESETS = [5000, 10000, 15000, 20000, 30000];
+const DEFAULT_KM = 15000;
+---
+
+<div class="mileage-control">
+  <span class="mileage-control-label">Assume how far you drive</span>
+  <div class="mileage-options">
+    {PRESETS.map((kmVal) => (
+      <label class="mileage-option">
+        <input type="radio" name="annual-km" value={kmVal} checked={kmVal === DEFAULT_KM} />
+        {km(kmVal)}
+        {kmVal === DEFAULT_KM && <span class="mileage-default-tag">(default)</span>}
+      </label>
+    ))}
+  </div>
+  <span class="mileage-control-note">
+    Changes fuel cost and how much resale value erodes with distance. Ownership tax and the
+    repair estimate stay flat per year regardless of mileage, so a high-mileage pick understates
+    cost a little. Ranks and tiers below update to match.
+  </span>
+</div>
+
+<style>
+  .mileage-control {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 18px;
+    margin: 10px 0 8px;
+    padding: 10px 14px;
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+    font-size: 0.88rem;
+  }
+  .mileage-control-label {
+    font-family: var(--font-data);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+  }
+  .mileage-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+  }
+  .mileage-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .mileage-option input {
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+  .mileage-default-tag {
+    color: var(--ink-faint);
+    font-size: 0.78rem;
+  }
+  .mileage-control-note {
+    color: var(--ink-faint);
+    font-size: 0.78rem;
+    flex-basis: 100%;
+  }
+</style>
+
+<script define:vars={{ MILEAGE_SLOPE, DEFAULT_KM }}>
+  const BASE_KM = 15000;
+  const SLOPE = MILEAGE_SLOPE;
+
+  function kr(n) {
+    if (n === null || n === undefined || Number.isNaN(n)) return "-";
+    return Math.round(n).toLocaleString("da-DK").replace(/,/g, ".") + " kr";
+  }
+  function krPerYear(n) {
+    if (n === null || n === undefined || Number.isNaN(n)) return "-";
+    return kr(n) + "/year";
+  }
+
+  function num(row, key) {
+    const v = row.dataset[key];
+    return v === "" || v === undefined ? null : parseFloat(v);
+  }
+
+  // Fuel scales linearly with distance; ownership tax and the repair
+  // estimate are flat per year. Mirrors pipeline/src/build_phase3_metrics.py
+  // and build_phase4_rankings.py's ANNUAL_KM assumption.
+  function runningPerYear(row, K) {
+    const fuel = num(row, "fuel") ?? 0;
+    const ejer = num(row, "ejer") ?? 0;
+    const repair = num(row, "repair") ?? 0;
+    return fuel * (K / BASE_KM) + ejer + repair;
+  }
+
+  // Resale erodes with the same mileage slope the site already discloses
+  // and uses to compare a car bought at one age to itself sold years later
+  // (methodology.astro, "Mileage matters too"). Depreciation-unavailable
+  // rows (oldest age band, no forward resale point) fall back to running
+  // costs only, same as the server-rendered figure.
+  function tcoPerYear(row, K) {
+    const running = runningPerYear(row, K);
+    if (row.dataset.dep !== "1") return running;
+    const entry = num(row, "entry");
+    const resale = num(row, "resale");
+    const hold = num(row, "hold");
+    if (entry === null || resale === null || hold === null || hold === 0) return running;
+    const resaleAtK = resale * Math.pow(1 - SLOPE, (hold * (K - BASE_KM)) / 10000);
+    const depPerYear = (entry - resaleAtK) / hold;
+    return depPerYear + running;
+  }
+
+  // Same cut points as build_phase4_rankings.py's quantile_tier().
+  function tierFor(i, n) {
+    if (n <= 0) return null;
+    const frac = i / n;
+    if (frac < 0.1) return "S";
+    if (frac < 0.3) return "A";
+    if (frac < 0.7) return "B";
+    if (frac < 0.9) return "C";
+    return "D";
+  }
+
+  function setRank(row, rank) {
+    const rankEl = row.querySelector(".rank");
+    if (rankEl) rankEl.textContent = String(rank);
+  }
+
+  function setTier(row, tier) {
+    const badge = row.querySelector(".tier-badge");
+    if (!badge || !tier) return;
+    badge.textContent = tier;
+    badge.style.setProperty("--tier-color", `var(--tier-${tier.toLowerCase()})`);
+  }
+
+  function setField(row, field, text) {
+    const el = row.querySelector(`[data-field="${field}"]`);
+    if (!el) return;
+    const valueEl = el.querySelector(".score-value") ?? el;
+    valueEl.textContent = text;
+  }
+
+  // 50/50 blend of cost percentile (cheaper = higher) and engagement
+  // percentile (most engaging = higher), computed only among the rows
+  // passed in. Mirrors build_phase4_rankings.py lines ~313-333 exactly,
+  // including the worst-first cost ordering that gives the cheapest car
+  // a percentile of 1.0.
+  function valueScores(rows, K) {
+    const m = rows.length;
+    const withTco = rows.map((row) => ({ row, tco: tcoPerYear(row, K) }));
+    const costOrder = [...withTco].sort((a, b) => b.tco - a.tco);
+    const costPct = new Map();
+    costOrder.forEach((item, i) => costPct.set(item.row, m > 1 ? i / (m - 1) : 1));
+    const engOrder = [...rows].sort((a, b) => (num(a, "eng") ?? 0) - (num(b, "eng") ?? 0));
+    const engPct = new Map();
+    engOrder.forEach((row, i) => engPct.set(row, m > 1 ? i / (m - 1) : 1));
+    return withTco.map(({ row, tco }) => ({
+      row,
+      tco,
+      score: 0.5 * costPct.get(row) + 0.5 * engPct.get(row),
+    }));
+  }
+
+  function applyMileage(K) {
+    document.querySelectorAll("[data-list-mode]").forEach((container) => {
+      const mode = container.dataset.listMode;
+      const rows = Array.from(container.querySelectorAll(".car-row"));
+      if (rows.length === 0) return;
+
+      if (mode === "cost") {
+        const n = rows.length;
+        const withTco = rows.map((row) => ({ row, tco: tcoPerYear(row, K) }));
+        withTco.sort((a, b) => a.tco - b.tco);
+        withTco.forEach(({ row, tco }, i) => {
+          setRank(row, i + 1);
+          setTier(row, tierFor(i, n));
+          setField(row, "tco", krPerYear(tco));
+          container.appendChild(row);
+        });
+        const eligible = rows.filter((row) => num(row, "eng") !== null);
+        if (eligible.length >= 3) {
+          valueScores(eligible, K).forEach(({ row, score }) =>
+            setField(row, "value", `${Math.round(score * 100)} pts`)
+          );
+        }
+      } else if (mode === "value") {
+        const eligible = rows.filter((row) => num(row, "eng") !== null);
+        if (eligible.length < 3) return;
+        const m = eligible.length;
+        const scored = valueScores(eligible, K).sort((a, b) => b.score - a.score);
+        scored.forEach(({ row, score, tco }, i) => {
+          setRank(row, i + 1);
+          setTier(row, tierFor(i, m));
+          setField(row, "value", `${Math.round(score * 100)} pts`);
+          setField(row, "tco", krPerYear(tco));
+          container.appendChild(row);
+        });
+      } else if (mode === "running") {
+        const n = rows.length;
+        const withRunning = rows.map((row) => ({ row, running: runningPerYear(row, K) }));
+        withRunning.sort((a, b) => a.running - b.running);
+        withRunning.forEach(({ row, running }, i) => {
+          setRank(row, i + 1);
+          setTier(row, tierFor(i, n));
+          setField(row, "running", krPerYear(running));
+          if (row.dataset.dep === "1") {
+            setField(row, "tco", krPerYear(tcoPerYear(row, K)));
+          }
+          container.appendChild(row);
+        });
+      }
+    });
+  }
+
+  function initMileageControl() {
+    const radios = document.querySelectorAll('input[name="annual-km"]');
+    if (radios.length === 0) return;
+
+    const validValues = new Set(Array.from(radios).map((r) => Number(r.value)));
+    const stored = parseInt(localStorage.getItem("annualKm") ?? "", 10);
+    const K = validValues.has(stored) ? stored : DEFAULT_KM;
+
+    radios.forEach((r) => {
+      r.checked = Number(r.value) === K;
+      r.addEventListener("change", () => {
+        if (!r.checked) return;
+        const newK = Number(r.value);
+        localStorage.setItem("annualKm", String(newK));
+        applyMileage(newK);
+      });
+    });
+
+    if (K !== DEFAULT_KM) applyMileage(K);
+  }
+
+  document.addEventListener("DOMContentLoaded", initMileageControl);
+</script>

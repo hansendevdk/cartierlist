@@ -114,7 +114,7 @@ function reliabilityNote(rate: number | null) {
           Based on {car.price_n_listings} comparable foreign listings
           {car.price_pooled_at_brand ? ", pooled across the whole brand rather than this specific model (fewer listings meant we had to borrow the brand's overall price pattern)" : ""}.
           The final number is adjusted with a correction factor of {Number(car.price_calibration_factor).toFixed(2)}x
-          found by checking a sample of real Danish asking prices against our raw estimate.
+          found by checking a sample of Danish asking prices against our raw estimate.
           Read more on the <a href="/methodology#pricing">methodology page</a>.
         </p>
       </div>
@@ -182,7 +182,7 @@ function reliabilityNote(rate: number | null) {
   .cap { text-transform: capitalize; color: var(--accent); }
 
   .siblings { padding-bottom: 64px; }
-  .siblings h2 { font-size: 1.1rem; }
+  .siblings h2 { font-size: 1.5rem; }
   .sibling-grid { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
   .sibling {
     padding: 12px 18px;

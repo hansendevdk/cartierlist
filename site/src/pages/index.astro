@@ -35,7 +35,7 @@ const cheapestBracket = bracketStats
     <div class="container-wide hero-inner">
       <div class="hero-copy">
         <p class="eyebrow">A car costs more than its price tag</p>
-        <h1>What will a used car actually cost you, not just to buy, but to own?</h1>
+        <h1>What will a used car cost you, not just to buy, but to own?</h1>
         <p class="hero-lede">
           Every price on this site adds up the same way a real receipt would: what you pay,
           minus what you get back when you sell, plus fuel, tax and repairs in between.
@@ -60,19 +60,19 @@ const cheapestBracket = bracketStats
         <li>
           <span class="step-num">1</span>
           <div>
-            <h3>Started from {fmt(scopedFleet)} real Danish cars</h3>
+            <h3>Started from {fmt(scopedFleet)} Danish cars</h3>
             <p>
               We pulled the Danish Motor Registry's public vehicle data, kept petrol, diesel
               and hybrid passenger cars first registered between 2010 and 2022, and matched{" "}
               {fmt(crosswalkFact.toString().split(" ")[0])} models against UK MOT test records
-              to measure how often each one actually breaks down.
+              to measure how often each one breaks down.
             </p>
           </div>
         </li>
         <li>
           <span class="step-num">2</span>
           <div>
-            <h3>Checked {fmt(motTests)} MOT tests for real failure patterns</h3>
+            <h3>{fmt(motTests)} MOT tests, mined for failure patterns</h3>
             <p>
               Reliability comes from the UK's public MOT test archive, adjusted so a
               heavily-driven car isn't unfairly compared to a lightly-driven one of the same age.
@@ -82,24 +82,24 @@ const cheapestBracket = bracketStats
         <li>
           <span class="step-num">3</span>
           <div>
-            <h3>Priced each car and checked it against the real Danish market</h3>
+            <h3>Priced each car and checked it against the Danish market</h3>
             <p>
               We built a price estimate for each model at four different ages, then checked it
-              against real asking prices we looked up on Danish listing sites by hand and
+              against asking prices we looked up on Danish listing sites by hand and
               corrected for the gap.{" "}
-              <a href="/methodology#pricing">Full pricing method &rarr;</a>
+              <a href="/methodology#pricing">Full pricing method</a>
             </p>
           </div>
         </li>
         <li>
           <span class="step-num">4</span>
           <div>
-            <h3>Added up fuel, tax and repairs, sorted by what you'd actually pay</h3>
+            <h3>What you'd pay, once fuel, tax and repairs are added up</h3>
             <p>
               Fuel cost, Danish ownership tax and an estimated repair cost combine with resale
               value to give one total cost of ownership per car. Cars are grouped into five price
               brackets and ranked inside each one, so you're only ever comparing cars you could
-              actually afford.
+              afford.
             </p>
           </div>
         </li>
@@ -115,7 +115,7 @@ const cheapestBracket = bracketStats
           <p class="finding-text">
             Among the best-ranked cars in each bracket, <strong>{cheapestBracket.label}</strong>{" "}
             has the lowest cost per year to own, about <strong class="num">{fmt(Math.round(cheapestBracket.median!))} kr</strong>{" "}
-            a year. Cheap does not just mean cheap to buy, it can mean cheap to keep.
+            a year. Cheap can mean cheap to buy. Here, it also means cheap to keep.
           </p>
         )}
       </div>
@@ -126,7 +126,7 @@ const cheapestBracket = bracketStats
     <div class="container">
       <p class="eyebrow">Find your budget</p>
       <h2>Pick a price bracket</h2>
-      <p class="section-lede">Each bracket ranks cars you could actually buy for that budget, best value first.</p>
+      <p class="section-lede">Each bracket ranks cars you could buy for that budget, best value first.</p>
     </div>
     <div class="container-wide bracket-grid">
       {bracketStats.map((b) => (
@@ -145,7 +145,7 @@ const cheapestBracket = bracketStats
         <p class="eyebrow">Or ignore the price tag</p>
         <p>
           Some cars cost more to buy but pay part of it back every year in fuel and tax.{" "}
-          <a href="/running-costs/">See every car ranked by running cost alone &rarr;</a>
+          <a href="/running-costs/">See every car ranked by running cost alone</a>
         </p>
       </div>
     </div>
@@ -205,7 +205,7 @@ const cheapestBracket = bracketStats
     flex-shrink: 0;
     font-size: 1rem;
   }
-  .steps h3 { font-size: 1.05rem; margin-bottom: 0.3em; }
+  .steps h3 { font-size: 1.3rem; margin-bottom: 0.3em; }
   .steps p { color: var(--ink-soft); margin: 0; }
   .steps p a { white-space: nowrap; }
 

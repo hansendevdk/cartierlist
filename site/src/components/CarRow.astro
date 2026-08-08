@@ -26,6 +26,21 @@ const secondaryValue =
   mode === "value" ? krPerYear(car.tco_per_year)
   : mode === "running" ? (car.depreciation_available ? krPerYear(car.tco_per_year) : null)
   : car.value_for_money_score !== null ? `${Math.round(car.value_for_money_score * 100)} pts` : null;
+
+// Which quantity each score slot holds, so the mileage control (if present
+// on the page) knows what to recompute and overwrite when the reader picks
+// a different annual distance. Doesn't affect rendering when that control
+// is absent.
+const primaryField = mode === "cost" ? "tco" : mode === "value" ? "value" : "running";
+const secondaryField = mode === "value" ? "tco" : mode === "running" ? "tco" : "value";
+
+// Repairs and ownership tax are flat per year, unaffected by mileage; only
+// fuel scales with distance and only resale erodes with it. The pipeline
+// never emits an annual repair figure on its own, but it falls out of the
+// running-cost total exactly, so it's derived here rather than duplicated
+// in the pipeline output.
+const annualRepair =
+  car.running_cost_per_year - (car.median_annual_fuel_cost_dkk ?? 0) - (car.median_annual_ejerafgift_dkk ?? 0);
 ---
 
 <a
@@ -33,6 +48,14 @@ const secondaryValue =
   href={`/cars/${car.slug}/`}
   data-hybrid={car.is_hybrid ? "1" : "0"}
   data-diesel={car.is_diesel_dominant ? "1" : "0"}
+  data-entry={car.entry_price_dkk}
+  data-resale={car.resale_price_dkk ?? ""}
+  data-hold={car.hold_years ?? ""}
+  data-dep={car.depreciation_available ? "1" : "0"}
+  data-fuel={car.median_annual_fuel_cost_dkk ?? ""}
+  data-ejer={car.median_annual_ejerafgift_dkk ?? ""}
+  data-repair={annualRepair}
+  data-eng={car.engagement_score ?? ""}
 >
   <span class="rank num">{rank}</span>
   <TierBadge tier={tier} />
@@ -56,14 +79,14 @@ const secondaryValue =
     </span>
   )}
   <span class="scores">
-    <span class="score-primary num">
-      {primaryValue}
+    <span class="score-primary num" data-field={primaryField}>
+      <span class="score-value">{primaryValue}</span>
       {mode !== "running" && !car.depreciation_available && <span class="asterisk" title="Running costs only, no resale data available">*</span>}
     </span>
     <span class="score-label">{primaryLabel}</span>
     {secondaryValue && (
-      <span class="score-secondary">
-        <span class="num">{secondaryValue}</span> {secondaryLabel}
+      <span class="score-secondary" data-field={secondaryField}>
+        <span class="num score-value">{secondaryValue}</span> {secondaryLabel}
       </span>
     )}
   </span>
