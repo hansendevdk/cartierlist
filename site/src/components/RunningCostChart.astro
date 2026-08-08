@@ -16,7 +16,7 @@ const hiddenCount = cars.length - shown.length;
 
 const W = 900;
 const H = 460;
-const MARGIN = { top: 16, right: 20, bottom: 44, left: 64 };
+const MARGIN = { top: 16, right: 20, bottom: 64, left: 78 };
 const plotW = W - MARGIN.left - MARGIN.right;
 const plotH = H - MARGIN.top - MARGIN.bottom;
 
@@ -75,6 +75,19 @@ const polyline = trendPoints.map((p) => `${xPos(p.price)},${yPos(p.cost)}`).join
       <text x={xPos(t)} y={H - MARGIN.bottom + 22} class="axis-label x-label">{kr(t)}</text>
     ))}
     <line x1={MARGIN.left} x2={W - MARGIN.right} y1={H - MARGIN.bottom} y2={H - MARGIN.bottom} class="axis-line" />
+
+    <text x={MARGIN.left + plotW / 2} y={H - 10} class="axis-title" text-anchor="middle">
+      Purchase price (kr)
+    </text>
+    <text
+      x={16}
+      y={MARGIN.top + plotH / 2}
+      class="axis-title"
+      text-anchor="middle"
+      transform={`rotate(-90, 16, ${MARGIN.top + plotH / 2})`}
+    >
+      Running cost (kr/year)
+    </text>
 
     {shown.map((c) => (
       <g class="point">
@@ -140,6 +153,12 @@ const polyline = trendPoints.map((p) => `${xPos(p.price)},${yPos(p.cost)}`).join
   }
   .x-label {
     text-anchor: middle;
+  }
+  .axis-title {
+    font-family: var(--font-data);
+    font-size: 12px;
+    font-weight: 600;
+    fill: var(--ink-soft);
   }
   .dot {
     fill: var(--ink-soft);
