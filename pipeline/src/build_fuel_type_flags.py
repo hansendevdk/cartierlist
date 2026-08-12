@@ -55,22 +55,123 @@ AGE_BANDS = [
     (4, 2010, 2013),
 ]
 
-# Audi's plug-in hybrid badge never says "hybrid", "plug-in", or "phev": it is
-# "TFSI e" (seen both spaced, "40 TFSI e", and unspaced, "40 TFSIe") or
-# "e-tron" (e.g. "40 E-TRON", "1,4 E-TRON"). tfsie/tfsi e together cover both
-# spellings seen in real DMR data. e-tron is safe against Audi's separate,
-# fully-electric e-tron SUV line: this query joins on model names already
-# confirmed in crosswalk.csv, and the electric e-tron family (DMR model names
-# "Q4 e-tron", "e-tron", "e-tron 55", etc.) was never crosswalked as its own
-# model, so those rows never reach this query at all. Checked directly against
-# the warehouse: every vehicle among the currently crosswalked Audi models
-# that this pattern matches is recorded as fuel_type_primary='Benzin', not
-# 'El', confirming it is a plug-in hybrid recorded under its combustion fuel
-# type, the way DMR records hybrids in this dataset, not a pure EV.
-HYBRID_PATTERNS = [
-    "%hybrid%", "%plug-in%", "%plug in%", "%phev%",
-    "%tfsie%", "%tfsi e%", "%e-tron%",
-]
+# Patterns safe to apply to every make: unambiguous hybrid vocabulary that
+# does not collide with any electric-vehicle naming seen in the warehouse.
+HYBRID_PATTERNS = ["%hybrid%", "%plug-in%", "%plug in%", "%phev%"]
+
+# "HEV" (Hybrid Electric Vehicle) is a real, plain-English self-charging-
+# hybrid badge used across several makes (Suzuki Vitara/SX4 S-Cross, Ford
+# Mondeo, Hyundai Ioniq/Kona/Tucson, Renault Captur/Clio, Dacia Duster,
+# Nissan Juke), so it is applied globally rather than kept in the per-make
+# table below. The one real collision is "mHEV" (mild hybrid: a 12V/48V
+# starter-generator that gives brief torque assist and stop-start, with no
+# meaningful electric-only driving, a materially weaker category we
+# deliberately do not badge as hybrid here, same as a plain turbo engine
+# isn't). Checked against the warehouse: "m" is always written directly onto
+# "hev" with no space in every mild-hybrid trim seen (Nissan Qashqai/X-Trail
+# "MHEV", Ford Puma "mHEV", Peugeot 2008 "MHEV", VW Passat "PHEV" is
+# unrelated), so excluding that substring cleanly separates the two everywhere
+# without needing a per-make list. Every non-mild-hybrid "hev" match found
+# this way is Benzin (a single stray Hyundai Kona row is the only exception),
+# confirming none of it is catching a genuinely electric vehicle.
+HEV_INCLUDE = "lower(v.variant_name) LIKE '%hev%'"
+HEV_EXCLUDE_MILD = "lower(v.variant_name) NOT LIKE '%mhev%'"
+
+# Patterns that are only safe within one specific make: researched against
+# that make's real DMR variant_name text and checked against fuel_type_primary
+# to rule out the pattern also catching that make's genuinely electric
+# vehicles (the class of check that matters here, same as the Audi TFSI e /
+# e-tron case). Each is a raw SQL boolean expression over
+# lower(v.variant_name) and v.make_name, combined with OR against every other
+# entry, so getting one make's condition wrong cannot affect another make's
+# rows.
+MAKE_HYBRID_CONDITIONS: dict[str, str] = {
+    # Audi's plug-in hybrid badge never says "hybrid", "plug-in", or "phev":
+    # it is "TFSI e" (seen both spaced, "40 TFSI e", and unspaced,
+    # "40 TFSIe") or "e-tron" (e.g. "40 E-TRON", "1,4 E-TRON"). e-tron is
+    # safe against Audi's separate, fully-electric e-tron SUV line: this
+    # query joins on model names already confirmed in crosswalk.csv, and the
+    # electric e-tron family (DMR model names "Q4 e-tron", "e-tron",
+    # "e-tron 55", etc.) was never crosswalked as its own model, so those
+    # rows never reach this query at all. Checked directly against the
+    # warehouse: every vehicle among the currently crosswalked Audi models
+    # that this pattern matches is recorded as fuel_type_primary='Benzin',
+    # not 'El', confirming it is a plug-in hybrid recorded under its
+    # combustion fuel type, not a pure EV.
+    "AUDI": "(lower(v.variant_name) LIKE '%tfsie%' OR lower(v.variant_name) LIKE '%tfsi e%'"
+            " OR lower(v.variant_name) LIKE '%e-tron%')",
+    # BMW's plug-in hybrid badge is a bare "e" directly after the power-tier
+    # number: 25e, 30e, 40e, 45e, 50e for the compact/SUV range, and
+    # 225e/230e/325e/330e/530e/545e/550e for the sedans and Active Tourers,
+    # each of which already ends in one of the shorter suffixes as its own
+    # trailing substring (e.g. "330e" ends in "30e"), so those five patterns
+    # alone cover every 3-digit case too. "225xe" is the one exception, an
+    # inserted "x" before the "e". Checked against the warehouse: every one
+    # of the 46 distinct variant strings this matches is Benzin (one is
+    # Diesel), never El; a plain "T4/T5/T6" trim with no trailing "e" (a real,
+    # much larger, non-hybrid population) never matches since it has no
+    # digit immediately followed by "e".
+    "BMW": "(" + " OR ".join(
+        f"lower(v.variant_name) LIKE '%{suffix}%'"
+        for suffix in ["25e", "30e", "40e", "45e", "50e", "225xe"]
+    ) + ")",
+    # Mercedes writes its plug-in hybrid badge as the trim number, a space,
+    # then "e" (petrol-electric, e.g. "300 e") or "de" (diesel-electric, e.g.
+    # "350 de"). Checked against the warehouse: every 3-digit value actually
+    # used this way is enumerated here (250/300/350/400/500 for "e",
+    # 300/350 for "de"); under 1% of the matching rows are recorded as El
+    # rather than Benzin/Diesel, on par with the miscoding rate already
+    # documented for this dataset's hybrids generally, not evidence of a real
+    # EV being caught (Mercedes's actual EQ electric line uses "EQA"/"EQC"/
+    # "EQS" style model names, not a "NNN e" trim suffix).
+    "MERCEDES-BENZ": "(" + " OR ".join(
+        f"lower(v.variant_name) LIKE '%{badge}%'"
+        for badge in ["250 e", "300 e", "350 e", "400 e", "500 e", "300 de", "350 de"]
+    ) + ")",
+    # Volvo's plug-in hybrid badge pairs a T-number with "Recharge" (or its
+    # abbreviation "ReCh") or "Twin Engine": "T6 Recharge", "T8 ReCh",
+    # "T5 Twin Engine". T8 alone is unambiguous and does not need that
+    # qualifier: checked against the warehouse, every T8-prefixed trim in the
+    # current lineup is a plug-in hybrid (including abbreviated forms like
+    # "T8 eAWD" and "T8 Aut." with no "Recharge" wording at all), so bare
+    # "T8" is matched outright. T4/T5/T6 are NOT unambiguous: each also has a
+    # much larger population of plain non-hybrid petrol trims ("T4 Aut.",
+    # "T5 AWD Aut.", "T6 Aut."), so those three only count as hybrid together
+    # with "rech" or "twin engine" in the same trim string. Volvo's actual
+    # battery-electric line ("Recharge" with no T-number, "P6/P8", a bare kW
+    # rating, "Elektro") never carries a T4/T5/T6/T8 prefix, so it cannot
+    # satisfy either branch of this condition; checked directly, every row
+    # this condition matches is Benzin, and the "Recharge"-without-T-number
+    # BEV rows are all El and excluded, as intended.
+    "VOLVO": "(lower(v.variant_name) LIKE 't8%'"
+             " OR ((lower(v.variant_name) LIKE 't4%' OR lower(v.variant_name) LIKE 't5%'"
+             " OR lower(v.variant_name) LIKE 't6%')"
+             " AND (lower(v.variant_name) LIKE '%rech%' OR lower(v.variant_name) LIKE '%twin engine%')))",
+    # VW's plug-in hybrid badge is "GTE" (Golf GTE, Passat GTE). Most GTE
+    # trims already say "hybrid" too and are caught by the global pattern
+    # above, but a real minority don't ("GTE", "1,4 GTE Variant DSG",
+    # "1,4 TSI GTE"). Checked against the warehouse: every GTE match is
+    # Benzin, VW has no separate electric model sharing the GTE name.
+    "VOLKSWAGEN": "lower(v.variant_name) LIKE '%gte%'",
+    # Honda's hybrid system is branded "i-MMD" (Intelligent Multi-Mode
+    # Drive), which never says "hybrid" (Jazz/CR-V trims like "1.5 i-MMD 5d
+    # eCVT"). Checked against the warehouse: 100% Benzin; Honda has no
+    # covered model with a separate electric variant to collide with.
+    "HONDA": "lower(v.variant_name) LIKE '%i-mmd%'",
+    # Renault's hybrid badge is "E-TECH" followed by a power number (e.g.
+    # "E-TECH 160"), used for both its self-charging hybrids and, with
+    # "PLUG-IN" spelled out, its plug-in hybrids (the latter already caught
+    # by the global "plug-in" pattern). Renault reuses the same "E-TECH" name
+    # for its battery-electric Megane/Twingo/Scenic, always with the word
+    # "Electric" alongside it ("E-Tech Electric 60 kWh"), so excluding that
+    # word is what keeps this safe. It is not perfect: a small residual (on
+    # the order of a few percent of matches) is still recorded as El, mostly
+    # a bare "E-TECH" with no power number or "Electric" qualifier at all,
+    # which real-world naming can't distinguish from the hybrid via text
+    # alone; left as unavoidable noise of the same kind Phase 1 already
+    # documented for this dataset, not chased further.
+    "RENAULT": "(lower(v.variant_name) LIKE '%e-tech%' AND lower(v.variant_name) NOT LIKE '%electric%')",
+}
 
 DIESEL_THRESHOLD = 0.5
 HYBRID_THRESHOLD = 0.3
@@ -87,9 +188,13 @@ def age_band_sql_case(reg_year_col: str) -> str:
 def main() -> None:
     con = duckdb.connect(str(WAREHOUSE))
 
-    hybrid_clause = " OR ".join(
-        f"lower(v.variant_name) LIKE '{p}'" for p in HYBRID_PATTERNS
+    global_clause = " OR ".join(f"lower(v.variant_name) LIKE '{p}'" for p in HYBRID_PATTERNS)
+    hev_clause = f"({HEV_INCLUDE} AND {HEV_EXCLUDE_MILD})"
+    make_clause = " OR ".join(
+        f"(v.make_name = '{make}' AND {condition})"
+        for make, condition in MAKE_HYBRID_CONDITIONS.items()
     )
+    hybrid_clause = f"({global_clause}) OR {hev_clause} OR {make_clause}"
 
     rows = con.execute(f"""
         WITH covered_models AS (
