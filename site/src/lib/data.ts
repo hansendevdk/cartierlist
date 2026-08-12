@@ -122,9 +122,14 @@ export function bandLabel(band: string, lang: Lang): string {
   return BAND_LABELS[lang][band];
 }
 
+// Danish says "datagrundlag" (the data behind the estimate), not "sikkerhed".
+// "Lav sikkerhed" on a car reads as "low safety", i.e. the car is unsafe to
+// drive, which is the opposite of what this flag means. "Datagrundlag" also
+// says what is actually being measured: how many comparable listings backed
+// the price. Note the adjectives are neuter (lavt/højt) to agree with it.
 const CONFIDENCE_LABELS: Record<Lang, Record<"low" | "medium" | "high", string>> = {
   en: { low: "low", medium: "medium", high: "high" },
-  da: { low: "lav", medium: "middel", high: "høj" },
+  da: { low: "lavt", medium: "middel", high: "højt" },
 };
 
 export function confidenceLabel(level: "low" | "medium" | "high", lang: Lang): string {

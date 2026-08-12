@@ -2,7 +2,7 @@
 import Layout from "../../../layouts/Layout.astro";
 import LedgerBreakdown from "../../../components/LedgerBreakdown.astro";
 import TierBadge from "../../../components/TierBadge.astro";
-import { rankings, unpriced, bracketLabel, getSiblingAges, reliabilityNote, kr, pct, km } from "../../../lib/data";
+import { rankings, unpriced, bracketLabel, confidenceLabel, getSiblingAges, reliabilityNote, kr, pct, km } from "../../../lib/data";
 import type { RankedCar } from "../../../lib/data";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
@@ -106,7 +106,7 @@ const siblingAges = getSiblingAges(car, priced);
       <div class="confidence card">
         <p class="eyebrow">Hvor sikre er vi på prisen?</p>
         <p>
-          <strong class="cap">{car.price_confidence === "low" ? "lav" : car.price_confidence === "medium" ? "middel" : "høj"}</strong> sikkerhed.
+          <strong class="cap">{confidenceLabel(car.price_confidence, lang)}</strong> datagrundlag.
           Baseret på {car.price_n_listings} sammenlignelige udenlandske annoncer
           {car.price_pooled_at_brand ? ", samlet på tværs af hele mærket frem for denne bestemte model (for få annoncer betød, at vi måtte låne mærkets samlede prismønster)" : ""}.
           Det endelige tal er justeret med en korrektionsfaktor på {Number(car.price_calibration_factor).toFixed(2)}x,

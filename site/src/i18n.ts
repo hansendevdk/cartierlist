@@ -77,7 +77,6 @@ export const UI = {
       hiddenNote: (n: number, price: string) =>
         ` ${n} cars over ${price} aren't shown, the price axis would mostly be empty space to fit them in.`,
     },
-    confidence: { low: "low", medium: "medium", high: "high" },
   },
   da: {
     nav: {
@@ -100,8 +99,8 @@ export const UI = {
       costPerYear: "pris/år",
       totalCostPerYear: "samlet pris/år",
       buyAround: "køb omkring",
-      confidenceSuffix: "sikkerhed",
-      confidenceTitle: (level: string) => `Sikkerhed på prisestimat: ${level}`,
+      confidenceSuffix: "datagrundlag",
+      confidenceTitle: (level: string) => `Datagrundlag for prisestimat: ${level}`,
       hybridTitle: "Variantnavnet nævner hybrid eller plug-in. Officielle forbrugstal for dem er typisk optimistiske, se metode.",
       dieselTitle: "Over halvdelen af de registrerede biler bag denne række er diesel.",
       hybridLabel: "hybrid",
@@ -150,6 +149,5 @@ export const UI = {
       hiddenNote: (n: number, price: string) =>
         ` ${n} biler over ${price} vises ikke, prisaksen ville være mest tom plads for at få dem med.`,
     },
-    confidence: { low: "lav", medium: "middel", high: "høj" },
   },
 } as const;

@@ -139,13 +139,13 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
       "præcis inden for en bestemt procent" som noget, der endnu ikke er bevist.
     </p>
     <p>
-      Hver pris på siden har også en sikkerhedsmarkering, lav, middel eller høj, ud fra hvor
-      mange sammenlignelige udenlandske annoncer der lå bag, og om vi måtte låne hele mærkets
-      prismønster, fordi en bestemt model havde færre end 15 annoncer af sine egne at bygge et
-      fair estimat på. Den grænse betyder noget: en samlet Skoda-pris bliver for eksempel lagt i
-      gennemsnit med Octavia, Superb og Kodiaq, så en billig bybil kan ende med at blive
-      prissat som en mellemklassesedan, medmindre den klarer grænsen selv. Du ser
-      sikkerhedsmarkeringen på enhver bilside, hvor den ikke er "høj".
+      Hver pris på siden har også en markering af datagrundlaget, lavt, middel eller højt, ud
+      fra hvor mange sammenlignelige udenlandske annoncer der lå bag, og om vi måtte låne hele
+      mærkets prismønster, fordi en bestemt model havde færre end 15 annoncer af sine egne at
+      bygge et fair estimat på. Den grænse betyder noget: en samlet Skoda-pris bliver for
+      eksempel lagt i gennemsnit med Octavia, Superb og Kodiaq, så en billig bybil kan ende med
+      at blive prissat som en mellemklassesedan, medmindre den klarer grænsen selv. Du ser
+      markeringen på enhver bilside, hvor datagrundlaget ikke er "højt".
     </p>
 
     <h3>Kilometertallet betyder også noget, og det justerer vi for</h3>
@@ -164,8 +164,8 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
       Baleno, Ignis, Celerio) fandt vi danske udbudspriser i hånden og brugte samme metode med
       kurveform fra en tilsvarende bil, som vi bruger til Skoda Citigo (se kendte begrænsninger
       nedenfor): vi låner værditabskurven fra en model i samme segment og skalerer den til den
-      pris. De er markeret "lav sikkerhed", da de hviler på en eller to annoncer frem for en hel
-      kurve. Resten viser stadig pålidelighed og driftsomkostninger uden pris og uden placering,
+      pris. De er markeret "lavt datagrundlag", da de hviler på en eller to annoncer frem for en
+      hel kurve. Resten viser stadig pålidelighed og driftsomkostninger uden pris og uden placering,
       tydeligt markeret. {fact("Suzuki/DS models still unpriced")} modeller er stadig uden pris.
     </p>
 
