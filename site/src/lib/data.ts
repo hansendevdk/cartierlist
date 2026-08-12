@@ -62,7 +62,27 @@ export interface RankedCar {
 }
 
 export const rankings = rankingsJson as unknown as RankedCar[];
-export const unpriced = unpricedJson as unknown as Array<Record<string, any>>;
+
+// unpriced.json comes out of a different pipeline branch than rankings.json and
+// carries only age_band, not the band_years/approx_age_years that every ranked
+// row has. The car page prints both straight into its <title> and lede, so
+// without this the 17 unpriced models shipped a title reading "DS Ds 3,
+// undefined" and a sentence reading "First registered , about years old today".
+// Both fields are pure functions of age_band, so derive them here rather than
+// teaching every consumer to handle the gap.
+const BAND_YEARS: Record<string, string> = {
+  "1": "2020-2022",
+  "2": "2017-2019",
+  "3": "2014-2016",
+  "4": "2010-2013",
+};
+const BAND_APPROX_AGE: Record<string, number> = { "1": 5, "2": 8, "3": 11, "4": 14.5 };
+
+export const unpriced = (unpricedJson as unknown as Array<Record<string, any>>).map((car) => ({
+  ...car,
+  band_years: car.band_years ?? BAND_YEARS[car.age_band],
+  approx_age_years: car.approx_age_years ?? BAND_APPROX_AGE[car.age_band],
+}));
 export const methodology = methodologyJson as unknown as Array<{ fact: string; value: string; source: string; date: string }>;
 export const sources = sourcesJson as unknown as {
   registrationTax: Array<Record<string, string>>;
