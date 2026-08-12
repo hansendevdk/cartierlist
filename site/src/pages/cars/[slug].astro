@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import LedgerBreakdown from "../../components/LedgerBreakdown.astro";
+import EvidenceStrip from "../../components/EvidenceStrip.astro";
 import TierBadge from "../../components/TierBadge.astro";
 import { rankings, unpriced, bracketLabel, getSiblingAges, reliabilityNote, kr, pct, km } from "../../lib/data";
 import type { RankedCar } from "../../lib/data";
@@ -49,7 +50,7 @@ const siblingAges = getSiblingAges(car, priced);
         )}
       </p>
     )}
-    <p class="sub">First registered {car.band_years}, about {car.approx_age_years} years old today. Based on {car.dk_vehicle_count?.toLocaleString("da-DK")} of these registered in Denmark.</p>
+    <p class="sub">First registered {car.band_years}, about {car.approx_age_years} years old today.</p>
 
     {priced ? (
       <div class="card ledger-card">
@@ -101,6 +102,8 @@ const siblingAges = getSiblingAges(car, priced);
         <p class="stat-detail">grøn ejerafgift, from this car's fuel consumption or CO2 figure.</p>
       </div>
     </div>
+
+    <EvidenceStrip car={car} priced={priced} lang={lang} />
 
     {priced && (
       <div class="confidence card">

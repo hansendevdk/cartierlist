@@ -36,6 +36,18 @@ export const UI = {
       runningOnlyTitle: "Running costs only, no resale data available",
       pts: (n: number) => `${n} pts`,
     },
+    evidence: {
+      label: "What these numbers are built on",
+      motTests: "UK MOT tests",
+      motTestsNote:
+        "roadworthiness inspections on this model at this age. The reliability and repair figures are read off them.",
+      danishCars: "registered in Denmark",
+      danishCarsNote: "the Danish fleet this row describes, from the Motor Register.",
+      listings: "comparable foreign listings",
+      listingsNote:
+        "second-hand adverts from a market without registration tax, converted and then calibrated against real Danish asking prices.",
+      thin: "Thin evidence: too few tests behind this one to place its reliability confidently. Treat the ranking as indicative.",
+    },
     ledger: {
       note: "This car is old enough that we have no later resale price to compare against, so this is running costs only: fuel, tax, repairs.",
       buyAt: (years: string) => `Buy at ${years}`,
@@ -107,6 +119,18 @@ export const UI = {
       dieselLabel: "diesel",
       runningOnlyTitle: "Kun driftsomkostninger, ingen gensalgsdata",
       pts: (n: number) => `${n} point`,
+    },
+    evidence: {
+      label: "Hvad tallene bygger på",
+      motTests: "britiske MOT-syn",
+      motTestsNote:
+        "synsrapporter på denne model i denne alder. Tallene for pålidelighed og reparationer er læst ud af dem.",
+      danishCars: "indregistreret i Danmark",
+      danishCarsNote: "den danske bilpark bag denne række, fra Motorregisteret.",
+      listings: "sammenlignelige udenlandske annoncer",
+      listingsNote:
+        "brugtbilsannoncer fra et marked uden registreringsafgift, omregnet og derefter kalibreret mod rigtige danske udbudspriser.",
+      thin: "Tyndt datagrundlag: for få syn bag denne til at placere pålideligheden sikkert. Betragt placeringen som vejledende.",
     },
     ledger: {
       note: "Bilen er gammel nok til, at vi ikke har en senere gensalgspris at holde den op mod, så det her er kun driftsomkostninger: brændstof, afgift, reparationer.",

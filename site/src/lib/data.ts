@@ -167,6 +167,14 @@ export function krPerYear(value: number | null | undefined, lang: Lang = "en"): 
   return kr(value) + (lang === "da" ? "/år" : "/year");
 }
 
+// Plain integer with Danish thousands separators. The replace() is a fallback
+// for Node builds without full ICU data, where da-DK silently degrades to
+// en-US commas; same guard as kr() above.
+export function num(value: number | null | undefined): string {
+  if (value === null || value === undefined) return "-";
+  return Math.round(value).toLocaleString("da-DK").replace(/,/g, ".");
+}
+
 export function pct(value: number | null | undefined): string {
   if (value === null || value === undefined) return "-";
   return (value * 100).toFixed(0) + "%";

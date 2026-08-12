@@ -1,0 +1,87 @@
+---
+// Surfaces the record counts behind each row's numbers. These already existed
+// in the pipeline output (n_nt_tests especially, which nothing rendered) and
+// are the strongest trust signal the site has: a reliability figure backed by
+// 96,744 real MOT tests reads very differently from an unsourced star rating.
+//
+// Deliberately shows thin evidence rather than hiding it. A row backed by 40
+// tests is worth publishing with the count attached; publishing it bare, or
+// suppressing it, are both worse. The count is the caveat.
+import { UI, type Lang } from "../i18n";
+import { num } from "../lib/data";
+
+interface Props {
+  car: Record<string, any>;
+  priced: boolean;
+  lang: Lang;
+}
+
+const { car, priced, lang } = Astro.props;
+const t = UI[lang].evidence;
+
+// Below this, a pass rate is being read off too few tests to carry a model's
+// reputation. Matches the pipeline's own stability flags rather than picking a
+// second, competing threshold here.
+const thinEvidence = car.reliability_unstable || !car.meets_stability_floor;
+---
+
+<div class="evidence card">
+  <p class="eyebrow">{t.label}</p>
+  <ul class="evidence-list">
+    {car.n_nt_tests > 0 && (
+      <li>
+        <span class="ev-num">{num(car.n_nt_tests)}</span>
+        <span class="ev-label">{t.motTests}</span>
+        <span class="ev-note">{t.motTestsNote}</span>
+      </li>
+    )}
+    <li>
+      <span class="ev-num">{num(car.dk_vehicle_count)}</span>
+      <span class="ev-label">{t.danishCars}</span>
+      <span class="ev-note">{t.danishCarsNote}</span>
+    </li>
+    {priced && car.price_n_listings > 0 && (
+      <li>
+        <span class="ev-num">{num(car.price_n_listings)}</span>
+        <span class="ev-label">{t.listings}</span>
+        <span class="ev-note">{t.listingsNote}</span>
+      </li>
+    )}
+  </ul>
+  {thinEvidence && <p class="ev-thin">{t.thin}</p>}
+</div>
+
+<style>
+  .evidence { padding: 18px 22px; margin-bottom: 20px; }
+  .evidence-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 18px 26px;
+  }
+  .evidence-list li { display: flex; flex-direction: column; gap: 2px; }
+  .ev-num {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--accent);
+  }
+  .ev-label {
+    font-family: var(--font-data);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+  }
+  .ev-note { font-size: 0.82rem; color: var(--ink-faint); margin-top: 2px; }
+  .ev-thin {
+    margin: 16px 0 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+  }
+</style>
