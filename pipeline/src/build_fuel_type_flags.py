@@ -59,11 +59,14 @@ AGE_BANDS = [
 # "TFSI e" (seen both spaced, "40 TFSI e", and unspaced, "40 TFSIe") or
 # "e-tron" (e.g. "40 E-TRON", "1,4 E-TRON"). tfsie/tfsi e together cover both
 # spellings seen in real DMR data. e-tron is safe against Audi's separate,
-# fully-electric e-tron SUV line: this script only ever runs against vehicles
-# already scoped to fuel_type_primary != 'El' upstream (see build_dk_fleet.py),
-# so any vehicle this pattern can reach is recorded under a combustion fuel
-# type despite the e-tron badge, meaning it is a plug-in hybrid recorded the
-# way DMR records hybrids in this dataset, not a pure EV.
+# fully-electric e-tron SUV line: this query joins on model names already
+# confirmed in crosswalk.csv, and the electric e-tron family (DMR model names
+# "Q4 e-tron", "e-tron", "e-tron 55", etc.) was never crosswalked as its own
+# model, so those rows never reach this query at all. Checked directly against
+# the warehouse: every vehicle among the currently crosswalked Audi models
+# that this pattern matches is recorded as fuel_type_primary='Benzin', not
+# 'El', confirming it is a plug-in hybrid recorded under its combustion fuel
+# type, the way DMR records hybrids in this dataset, not a pure EV.
 HYBRID_PATTERNS = [
     "%hybrid%", "%plug-in%", "%plug in%", "%phev%",
     "%tfsie%", "%tfsi e%", "%e-tron%",
