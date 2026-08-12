@@ -57,7 +57,13 @@ AGE_BANDS = [
 
 # Patterns safe to apply to every make: unambiguous hybrid vocabulary that
 # does not collide with any electric-vehicle naming seen in the warehouse.
-HYBRID_PATTERNS = ["%hybrid%", "%plug-in%", "%plug in%", "%phev%"]
+# "HSD" (Hybrid Synergy Drive) is Toyota's own name for its self-charging
+# hybrid system, seen on older Yaris and Auris trims that predate Toyota
+# spelling "hybrid" out in the trim string. Checked against the warehouse:
+# every match is Toyota (Lexus, its sibling brand, also uses the badge but
+# has no covered model here), all Benzin, none El, so it is applied globally
+# rather than kept in the per-make table below.
+HYBRID_PATTERNS = ["%hybrid%", "%plug-in%", "%plug in%", "%phev%", "%hsd%"]
 
 # "HEV" (Hybrid Electric Vehicle) is a real, plain-English self-charging-
 # hybrid badge used across several makes (Suzuki Vitara/SX4 S-Cross, Ford
