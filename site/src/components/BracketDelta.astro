@@ -1,0 +1,68 @@
+---
+// The value argument: cars that cost the same to buy do not cost the same
+// to keep. Reuses the same candidate rule as the lists below it (rank-
+// eligible, depreciation_available only), so the headline can never claim a
+// gap the lists don't also support. See getBracketDelta's own comment for
+// why the depreciation filter is what it is.
+//
+// data-field spans mirror the convention CarRow.astro already uses for the
+// mileage control: MileageControl.astro re-sorts the lists client-side when
+// the reader picks a different annual distance, and without a matching
+// recompute here the headline would freeze at the 15,000 km figure while
+// the ranking underneath it moves, which is worse than not shipping this
+// section at all.
+import { getBracketDelta, kr, yearsNum } from "../lib/data";
+import { UI, type Lang } from "../i18n";
+
+interface Props {
+  bracketId: string;
+  lang: Lang;
+}
+
+const { bracketId, lang } = Astro.props;
+const t = UI[lang].bracketDelta;
+const delta = getBracketDelta(bracketId);
+---
+
+{delta && (
+  <div class="bracket-delta card" data-bracket-delta>
+    <p class="eyebrow">{t.eyebrow}</p>
+    <p class="delta-headline" data-field="delta-headline">{t.headline(kr(delta.totalGap))}</p>
+    <p class="delta-body" data-field="delta-body">
+      {t.body(
+        `${delta.best.makeDisplay} ${delta.best.modelDisplay}`,
+        delta.best.band_years,
+        kr(delta.best.tco_per_year),
+        `${delta.worst.makeDisplay} ${delta.worst.modelDisplay}`,
+        delta.worst.band_years,
+        kr(delta.worst.tco_per_year),
+        kr(delta.gapPerYear),
+        t.horizonLabel(yearsNum(delta.horizonYears, lang)),
+        kr(delta.totalGap)
+      )}
+    </p>
+  </div>
+)}
+
+<style>
+  .bracket-delta {
+    padding: 18px 22px;
+    margin: 18px 0;
+    border-left: 3px solid var(--accent);
+  }
+  .delta-headline {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 800;
+    line-height: 1.25;
+    margin: 0 0 10px;
+    color: var(--ink);
+  }
+  .delta-body {
+    margin: 0;
+    max-width: 68ch;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+</style>

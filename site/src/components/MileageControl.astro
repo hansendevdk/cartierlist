@@ -20,6 +20,7 @@ interface Props {
 }
 const { lang = "en" } = Astro.props;
 const s = UI[lang].mileage;
+const d = UI[lang].bracketDelta;
 
 const slopeFact = methodology.find((m) => m.fact.startsWith("Mileage adjustment slope"));
 const MILEAGE_SLOPE = Number(slopeFact?.value ?? "0") / 100;
@@ -27,6 +28,26 @@ const MILEAGE_SLOPE = Number(slopeFact?.value ?? "0") / 100;
 const PRESETS = [5000, 10000, 15000, 20000, 30000];
 const DEFAULT_KM = 15000;
 const YEAR_SUFFIX = s.perYearSuffix;
+
+// BracketDelta's headline only exists on bracket pages, but the same
+// component ships to running-costs.astro too, so its sentence templates are
+// built here rather than assuming the element exists. Filling each i18n
+// slot with a unique token and doing plain string replacement client-side
+// means the recomputed headline is worded from the exact same copy as the
+// server-rendered one, not a second hand-maintained copy of it.
+const HEADLINE_TEMPLATE = d.headline("__TOTAL__");
+const HORIZON_TEMPLATE = d.horizonLabel("__N__");
+const BODY_TEMPLATE = d.body(
+  "__BEST_NAME__",
+  "__BEST_YEARS__",
+  "__BEST_COST__",
+  "__WORST_NAME__",
+  "__WORST_YEARS__",
+  "__WORST_COST__",
+  "__GAP__",
+  "__HORIZON__",
+  "__TOTAL__"
+);
 ---
 
 <div class="mileage-control">
@@ -91,7 +112,7 @@ const YEAR_SUFFIX = s.perYearSuffix;
   }
 </style>
 
-<script define:vars={{ MILEAGE_SLOPE, DEFAULT_KM, YEAR_SUFFIX }}>
+<script define:vars={{ MILEAGE_SLOPE, DEFAULT_KM, YEAR_SUFFIX, LANG: lang, HEADLINE_TEMPLATE, HORIZON_TEMPLATE, BODY_TEMPLATE }}>
   const BASE_KM = 15000;
   const SLOPE = MILEAGE_SLOPE;
 
@@ -187,7 +208,54 @@ const YEAR_SUFFIX = s.perYearSuffix;
     }));
   }
 
+  function yearsNum(value) {
+    const str = String(value);
+    return LANG === "da" ? str.replace(".", ",") : str;
+  }
+
+  // BracketDelta's headline states a best-vs-worst gap over the same
+  // candidate rows as the "cost" list (rank-eligible, depreciation
+  // available), so it goes stale exactly like that list does when the
+  // reader changes annual distance. Recomputed from the "cost" container's
+  // own rows rather than a separate data source, so it can never disagree
+  // with what's ranked underneath it.
+  function updateBracketDelta(K) {
+    const section = document.querySelector("[data-bracket-delta]");
+    if (!section) return;
+    const costList = document.querySelector('[data-list-mode="cost"]');
+    if (!costList) return;
+    const rows = Array.from(costList.querySelectorAll(".car-row")).filter((row) => row.dataset.dep === "1");
+    if (rows.length < 2) return;
+
+    const withTco = rows.map((row) => ({ row, tco: tcoPerYear(row, K) })).sort((a, b) => a.tco - b.tco);
+    const best = withTco[0];
+    const worst = withTco[withTco.length - 1];
+    const bestHold = num(best.row, "hold") ?? 0;
+    const worstHold = num(worst.row, "hold") ?? 0;
+    const horizon = Math.min(bestHold, worstHold);
+    const gapPerYear = worst.tco - best.tco;
+    const totalGap = Math.round(gapPerYear * horizon);
+
+    const headlineEl = section.querySelector('[data-field="delta-headline"]');
+    if (headlineEl) headlineEl.textContent = HEADLINE_TEMPLATE.replace("__TOTAL__", kr(totalGap));
+
+    const bodyEl = section.querySelector('[data-field="delta-body"]');
+    if (bodyEl) {
+      const horizonPhrase = HORIZON_TEMPLATE.replace("__N__", yearsNum(horizon));
+      bodyEl.textContent = BODY_TEMPLATE.replace("__BEST_NAME__", best.row.dataset.name)
+        .replace("__BEST_YEARS__", best.row.dataset.bandYears)
+        .replace("__BEST_COST__", kr(best.tco))
+        .replace("__WORST_NAME__", worst.row.dataset.name)
+        .replace("__WORST_YEARS__", worst.row.dataset.bandYears)
+        .replace("__WORST_COST__", kr(worst.tco))
+        .replace("__GAP__", kr(gapPerYear))
+        .replace("__HORIZON__", horizonPhrase)
+        .replace("__TOTAL__", kr(totalGap));
+    }
+  }
+
   function applyMileage(K) {
+    updateBracketDelta(K);
     document.querySelectorAll("[data-list-mode]").forEach((container) => {
       const mode = container.dataset.listMode;
       const rows = Array.from(container.querySelectorAll(".car-row"));

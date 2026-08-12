@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import CarRow from "../../components/CarRow.astro";
+import BracketDelta from "../../components/BracketDelta.astro";
 import FuelFilterToggle from "../../components/FuelFilterToggle.astro";
 import MileageControl from "../../components/MileageControl.astro";
 import { BRACKET_IDS, bracketLabel, bandLabel, getBracketLists } from "../../lib/data";
@@ -39,6 +40,8 @@ const { cars, byCost, byValue, bandsPresent, hasRunningCostOnly } = getBracketLi
         <a href={getRelativeLocaleUrl(lang, "/methodology")}>methodology page</a> for the full picture.
       </p>
     )}
+
+    <BracketDelta bracketId={bracketId} lang={lang} />
 
     <FuelFilterToggle lang={lang} />
     <MileageControl lang={lang} />

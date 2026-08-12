@@ -62,6 +62,8 @@ const annualRepair =
   data-ejer={car.median_annual_ejerafgift_dkk ?? ""}
   data-repair={annualRepair}
   data-eng={car.engagement_score ?? ""}
+  data-name={`${car.makeDisplay} ${car.modelDisplay}`}
+  data-band-years={car.band_years}
 >
   <span class="rank num">{rank}</span>
   <TierBadge tier={tier} />

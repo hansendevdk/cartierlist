@@ -77,6 +77,23 @@ export const UI = {
       note: "Changes fuel cost and how much resale value erodes with distance. Ownership tax and the repair estimate stay flat per year regardless of mileage, so a high-mileage pick understates cost a little. Ranks and tiers below update to match.",
       perYearSuffix: "/year",
     },
+    bracketDelta: {
+      eyebrow: "The value argument",
+      headline: (total: string) => `${total} apart, for cars that cost the same to buy.`,
+      horizonLabel: (n: string) => `${n} years`,
+      body: (
+        bestName: string,
+        bestYears: string,
+        bestCost: string,
+        worstName: string,
+        worstYears: string,
+        worstCost: string,
+        gapPerYear: string,
+        horizon: string,
+        total: string
+      ) =>
+        `A ${bestName} (${bestYears}) costs ${bestCost} a year to own in this bracket. A ${worstName} (${worstYears}) costs ${worstCost}, that is ${gapPerYear} more every year. Over the ${horizon} the data covers for both cars, that adds up to ${total}. They are not the same kind of car: a bigger or newer model will typically cost more to run than a smaller one. But they cost the same to buy. Same money out of your pocket at purchase, very different money over the years that follow.`,
+    },
     chart: {
       xTitle: "Purchase price (kr)",
       yTitle: "Running cost (kr/year)",
@@ -160,6 +177,23 @@ export const UI = {
       default: "(standard)",
       note: "Ændrer brændstofudgiften og hvor meget gensalgsværdien falder med kilometrene. Grøn ejerafgift og reparationsestimatet er faste per år uanset kilometertal, så et højt valg undervurderer prisen en smule. Placeringer og niveauer nedenfor opdateres.",
       perYearSuffix: "/år",
+    },
+    bracketDelta: {
+      eyebrow: "Værdiargumentet",
+      headline: (total: string) => `${total} fra hinanden, for biler der koster det samme at købe.`,
+      horizonLabel: (n: string) => `${n} år`,
+      body: (
+        bestName: string,
+        bestYears: string,
+        bestCost: string,
+        worstName: string,
+        worstYears: string,
+        worstCost: string,
+        gapPerYear: string,
+        horizon: string,
+        total: string
+      ) =>
+        `En ${bestName} (${bestYears}) koster ${bestCost} om året at eje i denne prisklasse. En ${worstName} (${worstYears}) koster ${worstCost}, altså ${gapPerYear} mere om året. Over de ${horizon}, som tallene dækker for begge biler, bliver det til ${total}. De er ikke samme slags bil: en større eller nyere model koster typisk mere i drift end en mindre. Men de koster det samme at købe. Samme beløb ud af lommen ved købet, vidt forskelligt beløb i årene der følger.`,
     },
     chart: {
       xTitle: "Købspris (kr)",

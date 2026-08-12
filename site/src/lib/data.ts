@@ -231,6 +231,44 @@ export function getBracketLists(bracketId: string) {
   return { cars, byCost, byValue, bandsPresent, hasRunningCostOnly };
 }
 
+export interface BracketDelta {
+  best: RankedCar;
+  worst: RankedCar;
+  gapPerYear: number;
+  horizonYears: number;
+  totalGap: number;
+}
+
+// The value argument: same money at purchase, different money to keep it.
+// Candidates require depreciation_available: true. 129 rank-eligible rows
+// are old enough that the pipeline has no later resale price for them, so
+// their tco_per_year is running costs only, with no depreciation in it
+// (they carry the asterisk in the lists for the same reason). Comparing one
+// of those against a fully priced row would pit a partial cost against a
+// full one and inflate the gap. horizonYears is a min of both cars'
+// hold_years, not a constant, because hold_years varies per row (3.5, 6,
+// 6.5) and multiplying a shorter-horizon row out past that overstates a
+// total the pipeline never modelled.
+export function getBracketDelta(bracketId: string): BracketDelta | null {
+  const eligible = carsInBracket(bracketId).filter((c) => c.depreciation_available === true);
+  if (eligible.length < 2) return null;
+  const sorted = [...eligible].sort((a, b) => a.tco_per_year - b.tco_per_year);
+  const best = sorted[0];
+  const worst = sorted[sorted.length - 1];
+  const gapPerYear = worst.tco_per_year - best.tco_per_year;
+  const horizonYears = Math.min(best.hold_years ?? 0, worst.hold_years ?? 0);
+  return { best, worst, gapPerYear, horizonYears, totalGap: Math.round(gapPerYear * horizonYears) };
+}
+
+// hold_years carries a genuine decimal (3.5, 6.5), unlike everything else
+// this file formats. kr()/num() round to a whole number by design; this
+// only swaps the decimal separator, so "3.5" and "6" both print correctly
+// in Danish (3,5 / 6) instead of being rounded into each other.
+export function yearsNum(value: number, lang: Lang): string {
+  const str = String(value);
+  return lang === "da" ? str.replace(".", ",") : str;
+}
+
 export function getSiblingAges(car: { modelSlug: string; slug: string }, priced: boolean) {
   return priced
     ? rankings.filter((r) => r.modelSlug === car.modelSlug && r.slug !== car.slug)
