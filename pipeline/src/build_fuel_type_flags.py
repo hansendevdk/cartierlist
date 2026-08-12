@@ -40,7 +40,13 @@ OUT_CSV = REFERENCE / "model_age_band_fuel_flags.csv"
 
 
 def normalize_key(model: str) -> str:
-    return re.sub(r"\s+", "", model.lower())
+    # Must match fix_case_duplicate_models.py's normalize_key exactly, since
+    # this function's whole job is looking up that script's canonical
+    # spelling. Whitespace-only stripping missed the Kia Cee'd SW pair
+    # ("CEE'D SW" vs "CEED SW", an apostrophe-only difference), so a raw
+    # vehicle recorded under the non-canonical spelling would silently fail
+    # this lookup and stay unfolded instead of joining the merged row.
+    return re.sub(r"[^a-z0-9]", "", model.lower())
 
 AGE_BANDS = [
     (1, 2020, 2022),

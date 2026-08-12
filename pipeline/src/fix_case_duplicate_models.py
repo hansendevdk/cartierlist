@@ -60,7 +60,16 @@ WEIGHTED_FIELDS = [
 
 
 def normalize_key(model: str) -> str:
-    return re.sub(r"\s+", "", model.lower())
+    # Whitespace-only stripping missed the Kia Cee'd SW case: "CEE'D SW" vs
+    # "CEED SW" differ only by an apostrophe, so they never even landed in the
+    # same group to be considered for merging, a narrower kind of duplicate
+    # than the case/whitespace pairs already handled (FOCUS/Focus, C1/C 1,
+    # 500C/500 C, I10/I 10). Stripping all non-alphanumeric characters covers
+    # that case too. This is still safe: the normalized key only decides who
+    # gets compared, the DVSA-field-equality assertion below decides who
+    # actually merges, so a coincidental key collision between two genuinely
+    # different cars would still be caught rather than silently merged.
+    return re.sub(r"[^a-z0-9]", "", model.lower())
 
 
 def main() -> None:

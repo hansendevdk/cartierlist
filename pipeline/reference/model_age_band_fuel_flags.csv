@@ -239,13 +239,13 @@ HYUNDAI,i10 AC3,1,1669,0.0,0.0,False,False
 HYUNDAI,i30 Stc.,1,1908,0.0341,0.0,False,False
 HYUNDAI,i30 Stc.,2,1820,0.2549,0.0,False,False
 HYUNDAI,i30 Stc.,3,1,1.0,0.0,True,False
-KIA,CEE'D SW,1,1,0.0,0.0,False,False
-KIA,CEE'D SW,3,3,0.3333,0.0,False,False
+KIA,CEE'D SW,3,4,0.5,0.0,False,False
 KIA,CEE'D SW,4,4765,0.8348,0.0,True,False
 KIA,CEED,1,12988,0.0164,0.3958,False,True
 KIA,CEED,2,4837,0.4031,0.0,False,False
 KIA,CEED,3,4751,0.5397,0.0,True,False
 KIA,CEED,4,3368,0.6306,0.0,True,False
+KIA,CEED SW,1,50,0.0,0.86,False,True
 KIA,Niro,1,8204,0.0,0.4629,False,True
 KIA,Niro,2,4436,0.0,0.8922,False,True
 KIA,Niro,3,15,0.0,1.0,False,True
