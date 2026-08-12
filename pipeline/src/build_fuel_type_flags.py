@@ -55,7 +55,19 @@ AGE_BANDS = [
     (4, 2010, 2013),
 ]
 
-HYBRID_PATTERNS = ["%hybrid%", "%plug-in%", "%plug in%", "%phev%"]
+# Audi's plug-in hybrid badge never says "hybrid", "plug-in", or "phev": it is
+# "TFSI e" (seen both spaced, "40 TFSI e", and unspaced, "40 TFSIe") or
+# "e-tron" (e.g. "40 E-TRON", "1,4 E-TRON"). tfsie/tfsi e together cover both
+# spellings seen in real DMR data. e-tron is safe against Audi's separate,
+# fully-electric e-tron SUV line: this script only ever runs against vehicles
+# already scoped to fuel_type_primary != 'El' upstream (see build_dk_fleet.py),
+# so any vehicle this pattern can reach is recorded under a combustion fuel
+# type despite the e-tron badge, meaning it is a plug-in hybrid recorded the
+# way DMR records hybrids in this dataset, not a pure EV.
+HYBRID_PATTERNS = [
+    "%hybrid%", "%plug-in%", "%plug in%", "%phev%",
+    "%tfsie%", "%tfsi e%", "%e-tron%",
+]
 
 DIESEL_THRESHOLD = 0.5
 HYBRID_THRESHOLD = 0.3
