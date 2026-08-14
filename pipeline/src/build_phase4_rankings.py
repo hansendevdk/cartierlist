@@ -412,7 +412,7 @@ def main() -> None:
         {"fact": "Rows in the final bracket ranking, rank-eligible", "value": f"{n_ranked} of {len(out_rows)}", "source": "model_bracket_rankings.csv", "date": "2026-07-31"},
         {"fact": "Suzuki/DS models still unpriced (no real price found yet)", "value": n_suzuki_ds_unpriced, "source": "suzuki_ds_price_anchors.csv", "date": "2026-07-31"},
         {"fact": "Repair cost constant (DKK per burden-unit-year)", "value": repair_const, "source": "repair_cost_constant.csv", "date": "2026-07-31"},
-        {"fact": "Rows flagged hybrid (trim name mentions hybrid/plug-in/PHEV)", "value": sum(1 for r in out_rows if r["is_hybrid"]), "source": "model_age_band_fuel_flags.csv", "date": "2026-07-31"},
+        {"fact": "Rows flagged hybrid (trim badge, or petrol economy too high for a combustion engine)", "value": sum(1 for r in out_rows if r["is_hybrid"]), "source": "model_age_band_fuel_flags.csv", "date": "2026-07-31"},
         {"fact": "Rows flagged diesel-dominant (over half the cell is diesel)", "value": sum(1 for r in out_rows if r["is_diesel_dominant"]), "source": "model_age_band_fuel_flags.csv", "date": "2026-07-31"},
         {"fact": "Mileage adjustment slope (%/10,000 km)", "value": round(mileage_slope * 100, 2), "source": "price_estimates_calibrated.csv", "date": "2026-07-31"},
     ]
