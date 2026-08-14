@@ -288,11 +288,19 @@ def build_dvsa_eligible_tests(con: duckdb.DuckDBPyConnection) -> dict:
     # earlier (by test_date) for the same vehicle_id. Computed once per
     # physical test_id -- vehicle_id/test_date/test_mileage_km are properties
     # of the physical test, not of which DMR model later claims it.
+    #
+    # ORDER BY test_date alone is not a total order: a vehicle with two tests
+    # on the same date has its relative order inside the window frame left
+    # unspecified, so which of the two counted as "earlier" (and therefore
+    # which later test could be flagged clocked against it) varied between
+    # runs on identical data. test_id breaks the tie deterministically: it is
+    # unique per physical test (dvsa_physical_tests is deduplicated on it,
+    # see above), so adding it makes the ordering total.
     con.execute("""
         CREATE OR REPLACE TABLE dvsa_clocking_flag AS
         SELECT test_id,
                test_mileage_km < MAX(test_mileage_km) OVER (
-                   PARTITION BY vehicle_id ORDER BY test_date
+                   PARTITION BY vehicle_id ORDER BY test_date, test_id
                    ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING
                ) AS is_clocked
         FROM dvsa_physical_tests
