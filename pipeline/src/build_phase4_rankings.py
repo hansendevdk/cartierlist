@@ -276,6 +276,11 @@ def main() -> None:
             "price_pooled_at_brand": pooled,
             "price_calibration_factor": entry.get("calibration_factor_applied", ""),
             "price_confidence": price_confidence(n_listings, pooled),
+            # Empty for every normal (Poland-sourced) row. Only set for the Suzuki/DS
+            # rows build_suzuki_ds_prices.py produces, so the site can tell the two
+            # pricing mechanisms apart and describe each honestly instead of always
+            # narrating the foreign-listings path.
+            "donor_model": entry.get("donor_model", ""),
             "excluded_from_rank": excluded_from_rank,
             "excluded_from_running_cost_rank": excluded_from_running_cost_rank,
             "exclusion_reason": exclusion_reason,

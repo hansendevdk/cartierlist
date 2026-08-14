@@ -55,6 +55,10 @@ export interface RankedCar {
   value_for_money_tier: "S" | "A" | "B" | "C" | "D" | null;
   is_hybrid: boolean;
   is_diesel_dominant: boolean;
+  // Set only for the Suzuki/DS rows priced by borrowing a donor model's
+  // depreciation curve (see build_suzuki_ds_prices.py); null for every
+  // normal, foreign-listings-priced row. Drives which confidence copy shows.
+  donor_model: string | null;
   makeDisplay: string;
   modelDisplay: string;
   slug: string;

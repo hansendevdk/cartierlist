@@ -6,6 +6,7 @@ import TierBadge from "../../components/TierBadge.astro";
 import { rankings, unpriced, bracketLabel, getSiblingAges, reliabilityNote, kr, pct, km } from "../../lib/data";
 import type { RankedCar } from "../../lib/data";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { UI } from "../../i18n";
 
 const lang = "en" as const;
 
@@ -109,12 +110,18 @@ const siblingAges = getSiblingAges(car, priced);
       <div class="confidence card">
         <p class="eyebrow">How sure are we about the price?</p>
         <p>
-          <strong class="cap">{car.price_confidence}</strong> confidence.
-          Based on {car.price_n_listings} comparable foreign listings
-          {car.price_pooled_at_brand ? ", pooled across the whole brand rather than this specific model (fewer listings meant we had to borrow the brand's overall price pattern)" : ""}.
-          The final number is adjusted with a correction factor of {Number(car.price_calibration_factor).toFixed(2)}x
-          found by checking a sample of Danish asking prices against our raw estimate.
-          Read more on the <a href={getRelativeLocaleUrl(lang, "/methodology") + "#pricing"}>methodology page</a>.
+          <strong class="cap">{car.price_confidence}</strong> confidence.{" "}
+          {car.donor_model ? (
+            UI[lang].confidence.donorBased(car.makeDisplay, car.donor_model)
+          ) : (
+            <>
+              Based on {car.price_n_listings} comparable foreign listings
+              {car.price_pooled_at_brand ? ", pooled across the whole brand rather than this specific model (fewer listings meant we had to borrow the brand's overall price pattern)" : ""}.
+              The final number is adjusted with a correction factor of {Number(car.price_calibration_factor).toFixed(2)}x
+              found by checking a sample of Danish asking prices against our raw estimate.
+            </>
+          )}
+          {" "}Read more on the <a href={getRelativeLocaleUrl(lang, "/methodology") + "#pricing"}>methodology page</a>.
         </p>
       </div>
     )}

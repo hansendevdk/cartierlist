@@ -36,6 +36,15 @@ export const UI = {
       runningOnlyTitle: "Running costs only, no resale data available",
       pts: (n: number) => `${n} pts`,
     },
+    // Only for the 14 Suzuki/DS rows priced by borrowing a donor model's
+    // depreciation curve rather than from foreign listings (see
+    // build_suzuki_ds_prices.py). Every other row's confidence prose is
+    // hardcoded inline in the car page instead, since it never needs this
+    // second version.
+    confidence: {
+      donorBased: (make: string, donor: string) =>
+        `Based on a real Danish asking price found by hand for this model, not a foreign listing. Poland's listings, the market this site prices every other model from, carry no ${make} rows at all, so there's no depreciation curve to read off there. The shape of how value falls with age is instead borrowed from a comparable model, the ${donor}. Only the starting price level is a real Danish figure.`,
+    },
     evidence: {
       label: "What these numbers are built on",
       motTests: "UK MOT tests",
@@ -136,6 +145,10 @@ export const UI = {
       dieselLabel: "diesel",
       runningOnlyTitle: "Kun driftsomkostninger, ingen gensalgsdata",
       pts: (n: number) => `${n} point`,
+    },
+    confidence: {
+      donorBased: (make: string, donor: string) =>
+        `Baseret på en rigtig dansk udbudspris, fundet i hånden for denne model, ikke en udenlandsk annonce. Det polske marked, som resten af siden bruger til at prissætte biler, har slet ingen ${make}-annoncer, så der er ingen værditabskurve at læse dér. Faldet i værdi med alderen er i stedet lånt fra en sammenlignelig model, en ${donor}. Det er kun startprisen, der er et reelt dansk tal.`,
     },
     evidence: {
       label: "Hvad tallene bygger på",

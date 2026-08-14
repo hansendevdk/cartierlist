@@ -39,6 +39,17 @@ function titleCaseModel(raw) {
     .join(" ");
 }
 
+// donor_model comes out of the pipeline as a single raw "MAKE MODEL" string
+// (e.g. "TOYOTA YARIS"); every current donor has a one-word make, so the
+// first token is safe to split off. Reuses the same display helpers as the
+// donor's own page, so a mention here reads exactly like that model does
+// anywhere else on the site.
+function formatDonor(raw) {
+  if (!raw) return null;
+  const [make, ...modelParts] = raw.split(" ");
+  return `${MAKE_DISPLAY[make] ?? make} ${titleCaseModel(modelParts.join(" "))}`;
+}
+
 function slugify(make, model) {
   return `${make}-${model}`
     .toLowerCase()
@@ -82,6 +93,7 @@ const rankings = rankingsRaw.map((r) => ({
   modelDisplay: titleCaseModel(r.dmr_model),
   slug: slugify(r.dmr_make, r.dmr_model) + "--band" + r.age_band,
   modelSlug: slugify(r.dmr_make, r.dmr_model),
+  donor_model: formatDonor(r.donor_model),
 }));
 writeFileSync(path.join(OUT_DIR, "rankings.json"), JSON.stringify(rankings));
 
