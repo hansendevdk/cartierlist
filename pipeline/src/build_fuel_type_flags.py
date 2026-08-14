@@ -179,6 +179,38 @@ MAKE_HYBRID_CONDITIONS: dict[str, str] = {
     "RENAULT": "(lower(v.variant_name) LIKE '%e-tech%' AND lower(v.variant_name) NOT LIKE '%electric%')",
 }
 
+# Independent, non-text signal for the same thing the patterns above are
+# trying to catch. Some makes badge a plug-in hybrid with no hybrid wording
+# at all: Opel's Grandland X plug-in drivetrain is sold only as "1.6 225 A8
+# SUV" / "1,6 300 A8 SUV" (power output, nothing else), and several makes use
+# a raw factory part code as the trim string (Kia Niro "C5P21", Hyundai Ioniq
+# "B5P21", Volvo XC40 "XZBB"). No pattern list can ever match those, because
+# there is no hybrid-related text present to match. km_per_liter_primary is a
+# WLTP/NEDC combined figure that credits part of a plug-in hybrid's test
+# distance as electric-only, so it lands at a level no combustion engine can
+# reach: 30 sits above both the best genuinely non-hybrid petrol cars on sale
+# (21-24 km/l) and this dataset's own p90 for in-scope Benzin vehicles
+# (28.1 km/l), with the plug-in population starting at 31 and running to 85.
+# Restricted to Benzin only, on purpose: ordinary economical small diesels
+# clear 30 km/l with no electrification whatsoever (Peugeot 208 BlueHDi sits
+# at 33.3 km/l across 26,660 vehicles), so the same cutoff on Diesel would
+# flag the least efficient signal, not the most. Benzin-only also excludes
+# El vehicles for free, since those read 70-85 km/l on this field.
+#
+# Known, accepted residual: a handful of genuinely non-hybrid small petrol
+# cars also clear 30 km/l on their older NEDC-cycle rating (Fiat 500 1.0,
+# VW Up! 1.0, Kia Picanto, Toyota Aygo, Peugeot 108 and similar), roughly 40
+# vehicles spread across about 29 model groups. Left as-is rather than tuned
+# away: each group is a handful of vehicles inside a model denominator of
+# thousands, so none of them can flip a model-level is_hybrid badge (checked
+# directly, they don't), and raising the cutoff to remove them would drop
+# real, currently-unbadged plug-in hybrids instead, since VW Golf and Passat
+# GTE (rated at their 204/218 combined system output, the exact unbadged
+# case this rule exists for) sit at 31 to 34 km/l, right where that noise
+# lives. Same tradeoff already accepted elsewhere in this file, see the
+# Renault entry above.
+PETROL_KML_HYBRID_THRESHOLD = 30
+
 DIESEL_THRESHOLD = 0.5
 HYBRID_THRESHOLD = 0.3
 
@@ -200,7 +232,10 @@ def main() -> None:
         f"(v.make_name = '{make}' AND {condition})"
         for make, condition in MAKE_HYBRID_CONDITIONS.items()
     )
-    hybrid_clause = f"({global_clause}) OR {hev_clause} OR {make_clause}"
+    kml_clause = (
+        f"(v.fuel_type_primary = 'Benzin' AND v.km_per_liter_primary > {PETROL_KML_HYBRID_THRESHOLD})"
+    )
+    hybrid_clause = f"({global_clause}) OR {hev_clause} OR {make_clause} OR {kml_clause}"
 
     rows = con.execute(f"""
         WITH covered_models AS (

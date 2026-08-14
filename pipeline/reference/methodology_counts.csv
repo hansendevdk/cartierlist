@@ -10,6 +10,6 @@ Real Danish listings used to calibrate prices,27,calibration_prices.csv,2026-07-
 "Rows in the final bracket ranking, rank-eligible",535 of 667,model_bracket_rankings.csv,2026-07-31
 Suzuki/DS models still unpriced (no real price found yet),7,suzuki_ds_price_anchors.csv,2026-07-31
 Repair cost constant (DKK per burden-unit-year),3000.0,repair_cost_constant.csv,2026-07-31
-Rows flagged hybrid (trim name mentions hybrid/plug-in/PHEV),64,model_age_band_fuel_flags.csv,2026-07-31
+Rows flagged hybrid (trim name mentions hybrid/plug-in/PHEV),65,model_age_band_fuel_flags.csv,2026-07-31
 Rows flagged diesel-dominant (over half the cell is diesel),258,model_age_band_fuel_flags.csv,2026-07-31
 "Mileage adjustment slope (%/10,000 km)",3.91,price_estimates_calibrated.csv,2026-07-31
