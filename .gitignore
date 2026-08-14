@@ -22,3 +22,6 @@ dist/
 # claude code harness state
 .claude/
 .serena/
+
+# working notes, not part of the site's published methodology docs
+reports/handover_*.md
