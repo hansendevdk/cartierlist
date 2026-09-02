@@ -191,11 +191,15 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
       overall shape of the site's findings should hold.
     </p>
 
-    <h2 id="pricing-heading">How we estimate a used price without scraping Danish listing sites</h2>
+    <h2 id="pricing-heading">How we estimate a used price</h2>
     <p>
-      We don't have permission to pull prices from Bilbasen or DBA, and Denmark doesn't publish
-      a public database of used car prices. So we built an estimate instead of leaving prices out
-      entirely, and then checked that estimate against reality.
+      Bilbasen and DBA's listing databases are protected under EU database right law, and Denmark
+      doesn't publish a public database of used car prices either. Bulk copying either site's
+      listings is off the table. So we built an estimate instead of leaving prices out entirely,
+      and then checked that estimate against a small number of real Danish asking prices: mostly
+      collected by hand, filled out where needed with a handful of individual, rate-limited
+      searches on Bilbasen and DBA, no different in scale from a buyer checking a few listings by
+      hand, never a bulk pull of either site's database.
     </p>
     <ol class="method-steps">
       <li>
@@ -215,9 +219,11 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
       </li>
       <li>
         <strong>Checked the result against the Danish market</strong>: asking prices
-        we looked up by hand across a spread of common models and price levels, and corrected
-        the whole estimate by the gap we found. Cars under 150,000 kr were corrected separately
-        from cars above it, since the gap wasn't quite the same size at both ends.
+        we collected by hand and, for models we couldn't otherwise find enough of, through a
+        small number of individual searches on Bilbasen and DBA, across a spread of common
+        models and price levels, and corrected the whole estimate by the gap we found. Cars
+        under 150,000 kr were corrected separately from cars above it, since the gap wasn't
+        quite the same size at both ends.
       </li>
     </ol>
     <p>
@@ -279,7 +285,7 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
 
     <h2>What we won't do</h2>
     <ul>
-      <li>We don't scrape Bilbasen, DBA or any other classifieds site. Their listing databases are protected by EU database right law, and there's no public API.</li>
+      <li>We don't build a bulk copy of Bilbasen, DBA or any other classifieds site's listing database. Those are protected by EU database right law, and there's no public API. A small number of individual, rate-limited searches to fill gaps in our own price calibration is not that, and we don't republish what those searches return.</li>
       <li>We don't pull TÜV Report or ADAC Pannenstatistik tables. Those are copyrighted; we can mention their published headline findings in prose, not reproduce their data.</li>
       <li>We don't rank battery electric cars in this version. There isn't enough age-band data yet to do it fairly.</li>
     </ul>

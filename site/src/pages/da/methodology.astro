@@ -196,11 +196,15 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
       prisklasse rykke sig, men det overordnede billede burde holde.
     </p>
 
-    <h2 id="pricing-heading">Sådan estimerer vi en brugtpris uden at scrape danske bilsider</h2>
+    <h2 id="pricing-heading">Sådan estimerer vi en brugtpris</h2>
     <p>
-      Vi har ikke lov til at hente priser fra Bilbasen eller DBA, og Danmark udgiver ikke en
-      offentlig database over brugtbilpriser. Så vi byggede et estimat i stedet for at droppe
-      priser helt, og holdt derefter estimatet op mod virkeligheden.
+      Bilbasen og DBA's annoncedatabaser er beskyttet af EU's databaseret, og Danmark udgiver
+      heller ikke en offentlig database over brugtbilpriser. At kopiere hele databasen fra
+      nogen af siderne er ikke en mulighed. Så vi byggede et estimat i stedet for at droppe
+      priser helt, og holdt derefter estimatet op mod et lille antal rigtige danske udbudspriser:
+      mest indsamlet i hånden, suppleret hvor nødvendigt med et fåtal individuelle,
+      hastighedsbegrænsede opslag på Bilbasen og DBA, ikke i større skala end en køber, der
+      selv tjekker et par annoncer, aldrig en samlet udtrækning af nogen af sidernes database.
     </p>
     <ol class="method-steps">
       <li>
@@ -220,10 +224,12 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
         begrænsninger" nedenfor.
       </li>
       <li>
-        <strong>Holdt resultatet op mod det danske marked</strong>: udbudspriser vi slog op i
-        hånden på tværs af en række almindelige modeller og prisniveauer, og korrigerede hele
-        estimatet med den forskel, vi fandt. Biler under 150.000 kr blev korrigeret for sig og
-        biler over for sig, for forskellen var ikke helt lige stor i begge ender.
+        <strong>Holdt resultatet op mod det danske marked</strong>: udbudspriser vi indsamlede
+        i hånden og, for de modeller vi ikke ellers kunne finde nok af, gennem et lille antal
+        individuelle opslag på Bilbasen og DBA, på tværs af en række almindelige modeller og
+        prisniveauer, og korrigerede hele estimatet med den forskel, vi fandt. Biler under
+        150.000 kr blev korrigeret for sig og biler over for sig, for forskellen var ikke helt
+        lige stor i begge ender.
       </li>
     </ol>
     <p>
@@ -285,7 +291,7 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
 
     <h2>Hvad vi ikke gør</h2>
     <ul>
-      <li>Vi scraper ikke Bilbasen, DBA eller andre annoncesider. Deres annoncedatabaser er beskyttet af EU's databaseret, og der findes ikke noget offentligt API.</li>
+      <li>Vi laver ikke en samlet kopi af Bilbasen, DBA eller andre annoncesiders database. Den slags er beskyttet af EU's databaseret, og der findes ikke noget offentligt API. Et lille antal individuelle, hastighedsbegrænsede opslag for at udfylde huller i vores egen priskalibrering er ikke det, og vi gengiver ikke det, de opslag returnerer.</li>
       <li>Vi henter ikke tabeller fra TÜV Report eller ADAC Pannenstatistik. De er ophavsretligt beskyttet. Vi må omtale deres offentliggjorte hovedkonklusioner i tekst, ikke gengive deres data.</li>
       <li>Vi rangerer ikke elbiler i denne version. Der er endnu ikke data nok på tværs af aldersgrupper til at gøre det fair.</li>
     </ul>
