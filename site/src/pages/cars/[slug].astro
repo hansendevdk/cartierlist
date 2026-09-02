@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import LedgerBreakdown from "../../components/LedgerBreakdown.astro";
 import EvidenceStrip from "../../components/EvidenceStrip.astro";
 import TierBadge from "../../components/TierBadge.astro";
-import { rankings, unpriced, bracketLabel, getSiblingAges, reliabilityNote, kr, pct, km } from "../../lib/data";
+import { rankings, unpriced, bracketLabel, getSiblingAges, reliabilityNote, reliabilityConfidenceNote, kr, pct, km } from "../../lib/data";
 import type { RankedCar } from "../../lib/data";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { UI } from "../../i18n";
@@ -122,6 +122,20 @@ const siblingAges = getSiblingAges(car, priced);
             </>
           )}
           {" "}Read more on the <a href={getRelativeLocaleUrl(lang, "/methodology") + "#pricing"}>methodology page</a>.
+        </p>
+      </div>
+    )}
+
+    {car.reliability_confidence && (
+      <div class="confidence card">
+        <p class="eyebrow">How sure are we about reliability?</p>
+        <p>
+          <strong class="cap">{car.reliability_confidence}</strong> confidence
+          {car.reliability_source_count === 2 && car.reliability_agreement !== null ? (
+            <> (two sources, {car.reliability_agreement.toFixed(2)} standard deviations apart)</>
+          ) : null}.{" "}
+          {reliabilityConfidenceNote(car, lang)}{" "}
+          Read more on the <a href={getRelativeLocaleUrl(lang, "/methodology") + "#reliability"}>methodology page</a>.
         </p>
       </div>
     )}

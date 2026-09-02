@@ -36,11 +36,15 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
         in total.
       </li>
       <li>
-        <strong>Reliability.</strong> The UK's public MOT test archive (Ministry of Transport
-        test, the UK's version of Denmark's "syn"), covering {fmt(fact("Eligible DVSA MOT tests"))} eligible
-        tests. Published by the UK Driver and Vehicle Standards Agency under the{" "}
+        <strong>Reliability.</strong> Two national roadworthiness-inspection archives, combined.
+        The UK's public MOT test archive (Ministry of Transport test, the UK's version of
+        Denmark's "syn"), covering {fmt(fact("Eligible DVSA MOT tests"))} eligible tests, published
+        by the UK Driver and Vehicle Standards Agency under the{" "}
         <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" target="_blank" rel="noopener">Open Government Licence v3.0</a>,
-        which permits this kind of use with attribution. This is UK data, see the caveat below.
+        which permits this kind of use with attribution. And Norway's periodic vehicle control
+        (PKK / EU-kontroll), published by Statens vegvesen under{" "}
+        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>,
+        which likewise permits this use with attribution. Both are foreign data, see the caveat below.
       </li>
       <li>
         <strong>Fuel prices.</strong> Circle K's public price API, fetched fresh at build time.
@@ -60,13 +64,13 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
       </li>
     </ul>
 
-    <h2 id="reliability">Reliability comes from UK cars on UK roads</h2>
+    <h2 id="reliability">Reliability comes from foreign cars on foreign roads, checked against each other</h2>
     <p>
       We don't have a public, model-level Danish equivalent of the UK's MOT archive, so
-      reliability comes from UK-market cars: UK roads, UK weather, UK road salt. A model's
-      reliability <em>relative to other models</em> should carry over reasonably well, since it's
-      mostly about how the car itself is built. The exact failure rate might not, since Danish
-      winters and Danish roads differ from the UK's. Treat the ranking
+      reliability comes from foreign-market cars: foreign roads, foreign weather, foreign road
+      salt. A model's reliability <em>relative to other models</em> should carry over reasonably
+      well, since it's mostly about how the car itself is built. The exact failure rate might not,
+      since Danish winters and Danish roads differ from either source country's. Treat the ranking
       between cars as more trustworthy than the exact percentage for any one car.
     </p>
     <p>
@@ -74,6 +78,104 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
       hard isn't unfairly compared to one that's usually driven gently. We only publish a
       reliability figure where there were enough tests to be confident in it. Where there weren't
       enough, we say so rather than show a shaky number.
+    </p>
+    <p>
+      <strong>As of this update, reliability draws on two countries' inspection data, not one.</strong>{" "}
+      We added Norway's periodic vehicle control (PKK) alongside the UK's MOT archive, and checked
+      whether the two agree, rather than assuming a single foreign country is a safe stand-in for
+      Denmark. They partly do, and the honest answer changes by how old the car is.
+    </p>
+    <p>
+      What does <em>not</em> carry over between the two countries is the raw pass rate: Norway's
+      measured pass rate runs 30 to 40 percentage points below the UK's for the same models at the
+      same age, a gap driven by different statutory defect thresholds and tester incentives, not by
+      Norwegian cars actually failing twice as often. So we never average a UK pass rate with a
+      Norwegian one directly. Instead, each country's rate is converted to a standardised score
+      (specifically, the logit of the pass rate, then a z-score) computed separately within each
+      age band and each country, which strips out that country-level offset and keeps only where a
+      model sits relative to its peers in the same country and age band. The two standardised
+      scores are then combined with a weighted average, weighted by how much data backs each one
+      (a UK figure built on 400,000 tests moves the combined score more than a Norwegian figure
+      built on 3,000), never by whether the two sources happen to agree.
+    </p>
+    <p>
+      What does carry over, to varying degrees, is the <em>ordering</em>: whether the UK and
+      Norwegian data agree on which models are more or less reliable than their peers, at the same
+      age. We measured this directly, model by model, within each age band:
+    </p>
+    <table class="agreement-table">
+      <thead>
+        <tr><th>Age band</th><th>Cars this age today</th><th>UK/Norway agreement (rank correlation)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>4 to 6 years</td><td>2020 to 2022</td><td>0.42, weak</td></tr>
+        <tr><td>7 to 9 years</td><td>2017 to 2019</td><td>0.46, weak to moderate</td></tr>
+        <tr><td>10 to 12 years</td><td>2014 to 2016</td><td>0.75, strong</td></tr>
+        <tr><td>13 to 16 years</td><td>2010 to 2013</td><td>0.88, strong</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Read that plainly: for the newest cars on this site, agreement between the two countries is
+      weak, and this data does not strongly support the idea that a UK-based and a Norway-based
+      ranking would put the same young cars at the top. For the oldest cars, the two countries
+      agree closely, and that agreement is real evidence the ranking reflects something about how
+      the car is built, not an artefact of one country's roads. We looked hard for a reason band 1
+      is weaker (fewer tests, a different mix of defects counted) and ruled both out; the honest
+      remaining explanation is that young-car reliability differences are small enough, and swamped
+      enough by local conditions, that a single-country ranking of the newest cars is less
+      trustworthy than it looks.
+    </p>
+    <p>
+      One make group is weaker than the rest, and it isn't hidden in a make list, it falls out of
+      the per-model numbers directly: <strong>BMW, Mercedes-Benz, Audi and Volvo, in the two
+      youngest age bands</strong>, show close to no agreement between the UK and Norwegian data
+      (their internal rank correlation sits around 0.1 to 0.2 in bands 1 and 2, against 0.75 to
+      0.85 for nameplate-clean makes like Skoda, Peugeot, Volkswagen and Toyota in the same bands).
+      We traced this as far as we could: it survives fixing real crosswalk bugs on the Norwegian
+      side (these makes' Norwegian model strings are bare engine codes, like "320D" or "X3
+      XDRIVE20D", that have to be grouped back up to a nameplate), and it is not explained by which
+      kind of defect is counted. It is not a hardcoded flag on these four makes: the confidence
+      badge on each car page is driven by how much that specific model's own numbers agree, and a
+      handful of BMW, Mercedes, Audi and Volvo model/age combinations do agree well and are marked
+      accordingly. But most of them, in the two youngest bands, don't, and are marked "low"
+      confidence for exactly that reason.
+    </p>
+    <h3>The reliability confidence badge</h3>
+    <p>
+      Every ranked car now carries a reliability confidence badge, low, medium or high, next to
+      the existing price confidence badge. It is built from three things: how many tests back the
+      figure, whether one country's data backs it or both, and, where both do, how closely the two
+      agree for that specific model and age band.
+    </p>
+    <ul>
+      <li>
+        <strong>Two sources, close agreement, comfortably more data than the bare minimum</strong>:{" "}
+        <em>high</em>. Both countries independently point the same way, and neither is thin.
+      </li>
+      <li>
+        <strong>Two sources in reasonable but not tight agreement, or one strong source with
+        nothing to check it against</strong>: <em>medium</em>. This is most rows on the site, and
+        that's the honest shape of the data, not a default we fell back to. A single-country
+        figure can never reach "high" on its own, however many tests back it, because there is no
+        way to rule out this being exactly the kind of model where a single country's ranking
+        doesn't transfer, which is the entire reason we went looking for a second source.
+      </li>
+      <li>
+        <strong>Two sources that disagree by more than one full standard deviation within their
+        age band, or a single source that only barely clears its own stability floor</strong>:{" "}
+        <em>low</em>. More data does not fix the first case: we already checked, and the
+        disagreement between the UK and Norwegian data is real, not sampling noise, so a bigger
+        sample on either side would not make it go away.
+      </li>
+    </ul>
+    <p>
+      {fmt(fact("Ranked rows backed by two reliability sources"))} ranked rows are backed by both
+      countries, {fmt(fact("Ranked rows backed by one reliability source only"))} by one. Of all
+      ranked rows, {fmt(fact("Ranked rows flagged high reliability confidence"))} are "high"
+      confidence, {fmt(fact("Ranked rows flagged medium reliability confidence"))} are "medium",
+      and {fmt(fact("Ranked rows flagged low reliability confidence"))} are "low". Most rows land
+      on medium, and we're reporting that plainly rather than adjusting the thresholds to make the
+      picture look more decisive than the data supports.
     </p>
 
     <h2 id="repair-cost">The repair cost estimate is a rough index, not a garage quote</h2>
@@ -184,7 +286,7 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
 
     <h2>Known limits, all in one place</h2>
     <ul class="limits-list">
-      <li>Reliability figures are from UK-market cars, not Danish ones. See <a href="#reliability">above</a>.</li>
+      <li>Reliability figures are from UK and Norwegian cars, not Danish ones, and the two sources agree only weakly for the newest cars (age bands 1 and 2) and for BMW, Mercedes-Benz, Audi and Volvo specifically in those bands. See <a href="#reliability">above</a>.</li>
       <li>The repair cost figure is a judgement-based rate per point, not measured invoices. See <a href="#repair-cost">above</a>.</li>
       <li>Price calibration hasn't been checked against a held-out set of listings it wasn't built from. See <a href="#pricing-heading">above</a>.</li>
       <li>
@@ -240,4 +342,17 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
   .source-list li, .limits-list li, .method-steps li { color: var(--ink-soft); }
   .source-list strong, .limits-list strong, .method-steps strong { color: var(--ink); }
   .closing { color: var(--ink-faint); font-size: 0.9rem; padding-bottom: 60px; max-width: 68ch; }
+  .agreement-table {
+    border-collapse: collapse;
+    max-width: 74ch;
+    margin: 1em 0 1.4em;
+    font-size: 0.92rem;
+  }
+  .agreement-table th, .agreement-table td {
+    text-align: left;
+    padding: 6px 18px 6px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-soft);
+  }
+  .agreement-table th { color: var(--ink); font-weight: 600; }
 </style>

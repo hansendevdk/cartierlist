@@ -3,7 +3,7 @@ import Layout from "../../../layouts/Layout.astro";
 import LedgerBreakdown from "../../../components/LedgerBreakdown.astro";
 import EvidenceStrip from "../../../components/EvidenceStrip.astro";
 import TierBadge from "../../../components/TierBadge.astro";
-import { rankings, unpriced, bracketLabel, confidenceLabel, getSiblingAges, reliabilityNote, kr, pct, km } from "../../../lib/data";
+import { rankings, unpriced, bracketLabel, confidenceLabel, getSiblingAges, reliabilityNote, reliabilityConfidenceNote, kr, pct, km } from "../../../lib/data";
 import type { RankedCar } from "../../../lib/data";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { UI } from "../../../i18n";
@@ -122,6 +122,20 @@ const siblingAges = getSiblingAges(car, priced);
             </>
           )}
           {" "}Læs mere på <a href={getRelativeLocaleUrl(lang, "/methodology") + "#pricing"}>metodesiden</a>.
+        </p>
+      </div>
+    )}
+
+    {car.reliability_confidence && (
+      <div class="confidence card">
+        <p class="eyebrow">Hvor sikre er vi på pålideligheden?</p>
+        <p>
+          <strong class="cap">{confidenceLabel(car.reliability_confidence, lang)}</strong> datagrundlag
+          {car.reliability_source_count === 2 && car.reliability_agreement !== null ? (
+            <> (to kilder, {car.reliability_agreement.toFixed(2)} standardafvigelser fra hinanden)</>
+          ) : null}.{" "}
+          {reliabilityConfidenceNote(car, lang)}{" "}
+          Læs mere på <a href={getRelativeLocaleUrl(lang, "/methodology") + "#reliability"}>metodesiden</a>.
         </p>
       </div>
     )}

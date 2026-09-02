@@ -59,6 +59,17 @@ export interface RankedCar {
   // depreciation curve (see build_suzuki_ds_prices.py); null for every
   // normal, foreign-listings-priced row. Drives which confidence copy shows.
   donor_model: string | null;
+  // From build_combined_reliability.py: the UK reliability index (above)
+  // combined with a second, Norwegian source where one exists, standardised
+  // within (source, age band) on the logit scale and combined by
+  // inverse-variance weight. Null for the 54 rows whose reliability is too
+  // thin on both sides to publish at all (same rows already excluded_from_rank
+  // for reliability_unstable). reliability_agreement is null whenever only
+  // one source backs the row, since there is nothing to compare it to.
+  combined_reliability_z: number | null;
+  reliability_agreement: number | null;
+  reliability_source_count: 1 | 2 | null;
+  reliability_confidence: "low" | "medium" | "high" | null;
   makeDisplay: string;
   modelDisplay: string;
   slug: string;
@@ -277,6 +288,46 @@ export function getSiblingAges(car: { modelSlug: string; slug: string }, priced:
   return priced
     ? rankings.filter((r) => r.modelSlug === car.modelSlug && r.slug !== car.slug)
     : rankings.filter((r) => r.modelSlug === car.modelSlug);
+}
+
+// Companion to price_confidence: how sure the combined UK+Norway reliability
+// figure is, per build_combined_reliability.py. Unlike the price flag, low
+// confidence here is not primarily about volume, it is often about the two
+// sources actively disagreeing (see the methodology page), so the copy leads
+// with agreement, not just sample size.
+export function reliabilityConfidenceNote(
+  car: Pick<RankedCar, "reliability_source_count" | "reliability_confidence">,
+  lang: Lang
+): string {
+  const { reliability_source_count: n, reliability_confidence: level } = car;
+  if (!level) {
+    return lang === "da"
+      ? "For få britiske og norske syn til at give denne model et pålidelighedstal overhovedet."
+      : "Too few UK and Norwegian tests for this model to carry a reliability figure at all.";
+  }
+  if (n === 2) {
+    if (level === "high") {
+      return lang === "da"
+        ? "Britiske og norske syn stemmer godt overens for denne model og aldersgruppe, hvilket gør tallet mere sikkert end et enkelt land alene kunne give."
+        : "UK and Norwegian tests broadly agree for this model and age band, which makes this figure more trustworthy than either country could give alone.";
+    }
+    if (level === "medium") {
+      return lang === "da"
+        ? "Britiske og norske syn stemmer nogenlunde overens for denne model og aldersgruppe."
+        : "UK and Norwegian tests broadly agree for this model and age band, without being close enough to call it strong agreement.";
+    }
+    return lang === "da"
+      ? "Britiske og norske syn er markant uenige om denne models pålidelighed i denne aldersgruppe. Vi viser stadig et vægtet gennemsnit, men uenigheden er reel, ikke støj, så behæft tallet med mere usikkerhed end normalt."
+      : "UK and Norwegian tests disagree substantially on this model's reliability in this age band. We still show a weighted average, but the disagreement is real, not sampling noise, so treat this figure with more caution than usual.";
+  }
+  // n === 1: only one of the two sources clears its own stability floor for
+  // this cell (almost always UK, since that is the source every ranked row
+  // requires; stated source-neutrally rather than hardcoded to "UK" so the
+  // copy stays correct even for the rare cell a future rebuild backs with
+  // Norwegian data alone).
+  return lang === "da"
+    ? "Bygger kun på ét af de to synsdatasæt for denne model og aldersgruppe, så tallet er ikke krydstjekket mod et andet land."
+    : "Backed by only one of the two inspection datasets for this model and age band, so this figure has not been cross-checked against a second country.";
 }
 
 export function reliabilityNote(rate: number | null, lang: Lang): string {

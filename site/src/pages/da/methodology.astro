@@ -36,12 +36,16 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
         alt {fmt(fact("Danish vehicles in scope"))} biler.
       </li>
       <li>
-        <strong>Pålidelighed.</strong> Det britiske offentlige MOT-synsarkiv
-        (Ministry of Transport-test, den britiske pendant til dansk syn) med{" "}
-        {fmt(fact("Eligible DVSA MOT tests"))} anvendelige syn. Udgivet af Driver and Vehicle
+        <strong>Pålidelighed.</strong> To nationale synsarkiver, kombineret. Det britiske
+        offentlige MOT-synsarkiv (Ministry of Transport-test, den britiske pendant til dansk syn)
+        med {fmt(fact("Eligible DVSA MOT tests"))} anvendelige syn, udgivet af Driver and Vehicle
         Standards Agency under{" "}
         <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" target="_blank" rel="noopener">Open Government Licence v3.0</a>,
-        som tillader denne brug med kildeangivelse. Det er britiske data, se forbeholdet nedenfor.
+        som tillader denne brug med kildeangivelse. Og den norske periodiske køretøjskontrol
+        (PKK / EU-kontroll), udgivet af Statens vegvesen under{" "}
+        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>,
+        som ligeledes tillader denne brug med kildeangivelse. Begge er udenlandske data, se
+        forbeholdet nedenfor.
       </li>
       <li>
         <strong>Brændstofpriser.</strong> Circle K's offentlige pris-API, hentet på ny hver gang
@@ -62,21 +66,121 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
       </li>
     </ul>
 
-    <h2 id="reliability">Pålideligheden kommer fra britiske biler på britiske veje</h2>
+    <h2 id="reliability">Pålideligheden kommer fra udenlandske biler på udenlandske veje, holdt op mod hinanden</h2>
     <p>
       Der findes ikke et offentligt dansk arkiv på modelniveau svarende til det britiske
-      MOT-arkiv, så pålideligheden kommer fra biler på det britiske marked: britiske veje,
-      britisk vejr, britisk vejsalt. En models pålidelighed <em>i forhold til andre modeller</em>{" "}
-      burde kunne overføres nogenlunde, for den handler mest om, hvordan bilen er bygget. Den
-      præcise fejlrate gør ikke nødvendigvis, for danske vintre og danske veje er ikke de samme
-      som de britiske. Stol mere på rækkefølgen mellem bilerne end på den præcise procent for en
-      enkelt bil.
+      MOT-arkiv, så pålideligheden kommer fra biler på udenlandske markeder: udenlandske veje,
+      udenlandsk vejr, udenlandsk vejsalt. En models pålidelighed <em>i forhold til andre
+      modeller</em>{" "} burde kunne overføres nogenlunde, for den handler mest om, hvordan bilen
+      er bygget. Den præcise fejlrate gør ikke nødvendigvis, for danske vintre og danske veje er
+      ikke de samme som i kildelandene. Stol mere på rækkefølgen mellem bilerne end på den
+      præcise procent for en enkelt bil.
     </p>
     <p>
       Vi justerer for, hvor langt en bil typisk er kørt, så en model der normalt køres hårdt,
       ikke sammenlignes urimeligt med en der køres nænsomt. Vi offentliggør kun et
       pålidelighedstal, hvor der var syn nok til at stole på det. Hvor der ikke var nok, skriver
       vi det i stedet for at vise et usikkert tal.
+    </p>
+    <p>
+      <strong>Fra og med denne opdatering bygger pålideligheden på to landes synsdata, ikke
+      ét.</strong> Vi tilføjede den norske periodiske køretøjskontrol (PKK) ved siden af det
+      britiske MOT-arkiv, og undersøgte om de to er enige, i stedet for at antage at ét
+      udenlandsk land er en sikker stedfortræder for Danmark. Det er de delvist, og det ærlige
+      svar afhænger af, hvor gammel bilen er.
+    </p>
+    <p>
+      Det, der <em>ikke</em> overføres mellem de to lande, er den rå bestået-procent: Norges
+      målte bestået-procent ligger 30 til 40 procentpoint under Storbritanniens for de samme
+      modeller i samme alder, en forskel drevet af forskellige lovbestemte fejlgrænser og
+      synsvirksomheders incitamenter, ikke af at norske biler faktisk fejler dobbelt så tit. Så
+      vi lægger aldrig en britisk bestået-procent direkte sammen med en norsk. I stedet omregnes
+      hvert lands rate til en standardiseret score (nærmere bestemt logit af bestået-procenten,
+      derefter en z-score), beregnet separat inden for hver aldersgruppe og hvert land, hvilket
+      fjerner den landespecifikke forskydning og kun beholder, hvor en model ligger i forhold til
+      sine jævnaldrende i samme land og aldersgruppe. De to standardiserede scorer kombineres
+      derefter med et vægtet gennemsnit, vægtet efter hvor meget data der ligger bag hver enkelt
+      (et britisk tal bygget på 400.000 syn flytter den kombinerede score mere end et norsk tal
+      bygget på 3.000), aldrig efter om de to kilder er enige.
+    </p>
+    <p>
+      Det, der overføres, i varierende grad, er <em>rækkefølgen</em>: om de britiske og norske
+      data er enige om, hvilke modeller der er mere eller mindre pålidelige end deres jævnaldrende,
+      i samme alder. Det har vi målt direkte, model for model, inden for hver aldersgruppe:
+    </p>
+    <table class="agreement-table">
+      <thead>
+        <tr><th>Aldersgruppe</th><th>Biler af den alder i dag</th><th>Enighed mellem UK og Norge (rangkorrelation)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>4 til 6 år</td><td>2020 til 2022</td><td>0,42, svag</td></tr>
+        <tr><td>7 til 9 år</td><td>2017 til 2019</td><td>0,46, svag til moderat</td></tr>
+        <tr><td>10 til 12 år</td><td>2014 til 2016</td><td>0,75, stærk</td></tr>
+        <tr><td>13 til 16 år</td><td>2010 til 2013</td><td>0,88, stærk</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Læs det ligeud: for de nyeste biler på siden er enigheden mellem de to lande svag, og
+      dataene understøtter ikke stærkt tanken om, at en britisk-baseret og en norsk-baseret
+      rangordning ville placere de samme unge biler øverst. For de ældste biler er landene tæt
+      enige, og den enighed er reel dokumentation for, at rangordningen afspejler noget ved,
+      hvordan bilen er bygget, ikke en artefakt af ét lands veje. Vi ledte grundigt efter en
+      forklaring på, hvorfor gruppe 1 er svagere (færre syn, en anden sammensætning af talte
+      fejl) og udelukkede begge dele; den ærlige tilbageværende forklaring er, at forskellene i
+      pålidelighed mellem unge biler er små nok, og overdøvet nok af lokale forhold, til at en
+      rangordning baseret på ét land er mindre pålidelig for de nyeste biler, end den ser ud til.
+    </p>
+    <p>
+      Én mærkegruppe er svagere end resten, og det er ikke gemt i en mærkeliste, det falder ud af
+      tallene for hver enkelt model direkte: <strong>BMW, Mercedes-Benz, Audi og Volvo, i de to
+      yngste aldersgrupper</strong>, viser næsten ingen enighed mellem de britiske og norske data
+      (deres interne rangkorrelation ligger omkring 0,1 til 0,2 i gruppe 1 og 2, mod 0,75 til 0,85
+      for mærker med rene modelnavne som Skoda, Peugeot, Volkswagen og Toyota i de samme grupper).
+      Vi sporede det så langt, vi kunne: det overlever at rette rigtige fejl i krydsmatchningen på
+      den norske side (disse mærkers norske modelstrenge er bare motorkoder, som "320D" eller "X3
+      XDRIVE20D", der skal grupperes op til et modelnavn), og det forklares ikke af, hvilken slags
+      fejl der tælles. Det er ikke et hardkodet flag på de fire mærker: sikkerhedsmærket på hver
+      bilside styres af, hvor godt netop den models egne tal er enige, og en håndfuld BMW-,
+      Mercedes-, Audi- og Volvo-model/alderskombinationer er faktisk enige og markeret derefter.
+      Men de fleste af dem, i de to yngste grupper, er det ikke, og er markeret "lavt"
+      datagrundlag af netop den grund.
+    </p>
+    <h3>Sikkerhedsmærket for pålidelighed</h3>
+    <p>
+      Hver rangeret bil har nu et sikkerhedsmærke for pålidelighed, lavt, middel eller højt, ved
+      siden af det eksisterende sikkerhedsmærke for pris. Det er bygget af tre ting: hvor mange
+      syn der ligger bag tallet, om ét lands data eller begges data ligger bag, og hvor godt de to
+      er enige for netop den model og aldersgruppe, hvor begge findes.
+    </p>
+    <ul>
+      <li>
+        <strong>To kilder, tæt enighed, betydeligt mere data end det bare minimum</strong>:{" "}
+        <em>højt</em>. Begge lande peger uafhængigt samme vej, og ingen af dem er tynd.
+      </li>
+      <li>
+        <strong>To kilder med rimelig, men ikke tæt enighed, eller én stærk kilde uden noget at
+        holde den op mod</strong>: <em>middel</em>. Det er de fleste biler på siden, og det er
+        dataens ærlige form, ikke en standard vi faldt tilbage på. Et tal fra ét land alene kan
+        aldrig nå "højt", uanset hvor mange syn der ligger bag, fordi der ikke er nogen måde at
+        udelukke, at det er netop den slags model, hvor ét lands rangordning ikke overføres, hvilket
+        er hele grunden til, at vi gik på jagt efter en anden kilde.
+      </li>
+      <li>
+        <strong>To kilder, der er uenige med mere end én hel standardafvigelse inden for deres
+        aldersgruppe, eller én kilde der kun lige akkurat klarer sit eget stabilitetskrav</strong>:{" "}
+        <em>lavt</em>. Mere data løser ikke det første tilfælde: vi har allerede tjekket, og
+        uenigheden mellem de britiske og norske data er reel, ikke støj fra stikprøvestørrelsen,
+        så en større stikprøve på nogen af siderne ville ikke få den til at forsvinde.
+      </li>
+    </ul>
+    <p>
+      {fmt(fact("Ranked rows backed by two reliability sources"))} rangerede biler bygger på begge
+      lande, {fmt(fact("Ranked rows backed by one reliability source only"))} på kun ét. Af alle
+      rangerede biler har {fmt(fact("Ranked rows flagged high reliability confidence"))} "højt"
+      datagrundlag, {fmt(fact("Ranked rows flagged medium reliability confidence"))} har "middel",
+      og {fmt(fact("Ranked rows flagged low reliability confidence"))} har "lavt". De fleste biler
+      lander på middel, og det melder vi ligeud i stedet for at justere grænserne, så billedet ser
+      mere afklaret ud, end dataene understøtter.
     </p>
 
     <h2 id="repair-cost">Reparationsestimatet er et groft indeks, ikke et værkstedstilbud</h2>
@@ -188,7 +292,7 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
 
     <h2>Kendte begrænsninger, samlet ét sted</h2>
     <ul class="limits-list">
-      <li>Pålidelighedstal kommer fra biler på det britiske marked, ikke danske. Se <a href="#reliability">ovenfor</a>.</li>
+      <li>Pålidelighedstal kommer fra britiske og norske biler, ikke danske, og de to kilder er kun svagt enige for de nyeste biler (aldersgruppe 1 og 2) og for BMW, Mercedes-Benz, Audi og Volvo specifikt i de grupper. Se <a href="#reliability">ovenfor</a>.</li>
       <li>Reparationstallet er en skønsbaseret sats per point, ikke målte regninger. Se <a href="#repair-cost">ovenfor</a>.</li>
       <li>Priskalibreringen er ikke testet mod et sæt annoncer, den ikke er bygget på. Se <a href="#pricing-heading">ovenfor</a>.</li>
       <li>
@@ -244,4 +348,17 @@ const fuelDiesel = sources.fuelPrices.find((f) => f.fuel_type === "Diesel");
   .source-list li, .limits-list li, .method-steps li { color: var(--ink-soft); }
   .source-list strong, .limits-list strong, .method-steps strong { color: var(--ink); }
   .closing { color: var(--ink-faint); font-size: 0.9rem; padding-bottom: 60px; max-width: 68ch; }
+  .agreement-table {
+    border-collapse: collapse;
+    max-width: 74ch;
+    margin: 1em 0 1.4em;
+    font-size: 0.92rem;
+  }
+  .agreement-table th, .agreement-table td {
+    text-align: left;
+    padding: 6px 18px 6px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-soft);
+  }
+  .agreement-table th { color: var(--ink); font-weight: 600; }
 </style>

@@ -83,6 +83,13 @@ TYPICAL_MILEAGE_CSV = REFERENCE / "typical_mileage_by_age_band.csv"
 REPAIR_CONST_CSV = REFERENCE / "repair_cost_constant.csv"
 FUEL_FLAGS_CSV = REFERENCE / "model_age_band_fuel_flags.csv"
 SUZUKI_DS_PRICE_CSV = REFERENCE / "suzuki_ds_price_estimates.csv"
+# Built by build_combined_reliability.py, which combines this UK metrics file
+# with model_age_band_metrics_no.csv (Norway). Purely additive: the four
+# columns it contributes here (combined_reliability_z, reliability_agreement,
+# reliability_source_count, reliability_confidence) never feed cost_rank_in_group
+# or any other ranking decision, so joining it cannot move an existing rank --
+# see the "must not regress" check in main() below.
+RELIABILITY_COMBINED_CSV = REFERENCE / "model_age_band_reliability_combined.csv"
 OUT_CSV = REFERENCE / "model_bracket_rankings.csv"
 METHODOLOGY_CSV = REFERENCE / "methodology_counts.csv"
 
@@ -164,6 +171,10 @@ def main() -> None:
                                    if r["basis"] == "primary")["dkk_per_burden_unit_per_year"])
     with open(FUEL_FLAGS_CSV, encoding="utf-8") as f:
         fuel_flags_idx = {(r["dmr_make"], r["dmr_model"], r["age_band"]): r for r in csv.DictReader(f)}
+    reliability_combined_idx = {}
+    if RELIABILITY_COMBINED_CSV.exists():
+        with open(RELIABILITY_COMBINED_CSV, encoding="utf-8") as f:
+            reliability_combined_idx = {(r["dmr_make"], r["dmr_model"], r["age_band"]): r for r in csv.DictReader(f)}
 
     mileage_slope = float(price_rows[0]["mileage_adjustment_pct_per_10k_km"])
 
@@ -274,6 +285,14 @@ def main() -> None:
         is_hybrid = fuel_flags["is_hybrid"] == "True" if fuel_flags else False
         is_diesel_dominant = fuel_flags["is_diesel_dominant"] == "True" if fuel_flags else False
 
+        # New columns from build_combined_reliability.py -- see that script's
+        # module docstring for the combination rule. Present only for cells
+        # with at least one statistically stable reliability source (every
+        # row missing here is already excluded_from_rank for the pre-existing
+        # reliability_unstable/meets_stability_floor reason, so nothing ranked
+        # is left without a confidence label).
+        rel = reliability_combined_idx.get((make, model, entry_band))
+
         out_rows.append({
             "dmr_make": make, "dmr_model": model, "age_band": entry_band,
             "band_years": BAND_YEARS[entry_band], "approx_age_years": AGE_YEARS[entry_band],
@@ -316,6 +335,10 @@ def main() -> None:
             "exclusion_reason": exclusion_reason,
             "is_hybrid": is_hybrid,
             "is_diesel_dominant": is_diesel_dominant,
+            "combined_reliability_z": rel["combined_reliability_z"] if rel else "",
+            "reliability_agreement": rel["reliability_agreement"] if rel else "",
+            "reliability_source_count": rel["reliability_source_count"] if rel else "",
+            "reliability_confidence": rel["reliability_confidence"] if rel else "",
         })
 
     print(f"\n{n_suppressed_nonpositive} pairs suppressed (non-positive depreciation, DECISION 2)")
@@ -450,6 +473,11 @@ def main() -> None:
         {"fact": "Rows flagged hybrid (trim badge, or petrol economy too high for a combustion engine)", "value": sum(1 for r in out_rows if r["is_hybrid"]), "source": "model_age_band_fuel_flags.csv", "date": "2026-07-31"},
         {"fact": "Rows flagged diesel-dominant (over half the cell is diesel)", "value": sum(1 for r in out_rows if r["is_diesel_dominant"]), "source": "model_age_band_fuel_flags.csv", "date": "2026-07-31"},
         {"fact": "Mileage adjustment slope (%/10,000 km)", "value": round(mileage_slope * 100, 2), "source": "price_estimates_calibrated.csv", "date": "2026-07-31"},
+        {"fact": "Ranked rows backed by two reliability sources (UK + Norway)", "value": sum(1 for r in out_rows if str(r["reliability_source_count"]) == "2"), "source": "model_age_band_reliability_combined.csv", "date": "2026-09-02"},
+        {"fact": "Ranked rows backed by one reliability source only", "value": sum(1 for r in out_rows if str(r["reliability_source_count"]) == "1"), "source": "model_age_band_reliability_combined.csv", "date": "2026-09-02"},
+        {"fact": "Ranked rows flagged low reliability confidence", "value": sum(1 for r in out_rows if r["reliability_confidence"] == "low"), "source": "model_age_band_reliability_combined.csv", "date": "2026-09-02"},
+        {"fact": "Ranked rows flagged medium reliability confidence", "value": sum(1 for r in out_rows if r["reliability_confidence"] == "medium"), "source": "model_age_band_reliability_combined.csv", "date": "2026-09-02"},
+        {"fact": "Ranked rows flagged high reliability confidence", "value": sum(1 for r in out_rows if r["reliability_confidence"] == "high"), "source": "model_age_band_reliability_combined.csv", "date": "2026-09-02"},
     ]
     with open(METHODOLOGY_CSV, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=["fact", "value", "source", "date"])

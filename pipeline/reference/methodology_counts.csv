@@ -13,3 +13,8 @@ Repair cost constant (DKK per burden-unit-year),3000.0,repair_cost_constant.csv,
 "Rows flagged hybrid (trim badge, or petrol economy too high for a combustion engine)",62,model_age_band_fuel_flags.csv,2026-07-31
 Rows flagged diesel-dominant (over half the cell is diesel),245,model_age_band_fuel_flags.csv,2026-07-31
 "Mileage adjustment slope (%/10,000 km)",3.91,price_estimates_calibrated.csv,2026-07-31
+Ranked rows backed by two reliability sources (UK + Norway),233,model_age_band_reliability_combined.csv,2026-09-02
+Ranked rows backed by one reliability source only,334,model_age_band_reliability_combined.csv,2026-09-02
+Ranked rows flagged low reliability confidence,51,model_age_band_reliability_combined.csv,2026-09-02
+Ranked rows flagged medium reliability confidence,404,model_age_band_reliability_combined.csv,2026-09-02
+Ranked rows flagged high reliability confidence,112,model_age_band_reliability_combined.csv,2026-09-02
