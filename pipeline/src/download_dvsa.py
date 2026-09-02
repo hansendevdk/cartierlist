@@ -1,10 +1,21 @@
-"""Fetch DVSA anonymised MOT data (OGL v3.0) for the two most recent available years,
+"""Fetch DVSA anonymised MOT data (OGL v3.0) for a four-year window (2022-2025),
 plus the lookup tables and user guide needed to decode failure item codes.
 
-As of this writing, the two most recent complete years published on
-open.data.dvsa.gov.uk/mot-anonymised are 2024 and 2025; the source file naming
-differs between years because DVSA changed their publishing convention partway
-through, so the pairs below are named individually rather than templated.
+Four years, not two: 2022 and 2023 are the two additional back years added to
+raise the test count behind every (model, age band) cell and recover some of
+the rows that could not clear RANKING_FLOOR_TESTS on 2024/2025 alone (see
+reports/dvsa_backyears_report.md for what the extra volume actually bought).
+
+The source file naming differs across years because DVSA changed their
+publishing convention partway through, so the pairs below are named
+individually rather than templated:
+  - 2022 and 2023 use the plain `dft_test_result_<year>.zip` /
+    `dft_test_item_<year>.zip` naming. There is no `_extracts_` variant for
+    these two years (confirmed: that URL form 403s for 2022/2023, unlike 2025).
+  - 2024 has two publications under different names -- see
+    download_dvsa_2024_alt.py and compare_dvsa_2024.py for why the warehouse
+    build points at the `_extracts_` one.
+  - 2025 uses the `dft_test_result_extracts_2025.zip` naming.
 """
 
 from __future__ import annotations
@@ -16,6 +27,10 @@ from pathlib import Path
 BASE = "https://edh-dvsa-data-gov-uk-files-prod.s3.eu-west-1.amazonaws.com"
 
 FILES = {
+    "results_2022.zip": f"{BASE}/dft_test_result_2022.zip",
+    "failure_item_2022.zip": f"{BASE}/dft_test_item_2022.zip",
+    "results_2023.zip": f"{BASE}/dft_test_result_2023.zip",
+    "failure_item_2023.zip": f"{BASE}/dft_test_item_2023.zip",
     "results_2024.zip": f"{BASE}/MOT+testing+data+results+(2024).zip",
     "failure_item_2024.zip": f"{BASE}/MOT+Testing+data+failure+item+(2024).zip",
     "results_2025.zip": f"{BASE}/dft_test_result_extracts_2025.zip",
