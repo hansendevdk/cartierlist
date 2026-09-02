@@ -1,0 +1,134 @@
+---
+// Client-side show/hide filter over CarRow elements already rendered in the
+// page, not a new data fetch or a rebuild -- same mechanism as
+// FuelFilterToggle. Unlike the fuel filter's two independent booleans, this
+// tracks a set of *hidden* segment codes so any combination (hide just A,
+// or isolate just C) works with one piece of state. localStorage keys are
+// shared across locales on purpose: switching language shouldn't reset the
+// filter.
+import { UI, type Lang } from "../i18n";
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = "en" } = Astro.props;
+const s = UI[lang].segmentFilter;
+const SEGMENT_ORDER = ["A", "B", "C", "D", "E", "F", "J", "M"] as const;
+---
+
+<div class="segment-filter">
+  <span class="segment-filter-label">{s.filterBySegment}</span>
+  {SEGMENT_ORDER.map((seg) => (
+    <label>
+      <input type="checkbox" class="segment-toggle" data-segment={seg} checked />
+      {s.segments[seg]}
+    </label>
+  ))}
+  <span class="segment-filter-actions">
+    <button type="button" id="segment-select-all">{s.all}</button>
+    <button type="button" id="segment-select-none">{s.none}</button>
+  </span>
+</div>
+
+<style>
+  .segment-filter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 18px;
+    margin: 8px 0;
+    padding: 10px 14px;
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+    font-size: 0.88rem;
+  }
+  .segment-filter-label {
+    font-family: var(--font-data);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+  }
+  .segment-filter label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ink);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .segment-filter input {
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+  .segment-filter-actions {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+  }
+  .segment-filter-actions button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--ink-soft);
+    text-decoration: underline;
+    font-size: 0.82rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .segment-filter-actions button:hover {
+    color: var(--accent);
+  }
+</style>
+
+<script>
+  import { applyRowVisibility } from "../lib/rowFilters";
+
+  const STORAGE_KEY = "hiddenSegments";
+
+  function getHidden(): Set<string> {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return new Set(raw ? raw.split(",").filter(Boolean) : []);
+  }
+
+  function setHidden(hidden: Set<string>) {
+    localStorage.setItem(STORAGE_KEY, Array.from(hidden).join(","));
+  }
+
+  function syncCheckboxes() {
+    const hidden = getHidden();
+    document.querySelectorAll<HTMLInputElement>(".segment-toggle").forEach((box) => {
+      box.checked = !hidden.has(box.dataset.segment ?? "");
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    syncCheckboxes();
+    applyRowVisibility();
+
+    document.querySelectorAll<HTMLInputElement>(".segment-toggle").forEach((box) => {
+      box.addEventListener("change", () => {
+        const hidden = getHidden();
+        const seg = box.dataset.segment ?? "";
+        if (box.checked) hidden.delete(seg);
+        else hidden.add(seg);
+        setHidden(hidden);
+        applyRowVisibility();
+      });
+    });
+
+    document.getElementById("segment-select-all")?.addEventListener("click", () => {
+      setHidden(new Set());
+      syncCheckboxes();
+      applyRowVisibility();
+    });
+
+    document.getElementById("segment-select-none")?.addEventListener("click", () => {
+      const all = Array.from(document.querySelectorAll<HTMLInputElement>(".segment-toggle"))
+        .map((box) => box.dataset.segment ?? "");
+      setHidden(new Set(all));
+      syncCheckboxes();
+      applyRowVisibility();
+    });
+  });
+</script>

@@ -54,6 +54,7 @@ const annualRepair =
   href={getRelativeLocaleUrl(lang, `/cars/${car.slug}/`)}
   data-hybrid={car.is_hybrid ? "1" : "0"}
   data-diesel={car.is_diesel_dominant ? "1" : "0"}
+  data-segment={car.segment}
   data-entry={car.entry_price_dkk}
   data-resale={car.resale_price_dkk ?? ""}
   data-hold={car.hold_years ?? ""}

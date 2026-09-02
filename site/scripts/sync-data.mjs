@@ -68,7 +68,7 @@ function readCsv(filename) {
 // model/make/band identifiers ("208", "3", "500") are names, not numbers.
 const ALWAYS_STRING = new Set([
   "dmr_make", "dmr_model", "age_band", "exit_age_band", "price_bracket_id",
-  "band_years",
+  "band_years", "segment",
 ]);
 
 const TRUE_STRINGS = new Set(["True", "true"]);

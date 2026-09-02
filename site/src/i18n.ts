@@ -80,6 +80,21 @@ export const UI = {
       note: 'Hybrids are found by trim name (e.g. "Plug-in Hybrid"), not a clean data field, so this can miss a few.',
       noteLink: "Why, on the methodology page.",
     },
+    segmentFilter: {
+      filterBySegment: "Filter by segment",
+      segments: {
+        A: "A — Mini",
+        B: "B — Small",
+        C: "C — Compact",
+        D: "D — Large",
+        E: "E — Executive",
+        F: "F — Luxury",
+        J: "J — SUV",
+        M: "M — MPV",
+      },
+      all: "All",
+      none: "None",
+    },
     mileage: {
       label: "Assume how far you drive per year",
       default: "(default)",
@@ -184,6 +199,21 @@ export const UI = {
       hideDiesel: "Skjul diesel",
       note: 'Hybridbiler findes via variantnavnet (fx "Plug-in Hybrid"), ikke et rent datafelt, så nogle glipper.',
       noteLink: "Hvorfor, på metodesiden.",
+    },
+    segmentFilter: {
+      filterBySegment: "Filtrér efter segment",
+      segments: {
+        A: "A — Mini",
+        B: "B — Lille",
+        C: "C — Mellemklasse",
+        D: "D — Stor",
+        E: "E — Overklasse",
+        F: "F — Luksus",
+        J: "J — SUV",
+        M: "M — MPV",
+      },
+      all: "Alle",
+      none: "Ingen",
     },
     mileage: {
       label: "Antag hvor langt du kører per år",

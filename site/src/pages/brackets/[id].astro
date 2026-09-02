@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import CarRow from "../../components/CarRow.astro";
 import BracketDelta from "../../components/BracketDelta.astro";
 import FuelFilterToggle from "../../components/FuelFilterToggle.astro";
+import SegmentFilterToggle from "../../components/SegmentFilterToggle.astro";
 import MileageControl from "../../components/MileageControl.astro";
 import { BRACKET_IDS, bracketLabel, bandLabel, getBracketLists } from "../../lib/data";
 import { getRelativeLocaleUrl } from "astro:i18n";
@@ -44,6 +45,7 @@ const { cars, byCost, byValue, bandsPresent, hasRunningCostOnly } = getBracketLi
     <BracketDelta bracketId={bracketId} lang={lang} />
 
     <FuelFilterToggle lang={lang} />
+    <SegmentFilterToggle lang={lang} />
     <MileageControl lang={lang} />
 
     <div class="lists">

@@ -9,6 +9,7 @@ export interface RankedCar {
   dmr_make: string;
   dmr_model: string;
   age_band: "1" | "2" | "3" | "4";
+  segment: "A" | "B" | "C" | "D" | "E" | "F" | "J" | "M";
   band_years: string;
   approx_age_years: number;
   price_bracket_id: string;

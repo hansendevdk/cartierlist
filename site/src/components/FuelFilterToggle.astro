@@ -71,15 +71,7 @@ const methodologyHref = getRelativeLocaleUrl(lang, "/methodology") + "#pricing";
 </style>
 
 <script>
-  function applyFuelFilters() {
-    const hideHybrid = localStorage.getItem("hideHybrid") === "1";
-    const hideDiesel = localStorage.getItem("hideDiesel") === "1";
-    document.querySelectorAll<HTMLElement>(".car-row").forEach((row) => {
-      const isHybrid = row.dataset.hybrid === "1";
-      const isDiesel = row.dataset.diesel === "1";
-      row.style.display = (hideHybrid && isHybrid) || (hideDiesel && isDiesel) ? "none" : "";
-    });
-  }
+  import { applyRowVisibility } from "../lib/rowFilters";
 
   function initToggle(id: string, storageKey: string) {
     const box = document.getElementById(id) as HTMLInputElement | null;
@@ -87,13 +79,13 @@ const methodologyHref = getRelativeLocaleUrl(lang, "/methodology") + "#pricing";
     box.checked = localStorage.getItem(storageKey) === "1";
     box.addEventListener("change", () => {
       localStorage.setItem(storageKey, box.checked ? "1" : "0");
-      applyFuelFilters();
+      applyRowVisibility();
     });
   }
 
   document.addEventListener("DOMContentLoaded", () => {
     initToggle("hide-hybrid-toggle", "hideHybrid");
     initToggle("hide-diesel-toggle", "hideDiesel");
-    applyFuelFilters();
+    applyRowVisibility();
   });
 </script>

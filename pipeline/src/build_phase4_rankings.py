@@ -83,6 +83,10 @@ TYPICAL_MILEAGE_CSV = REFERENCE / "typical_mileage_by_age_band.csv"
 REPAIR_CONST_CSV = REFERENCE / "repair_cost_constant.csv"
 FUEL_FLAGS_CSV = REFERENCE / "model_age_band_fuel_flags.csv"
 SUZUKI_DS_PRICE_CSV = REFERENCE / "suzuki_ds_price_estimates.csv"
+# Hand-authored EU segment (A/B/C/D/E/F/J/M) per (dmr_make, dmr_model); see
+# write_model_segments.py for the taxonomy and why this is a lookup against a
+# standard classification rather than a measurement or a judgement call.
+SEGMENTS_CSV = REFERENCE / "model_segments.csv"
 # Built by build_combined_reliability.py, which combines this UK metrics file
 # with model_age_band_metrics_no.csv (Norway). Purely additive: the four
 # columns it contributes here (combined_reliability_z, reliability_agreement,
@@ -200,6 +204,8 @@ def main() -> None:
     if RELIABILITY_COMBINED_CSV.exists():
         with open(RELIABILITY_COMBINED_CSV, encoding="utf-8") as f:
             reliability_combined_idx = {(r["dmr_make"], r["dmr_model"], r["age_band"]): r for r in csv.DictReader(f)}
+    with open(SEGMENTS_CSV, encoding="utf-8") as f:
+        segment_idx = {(r["dmr_make"], r["dmr_model"]): r["segment"] for r in csv.DictReader(f)}
 
     mileage_slope = float(price_rows[0]["mileage_adjustment_pct_per_10k_km"])
 
@@ -321,6 +327,7 @@ def main() -> None:
         out_rows.append({
             "dmr_make": make, "dmr_model": model, "age_band": entry_band,
             "band_years": BAND_YEARS[entry_band], "approx_age_years": AGE_YEARS[entry_band],
+            "segment": segment_idx.get((make, model), ""),
             "price_bracket_id": price_bracket_id, "price_bracket_label": price_bracket_label,
             "entry_price_dkk": round(entry_price), "entry_price_reference_km": round(typical_km[entry_band]),
             "exit_age_band": exit_band or "", "hold_years": hold_used if hold_used is not None else "",
@@ -383,6 +390,11 @@ def main() -> None:
 
     print(f"\n{n_suppressed_nonpositive} pairs suppressed (non-positive depreciation, DECISION 2)")
     print(f"{n_no_exit_data} entry cells have no exit-band data at all (still kept, running-cost-only)")
+
+    models_missing_segment = sorted({(r["dmr_make"], r["dmr_model"]) for r in out_rows if not r["segment"]})
+    if models_missing_segment:
+        print(f"\nWARNING: {len(models_missing_segment)} model(s) have no row in {SEGMENTS_CSV.name}, "
+              f"segment left blank: {models_missing_segment}")
 
     # --- rank within bracket only, mixing age bands, per spec section 1.6
     #     and DECISION 5: the whole point of a (model, age_band) row is that
