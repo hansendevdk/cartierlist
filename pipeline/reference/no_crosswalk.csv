@@ -1,0 +1,209 @@
+dmr_make,dmr_model,dk_vehicle_count,proposed_no_make,proposed_no_model_token,no_inspection_count,confidence,rule_fired
+VOLKSWAGEN,UP!,62570,VOLKSWAGEN,UP,6854,exact,prefix_identity
+PEUGEOT,208,52719,PEUGEOT,208,8735,exact,prefix_identity
+VOLKSWAGEN,POLO,44100,VOLKSWAGEN,POLO,40877,exact,prefix_identity
+TOYOTA,AYGO,43773,TOYOTA,AYGO,7203,exact,prefix_identity
+TOYOTA,YARIS,39750,TOYOTA,YARIS,84724,exact,prefix_identity
+CITROËN,C3,38244,CITROEN,C3,7407,exact,prefix_identity
+KIA,PICANTO,32895,KIA,PICANTO,6700,exact,prefix_identity
+CITROËN,C1,31991,CITROEN,C1,2638,exact,prefix_identity
+FORD,FIESTA,31965,FORD,FIESTA,26232,exact,prefix_identity
+VOLKSWAGEN,GOLF,29976,VOLKSWAGEN,GOLF,129219,exact,prefix_identity
+HYUNDAI,I10,29175,HYUNDAI,I10,2608,exact,prefix_identity
+SKODA,CITIGO,27868,SKODA,CITIGO,2220,exact,prefix_identity
+OPEL,CORSA,27644,OPEL,CORSA,10031,exact,prefix_identity
+RENAULT,Ny Clio,26976,RENAULT,CLIO,4069,exact,prefix_identity
+HYUNDAI,I20,25514,HYUNDAI,I20,11429,exact,prefix_identity
+SKODA,FABIA,25197,SKODA,FABIA,15567,exact,prefix_identity
+SKODA,OCTAVIA,24510,SKODA,OCTAVIA,67202,exact,prefix_identity
+NISSAN,QASHQAI,23722,NISSAN,QASHQAI,33664,exact,prefix_identity
+SUZUKI,SWIFT,22549,SUZUKI,SWIFT,17165,exact,prefix_identity
+KIA,RIO,21547,KIA,RIO,4672,exact,prefix_identity
+PEUGEOT,308,20846,PEUGEOT,308,15427,exact,prefix_identity
+RENAULT,Captur,18881,RENAULT,CAPTUR,3713,exact,prefix_identity
+VOLKSWAGEN,TOURAN,17682,VOLKSWAGEN,TOURAN,25894,exact,prefix_identity
+PEUGEOT,107,17674,PEUGEOT,107,2957,exact,prefix_identity
+FORD,KUGA,16767,FORD,KUGA,22451,exact,prefix_identity
+PEUGEOT,2008,16677,PEUGEOT,2008,8657,exact,prefix_identity
+PEUGEOT,108,15588,PEUGEOT,108,1031,exact,prefix_identity
+VOLKSWAGEN,PASSAT,15030,VOLKSWAGEN,PASSAT,70734,exact,prefix_identity
+KIA,CEED,14992,KIA,CEED,6566,exact,prefix_identity
+OPEL,ASTRA,14759,OPEL,ASTRA,17798,exact,prefix_identity
+FORD,FOCUS,14472,FORD,FOCUS,44247,exact,prefix_identity
+CHEVROLET,SPARK,12832,CHEVROLET,SPARK,339,exact,prefix_identity
+FORD,KA,12679,FORD,KA,1046,exact,prefix_identity
+MERCEDES-BENZ,C-Klasse,12063,MERCEDES-BENZ,C,31181,exact,prefix_identity
+PEUGEOT,3008,11806,PEUGEOT,3008,19410,exact,prefix_identity
+FIAT,500,11378,FIAT,500,4817,exact,prefix_identity
+TOYOTA,AURIS,10970,TOYOTA,AURIS,62942,exact,prefix_identity
+SUZUKI,VITARA,9524,SUZUKI,VITARA,8765,exact,prefix_identity
+RENAULT,MEGANE,9277,RENAULT,MEGANE,5169,exact,prefix_identity
+SEAT,LEON,9206,SEAT,LEON,201,exact,prefix_identity
+HYUNDAI,I30,9003,HYUNDAI,I30,4284,exact,prefix_identity
+SUZUKI,SX4 S-Cross,8987,SUZUKI,SX4 S CROSS,6636,exact,prefix_identity
+SUZUKI,BALENO,8873,SUZUKI,BALENO,479,exact,prefix_identity
+VOLKSWAGEN,T-Roc,8548,VOLKSWAGEN,T ROC,7701,exact,prefix_identity
+SKODA,OCTAVIA COMBI,8432,SKODA,OCTAVIA,67202,exact,prefix_identity
+RENAULT,CLIO,8289,RENAULT,CLIO,4069,exact,prefix_identity
+CITROËN,C4,8280,CITROEN,C4,14694,exact,prefix_identity
+MERCEDES-BENZ,A-Klasse,8082,MERCEDES-BENZ,A,15306,exact,prefix_identity
+SKODA,FABIA COMBI,8079,SKODA,FABIA,15567,exact,prefix_identity
+FORD,C-MAX,8014,FORD,C MAX,3869,exact,prefix_identity
+CITROËN,C4 Cactus,7882,CITROEN,C4 CACTUS,3491,exact,prefix_identity
+NISSAN,MICRA,7864,NISSAN,MICRA,3600,exact,prefix_identity
+FIAT,PANDA,7703,FIAT,PANDA,582,exact,prefix_identity
+MAZDA,MAZDA2,7483,MAZDA,2,6051,exact,prefix_identity
+BMW,3-Serie,7390,BMW,320,17606,high,family_series_sibling
+BMW,3-Serie,7390,BMW,318,8228,high,family_series_sibling
+BMW,3-Serie,7390,BMW,316,5807,high,family_series_sibling
+BMW,3-Serie,7390,BMW,330,5397,high,family_series_sibling
+BMW,3-Serie,7390,BMW,325,1248,high,family_series_sibling
+BMW,3-Serie,7390,BMW,328,313,high,family_series_sibling
+BMW,3-Serie,7390,BMW,335,261,high,family_series_sibling
+SUZUKI,IGNIS,7200,SUZUKI,IGNIS,5987,exact,prefix_identity
+AUDI,A3 Sportback,7174,AUDI,A3 SPORTBACK,21874,exact,prefix_identity
+SEAT,IBIZA,7137,SEAT,IBIZA,235,exact,prefix_identity
+MERCEDES-BENZ,E-Klasse,7135,MERCEDES-BENZ,E,39883,exact,prefix_identity
+FORD,S-MAX,7026,FORD,S MAX,18412,exact,prefix_identity
+MITSUBISHI,SPACE STAR,7009,MITSUBISHI,SPACE STAR,4078,exact,prefix_identity
+SUZUKI,ALTO,6754,SUZUKI,ALTO,692,exact,prefix_identity
+CITROËN,C 1,6597,CITROEN,C1,2638,exact,prefix_identity
+VOLKSWAGEN,T-Cross,6532,VOLKSWAGEN,T CROSS,1240,exact,prefix_identity
+VOLKSWAGEN,TIGUAN,6412,VOLKSWAGEN,TIGUAN,40886,exact,prefix_identity
+KIA,Niro,6209,KIA,NIRO,8121,exact,prefix_identity
+VOLKSWAGEN,PASSAT VARIANT,6038,VOLKSWAGEN,PASSAT,70734,exact,prefix_identity
+FORD,FIESTA 5 DØRS,5987,FORD,FIESTA,26232,exact,prefix_identity
+TOYOTA,Toyota C-HR,5943,TOYOTA,C HR,18837,exact,prefix_identity
+TOYOTA,AYGO 3/5-DØRS,5820,TOYOTA,AYGO,7203,exact,prefix_identity
+NISSAN,NOTE,5684,NISSAN,NOTE,3325,exact,prefix_identity
+VOLVO,V60,5670,VOLVO,V60,35556,exact,prefix_identity
+FORD,MONDEO,5626,FORD,MONDEO,36399,exact,prefix_identity
+TOYOTA,COROLLA,5346,TOYOTA,COROLLA,40357,exact,prefix_identity
+DACIA,Duster,5050,DACIA,DUSTER,1807,exact,prefix_identity
+TOYOTA,RAV4,4915,TOYOTA,RAV4,83482,exact,prefix_identity
+TOYOTA,AVENSIS,4889,TOYOTA,AVENSIS,55295,exact,prefix_identity
+VOLKSWAGEN,Golf Sportsvan,4733,VOLKSWAGEN,GOLF SPORTSVAN,5061,exact,prefix_identity
+MAZDA,MAZDA6,4712,MAZDA,6,12454,exact,prefix_identity
+TOYOTA,YARIS 5-DØRS,4539,TOYOTA,YARIS,84724,exact,prefix_identity
+HONDA,JAZZ,4499,HONDA,JAZZ,6568,exact,prefix_identity
+HYUNDAI,I30CW,4476,HYUNDAI,I30,4284,exact,code_exact
+TOYOTA,VERSO,4405,TOYOTA,VERSO,6130,exact,prefix_identity
+OPEL,INSIGNIA,4352,OPEL,INSIGNIA,10843,exact,prefix_identity
+RENAULT,Kadjar,4348,RENAULT,KADJAR,1149,exact,prefix_identity
+PEUGEOT,207,4319,PEUGEOT,207,7722,exact,prefix_identity
+CITROËN,C3 PICASSO,4293,CITROEN,C3 PICASSO,1272,exact,prefix_identity
+MAZDA,CX-5,4262,MAZDA,CX 5,29842,exact,prefix_identity
+OPEL,Crossland X,4241,OPEL,CROSSLAND X,1556,exact,prefix_identity
+MAZDA,MAZDA3,4189,MAZDA,3,11132,exact,prefix_identity
+AUDI,A4 AVANT,4144,AUDI,A4 AVANT,6599,exact,prefix_identity
+PEUGEOT,206 +,4125,PEUGEOT,206,2777,exact,prefix_identity
+BMW,1-Serie,4105,BMW,116,10420,high,family_series_sibling
+BMW,1-Serie,4105,BMW,118,5655,high,family_series_sibling
+BMW,1-Serie,4105,BMW,120,975,high,family_series_sibling
+BMW,1-Serie,4105,BMW,114,324,high,family_series_sibling
+PEUGEOT,5008,4075,PEUGEOT,5008,10054,exact,prefix_identity
+BMW,5-Serie,4027,BMW,520,19420,high,family_series_sibling
+BMW,5-Serie,4027,BMW,525,7870,high,family_series_sibling
+BMW,5-Serie,4027,BMW,530,7625,high,family_series_sibling
+BMW,5-Serie,4027,BMW,523,845,high,family_series_sibling
+BMW,5-Serie,4027,BMW,535,432,high,family_series_sibling
+BMW,5-Serie,4027,BMW,540,242,high,family_series_sibling
+BMW,5-Serie,4027,BMW,528,226,high,family_series_sibling
+BMW,5-Serie,4027,BMW,518,214,high,family_series_sibling
+HYUNDAI,KONA,3897,HYUNDAI,KONA,276,exact,prefix_identity
+AUDI,Q3,3809,AUDI,Q3,5398,exact,prefix_identity
+SKODA,SUPERB,3724,SKODA,SUPERB,22645,exact,prefix_identity
+VOLVO,XC40,3659,VOLVO,XC40,6577,exact,prefix_identity
+SKODA,KAMIQ,3615,SKODA,KAMIQ,347,exact,prefix_identity
+HYUNDAI,Tucson,3585,HYUNDAI,TUCSON,8355,exact,prefix_identity
+HONDA,CIVIC,3578,HONDA,CIVIC,9680,exact,prefix_identity
+MAZDA,CX-3,3555,MAZDA,CX 3,8841,exact,prefix_identity
+MERCEDES-BENZ,B-Klasse,3537,MERCEDES-BENZ,B,12287,exact,prefix_identity
+VOLVO,XC60,3445,VOLVO,XC60,50617,exact,prefix_identity
+VOLKSWAGEN,CADDY,3359,VOLKSWAGEN,CADDY,4139,exact,prefix_identity
+TOYOTA,AYGO 5-DØRS,3269,TOYOTA,AYGO,7203,exact,prefix_identity
+MAZDA,3,3198,MAZDA,3,11132,exact,prefix_identity
+AUDI,A6 AVANT,3021,AUDI,A6 AVANT,3997,exact,prefix_identity
+CITROËN,C3 Aircross,3001,CITROEN,C3 AIRCROSS,875,exact,prefix_identity
+CITROËN,C5 Aircross,2987,CITROEN,C5 AIRCROSS,1585,exact,prefix_identity
+AUDI,Q5,2982,AUDI,Q5,14484,exact,prefix_identity
+TOYOTA,RAV4 Plug in,2964,TOYOTA,RAV4,83482,exact,prefix_identity
+SKODA,KAROQ,2955,SKODA,KAROQ,2609,exact,prefix_identity
+MAZDA,2,2889,MAZDA,2,6051,exact,prefix_identity
+SKODA,RAPID,2881,SKODA,RAPID,3539,exact,prefix_identity
+TOYOTA,Aygo X,2868,TOYOTA,AYGO,7203,exact,prefix_identity
+BMW,X1,2862,BMW,X1,20852,exact,prefix_identity
+VOLVO,V40,2821,VOLVO,V40,24267,exact,prefix_identity
+TOYOTA,AVENSIS STW,2732,TOYOTA,AVENSIS,55295,exact,prefix_identity
+NISSAN,JUKE,2719,NISSAN,JUKE,3197,exact,prefix_identity
+OPEL,Grandland X,2675,OPEL,GRANDLAND X,2408,exact,prefix_identity
+AUDI,Q2,2668,AUDI,Q2,2311,exact,prefix_identity
+KIA,CEE'D SW,2612,KIA,CEED,6566,exact,prefix_identity
+OPEL,MERIVA,2606,OPEL,MERIVA,3304,exact,prefix_identity
+FORD,Focus,2582,FORD,FOCUS,44247,exact,prefix_identity
+CITROËN,BERLINGO,2539,CITROEN,BERLINGO,3094,exact,prefix_identity
+MERCEDES-BENZ,C,2526,MERCEDES-BENZ,C,31181,exact,prefix_identity
+KIA,VENGA,2486,KIA,VENGA,2046,exact,prefix_identity
+SKODA,RAPID SPACEBACK,2456,SKODA,RAPID,3539,exact,prefix_identity
+FORD,MONDEO STATIONCAR,2444,FORD,MONDEO,36399,exact,prefix_identity
+MITSUBISHI,OUTLANDER,2387,MITSUBISHI,OUTLANDER,79708,exact,prefix_identity
+SKODA,SCALA,2385,SKODA,SCALA,345,exact,prefix_identity
+KIA,SPORTAGE,2382,KIA,SPORTAGE,13659,exact,prefix_identity
+HONDA,CR-V,2347,HONDA,CR V,31336,exact,prefix_identity
+KIA,Optima,2341,KIA,OPTIMA,2855,exact,prefix_identity
+SKODA,SUPERB COMBI,2282,SKODA,SUPERB,22645,exact,prefix_identity
+HYUNDAI,i30 Stc.,2253,HYUNDAI,I30,4284,exact,prefix_identity
+FORD,NY Focus,2243,FORD,FOCUS,44247,exact,prefix_identity
+KIA,XCeed,2204,KIA,XCEED,268,exact,prefix_identity
+PEUGEOT,508,2195,PEUGEOT,508,8284,exact,prefix_identity
+AUDI,A5 SPORTBACK,2179,AUDI,A5 SPORTBACK,1449,exact,prefix_identity
+KIA,Stonic,2134,KIA,STONIC,725,exact,prefix_identity
+MERCEDES-BENZ,E,2114,MERCEDES-BENZ,E,39883,exact,prefix_identity
+SKODA,KODIAQ,2109,SKODA,KODIAQ,10328,exact,prefix_identity
+MITSUBISHI,ASX,2106,MITSUBISHI,ASX,16639,exact,prefix_identity
+SUZUKI,SX4 COMBIBACK,2103,SUZUKI,SX4,17530,exact,prefix_identity
+MINI,COOPER,2097,MINI,COOPER,9225,exact,prefix_identity
+MITSUBISHI,COLT,2076,MITSUBISHI,COLT,6284,exact,prefix_identity
+MERCEDES-BENZ,GLC,2052,MERCEDES-BENZ,GLC,11767,exact,prefix_identity
+SEAT,Ibiza GP2,2032,SEAT,IBIZA,235,exact,prefix_identity
+MERCEDES-BENZ,CLA,2030,MERCEDES-BENZ,CLA,5931,exact,prefix_identity
+AUDI,A1 SPORTBACK,2002,AUDI,A1 SPORTBACK,5479,exact,prefix_identity
+MAZDA,Mazda CX-30,1948,MAZDA,CX 30,2543,exact,prefix_identity
+TOYOTA,Yaris Cross,1939,TOYOTA,YARIS CROSS,308,exact,prefix_identity
+BMW,4-serie,1925,BMW,420,1016,high,family_series_sibling
+CITROËN,C4 PICASSO,1915,CITROEN,C4 PICASSO,5036,exact,prefix_identity
+CITROËN,DS3,1908,CITROEN,DS3,2216,exact,prefix_identity
+NISSAN,Qashqai J11A,1840,NISSAN,QASHQAI,33664,exact,prefix_identity
+HYUNDAI,Ioniq,1839,HYUNDAI,IONIQ,2524,exact,prefix_identity
+MERCEDES-BENZ,GLA,1831,MERCEDES-BENZ,GLA,4105,exact,prefix_identity
+FORD,FOCUS STATIONSVOGN,1801,FORD,FOCUS,44247,exact,prefix_identity
+FORD,PUMA,1795,FORD,PUMA,661,exact,prefix_identity
+BMW,2-Serie,1774,BMW,225,11273,high,family_series_sibling
+BMW,2-Serie,1774,BMW,218,1630,high,family_series_sibling
+BMW,2-Serie,1774,BMW,220,920,high,family_series_sibling
+BMW,2-Serie,1774,BMW,216,229,high,family_series_sibling
+FORD,B-MAX,1774,FORD,B MAX,1403,exact,prefix_identity
+BMW,X5,1767,BMW,X5,18551,exact,prefix_identity
+AUDI,A3,1760,AUDI,A3,40962,exact,prefix_identity
+VOLVO,V70,1756,VOLVO,V70,49444,exact,prefix_identity
+FORD,GALAXY,1725,FORD,GALAXY,5022,exact,prefix_identity
+FIAT,Punto S7,1690,FIAT,PUNTO,557,exact,prefix_identity
+OPEL,Mokka,1686,OPEL,MOKKA,8732,exact,prefix_identity
+RENAULT,MEGANE SPORT TOURER,1658,RENAULT,MEGANE,5169,exact,prefix_identity
+HYUNDAI,I 10,1642,HYUNDAI,I10,2608,exact,prefix_identity
+HYUNDAI,IX20,1641,HYUNDAI,IX20,3087,exact,prefix_identity
+SUZUKI,SX4,1616,SUZUKI,SX4,17530,exact,prefix_identity
+BMW,X3,1583,BMW,X3,24512,exact,prefix_identity
+AUDI,A3 Limousine,1525,AUDI,A3 LIMOUSINE,790,exact,prefix_identity
+NISSAN,X-TRAIL,1513,NISSAN,X TRAIL,14153,exact,prefix_identity
+MERCEDES-BENZ,GLE,1502,MERCEDES-BENZ,GLE,3143,exact,prefix_identity
+VOLVO,V90,1476,VOLVO,V90,15806,exact,prefix_identity
+VOLVO,XC90,1470,VOLVO,XC90,25142,exact,prefix_identity
+AUDI,A3 CABRIOLET,1419,AUDI,A3 CABRIOLET,326,exact,prefix_identity
+HYUNDAI,I40,1400,HYUNDAI,I40,3343,exact,prefix_identity
+OPEL,ZAFIRA,1383,OPEL,ZAFIRA,4014,exact,prefix_identity
+HYUNDAI,i10 AC3,1356,HYUNDAI,I10,2608,exact,prefix_identity
+ALFA ROMEO,GIULIETTA,1350,ALFA ROMEO,GIULIETTA,294,exact,prefix_identity
+VOLVO,V50,1331,VOLVO,V50,19676,exact,prefix_identity
+OPEL,ASTRA SPORTS TOURER,1323,OPEL,ASTRA SPORTS TOURER,3543,exact,prefix_identity
+KIA,CEED SW,46,KIA,CEED,6566,exact,prefix_identity

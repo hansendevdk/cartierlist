@@ -1,0 +1,651 @@
+dmr_make,dmr_model,age_band,n_periodisk_tests,n_pass,n_fail,n_strata_surviving,raw_pass_rate,standardized_pass_rate,reliability_unstable,meets_stability_floor_2500,meets_floor_500,meets_floor_1000,meets_floor_1500,meets_floor_2000,meets_floor_2500
+VOLVO,V60,3,13953,8139,5814,5,0.5833,0.622,False,True,True,True,True,True,True
+VOLVO,V40,3,13394,7656,5738,5,0.5716,0.5616,False,True,True,True,True,True,True
+TOYOTA,YARIS 5-DØRS,1,16882,13410,3472,5,0.7943,0.7325,False,True,True,True,True,True,True
+CITROËN,C 1,4,1119,357,762,4,0.319,0.244,False,False,True,True,False,False,False
+SKODA,KODIAQ,2,2105,1676,429,4,0.7962,0.8122,False,False,True,True,True,True,False
+NISSAN,MICRA,3,871,451,420,4,0.5178,0.4301,False,False,True,False,False,False,False
+VOLKSWAGEN,GOLF,3,40607,23283,17324,5,0.5734,0.5582,False,True,True,True,True,True,True
+BMW,3-Serie,4,10635,3305,7330,5,0.3108,0.3337,False,True,True,True,True,True,True
+VOLKSWAGEN,TOURAN,4,10414,3385,7029,4,0.325,0.3694,False,True,True,True,True,True,True
+VOLVO,XC90,4,1825,609,1216,3,0.3337,0.414,False,False,True,True,True,False,False
+KIA,SPORTAGE,3,7796,2985,4811,5,0.3829,0.3903,False,True,True,True,True,True,True
+OPEL,CORSA,4,3017,970,2047,5,0.3215,0.2336,False,True,True,True,True,True,True
+FORD,GALAXY,3,1766,598,1168,4,0.3386,0.4029,False,False,True,True,True,False,False
+MITSUBISHI,ASX,4,5149,2210,2939,5,0.4292,0.4245,False,True,True,True,True,True,True
+VOLVO,V70,3,11477,6529,4948,5,0.5689,0.6351,False,True,True,True,True,True,True
+AUDI,A1 SPORTBACK,4,183,85,98,3,0.4645,0.4506,False,False,False,False,False,False,False
+FORD,FOCUS STATIONSVOGN,4,12012,3868,8144,5,0.322,0.315,False,True,True,True,True,True,True
+NISSAN,Qashqai J11A,1,4798,3883,915,4,0.8093,0.8029,False,True,True,True,True,True,True
+FIAT,500,3,2045,682,1363,5,0.3335,0.2839,False,False,True,True,True,True,False
+HYUNDAI,Tucson,3,2331,1129,1202,5,0.4843,0.4729,False,False,True,True,True,True,False
+AUDI,Q5,4,5189,2166,3023,4,0.4174,0.4549,False,True,True,True,True,True,True
+SKODA,FABIA COMBI,1,2246,1694,552,3,0.7542,0.7406,False,False,True,True,True,True,False
+BMW,X1,2,3404,2367,1037,5,0.6954,0.7022,False,True,True,True,True,True,True
+MERCEDES-BENZ,A-Klasse,1,2726,2358,368,4,0.865,0.8518,False,True,True,True,True,True,True
+SUZUKI,VITARA,1,3773,3344,429,4,0.8863,0.8699,False,True,True,True,True,True,True
+BMW,X5,2,3601,2311,1290,5,0.6418,0.657,False,True,True,True,True,True,True
+NISSAN,QASHQAI,2,7503,5078,2425,5,0.6768,0.6581,False,True,True,True,True,True,True
+SKODA,FABIA,3,3929,1963,1966,5,0.4996,0.4474,False,True,True,True,True,True,True
+NISSAN,QASHQAI,3,10874,4800,6074,5,0.4414,0.4234,False,True,True,True,True,True,True
+TOYOTA,AVENSIS,4,20526,7135,13391,5,0.3476,0.3849,False,True,True,True,True,True,True
+SKODA,SUPERB,1,6713,4552,2161,5,0.6781,0.7083,False,True,True,True,True,True,True
+MERCEDES-BENZ,E-Klasse,3,8181,3876,4305,5,0.4738,0.5341,False,True,True,True,True,True,True
+FORD,FIESTA,4,7906,2272,5634,5,0.2874,0.2516,False,True,True,True,True,True,True
+SEAT,IBIZA,1,162,106,56,2,0.6543,,True,False,False,False,False,False,False
+SKODA,RAPID,3,1667,828,839,5,0.4967,0.4589,False,False,True,True,True,False,False
+MAZDA,MAZDA3,1,1523,1170,353,3,0.7682,0.747,False,False,True,True,True,False,False
+TOYOTA,AYGO 5-DØRS,4,3007,959,2048,5,0.3189,0.228,False,True,True,True,True,True,True
+FORD,Focus,4,12012,3868,8144,5,0.322,0.315,False,True,True,True,True,True,True
+FORD,FOCUS,4,12012,3868,8144,5,0.322,0.315,False,True,True,True,True,True,True
+BMW,X3,1,2884,2441,443,4,0.8464,0.8475,False,True,True,True,True,True,True
+KIA,PICANTO,3,3887,1590,2297,5,0.4091,0.298,False,True,True,True,True,True,True
+CITROËN,C3 PICASSO,4,833,241,592,4,0.2893,0.2622,False,False,True,False,False,False,False
+CITROËN,C4,4,2439,641,1798,4,0.2628,0.2561,False,False,True,True,True,True,False
+AUDI,A4 AVANT,1,1533,1288,245,4,0.8402,0.8571,False,False,True,True,True,False,False
+VOLVO,XC90,2,5537,3697,1840,5,0.6677,0.7068,False,True,True,True,True,True,True
+BMW,1-Serie,3,5856,2802,3054,5,0.4785,0.4737,False,True,True,True,True,True,True
+PEUGEOT,107,3,862,358,504,4,0.4153,0.3235,False,False,True,False,False,False,False
+MERCEDES-BENZ,C,3,6797,3463,3334,5,0.5095,0.5207,False,True,True,True,True,True,True
+VOLKSWAGEN,PASSAT VARIANT,1,11253,7930,3323,5,0.7047,0.7282,False,True,True,True,True,True,True
+KIA,SPORTAGE,4,1242,380,862,4,0.306,0.3128,False,False,True,True,False,False,False
+HYUNDAI,I20,4,3876,1544,2332,5,0.3983,0.3069,False,True,True,True,True,True,True
+SUZUKI,IGNIS,2,813,535,278,4,0.6581,0.5707,False,False,True,False,False,False,False
+MITSUBISHI,COLT,4,3136,1192,1944,5,0.3801,0.2626,False,True,True,True,True,True,True
+PEUGEOT,308,3,4837,2269,2568,5,0.4691,0.4418,False,True,True,True,True,True,True
+MERCEDES-BENZ,GLA,3,1359,958,401,5,0.7049,0.6719,False,False,True,True,False,False,False
+HONDA,CR-V,3,6725,4466,2259,5,0.6641,0.6702,False,True,True,True,True,True,True
+HYUNDAI,I40,4,753,221,532,3,0.2935,0.2917,False,False,True,False,False,False,False
+MITSUBISHI,ASX,1,452,380,72,3,0.8407,0.8374,False,False,False,False,False,False,False
+SUZUKI,SX4 COMBIBACK,4,4809,1874,2935,5,0.3897,0.3195,False,True,True,True,True,True,True
+SKODA,OCTAVIA,3,19319,9649,9670,5,0.4995,0.5284,False,True,True,True,True,True,True
+HYUNDAI,I10,3,1046,474,572,4,0.4532,0.3127,False,False,True,True,False,False,False
+TOYOTA,AYGO 3/5-DØRS,1,689,554,135,2,0.8041,,True,False,True,False,False,False,False
+FORD,FOCUS,2,5076,3477,1599,5,0.685,0.6816,False,True,True,True,True,True,True
+FORD,FOCUS,3,15257,7159,8098,5,0.4692,0.4713,False,True,True,True,True,True,True
+SKODA,KODIAQ,1,7893,6522,1371,5,0.8263,0.8383,False,True,True,True,True,True,True
+KIA,Niro,2,2639,1837,802,5,0.6961,0.6792,False,True,True,True,True,True,True
+VOLVO,XC90,3,1135,627,508,4,0.5524,0.5975,False,False,True,True,False,False,False
+PEUGEOT,308,4,4655,1415,3240,5,0.304,0.2762,False,True,True,True,True,True,True
+OPEL,ASTRA SPORTS TOURER,4,979,378,601,4,0.3861,0.3779,False,False,True,False,False,False,False
+SKODA,SUPERB COMBI,3,6121,2411,3710,4,0.3939,0.4402,False,True,True,True,True,True,True
+TOYOTA,RAV4,1,29243,24865,4378,5,0.8503,0.8498,False,True,True,True,True,True,True
+MAZDA,MAZDA3,2,2010,1273,737,5,0.6333,0.6234,False,False,True,True,True,True,False
+FORD,NY Focus,3,15257,7159,8098,5,0.4692,0.4713,False,True,True,True,True,True,True
+FORD,Focus,3,15257,7159,8098,5,0.4692,0.4713,False,True,True,True,True,True,True
+TOYOTA,AVENSIS STW,3,12867,7225,5642,5,0.5615,0.5936,False,True,True,True,True,True,True
+MERCEDES-BENZ,B-Klasse,4,4180,1259,2921,5,0.3012,0.2731,False,True,True,True,True,True,True
+PEUGEOT,3008,1,7489,5616,1873,4,0.7499,0.7462,False,True,True,True,True,True,True
+MITSUBISHI,OUTLANDER,2,22180,13721,8459,5,0.6186,0.6458,False,True,True,True,True,True,True
+VOLVO,V60,2,6546,4894,1652,5,0.7476,0.7618,False,True,True,True,True,True,True
+VOLVO,V40,2,6391,4430,1961,5,0.6932,0.6842,False,True,True,True,True,True,True
+FORD,Focus,1,6110,4914,1196,4,0.8043,0.798,False,True,True,True,True,True,True
+VOLKSWAGEN,PASSAT VARIANT,4,15462,5053,10409,4,0.3268,0.3582,False,True,True,True,True,True,True
+CITROËN,DS3,3,1430,426,1004,5,0.2979,0.2836,False,False,True,True,False,False,False
+BMW,3-Serie,2,3950,2530,1420,5,0.6405,0.6635,False,True,True,True,True,True,True
+HONDA,CR-V,1,1749,1500,249,4,0.8576,0.8564,False,False,True,True,True,False,False
+MITSUBISHI,SPACE STAR,2,910,702,208,4,0.7714,0.6882,False,False,True,False,False,False,False
+TOYOTA,VERSO,3,3553,1998,1555,5,0.5623,0.5148,False,True,True,True,True,True,True
+VOLKSWAGEN,PASSAT,4,15462,5053,10409,4,0.3268,0.3582,False,True,True,True,True,True,True
+MERCEDES-BENZ,A-Klasse,2,2268,1622,646,5,0.7152,0.6911,False,False,True,True,True,True,False
+MAZDA,CX-3,1,2711,2218,493,4,0.8181,0.8055,False,True,True,True,True,True,True
+PEUGEOT,5008,3,1911,621,1290,4,0.325,0.3694,False,False,True,True,True,False,False
+AUDI,Q2,2,722,484,238,4,0.6704,0.6474,False,False,True,False,False,False,False
+VOLKSWAGEN,CADDY,2,818,439,379,5,0.5367,0.5657,False,False,True,False,False,False,False
+HYUNDAI,I10,4,982,404,578,4,0.4114,0.281,False,False,True,False,False,False,False
+CHEVROLET,SPARK,4,21,10,11,0,0.4762,,True,False,False,False,False,False,False
+PEUGEOT,107,4,1880,582,1298,5,0.3096,0.1728,False,False,True,True,True,False,False
+PEUGEOT,3008,3,3530,1435,2095,5,0.4065,0.4048,False,True,True,True,True,True,True
+CITROËN,C4 PICASSO,3,1484,504,980,4,0.3396,0.3534,False,False,True,True,False,False,False
+MAZDA,3,4,3328,1137,2191,5,0.3416,0.3098,False,True,True,True,True,True,True
+SUZUKI,VITARA,2,3777,2883,894,5,0.7633,0.7425,False,True,True,True,True,True,True
+MAZDA,CX-3,3,1002,661,341,4,0.6597,0.6149,False,False,True,True,False,False,False
+HYUNDAI,i10 AC3,4,982,404,578,4,0.4114,0.281,False,False,True,False,False,False,False
+PEUGEOT,308,1,1141,730,411,3,0.6398,0.646,False,False,True,True,False,False,False
+OPEL,MERIVA,4,1312,449,863,5,0.3422,0.2943,False,False,True,True,False,False,False
+HYUNDAI,I 10,4,982,404,578,4,0.4114,0.281,False,False,True,False,False,False,False
+MITSUBISHI,COLT,3,1264,649,615,5,0.5134,0.3992,False,False,True,True,False,False,False
+VOLKSWAGEN,PASSAT,1,11253,7930,3323,5,0.7047,0.7282,False,True,True,True,True,True,True
+DACIA,Duster,1,767,450,317,3,0.5867,0.587,False,False,True,False,False,False,False
+FORD,KUGA,4,5780,2096,3684,4,0.3626,0.39,False,True,True,True,True,True,True
+RENAULT,CLIO,4,517,116,401,4,0.2244,0.2376,False,False,True,False,False,False,False
+BMW,1-Serie,2,1319,837,482,5,0.6346,0.6303,False,False,True,True,False,False,False
+PEUGEOT,508,4,1566,608,958,4,0.3883,0.4054,False,False,True,True,True,False,False
+TOYOTA,RAV4,3,11242,6723,4519,5,0.598,0.607,False,True,True,True,True,True,True
+OPEL,Mokka,1,1060,891,169,3,0.8406,0.8247,False,False,True,True,False,False,False
+FORD,MONDEO,3,9588,4419,5169,5,0.4609,0.5284,False,True,True,True,True,True,True
+MERCEDES-BENZ,A-Klasse,4,2238,733,1505,5,0.3275,0.2707,False,False,True,True,True,True,False
+KIA,Stonic,1,630,526,104,3,0.8349,0.7859,False,False,True,False,False,False,False
+HONDA,CR-V,2,2570,1986,584,5,0.7728,0.7803,False,True,True,True,True,True,True
+VOLVO,V40,1,3389,2648,741,4,0.7814,0.7835,False,True,True,True,True,True,True
+TOYOTA,RAV4,4,10666,4225,6441,5,0.3961,0.4166,False,True,True,True,True,True,True
+TOYOTA,COROLLA,1,9061,7496,1565,5,0.8273,0.8043,False,True,True,True,True,True,True
+NISSAN,X-TRAIL,2,2651,1471,1180,5,0.5549,0.5917,False,True,True,True,True,True,True
+SUZUKI,ALTO,3,285,104,181,3,0.3649,0.3116,False,False,False,False,False,False,False
+CHEVROLET,SPARK,3,308,80,228,3,0.2597,0.2083,False,False,False,False,False,False,False
+HYUNDAI,Tucson,2,2353,1608,745,5,0.6834,0.6858,False,False,True,True,True,True,False
+BMW,X5,1,5474,4259,1215,4,0.778,0.7928,False,True,True,True,True,True,True
+SUZUKI,IGNIS,4,390,134,256,3,0.3436,0.2586,False,False,False,False,False,False,False
+MITSUBISHI,SPACE STAR,1,320,275,45,2,0.8594,,True,False,False,False,False,False,False
+SKODA,FABIA COMBI,2,3224,2022,1202,5,0.6272,0.5917,False,True,True,True,True,True,True
+AUDI,A3 CABRIOLET,2,39,26,13,1,0.6667,,True,False,False,False,False,False,False
+FORD,C-MAX,2,749,509,240,4,0.6796,0.6635,False,False,True,False,False,False,False
+CITROËN,C1,1,58,42,16,1,0.7241,,True,False,False,False,False,False,False
+AUDI,A3 Limousine,3,391,226,165,4,0.578,0.5605,False,False,False,False,False,False,False
+KIA,CEED,2,1150,664,486,5,0.5774,0.5663,False,False,True,True,False,False,False
+MERCEDES-BENZ,C,1,3637,2952,685,5,0.8117,0.8214,False,True,True,True,True,True,True
+NISSAN,JUKE,1,107,88,19,2,0.8224,,True,False,False,False,False,False,False
+FORD,FOCUS STATIONSVOGN,1,6110,4914,1196,4,0.8043,0.798,False,True,True,True,True,True,True
+HYUNDAI,I20,1,1113,907,206,3,0.8149,0.787,False,False,True,True,False,False,False
+BMW,2-Serie,1,7055,5880,1175,4,0.8335,0.8155,False,True,True,True,True,True,True
+VOLKSWAGEN,UP!,2,1503,986,517,4,0.656,0.5671,False,False,True,True,True,False,False
+BMW,2-Serie,2,5966,3900,2066,5,0.6537,0.6298,False,True,True,True,True,True,True
+SKODA,FABIA,1,2246,1694,552,3,0.7542,0.7406,False,False,True,True,True,True,False
+MAZDA,MAZDA6,1,1078,830,248,4,0.7699,0.7831,False,False,True,True,False,False,False
+CITROËN,C1,4,1119,357,762,4,0.319,0.244,False,False,True,True,False,False,False
+FORD,FIESTA 5 DØRS,1,3219,2636,583,3,0.8189,0.7834,False,True,True,True,True,True,True
+FORD,S-MAX,1,1786,1355,431,5,0.7587,0.7866,False,False,True,True,True,False,False
+ALFA ROMEO,GIULIETTA,2,35,20,15,1,0.5714,,True,False,False,False,False,False,False
+HONDA,JAZZ,3,1643,1004,639,5,0.6111,0.5194,False,False,True,True,True,False,False
+PEUGEOT,206 +,4,143,40,103,3,0.2797,0.1801,False,False,False,False,False,False,False
+HYUNDAI,I30CW,3,164,66,98,3,0.4024,0.3876,False,False,False,False,False,False,False
+VOLVO,V50,4,11296,3399,7897,5,0.3009,0.3229,False,True,True,True,True,True,True
+VOLKSWAGEN,TOURAN,3,5455,2318,3137,4,0.4249,0.4646,False,True,True,True,True,True,True
+CITROËN,C4 PICASSO,1,823,501,322,4,0.6087,0.6286,False,False,True,False,False,False,False
+KIA,VENGA,2,273,180,93,3,0.6593,0.5921,False,False,False,False,False,False,False
+PEUGEOT,508,2,919,495,424,4,0.5386,0.576,False,False,True,False,False,False,False
+HYUNDAI,I20,2,2116,1461,655,4,0.6905,0.6465,False,False,True,True,True,True,False
+FIAT,Punto S7,3,91,22,69,2,0.2418,,True,False,False,False,False,False,False
+BMW,X1,3,5709,2747,2962,5,0.4812,0.4934,False,True,True,True,True,True,True
+BMW,1-Serie,1,314,244,70,4,0.7771,0.7848,False,False,False,False,False,False,False
+AUDI,A3 CABRIOLET,3,103,59,44,2,0.5728,,True,False,False,False,False,False,False
+VOLKSWAGEN,TIGUAN,4,11058,4474,6584,4,0.4046,0.4298,False,True,True,True,True,True,True
+SKODA,FABIA COMBI,3,3929,1963,1966,5,0.4996,0.4474,False,True,True,True,True,True,True
+BMW,5-Serie,2,3263,2094,1169,5,0.6417,0.6759,False,True,True,True,True,True,True
+VOLKSWAGEN,UP!,4,234,110,124,3,0.4701,0.3556,False,False,False,False,False,False,False
+TOYOTA,Aygo X,2,608,355,253,4,0.5839,0.4647,False,False,True,False,False,False,False
+MERCEDES-BENZ,GLA,1,938,794,144,3,0.8465,0.8205,False,False,True,False,False,False,False
+RENAULT,MEGANE SPORT TOURER,2,326,182,144,3,0.5583,0.5413,False,False,False,False,False,False,False
+HONDA,CIVIC,2,1171,866,305,5,0.7395,0.7253,False,False,True,True,False,False,False
+SEAT,Ibiza GP2,4,7,0,7,0,0.0,,True,False,False,False,False,False,False
+TOYOTA,AURIS,4,14992,5689,9303,5,0.3795,0.3404,False,True,True,True,True,True,True
+SKODA,SUPERB,3,6121,2411,3710,4,0.3939,0.4402,False,True,True,True,True,True,True
+RENAULT,MEGANE SPORT TOURER,3,1261,327,934,4,0.2593,0.2603,False,False,True,True,False,False,False
+FIAT,PANDA,4,101,20,81,3,0.198,0.1339,False,False,False,False,False,False,False
+MAZDA,MAZDA2,1,625,548,77,2,0.8768,,True,False,True,False,False,False,False
+MAZDA,CX-5,4,302,132,170,3,0.4371,0.4335,False,False,False,False,False,False,False
+CITROËN,BERLINGO,4,993,238,755,4,0.2397,0.2468,False,False,True,False,False,False,False
+KIA,CEED SW,1,984,805,179,3,0.8181,0.81,False,False,True,False,False,False,False
+TOYOTA,AURIS,1,6033,4922,1111,5,0.8158,0.8139,False,True,True,True,True,True,True
+BMW,X1,4,4390,1552,2838,4,0.3535,0.3637,False,True,True,True,True,True,True
+VOLKSWAGEN,GOLF,4,32682,12386,20296,5,0.379,0.3617,False,True,True,True,True,True,True
+VOLVO,XC40,1,6206,5806,400,5,0.9355,0.9279,False,True,True,True,True,True,True
+VOLKSWAGEN,POLO,3,10576,4973,5603,5,0.4702,0.3921,False,True,True,True,True,True,True
+NISSAN,X-TRAIL,3,2381,1001,1380,4,0.4204,0.4592,False,False,True,True,True,True,False
+VOLKSWAGEN,UP!,3,4436,2373,2063,5,0.5349,0.4304,False,True,True,True,True,True,True
+MITSUBISHI,ASX,3,9126,5176,3950,5,0.5672,0.575,False,True,True,True,True,True,True
+CITROËN,C4,1,2520,1538,982,4,0.6103,0.6137,False,True,True,True,True,True,True
+VOLKSWAGEN,TOURAN,2,2051,1292,759,5,0.6299,0.6479,False,False,True,True,True,True,False
+MAZDA,CX-5,3,14518,7898,6620,5,0.544,0.56,False,True,True,True,True,True,True
+SUZUKI,SX4,3,6632,3926,2706,5,0.592,0.5247,False,True,True,True,True,True,True
+VOLVO,V90,2,4670,3289,1381,5,0.7043,0.739,False,True,True,True,True,True,True
+VOLVO,XC60,3,13968,8470,5498,5,0.6064,0.6535,False,True,True,True,True,True,True
+AUDI,Q5,3,5548,3196,2352,4,0.5761,0.628,False,True,True,True,True,True,True
+TOYOTA,AVENSIS STW,4,20526,7135,13391,5,0.3476,0.3849,False,True,True,True,True,True,True
+FORD,MONDEO STATIONCAR,4,15288,4673,10615,6,0.3057,0.3527,False,True,True,True,True,True,True
+TOYOTA,Aygo X,3,2298,1095,1203,5,0.4765,0.3489,False,False,True,True,True,True,False
+FORD,S-MAX,4,6314,1768,4546,4,0.28,0.3254,False,True,True,True,True,True,True
+SKODA,CITIGO,3,1480,817,663,5,0.552,0.45,False,False,True,True,False,False,False
+MERCEDES-BENZ,A-Klasse,3,6182,3790,2392,5,0.6131,0.583,False,True,True,True,True,True,True
+VOLKSWAGEN,T-Roc,1,7258,6409,849,4,0.883,0.8672,False,True,True,True,True,True,True
+RENAULT,CLIO,3,1622,570,1052,5,0.3514,0.2944,False,False,True,True,True,False,False
+AUDI,A4 AVANT,3,2969,1610,1359,4,0.5423,0.5893,False,True,True,True,True,True,True
+OPEL,Mokka,3,4582,2447,2135,5,0.534,0.4721,False,True,True,True,True,True,True
+SUZUKI,SWIFT,1,4184,3405,779,4,0.8138,0.778,False,True,True,True,True,True,True
+FORD,FIESTA,3,8583,3352,5231,5,0.3905,0.3349,False,True,True,True,True,True,True
+VOLKSWAGEN,PASSAT,3,16654,7788,8866,5,0.4676,0.5138,False,True,True,True,True,True,True
+SKODA,OCTAVIA,2,13702,9307,4395,5,0.6792,0.6923,False,True,True,True,True,True,True
+AUDI,A3 Sportback,2,8901,5726,3175,5,0.6433,0.6386,False,True,True,True,True,True,True
+MERCEDES-BENZ,E-Klasse,4,11198,4475,6723,5,0.3996,0.4366,False,True,True,True,True,True,True
+FORD,MONDEO,4,15288,4673,10615,6,0.3057,0.3527,False,True,True,True,True,True,True
+NISSAN,QASHQAI,1,4798,3883,915,4,0.8093,0.8029,False,True,True,True,True,True,True
+SKODA,RAPID,2,1389,855,534,5,0.6156,0.597,False,False,True,True,False,False,False
+SKODA,OCTAVIA,1,14749,11614,3135,5,0.7874,0.8053,False,True,True,True,True,True,True
+TOYOTA,YARIS 5-DØRS,2,15223,10058,5165,5,0.6607,0.5882,False,True,True,True,True,True,True
+VOLVO,V90,1,10928,8850,2078,5,0.8098,0.839,False,True,True,True,True,True,True
+CITROËN,C4 Cactus,3,775,286,489,3,0.369,0.3213,False,False,True,False,False,False,False
+MAZDA,3,3,2880,1594,1286,5,0.5535,0.5232,False,True,True,True,True,True,True
+FORD,B-MAX,3,1129,476,653,4,0.4216,0.3292,False,False,True,True,False,False,False
+BMW,3-Serie,3,8958,4509,4449,5,0.5033,0.5387,False,True,True,True,True,True,True
+NISSAN,NOTE,3,946,545,401,5,0.5761,0.4751,False,False,True,False,False,False,False
+VOLKSWAGEN,GOLF,2,24534,17176,7358,5,0.7001,0.6945,False,True,True,True,True,True,True
+SKODA,OCTAVIA COMBI,3,19319,9649,9670,5,0.4995,0.5284,False,True,True,True,True,True,True
+VOLVO,XC60,2,9732,7049,2683,5,0.7243,0.7475,False,True,True,True,True,True,True
+BMW,5-Serie,4,10877,4039,6838,4,0.3713,0.4141,False,True,True,True,True,True,True
+PEUGEOT,207,4,5486,1561,3925,5,0.2845,0.2523,False,True,True,True,True,True,True
+CITROËN,C5 Aircross,1,1527,1183,344,3,0.7747,0.7618,False,False,True,True,True,False,False
+PEUGEOT,208,3,5152,2503,2649,5,0.4858,0.3892,False,True,True,True,True,True,True
+HONDA,CR-V,4,9204,3513,5691,4,0.3817,0.423,False,True,True,True,True,True,True
+SKODA,RAPID SPACEBACK,3,1667,828,839,5,0.4967,0.4589,False,False,True,True,True,False,False
+HYUNDAI,IX20,3,1937,900,1037,5,0.4646,0.364,False,False,True,True,True,False,False
+BMW,X5,3,2684,1502,1182,4,0.5596,0.5907,False,True,True,True,True,True,True
+RENAULT,Captur,3,929,472,457,4,0.5081,0.4292,False,False,True,False,False,False,False
+VOLVO,XC60,4,9334,4760,4574,4,0.51,0.5516,False,True,True,True,True,True,True
+MINI,COOPER,3,3308,1718,1590,5,0.5193,0.4899,False,True,True,True,True,True,True
+AUDI,Q2,1,1587,1280,307,4,0.8066,0.7983,False,False,True,True,True,False,False
+FORD,KUGA,2,4067,2964,1103,5,0.7288,0.746,False,True,True,True,True,True,True
+FIAT,500,4,2705,709,1996,5,0.2621,0.1803,False,True,True,True,True,True,True
+SUZUKI,SX4,4,4809,1874,2935,5,0.3897,0.3195,False,True,True,True,True,True,True
+HYUNDAI,I 10,3,1046,474,572,4,0.4532,0.3127,False,False,True,True,False,False,False
+AUDI,A3 Sportback,3,9047,5205,3842,5,0.5753,0.5648,False,True,True,True,True,True,True
+BMW,X3,2,3055,1983,1072,5,0.6491,0.6784,False,True,True,True,True,True,True
+CITROËN,DS3,4,696,204,492,4,0.2931,0.2573,False,False,True,False,False,False,False
+MAZDA,CX-3,2,5128,3873,1255,5,0.7553,0.7181,False,True,True,True,True,True,True
+KIA,RIO,3,2622,1269,1353,5,0.484,0.4038,False,True,True,True,True,True,True
+SUZUKI,SWIFT,3,4814,2282,2532,5,0.474,0.4143,False,True,True,True,True,True,True
+TOYOTA,VERSO,4,2396,897,1499,5,0.3744,0.3547,False,False,True,True,True,True,False
+PEUGEOT,508,3,4721,1938,2783,4,0.4105,0.4423,False,True,True,True,True,True,True
+RENAULT,Captur,2,1187,729,458,4,0.6142,0.5379,False,False,True,True,False,False,False
+VOLVO,XC90,1,8675,7360,1315,5,0.8484,0.8608,False,True,True,True,True,True,True
+TOYOTA,RAV4 Plug in,1,29243,24865,4378,5,0.8503,0.8498,False,True,True,True,True,True,True
+KIA,PICANTO,2,1280,745,535,4,0.582,0.4698,False,False,True,True,False,False,False
+MAZDA,2,4,2075,710,1365,5,0.3422,0.2739,False,False,True,True,True,True,False
+MERCEDES-BENZ,B-Klasse,3,4025,2093,1932,5,0.52,0.4844,False,True,True,True,True,True,True
+FORD,MONDEO STATIONCAR,2,5589,3932,1657,5,0.7035,0.7442,False,True,True,True,True,True,True
+OPEL,Grandland X,1,2268,1898,370,3,0.8369,0.8179,False,False,True,True,True,True,False
+TOYOTA,YARIS,4,12845,4534,8311,5,0.353,0.2741,False,True,True,True,True,True,True
+MERCEDES-BENZ,C-Klasse,2,5861,3790,2071,5,0.6466,0.6562,False,True,True,True,True,True,True
+MERCEDES-BENZ,E-Klasse,1,4198,3253,945,5,0.7749,0.8365,False,True,True,True,True,True,True
+HONDA,JAZZ,4,2120,976,1144,5,0.4604,0.3696,False,False,True,True,True,True,False
+KIA,SPORTAGE,1,1259,1019,240,4,0.8094,0.8249,False,False,True,True,False,False,False
+MERCEDES-BENZ,C,4,7755,2522,5233,5,0.3252,0.3384,False,True,True,True,True,True,True
+TOYOTA,COROLLA,4,4053,1446,2607,5,0.3568,0.3468,False,True,True,True,True,True,True
+KIA,XCeed,1,264,232,32,2,0.8788,,True,False,False,False,False,False,False
+SEAT,Ibiza GP2,1,162,106,56,2,0.6543,,True,False,False,False,False,False,False
+NISSAN,JUKE,2,531,330,201,4,0.6215,0.5601,False,False,True,False,False,False,False
+PEUGEOT,2008,3,2682,1119,1563,5,0.4172,0.3722,False,True,True,True,True,True,True
+TOYOTA,RAV4 Plug in,4,10666,4225,6441,5,0.3961,0.4166,False,True,True,True,True,True,True
+DACIA,Duster,3,489,137,352,4,0.2802,0.2791,False,False,False,False,False,False,False
+NISSAN,NOTE,4,1197,389,808,5,0.325,0.2759,False,False,True,True,False,False,False
+RENAULT,Captur,1,1550,1229,321,3,0.7929,0.7318,False,False,True,True,True,False,False
+HYUNDAI,Ioniq,1,1674,1273,401,3,0.7605,0.7566,False,False,True,True,True,False,False
+SKODA,SUPERB COMBI,4,3621,1116,2505,4,0.3082,0.3373,False,True,True,True,True,True,True
+OPEL,ASTRA SPORTS TOURER,3,2062,1057,1005,4,0.5126,0.5258,False,False,True,True,True,True,False
+CITROËN,C4 Cactus,1,1085,654,431,3,0.6028,0.5877,False,False,True,True,False,False,False
+OPEL,ZAFIRA,3,1038,461,577,4,0.4441,0.4792,False,False,True,True,False,False,False
+KIA,Optima,3,86,31,55,2,0.3605,,True,False,False,False,False,False,False
+HYUNDAI,KONA,2,42,31,11,1,0.7381,,True,False,False,False,False,False,False
+VOLKSWAGEN,CADDY,3,1122,419,703,5,0.3734,0.3962,False,False,True,True,False,False,False
+HYUNDAI,i10 AC3,2,411,241,170,3,0.5864,0.5079,False,False,False,False,False,False,False
+SKODA,OCTAVIA COMBI,4,12917,3887,9030,5,0.3009,0.3275,False,True,True,True,True,True,True
+TOYOTA,Aygo X,4,3007,959,2048,5,0.3189,0.228,False,True,True,True,True,True,True
+MERCEDES-BENZ,E-Klasse,2,3761,2309,1452,5,0.6139,0.6881,False,True,True,True,True,True,True
+SUZUKI,SX4 COMBIBACK,3,6632,3926,2706,5,0.592,0.5247,False,True,True,True,True,True,True
+CITROËN,C4 Cactus,2,1625,692,933,4,0.4258,0.4084,False,False,True,True,True,False,False
+NISSAN,X-TRAIL,4,3637,997,2640,4,0.2741,0.3326,False,True,True,True,True,True,True
+SKODA,RAPID SPACEBACK,2,1389,855,534,5,0.6156,0.597,False,False,True,True,False,False,False
+SKODA,CITIGO,4,64,28,36,2,0.4375,,True,False,False,False,False,False,False
+SUZUKI,SWIFT,4,4271,1449,2822,5,0.3393,0.2837,False,True,True,True,True,True,True
+MAZDA,MAZDA6,2,2276,1469,807,5,0.6454,0.6722,False,False,True,True,True,True,False
+AUDI,Q5,2,2270,1641,629,5,0.7229,0.7461,False,False,True,True,True,True,False
+PEUGEOT,508,1,1065,767,298,4,0.7202,0.7223,False,False,True,True,False,False,False
+FORD,PUMA,1,614,540,74,2,0.8795,,True,False,True,False,False,False,False
+CITROËN,C3,3,1322,433,889,5,0.3275,0.2593,False,False,True,True,False,False,False
+MAZDA,MAZDA3,3,2880,1594,1286,5,0.5535,0.5232,False,True,True,True,True,True,True
+FORD,FOCUS,1,6110,4914,1196,4,0.8043,0.798,False,True,True,True,True,True,True
+VOLKSWAGEN,POLO,2,5290,3504,1786,5,0.6624,0.6085,False,True,True,True,True,True,True
+SKODA,KAROQ,2,173,131,42,2,0.7572,,True,False,False,False,False,False,False
+OPEL,ZAFIRA,4,1175,297,878,4,0.2528,0.2693,False,False,True,True,False,False,False
+MERCEDES-BENZ,CLA,2,2377,1621,756,5,0.682,0.6756,False,False,True,True,True,True,False
+KIA,CEED SW,3,3585,1520,2065,5,0.424,0.4105,False,True,True,True,True,True,True
+KIA,CEED,3,3585,1520,2065,5,0.424,0.4105,False,True,True,True,True,True,True
+KIA,PICANTO,4,652,172,480,4,0.2638,0.1756,False,False,True,False,False,False,False
+HYUNDAI,i30 Stc.,4,3800,1210,2590,5,0.3184,0.2783,False,True,True,True,True,True,True
+AUDI,A6 AVANT,1,526,445,81,4,0.846,0.8459,False,False,True,False,False,False,False
+BMW,X5,4,3889,1673,2216,3,0.4302,0.4695,False,True,True,True,True,True,True
+VOLVO,V70,4,17685,7123,10562,5,0.4028,0.4781,False,True,True,True,True,True,True
+FORD,C-MAX,3,1829,986,843,5,0.5391,0.5246,False,False,True,True,True,False,False
+FORD,FIESTA,1,3219,2636,583,3,0.8189,0.7834,False,True,True,True,True,True,True
+TOYOTA,AVENSIS,2,3935,3001,934,5,0.7626,0.7704,False,True,True,True,True,True,True
+FORD,FOCUS STATIONSVOGN,2,5076,3477,1599,5,0.685,0.6816,False,True,True,True,True,True,True
+OPEL,ASTRA,2,1977,1443,534,5,0.7299,0.7277,False,False,True,True,True,False,False
+FORD,MONDEO,1,1541,1212,329,5,0.7865,0.8291,False,False,True,True,True,False,False
+OPEL,CORSA,2,1681,1022,659,4,0.608,0.501,False,False,True,True,True,False,False
+KIA,CEED SW,4,742,242,500,4,0.3261,0.316,False,False,True,False,False,False,False
+OPEL,ASTRA,4,5454,1923,3531,5,0.3526,0.3231,False,True,True,True,True,True,True
+OPEL,Crossland X,1,1377,1037,340,3,0.7531,0.6882,False,False,True,True,False,False,False
+MAZDA,3,2,2010,1273,737,5,0.6333,0.6234,False,False,True,True,True,True,False
+CITROËN,BERLINGO,2,293,138,155,3,0.471,0.4843,False,False,False,False,False,False,False
+SKODA,CITIGO,1,202,159,43,2,0.7871,,True,False,False,False,False,False,False
+FORD,NY Focus,4,12012,3868,8144,5,0.322,0.315,False,True,True,True,True,True,True
+TOYOTA,AYGO 3/5-DØRS,2,608,355,253,4,0.5839,0.4647,False,False,True,False,False,False,False
+HONDA,CIVIC,1,573,466,107,3,0.8133,0.8021,False,False,True,False,False,False,False
+SKODA,KAROQ,1,2413,1979,434,4,0.8201,0.8226,False,False,True,True,True,True,False
+BMW,X3,4,5417,2269,3148,4,0.4189,0.4506,False,True,True,True,True,True,True
+CITROËN,C3 PICASSO,3,382,114,268,3,0.2984,0.2742,False,False,False,False,False,False,False
+VOLKSWAGEN,POLO,1,5836,4893,943,4,0.8384,0.7988,False,True,True,True,True,True,True
+RENAULT,MEGANE SPORT TOURER,4,1622,318,1304,4,0.1961,0.1824,False,False,True,True,True,False,False
+RENAULT,MEGANE,4,1622,318,1304,4,0.1961,0.1824,False,False,True,True,True,False,False
+MITSUBISHI,ASX,2,1912,1457,455,5,0.762,0.7512,False,False,True,True,True,False,False
+FORD,FIESTA 5 DØRS,2,4402,2399,2003,4,0.545,0.487,False,True,True,True,True,True,True
+PEUGEOT,208,4,267,120,147,3,0.4494,0.3629,False,False,False,False,False,False,False
+CITROËN,C3 Aircross,1,782,514,268,3,0.6573,0.6281,False,False,True,False,False,False,False
+CITROËN,C 1,1,58,42,16,1,0.7241,,True,False,False,False,False,False,False
+OPEL,ZAFIRA,2,235,144,91,3,0.6128,0.6236,False,False,False,False,False,False,False
+RENAULT,MEGANE SPORT TOURER,1,294,196,98,3,0.6667,0.6563,False,False,False,False,False,False,False
+KIA,CEE'D SW,2,1150,664,486,5,0.5774,0.5663,False,False,True,True,False,False,False
+SUZUKI,SX4,2,2476,1840,636,5,0.7431,0.7009,False,False,True,True,True,True,False
+HYUNDAI,i10 AC3,3,1046,474,572,4,0.4532,0.3127,False,False,True,True,False,False,False
+FORD,MONDEO STATIONCAR,1,1541,1212,329,5,0.7865,0.8291,False,False,True,True,True,False,False
+AUDI,A1 SPORTBACK,2,1299,823,476,4,0.6336,0.6175,False,False,True,True,False,False,False
+SKODA,RAPID,1,482,341,141,3,0.7075,0.7083,False,False,False,False,False,False,False
+TOYOTA,AYGO,2,608,355,253,4,0.5839,0.4647,False,False,True,False,False,False,False
+PEUGEOT,207,3,610,226,384,5,0.3705,0.3165,False,False,True,False,False,False,False
+OPEL,ASTRA SPORTS TOURER,1,128,107,21,2,0.8359,,True,False,False,False,False,False,False
+HYUNDAI,I30,3,164,66,98,3,0.4024,0.3876,False,False,False,False,False,False,False
+BMW,3-Serie,1,4744,3597,1147,5,0.7582,0.7605,False,True,True,True,True,True,True
+SUZUKI,SX4 S-Cross,1,80,61,19,1,0.7625,,True,False,False,False,False,False,False
+OPEL,MERIVA,3,854,385,469,5,0.4508,0.396,False,False,True,False,False,False,False
+VOLKSWAGEN,Golf Sportsvan,1,502,442,60,3,0.8805,0.8611,False,False,True,False,False,False,False
+VOLKSWAGEN,Golf Sportsvan,2,2883,2218,665,4,0.7693,0.7367,False,True,True,True,True,True,True
+AUDI,A3 CABRIOLET,4,166,61,105,3,0.3675,0.3546,False,False,False,False,False,False,False
+HONDA,JAZZ,2,727,523,204,3,0.7194,0.6427,False,False,True,False,False,False,False
+VOLVO,V50,3,3281,1207,2074,4,0.3679,0.4117,False,True,True,True,True,True,True
+PEUGEOT,208,2,2180,1282,898,4,0.5881,0.5027,False,False,True,True,True,True,False
+CITROËN,C1,2,428,238,190,3,0.5561,0.4369,False,False,False,False,False,False,False
+SUZUKI,SX4,1,2054,1841,213,3,0.8963,0.8768,False,False,True,True,True,True,False
+TOYOTA,AYGO 5-DØRS,3,2298,1095,1203,5,0.4765,0.3489,False,False,True,True,True,True,False
+PEUGEOT,2008,2,3179,1777,1402,4,0.559,0.5219,False,True,True,True,True,True,True
+CITROËN,C4 PICASSO,4,1058,243,815,4,0.2297,0.2436,False,False,True,True,False,False,False
+MAZDA,MAZDA2,2,1120,807,313,4,0.7205,0.6754,False,False,True,True,False,False,False
+CITROËN,C4 PICASSO,2,1511,675,836,5,0.4467,0.4666,False,False,True,True,True,False,False
+RENAULT,CLIO,1,563,346,217,2,0.6146,,True,False,True,False,False,False,False
+VOLVO,V70,2,2502,1821,681,4,0.7278,0.7577,False,True,True,True,True,True,True
+HYUNDAI,KONA,1,232,192,40,2,0.8276,,True,False,False,False,False,False,False
+AUDI,A3,4,8787,3050,5737,5,0.3471,0.3446,False,True,True,True,True,True,True
+TOYOTA,VERSO,2,178,116,62,3,0.6517,0.5929,False,False,False,False,False,False,False
+KIA,RIO,4,248,94,154,3,0.379,0.3781,False,False,False,False,False,False,False
+RENAULT,Ny Clio,1,563,346,217,2,0.6146,,True,False,True,False,False,False,False
+DACIA,Duster,4,8,1,7,0,0.125,,True,False,False,False,False,False,False
+MERCEDES-BENZ,GLC,2,5064,3503,1561,5,0.6917,0.7012,False,True,True,True,True,True,True
+SKODA,FABIA COMBI,4,4252,1424,2828,5,0.3349,0.2906,False,True,True,True,True,True,True
+FORD,B-MAX,1,5,2,3,0,0.4,,True,False,False,False,False,False,False
+RENAULT,MEGANE,2,326,182,144,3,0.5583,0.5413,False,False,False,False,False,False,False
+BMW,4-serie,1,85,63,22,1,0.7412,,True,False,False,False,False,False,False
+FORD,FIESTA 5 DØRS,4,7906,2272,5634,5,0.2874,0.2516,False,True,True,True,True,True,True
+SUZUKI,ALTO,2,5,0,5,0,0.0,,True,False,False,False,False,False,False
+SEAT,LEON,1,71,53,18,1,0.7465,,True,False,False,False,False,False,False
+HONDA,JAZZ,1,801,676,125,3,0.8439,0.7993,False,False,True,False,False,False,False
+RENAULT,MEGANE,3,1261,327,934,4,0.2593,0.2603,False,False,True,True,False,False,False
+OPEL,Grandland X,2,125,95,30,2,0.76,,True,False,False,False,False,False,False
+OPEL,Mokka,4,35,18,17,1,0.5143,,True,False,False,False,False,False,False
+HYUNDAI,I40,2,123,62,61,3,0.5041,0.5262,False,False,False,False,False,False,False
+AUDI,A3,3,11732,6510,5222,5,0.5549,0.546,False,True,True,True,True,True,True
+VOLVO,V60,4,3752,1803,1949,4,0.4805,0.5042,False,True,True,True,True,True,True
+KIA,Niro,1,5432,4475,957,4,0.8238,0.82,False,True,True,True,True,True,True
+TOYOTA,Toyota C-HR,1,14399,12046,2353,4,0.8366,0.8181,False,True,True,True,True,True,True
+OPEL,Mokka,2,3055,2111,944,5,0.691,0.6402,False,True,True,True,True,True,True
+CITROËN,C3,2,1100,541,559,3,0.4918,0.4523,False,False,True,True,False,False,False
+VOLKSWAGEN,PASSAT VARIANT,2,14320,9142,5178,5,0.6384,0.6562,False,True,True,True,True,True,True
+NISSAN,Qashqai J11A,2,7503,5078,2425,5,0.6768,0.6581,False,True,True,True,True,True,True
+SKODA,OCTAVIA COMBI,1,14749,11614,3135,5,0.7874,0.8053,False,True,True,True,True,True,True
+PEUGEOT,5008,1,4893,3280,1613,5,0.6703,0.6804,False,True,True,True,True,True,True
+FORD,MONDEO STATIONCAR,3,9588,4419,5169,5,0.4609,0.5284,False,True,True,True,True,True,True
+MITSUBISHI,SPACE STAR,3,2090,1429,661,5,0.6837,0.5771,False,False,True,True,True,True,False
+HYUNDAI,I20,3,4313,2211,2102,5,0.5126,0.3843,False,True,True,True,True,True,True
+HYUNDAI,Tucson,1,2203,1889,314,4,0.8575,0.8471,False,False,True,True,True,True,False
+RENAULT,CLIO,2,641,261,380,4,0.4072,0.3799,False,False,True,False,False,False,False
+SKODA,OCTAVIA COMBI,2,13702,9307,4395,5,0.6792,0.6923,False,True,True,True,True,True,True
+MITSUBISHI,OUTLANDER,1,27166,21053,6113,5,0.775,0.7797,False,True,True,True,True,True,True
+SUZUKI,IGNIS,1,1716,1453,263,3,0.8467,0.8044,False,False,True,True,True,False,False
+OPEL,INSIGNIA,4,4475,1764,2711,5,0.3942,0.4159,False,True,True,True,True,True,True
+RENAULT,Ny Clio,3,1622,570,1052,5,0.3514,0.2944,False,False,True,True,True,False,False
+TOYOTA,YARIS,2,15223,10058,5165,5,0.6607,0.5882,False,True,True,True,True,True,True
+TOYOTA,RAV4,2,15118,10065,5053,5,0.6658,0.6694,False,True,True,True,True,True,True
+VOLKSWAGEN,PASSAT,2,14320,9142,5178,5,0.6384,0.6562,False,True,True,True,True,True,True
+FORD,MONDEO,2,5589,3932,1657,5,0.7035,0.7442,False,True,True,True,True,True,True
+TOYOTA,YARIS,3,21128,10726,10402,5,0.5077,0.4181,False,True,True,True,True,True,True
+VOLVO,V60,1,11028,9356,1672,5,0.8484,0.8608,False,True,True,True,True,True,True
+TOYOTA,Toyota C-HR,2,4126,3133,993,5,0.7593,0.7276,False,True,True,True,True,True,True
+MERCEDES-BENZ,GLC,1,6276,5185,1091,5,0.8262,0.8402,False,True,True,True,True,True,True
+PEUGEOT,108,3,301,144,157,3,0.4784,0.3555,False,False,False,False,False,False,False
+SKODA,SUPERB COMBI,2,5609,3365,2244,5,0.5999,0.6255,False,True,True,True,True,True,True
+VOLKSWAGEN,TIGUAN,1,8054,6495,1559,5,0.8064,0.816,False,True,True,True,True,True,True
+MERCEDES-BENZ,C,2,5861,3790,2071,5,0.6466,0.6562,False,True,True,True,True,True,True
+MAZDA,MAZDA6,3,3352,1681,1671,5,0.5015,0.5278,False,True,True,True,True,True,True
+FORD,C-MAX,4,1034,387,647,4,0.3743,0.3615,False,False,True,True,False,False,False
+OPEL,INSIGNIA,1,1365,1185,180,4,0.8681,0.8721,False,False,True,True,False,False,False
+TOYOTA,Aygo X,1,689,554,135,2,0.8041,,True,False,True,False,False,False,False
+TOYOTA,AURIS,3,23427,14070,9357,5,0.6006,0.563,False,True,True,True,True,True,True
+FORD,KA,4,449,141,308,4,0.314,0.2245,False,False,False,False,False,False,False
+VOLKSWAGEN,POLO,4,11528,3925,7603,5,0.3405,0.2835,False,True,True,True,True,True,True
+OPEL,CORSA,3,2051,932,1119,5,0.4544,0.3596,False,False,True,True,True,True,False
+FORD,NY Focus,2,5076,3477,1599,5,0.685,0.6816,False,True,True,True,True,True,True
+SKODA,SUPERB,2,5609,3365,2244,5,0.5999,0.6255,False,True,True,True,True,True,True
+CITROËN,C4,3,5303,2032,3271,5,0.3832,0.384,False,True,True,True,True,True,True
+RENAULT,MEGANE,1,294,196,98,3,0.6667,0.6563,False,False,False,False,False,False,False
+NISSAN,Qashqai J11A,3,10874,4800,6074,5,0.4414,0.4234,False,True,True,True,True,True,True
+MAZDA,MAZDA6,4,4254,1258,2996,4,0.2957,0.3115,False,True,True,True,True,True,True
+TOYOTA,RAV4 Plug in,2,15118,10065,5053,5,0.6658,0.6694,False,True,True,True,True,True,True
+NISSAN,X-TRAIL,1,677,535,142,4,0.7903,0.7925,False,False,True,False,False,False,False
+MERCEDES-BENZ,C-Klasse,3,6797,3463,3334,5,0.5095,0.5207,False,True,True,True,True,True,True
+SKODA,FABIA,4,4252,1424,2828,5,0.3349,0.2906,False,True,True,True,True,True,True
+PEUGEOT,308,2,4530,2376,2154,5,0.5245,0.5232,False,True,True,True,True,True,True
+VOLKSWAGEN,T-Roc,2,288,235,53,3,0.816,0.8251,False,False,False,False,False,False,False
+KIA,Optima,1,1833,1451,382,5,0.7916,0.8219,False,False,True,True,True,False,False
+FORD,S-MAX,3,5510,2081,3429,4,0.3777,0.4375,False,True,True,True,True,True,True
+NISSAN,QASHQAI,4,9029,2306,6723,5,0.2554,0.2539,False,True,True,True,True,True,True
+HYUNDAI,I30,4,3800,1210,2590,5,0.3184,0.2783,False,True,True,True,True,True,True
+NISSAN,MICRA,4,662,217,445,5,0.3278,0.2274,False,False,True,False,False,False,False
+OPEL,INSIGNIA,2,1507,1077,430,5,0.7147,0.7245,False,False,True,True,True,False,False
+NISSAN,JUKE,3,1806,680,1126,5,0.3765,0.3285,False,False,True,True,True,False,False
+MITSUBISHI,OUTLANDER,3,16791,7397,9394,5,0.4405,0.4881,False,True,True,True,True,True,True
+SUZUKI,SX4 COMBIBACK,2,2476,1840,636,5,0.7431,0.7009,False,False,True,True,True,True,False
+TOYOTA,AVENSIS,3,12867,7225,5642,5,0.5615,0.5936,False,True,True,True,True,True,True
+BMW,5-Serie,1,4543,3708,835,5,0.8162,0.829,False,True,True,True,True,True,True
+NISSAN,JUKE,4,753,257,496,4,0.3413,0.3011,False,False,True,False,False,False,False
+MERCEDES-BENZ,C-Klasse,1,3637,2952,685,5,0.8117,0.8214,False,True,True,True,True,True,True
+HYUNDAI,I30CW,4,3800,1210,2590,5,0.3184,0.2783,False,True,True,True,True,True,True
+KIA,CEED,1,984,805,179,3,0.8181,0.81,False,False,True,False,False,False,False
+SUZUKI,SX4 S-Cross,3,4208,2793,1415,5,0.6637,0.5936,False,True,True,True,True,True,True
+TOYOTA,AYGO 3/5-DØRS,4,3007,959,2048,5,0.3189,0.228,False,True,True,True,True,True,True
+CITROËN,C3,4,1932,531,1401,5,0.2748,0.2447,False,False,True,True,True,False,False
+VOLKSWAGEN,UP!,1,680,518,162,3,0.7618,0.699,False,False,True,False,False,False,False
+SUZUKI,ALTO,4,392,142,250,4,0.3622,0.3082,False,False,False,False,False,False,False
+FORD,Focus,2,5076,3477,1599,5,0.685,0.6816,False,True,True,True,True,True,True
+FIAT,500,1,212,136,76,2,0.6415,,True,False,False,False,False,False,False
+MERCEDES-BENZ,CLA,1,1365,1114,251,3,0.8161,0.8099,False,False,True,True,False,False,False
+HYUNDAI,I 10,2,411,241,170,3,0.5864,0.5079,False,False,False,False,False,False,False
+HYUNDAI,I10,2,411,241,170,3,0.5864,0.5079,False,False,False,False,False,False,False
+AUDI,Q3,3,2899,1439,1460,5,0.4964,0.4962,False,True,True,True,True,True,True
+TOYOTA,AYGO 5-DØRS,1,689,554,135,2,0.8041,,True,False,True,False,False,False,False
+RENAULT,Ny Clio,4,517,116,401,4,0.2244,0.2376,False,False,True,False,False,False,False
+HYUNDAI,IX20,4,920,313,607,5,0.3402,0.2674,False,False,True,False,False,False,False
+RENAULT,Kadjar,2,688,431,257,4,0.6265,0.6241,False,False,True,False,False,False,False
+NISSAN,NOTE,2,358,277,81,3,0.7737,0.7002,False,False,False,False,False,False,False
+MERCEDES-BENZ,GLE,2,719,502,217,4,0.6982,0.7203,False,False,True,False,False,False,False
+MERCEDES-BENZ,C-Klasse,4,7755,2522,5233,5,0.3252,0.3384,False,True,True,True,True,True,True
+MAZDA,2,1,625,548,77,2,0.8768,,True,False,True,False,False,False,False
+SUZUKI,VITARA,3,1056,709,347,5,0.6714,0.6181,False,False,True,True,False,False,False
+KIA,VENGA,4,668,255,413,4,0.3817,0.3228,False,False,True,False,False,False,False
+MERCEDES-BENZ,GLC,3,311,198,113,4,0.6367,0.6306,False,False,False,False,False,False,False
+AUDI,Q3,2,1293,812,481,5,0.628,0.6304,False,False,True,True,False,False,False
+SKODA,RAPID SPACEBACK,1,482,341,141,3,0.7075,0.7083,False,False,False,False,False,False,False
+VOLVO,V40,4,243,112,131,3,0.4609,0.4277,False,False,False,False,False,False,False
+AUDI,Q3,4,293,133,160,4,0.4539,0.46,False,False,False,False,False,False,False
+AUDI,Q5,1,1438,1216,222,4,0.8456,0.8547,False,False,True,True,False,False,False
+FORD,NY Focus,1,6110,4914,1196,4,0.8043,0.798,False,True,True,True,True,True,True
+MERCEDES-BENZ,B-Klasse,1,856,701,155,4,0.8189,0.7849,False,False,True,False,False,False,False
+SKODA,SUPERB,4,3621,1116,2505,4,0.3082,0.3373,False,True,True,True,True,True,True
+MAZDA,MAZDA3,4,3328,1137,2191,5,0.3416,0.3098,False,True,True,True,True,True,True
+OPEL,ASTRA SPORTS TOURER,2,374,274,100,3,0.7326,0.7367,False,False,False,False,False,False,False
+HYUNDAI,i10 AC3,1,161,107,54,2,0.6646,,True,False,False,False,False,False,False
+FORD,GALAXY,4,2069,505,1564,4,0.2441,0.2662,False,False,True,True,True,True,False
+AUDI,A3 CABRIOLET,1,7,5,2,0,0.7143,,True,False,False,False,False,False,False
+AUDI,A3 Limousine,1,109,81,28,2,0.7431,,True,False,False,False,False,False,False
+RENAULT,Kadjar,1,356,265,91,3,0.7444,0.7522,False,False,False,False,False,False,False
+OPEL,MERIVA,2,68,39,29,1,0.5735,,True,False,False,False,False,False,False
+TOYOTA,AYGO,3,2298,1095,1203,5,0.4765,0.3489,False,False,True,True,True,True,False
+MAZDA,CX-5,1,6042,4775,1267,4,0.7903,0.7938,False,True,True,True,True,True,True
+MERCEDES-BENZ,E,3,8181,3876,4305,5,0.4738,0.5341,False,True,True,True,True,True,True
+PEUGEOT,108,2,601,362,239,3,0.6023,0.4454,False,False,True,False,False,False,False
+HYUNDAI,i30 Stc.,3,164,66,98,3,0.4024,0.3876,False,False,False,False,False,False,False
+CITROËN,DS3,2,90,25,65,1,0.2778,,True,False,False,False,False,False,False
+MAZDA,2,2,1120,807,313,4,0.7205,0.6754,False,False,True,True,False,False,False
+HYUNDAI,I40,3,2466,880,1586,4,0.3569,0.3676,False,False,True,True,True,True,False
+BMW,4-serie,3,422,225,197,4,0.5332,0.5427,False,False,False,False,False,False,False
+KIA,CEE'D SW,4,742,242,500,4,0.3261,0.316,False,False,True,False,False,False,False
+KIA,CEED,4,742,242,500,4,0.3261,0.316,False,False,True,False,False,False,False
+VOLVO,XC40,2,184,156,28,2,0.8478,,True,False,False,False,False,False,False
+CITROËN,C3,1,2416,1552,864,3,0.6424,0.5996,False,False,True,True,True,True,False
+SUZUKI,SX4 COMBIBACK,1,2054,1841,213,3,0.8963,0.8768,False,False,True,True,True,True,False
+FIAT,PANDA,3,332,133,199,3,0.4006,0.3371,False,False,False,False,False,False,False
+MERCEDES-BENZ,GLE,3,72,45,27,2,0.625,,True,False,False,False,False,False,False
+CHEVROLET,SPARK,2,10,1,9,0,0.1,,True,False,False,False,False,False,False
+SEAT,Ibiza GP2,2,1,0,1,0,0.0,,True,False,False,False,False,False,False
+FORD,KA,3,505,227,278,3,0.4495,0.3178,False,False,True,False,False,False,False
+AUDI,A5 SPORTBACK,1,233,195,38,3,0.8369,0.8427,False,False,False,False,False,False,False
+VOLKSWAGEN,PASSAT VARIANT,3,16654,7788,8866,5,0.4676,0.5138,False,True,True,True,True,True,True
+FORD,KUGA,3,7170,3947,3223,5,0.5505,0.5831,False,True,True,True,True,True,True
+NISSAN,Qashqai J11A,4,9029,2306,6723,5,0.2554,0.2539,False,True,True,True,True,True,True
+VOLKSWAGEN,CADDY,4,1082,339,743,4,0.3133,0.3295,False,False,True,True,False,False,False
+OPEL,INSIGNIA,3,3483,1837,1646,4,0.5274,0.5561,False,True,True,True,True,True,True
+SKODA,OCTAVIA,4,12917,3887,9030,5,0.3009,0.3275,False,True,True,True,True,True,True
+KIA,CEE'D SW,3,3585,1520,2065,5,0.424,0.4105,False,True,True,True,True,True,True
+TOYOTA,AYGO,4,3007,959,2048,5,0.3189,0.228,False,True,True,True,True,True,True
+MINI,COOPER,4,2672,826,1846,5,0.3091,0.2868,False,True,True,True,True,True,True
+AUDI,A6 AVANT,3,2163,1472,691,4,0.6805,0.6959,False,False,True,True,True,True,False
+FORD,FOCUS STATIONSVOGN,3,15257,7159,8098,5,0.4692,0.4713,False,True,True,True,True,True,True
+AUDI,A6 AVANT,2,1067,806,261,4,0.7554,0.7784,False,False,True,True,False,False,False
+MAZDA,CX-5,2,8955,5940,3015,5,0.6633,0.6766,False,True,True,True,True,True,True
+HONDA,CIVIC,3,2369,1538,831,5,0.6492,0.6203,False,False,True,True,True,True,False
+MAZDA,MAZDA2,4,2075,710,1365,5,0.3422,0.2739,False,False,True,True,True,True,False
+BMW,2-Serie,3,949,594,355,5,0.6259,0.5958,False,False,True,False,False,False,False
+TOYOTA,AVENSIS STW,2,3935,3001,934,5,0.7626,0.7704,False,True,True,True,True,True,True
+SKODA,FABIA,2,3224,2022,1202,5,0.6272,0.5917,False,True,True,True,True,True,True
+MERCEDES-BENZ,GLA,2,1805,1343,462,5,0.744,0.721,False,False,True,True,True,False,False
+SKODA,SUPERB COMBI,1,6713,4552,2161,5,0.6781,0.7083,False,True,True,True,True,True,True
+BMW,X1,1,7080,6147,933,5,0.8682,0.8569,False,True,True,True,True,True,True
+HONDA,CIVIC,4,2980,960,2020,5,0.3221,0.2891,False,True,True,True,True,True,True
+AUDI,A5 SPORTBACK,3,880,499,381,4,0.567,0.583,False,False,True,False,False,False,False
+HYUNDAI,IX20,2,230,157,73,3,0.6826,0.5528,False,False,False,False,False,False,False
+PEUGEOT,5008,2,1312,666,646,4,0.5076,0.5223,False,False,True,True,False,False,False
+AUDI,A3 Sportback,4,227,92,135,4,0.4053,0.3941,False,False,False,False,False,False,False
+TOYOTA,AYGO,1,689,554,135,2,0.8041,,True,False,True,False,False,False,False
+PEUGEOT,2008,1,2747,2001,746,3,0.7284,0.6891,False,True,True,True,True,True,True
+CITROËN,C3 PICASSO,2,46,26,20,1,0.5652,,True,False,False,False,False,False,False
+HYUNDAI,Ioniq,2,834,549,285,4,0.6583,0.6387,False,False,True,False,False,False,False
+TOYOTA,YARIS,1,16882,13410,3472,5,0.7943,0.7325,False,True,True,True,True,True,True
+VOLKSWAGEN,TOURAN,1,1595,1198,397,5,0.7511,0.7682,False,False,True,True,True,False,False
+AUDI,A3,1,4115,3063,1052,4,0.7443,0.7468,False,True,True,True,True,True,True
+AUDI,A3 Sportback,1,3698,2731,967,4,0.7385,0.745,False,True,True,True,True,True,True
+AUDI,A6 AVANT,4,143,77,66,2,0.5385,,True,False,False,False,False,False,False
+MERCEDES-BENZ,GLE,1,2193,1890,303,4,0.8618,0.8608,False,False,True,True,True,True,False
+FORD,FIESTA,2,4402,2399,2003,4,0.545,0.487,False,True,True,True,True,True,True
+CITROËN,C 1,3,880,351,529,4,0.3989,0.2788,False,False,True,False,False,False,False
+CITROËN,C1,3,880,351,529,4,0.3989,0.2788,False,False,True,False,False,False,False
+KIA,CEED SW,2,1150,664,486,5,0.5774,0.5663,False,False,True,True,False,False,False
+TOYOTA,COROLLA,3,284,113,171,4,0.3979,0.3941,False,False,False,False,False,False,False
+BMW,4-serie,2,509,311,198,4,0.611,0.6213,False,False,True,False,False,False,False
+TOYOTA,AVENSIS STW,1,538,448,90,4,0.8327,0.8515,False,False,True,False,False,False,False
+KIA,VENGA,1,6,4,2,0,0.6667,,True,False,False,False,False,False,False
+PEUGEOT,208,1,1123,854,269,3,0.7605,0.6782,False,False,True,True,False,False,False
+FIAT,PANDA,2,94,34,60,2,0.3617,,True,False,False,False,False,False,False
+OPEL,CORSA,1,389,312,77,2,0.8021,,True,False,False,False,False,False,False
+KIA,RIO,2,1154,808,346,4,0.7002,0.6436,False,False,True,True,False,False,False
+AUDI,A1 SPORTBACK,1,902,681,221,3,0.755,0.7474,False,False,True,False,False,False,False
+FORD,B-MAX,4,19,9,10,0,0.4737,,True,False,False,False,False,False,False
+MAZDA,Mazda CX-30,1,2458,2028,430,3,0.8251,0.8213,False,False,True,True,True,True,False
+NISSAN,NOTE,1,25,21,4,1,0.84,,True,False,False,False,False,False,False
+FORD,KA,2,41,21,20,1,0.5122,,True,False,False,False,False,False,False
+SKODA,SCALA,1,339,259,80,2,0.764,,True,False,False,False,False,False,False
+VOLKSWAGEN,TIGUAN,3,13669,6926,6743,5,0.5067,0.5256,False,True,True,True,True,True,True
+PEUGEOT,5008,4,1845,453,1392,4,0.2455,0.2682,False,False,True,True,True,False,False
+BMW,X3,3,9399,4740,4659,5,0.5043,0.5414,False,True,True,True,True,True,True
+TOYOTA,RAV4 Plug in,3,11242,6723,4519,5,0.598,0.607,False,True,True,True,True,True,True
+TOYOTA,YARIS 5-DØRS,4,12845,4534,8311,5,0.353,0.2741,False,True,True,True,True,True,True
+MITSUBISHI,OUTLANDER,4,10148,2660,7488,4,0.2621,0.3063,False,True,True,True,True,True,True
+CITROËN,C4,2,3636,1634,2002,5,0.4494,0.4508,False,True,True,True,True,True,True
+BMW,1-Serie,4,6307,2292,4015,5,0.3634,0.3523,False,True,True,True,True,True,True
+AUDI,A3,2,9233,5946,3287,5,0.644,0.64,False,True,True,True,True,True,True
+TOYOTA,YARIS 5-DØRS,3,21128,10726,10402,5,0.5077,0.4181,False,True,True,True,True,True,True
+MERCEDES-BENZ,E,4,11198,4475,6723,5,0.3996,0.4366,False,True,True,True,True,True,True
+TOYOTA,AYGO 3/5-DØRS,3,2298,1095,1203,5,0.4765,0.3489,False,False,True,True,True,True,False
+FORD,FIESTA 5 DØRS,3,8583,3352,5231,5,0.3905,0.3349,False,True,True,True,True,True,True
+FORD,S-MAX,2,3631,2373,1258,4,0.6535,0.6677,False,True,True,True,True,True,True
+CITROËN,BERLINGO,3,704,270,434,4,0.3835,0.3967,False,False,True,False,False,False,False
+SUZUKI,SWIFT,2,2129,1379,750,4,0.6477,0.6107,False,False,True,True,True,True,False
+MERCEDES-BENZ,E,1,4198,3253,945,5,0.7749,0.8365,False,True,True,True,True,True,True
+VOLKSWAGEN,CADDY,1,865,543,322,5,0.6277,0.6482,False,False,True,False,False,False,False
+AUDI,A5 SPORTBACK,2,267,177,90,3,0.6629,0.6677,False,False,False,False,False,False,False
+VOLKSWAGEN,GOLF,1,9446,7501,1945,5,0.7941,0.7982,False,True,True,True,True,True,True
+DACIA,Duster,2,542,183,359,5,0.3376,0.3487,False,False,True,False,False,False,False
+FIAT,Punto S7,4,347,98,249,3,0.2824,0.2215,False,False,False,False,False,False,False
+MAZDA,2,3,1899,1019,880,5,0.5366,0.4417,False,False,True,True,True,False,False
+MAZDA,MAZDA2,3,1899,1019,880,5,0.5366,0.4417,False,False,True,True,True,False,False
+VOLVO,XC60,1,16959,14985,1974,5,0.8836,0.8893,False,True,True,True,True,True,True
+AUDI,A4 AVANT,4,152,76,76,3,0.5,0.5193,False,False,False,False,False,False,False
+SUZUKI,SX4 S-Cross,2,2348,1769,579,5,0.7534,0.7098,False,False,True,True,True,True,False
+MERCEDES-BENZ,B-Klasse,2,1185,705,480,5,0.5949,0.5715,False,False,True,True,False,False,False
+TOYOTA,AYGO 5-DØRS,2,608,355,253,4,0.5839,0.4647,False,False,True,False,False,False,False
+AUDI,A3 Limousine,2,290,192,98,4,0.6621,0.6687,False,False,False,False,False,False,False
+SEAT,LEON,4,7,0,7,0,0.0,,True,False,False,False,False,False,False
+AUDI,Q3,1,911,701,210,4,0.7695,0.7685,False,False,True,False,False,False,False
+RENAULT,Ny Clio,2,641,261,380,4,0.4072,0.3799,False,False,True,False,False,False,False
+TOYOTA,AVENSIS,1,538,448,90,4,0.8327,0.8515,False,False,True,False,False,False,False
+SKODA,CITIGO,2,474,303,171,3,0.6392,0.5609,False,False,False,False,False,False,False
+FORD,C-MAX,1,235,173,62,3,0.7362,0.7371,False,False,False,False,False,False,False
+MAZDA,3,1,1523,1170,353,3,0.7682,0.747,False,False,True,True,True,False,False
+SEAT,IBIZA,4,7,0,7,0,0.0,,True,False,False,False,False,False,False
+CITROËN,C3 Aircross,2,91,42,49,1,0.4615,,True,False,False,False,False,False,False
+KIA,RIO,1,599,506,93,3,0.8447,0.8323,False,False,True,False,False,False,False
+SKODA,KAMIQ,1,327,234,93,2,0.7156,,True,False,False,False,False,False,False
+FIAT,500,2,384,173,211,3,0.4505,0.4264,False,False,False,False,False,False,False
+CITROËN,BERLINGO,1,389,263,126,3,0.6761,0.6762,False,False,False,False,False,False,False
+OPEL,Crossland X,2,177,106,71,3,0.5989,0.5172,False,False,False,False,False,False,False
+KIA,Stonic,2,93,63,30,1,0.6774,,True,False,False,False,False,False,False
+NISSAN,MICRA,1,296,250,46,2,0.8446,,True,False,False,False,False,False,False
+TOYOTA,Yaris Cross,1,261,233,28,2,0.8927,,True,False,False,False,False,False,False
+PEUGEOT,107,2,7,3,4,0,0.4286,,True,False,False,False,False,False,False
+AUDI,A1 SPORTBACK,3,3090,1635,1455,5,0.5291,0.4854,False,True,True,True,True,True,True
+TOYOTA,AURIS,2,15458,11204,4254,5,0.7248,0.7014,False,True,True,True,True,True,True
+PEUGEOT,3008,2,3468,2055,1413,5,0.5926,0.584,False,True,True,True,True,True,True
+VOLKSWAGEN,TIGUAN,2,7466,5327,2139,5,0.7135,0.7227,False,True,True,True,True,True,True
+KIA,PICANTO,1,563,447,116,2,0.794,,True,False,True,False,False,False,False
+FORD,KUGA,1,5193,4271,922,4,0.8225,0.8205,False,True,True,True,True,True,True
+MERCEDES-BENZ,E,2,3761,2309,1452,5,0.6139,0.6881,False,True,True,True,True,True,True
+MINI,COOPER,2,1205,828,377,4,0.6871,0.6518,False,False,True,True,False,False,False
+KIA,SPORTAGE,2,3281,1958,1323,5,0.5968,0.6001,False,True,True,True,True,True,True
+VOLKSWAGEN,Golf Sportsvan,3,1676,1166,510,5,0.6957,0.6479,False,False,True,True,True,False,False
+VOLKSWAGEN,T-Cross,1,1210,913,297,3,0.7545,0.7029,False,False,True,True,False,False,False
+MERCEDES-BENZ,CLA,3,2171,1276,895,5,0.5877,0.5756,False,False,True,True,True,True,False
+PEUGEOT,3008,4,4758,1340,3418,4,0.2816,0.2777,False,True,True,True,True,True,True
+BMW,5-Serie,3,8687,4139,4548,5,0.4765,0.5144,False,True,True,True,True,True,True
+AUDI,A4 AVANT,2,1848,1325,523,5,0.717,0.7383,False,False,True,True,True,False,False
+MINI,COOPER,1,538,469,69,3,0.8717,0.8547,False,False,True,False,False,False,False
+KIA,VENGA,3,1099,530,569,5,0.4823,0.3892,False,False,True,True,False,False,False
+OPEL,ASTRA,1,1077,900,177,3,0.8357,0.8384,False,False,True,True,False,False,False
+KIA,Optima,2,926,609,317,4,0.6577,0.659,False,False,True,False,False,False,False
+RENAULT,Kadjar,3,102,57,45,2,0.5588,,True,False,False,False,False,False,False
+SEAT,LEON,3,2,0,2,0,0.0,,True,False,False,False,False,False,False
+KIA,CEE'D SW,1,984,805,179,3,0.8181,0.81,False,False,True,False,False,False,False
+OPEL,ASTRA,3,3710,1949,1761,5,0.5253,0.5184,False,True,True,True,True,True,True
+HYUNDAI,Tucson,4,317,103,214,3,0.3249,0.3363,False,False,False,False,False,False,False
+FORD,B-MAX,2,250,154,96,3,0.616,0.5423,False,False,False,False,False,False,False
+FORD,GALAXY,2,493,312,181,4,0.6329,0.6707,False,False,False,False,False,False,False
+CITROËN,C 1,2,428,238,190,3,0.5561,0.4369,False,False,False,False,False,False,False
+FORD,GALAXY,1,191,129,62,3,0.6754,0.7081,False,False,False,False,False,False,False
+HYUNDAI,I10,1,161,107,54,2,0.6646,,True,False,False,False,False,False,False
+ALFA ROMEO,GIULIETTA,3,258,119,139,3,0.4612,0.4506,False,False,False,False,False,False,False
+FIAT,PANDA,1,20,8,12,0,0.4,,True,False,False,False,False,False,False
+OPEL,ZAFIRA,1,47,36,11,1,0.766,,True,False,False,False,False,False,False
+SEAT,LEON,2,5,0,5,0,0.0,,True,False,False,False,False,False,False
+CITROËN,C3 PICASSO,1,11,8,3,0,0.7273,,True,False,False,False,False,False,False
+AUDI,A5 SPORTBACK,4,69,35,34,2,0.5072,,True,False,False,False,False,False,False
+HYUNDAI,I 10,1,161,107,54,2,0.6646,,True,False,False,False,False,False,False
+ALFA ROMEO,GIULIETTA,4,1,0,1,0,0.0,,True,False,False,False,False,False,False
+SEAT,IBIZA,2,1,0,1,0,0.0,,True,False,False,False,False,False,False
+PEUGEOT,108,1,129,82,47,2,0.6357,,True,False,False,False,False,False,False
+NISSAN,MICRA,2,274,184,90,3,0.6715,0.5727,False,False,False,False,False,False,False
+HYUNDAI,I40,1,1,0,1,0,0.0,,True,False,False,False,False,False,False
+KIA,Optima,4,1,0,1,0,0.0,,True,False,False,False,False,False,False
