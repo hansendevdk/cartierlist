@@ -18,6 +18,26 @@ DECISIONS APPLIED (user's choices, 2026-07-31):
      Phase 5 model page with a "no price estimate" note -- not this file's
      job to carry that flag.
 
+MIN_DK_VEHICLES (coverage_audit.md finding 4): there was a floor on UK MOT
+tests (RANKING_FLOOR_TESTS, Phase 3) but none on the DANISH side, so a row
+backed by a literal handful of Danish registrations could still be ranked
+as if it were a real, buyable car -- e.g. Toyota Aygo 5-DØRS 2020-2022 had
+ONE registered Danish car and sat at running-cost rank 68 of 607 before this
+was added. The site's own copy sells these lists as cars a reader can
+actually go buy in Denmark, which one or two registered examples is not.
+
+MIN_DK_VEHICLES = 50 IS A JUDGEMENT CALL, NOT A DERIVED THRESHOLD, unlike
+RANKING_FLOOR_TESTS (which traces to a stated statistical-stability target
+in the Phase 2 strategy doc). There is no equivalent statistical argument
+for a Danish fleet count -- dk_vehicle_count does not feed any standard
+error calculation here, it is just "is this enough cars that a reader could
+plausibly cross-shop one." 50 was chosen as a round number comfortably above
+the "1-3 stray DMR registrations" cases the audit called out by name, while
+keeping ordinary lower-volume models (which can legitimately be in the low
+hundreds for a single age band) in the rankings. Run this file's own output
+at 50 vs 100 and compare the row counts dropped before treating 50 as
+settled -- it is meant to be retuned, not treated as final.
+
 WHAT "ONE 6-YEAR HORIZON" ACTUALLY MEANS PER ENTRY BAND
 The only holds that exist are gaps between age bands with real data on both
 ends (Rule 0, phase4_scoring_spec.md section 0). There is no single (entry,
@@ -77,6 +97,7 @@ HORIZON_SPEC = {  # entry_band -> (exit_band or None, hold_years, shorter_than_6
     "4": (None, None, None),
 }
 ANNUAL_KM_ASSUMPTION = 15000  # same constant Phase 3 uses for fuel cost (section 4.6)
+MIN_DK_VEHICLES = 50  # judgement call, not derived -- see module docstring
 BRACKETS = [
     (0, 50_000, "1", "Up to 50,000 DKK"),
     (50_000, 90_000, "2", "50,000-90,000 DKK"),
@@ -226,14 +247,23 @@ def main() -> None:
         meets_floor = entry.get("meets_stability_floor") == "True"
         n_listings = int(entry.get("n_listings", 0) or 0)
         pooled = entry.get("pooled_at_brand") == "True"
+        dk_vehicle_count_int = int(entry.get("dk_vehicle_count", 0) or 0)
+        insufficient_dk_fleet = dk_vehicle_count_int < MIN_DK_VEHICLES
 
-        excluded_from_rank = bool(exclusion_reason) or reliability_unstable or not meets_floor
+        excluded_from_rank = (
+            bool(exclusion_reason) or reliability_unstable or not meets_floor or insufficient_dk_fleet
+        )
         # Running-cost-only ranking never uses depreciation or the entry/exit
         # price lookup, so a row excluded from the price-based rankings for
         # "no_exit_band_data" or "non_positive_depreciation" is still valid
-        # here -- only a genuine reliability data problem disqualifies it.
-        excluded_from_running_cost_rank = reliability_unstable or not meets_floor
-        if not exclusion_reason and reliability_unstable:
+        # here -- only a genuine reliability data problem, OR too few real
+        # Danish cars to back the row at all, disqualifies it from BOTH
+        # rankings (a car with two registered examples isn't "a car you can
+        # actually buy in Denmark" regardless of which list it would land in).
+        excluded_from_running_cost_rank = reliability_unstable or not meets_floor or insufficient_dk_fleet
+        if not exclusion_reason and insufficient_dk_fleet:
+            exclusion_reason = "insufficient_dk_fleet"
+        elif not exclusion_reason and reliability_unstable:
             exclusion_reason = "reliability_unstable"
         elif not exclusion_reason and not meets_floor:
             exclusion_reason = "below_stability_floor"

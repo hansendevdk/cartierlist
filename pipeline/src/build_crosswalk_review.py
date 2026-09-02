@@ -55,6 +55,13 @@ STABILITY_THRESHOLD = 2000
 # fact is already known and verified, not a guess for the reviewer to make.
 KNOWN_MODEL_RENAMES = {
     ("OPEL", "KARL"): ("VAUXHALL", "VIVA", "Opel Karl is sold in the UK as the Vauxhall Viva; confirmed in Phase 2 strategy doc finding G."),
+    # Added by the coverage_audit.md finding 2 fix. Without this, prefix_identity
+    # fires on the literal DVSA make/model string "MITSUBISHI SPACE STAR" and
+    # silently matches the wrong car: that DVSA pool is the 1998-2005 Space Star
+    # MPV (first-use years cluster 2000-2005), not the Danish fleet's 2013-onward
+    # car, which DVSA lists as "MIRAGE" (first-use years cluster 2013-2021,
+    # matching exactly). See crosswalk_review.csv's decision_basis on this row.
+    ("MITSUBISHI", "SPACE STAR"): ("MITSUBISHI", "MIRAGE", "Mitsubishi Space Star (Danish, 2013 on) is sold in the UK as the Mitsubishi Mirage. The DVSA make MITSUBISHI model SPACE STAR is a different, older car (1998-2005 MPV, first-use years cluster 2000-2005), confirmed by coverage_audit.md finding 2."),
 }
 
 

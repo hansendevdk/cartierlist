@@ -29,10 +29,44 @@ grouped by (make_id, model_id) vs by (make_name, model_name) -- since DMR's
 make/model spelling is inconsistent (Phase 0/1 found "BMW 3 SERIE" vs
 "BMW 3'ER-SERIE" as distinct strings) and the two groupings can disagree on
 which 150 models make the cut.
+
+MAKE FOLD: DMR "VW" -> "VOLKSWAGEN" (coverage_audit.md finding 5)
+make_aliases.csv already maps both DMR make strings to the same DVSA make,
+but that only affects the DVSA side of the crosswalk -- the 4,632 Danish
+vehicles filed under the DMR make string "VW" (as opposed to "VOLKSWAGEN")
+never had their make_name folded, so each of VW's models (VW PASSAT 1,082,
+VW GOLF 764, VW POLO 233, ...) was individually far too small to reach the
+top-214 universe cut and all of them fell out of the crosswalk review
+entirely. Folded here, at the SAME `dmr_vehicles_scoped` view Phase 3 later
+queries by make_name/model_name string equality against crosswalk.csv's
+covered_models -- so the fold benefits both this script's top_models_by_*
+tables AND Phase 3's per-vehicle join, from one edit.
+
+Only make_name is folded, not make_id: VW's DMR-internal make_id ('15401')
+and VOLKSWAGEN's ('10279') are different codes tied to different original
+model_id namespaces (VW POLO's model_id is not the same number as
+VOLKSWAGEN POLO's), so overwriting make_id would fabricate a false model_id
+association for no benefit -- nothing downstream joins on make_id, only on
+the (make_name, model_name) strings crosswalk.csv keys off.
+
+This merges into an EXISTING crosswalk.csv row wherever the post-fold
+model_name string is an exact match for a model crosswalk.csv already
+covers under "VOLKSWAGEN" (e.g. "POLO", "GOLF", "PASSAT", "PASSAT VARIANT",
+"TIGUAN", "TOURAN", "CADDY", "CALIFORNIA", "UP!", "GOLF VARIANT") --
+Phase 3's join is a plain string match, so those vehicles simply start
+counting once the make_name lines up. It does NOT create new crosswalk
+coverage for VW-only model spellings crosswalk.csv has no row for at all
+(e.g. "BEETLE", "SHARAN", "MULTIVAN", "T5") or for spellings that differ
+from the existing VOLKSWAGEN row only by case ("T-ROC" vs crosswalk's
+"T-Roc", "GOLF SPORTSVAN" vs "Golf Sportsvan", "T-CROSS" vs "T-Cross") --
+per the task scope, crosswalk_review.csv is not being regenerated and no
+new row is being auto-added, so those model_name strings are printed below
+for the record and left uncovered, exactly as they were before the fold.
 """
 
 from __future__ import annotations
 
+import csv
 from pathlib import Path
 
 import duckdb
@@ -41,6 +75,7 @@ INTERIM = Path(__file__).resolve().parents[2] / "data" / "interim"
 VEHICLES_PARQUET = INTERIM / "dmr_vehicles.parquet"
 WAREHOUSE = Path(__file__).resolve().parents[2] / "data" / "warehouse.duckdb"
 REPORTS = Path(__file__).resolve().parents[2] / "reports"
+CROSSWALK_CSV = Path(__file__).resolve().parents[1] / "reference" / "crosswalk.csv"
 
 
 def main() -> None:
@@ -81,7 +116,9 @@ def main() -> None:
             WHERE {SCOPE_WHERE}
               AND chassis_number IS NOT NULL
         )
-        SELECT * EXCLUDE (rn) FROM deduped WHERE rn = 1
+        SELECT * EXCLUDE (rn) REPLACE (
+            CASE WHEN make_name = 'VW' THEN 'VOLKSWAGEN' ELSE make_name END AS make_name
+        ) FROM deduped WHERE rn = 1
         """
     )
     n_scoped = con.execute("SELECT COUNT(*) FROM dmr_vehicles_scoped").fetchone()[0]
@@ -120,6 +157,43 @@ def main() -> None:
         "SELECT make_name, model_name, variant_name, vehicle_count FROM dk_fleet ORDER BY vehicle_count DESC LIMIT 20"
     ).fetchall():
         print(" ", row)
+
+    # --- VW -> VOLKSWAGEN make fold report ---------------------------------
+    # make_id still distinguishes former-VW rows ('15401') from
+    # always-VOLKSWAGEN rows ('10279') even after the make_name fold above,
+    # since only make_name was overwritten. Used here only for this report,
+    # not for any join.
+    crosswalk_volkswagen_models: set[str] = set()
+    if CROSSWALK_CSV.exists():
+        with open(CROSSWALK_CSV, encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                if row["dmr_make"] == "VOLKSWAGEN":
+                    crosswalk_volkswagen_models.add(row["dmr_model"])
+
+    vw_fold_rows = con.execute(
+        """
+        SELECT model_name, SUM(vehicle_count) AS vehicle_count
+        FROM dk_fleet
+        WHERE make_id = '15401' AND make_name = 'VOLKSWAGEN'
+        GROUP BY model_name
+        ORDER BY vehicle_count DESC
+        """
+    ).fetchall()
+    n_vw_total = sum(r[1] for r in vw_fold_rows)
+    vw_merged = [(m, c) for m, c in vw_fold_rows if m in crosswalk_volkswagen_models]
+    vw_orphaned = [(m, c) for m, c in vw_fold_rows if m not in crosswalk_volkswagen_models]
+
+    print(f"\nVW make fold: {n_vw_total:,} vehicles across {len(vw_fold_rows)} model spellings "
+          f"folded from make_name 'VW' into 'VOLKSWAGEN'")
+    print(f"  merged into an existing crosswalk.csv VOLKSWAGEN row "
+          f"({sum(c for _, c in vw_merged):,} vehicles, {len(vw_merged)} model spellings):")
+    for m, c in vw_merged:
+        print(f"    {m}: {c:,}")
+    print(f"  NOT covered by any existing crosswalk.csv VOLKSWAGEN row -- not auto-added, "
+          f"reported here per the task's scope limit "
+          f"({sum(c for _, c in vw_orphaned):,} vehicles, {len(vw_orphaned)} model spellings):")
+    for m, c in vw_orphaned:
+        print(f"    {m}: {c:,}")
 
     # --- crosswalk prep: top 150 models, counted two ways ---
     con.execute(
@@ -169,7 +243,21 @@ def main() -> None:
                 f"the same name string covering multiple model_ids).\n\n")
         f.write(f"Top 150 by (make_id, model_id) covers {top150_id_fleet_share:,} / {n_scoped:,} "
                 f"vehicles ({top150_id_fleet_share / n_scoped * 100:.1f}% of in-scope fleet).\n\n")
-        f.write("## Top 50 models by model_id grouping\n\n")
+        f.write("## VW -> VOLKSWAGEN make fold (coverage_audit.md finding 5)\n\n")
+        f.write(f"{n_vw_total:,} vehicles across {len(vw_fold_rows)} model spellings folded from "
+                f"DMR make string \"VW\" into \"VOLKSWAGEN\".\n\n")
+        f.write(f"Merged into an existing crosswalk.csv VOLKSWAGEN row "
+                f"({sum(c for _, c in vw_merged):,} vehicles, {len(vw_merged)} model spellings):\n\n")
+        f.write("| model_name | vehicle_count |\n|---|---|\n")
+        for m, c in vw_merged:
+            f.write(f"| {m} | {c:,} |\n")
+        f.write(f"\nNot covered by any existing crosswalk.csv VOLKSWAGEN row, not auto-added per the "
+                f"task's scope limit (crosswalk_review.csv is not being regenerated): "
+                f"{sum(c for _, c in vw_orphaned):,} vehicles, {len(vw_orphaned)} model spellings.\n\n")
+        f.write("| model_name | vehicle_count |\n|---|---|\n")
+        for m, c in vw_orphaned:
+            f.write(f"| {m} | {c:,} |\n")
+        f.write("\n## Top 50 models by model_id grouping\n\n")
         f.write("| make | model | vehicle_count |\n|---|---|---|\n")
         for r in con.execute(
             "SELECT make_name, model_name, vehicle_count FROM top_models_by_id ORDER BY vehicle_count DESC LIMIT 50"

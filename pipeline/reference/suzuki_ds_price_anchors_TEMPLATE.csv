@@ -1,12 +1,15 @@
 dmr_make,dmr_model,age_band,suggested_search_year,real_price_dkk,real_mileage_km,source_note
-SUZUKI,SWIFT,2,2018,,,
-SUZUKI,BALENO,2,2018,,,
-SUZUKI,ALTO,3,2015,,,
-SUZUKI,Celerio,2,2018,,,
-SUZUKI,SPLASH,3,2015,,,
-SUZUKI,IGNIS,2,2018,,,
-SUZUKI,SX4 S-Cross,2,2018,,,
-SUZUKI,VITARA,2,2018,,,
-SUZUKI,SX4,3,2015,,,
-SUZUKI,SX4 COMBIBACK,4,2011,,,
-DS,DS 3,2,2018,,,
+SUZUKI,VITARA,2,2018,,,high mileage listing
+SUZUKI,VITARA,2,2018,,,low mileage listing
+SUZUKI,SX4 S-Cross,2,2018,,,high mileage listing
+SUZUKI,SX4 S-Cross,2,2018,,,low mileage listing
+SUZUKI,ALTO,3,2015,,,high mileage listing
+SUZUKI,ALTO,3,2015,,,low mileage listing
+SUZUKI,SPLASH,3,2015,,,high mileage listing
+SUZUKI,SPLASH,3,2015,,,low mileage listing
+SUZUKI,SX4,3,2015,,,high mileage listing
+SUZUKI,SX4,3,2015,,,low mileage listing
+SUZUKI,SX4 COMBIBACK,4,2011,,,high mileage listing
+SUZUKI,SX4 COMBIBACK,4,2011,,,low mileage listing
+DS,DS 3,2,2018,,,"OPTIONAL, not blocking: DS 3 already prices from CITROEN DS3's own curve (same physical car, badge relaunched under the DS Automobiles brand in 2015 -- see build_suzuki_ds_prices.py SAME_CAR_DONORS) with no anchor needed. Only fill this in if you find a real DS 3 listing and want it to override the borrowed Citroen curve -- a real anchor always wins."
+DS,DS 3,2,2018,,,"OPTIONAL -- see note on the row above. Second listing, different mileage, only needed if you're supplying a real anchor at all."

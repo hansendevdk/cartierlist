@@ -69,7 +69,7 @@ AUDI,A3 Sportback,7174,AUDI,A3,1007746,exact,prefix_identity
 SEAT,IBIZA,7137,SEAT,IBIZA,487807,exact,prefix_identity
 MERCEDES-BENZ,E-Klasse,7135,MERCEDES-BENZ,E,556928,exact,prefix_identity
 FORD,S-MAX,7026,FORD,S MAX,180418,exact,prefix_identity
-MITSUBISHI,SPACE STAR,7009,MITSUBISHI,SPACE STAR,3423,exact,prefix_identity
+MITSUBISHI,SPACE STAR,7009,MITSUBISHI,MIRAGE,25556,known-rename,"Mitsubishi Space Star (Danish, 2013 on) is sold in the UK as the Mitsubishi Mirage. The DVSA make MITSUBISHI model SPACE STAR is a different, older car (1998-2005 MPV, first-use years cluster 2000-2005), confirmed by coverage_audit.md finding 2."
 SUZUKI,ALTO,6754,SUZUKI,ALTO,116084,exact,prefix_identity
 CITROËN,C 1,6597,CITROEN,C1,407006,exact,prefix_identity
 VOLKSWAGEN,T-Cross,6532,VOLKSWAGEN,T CROSS,60318,exact,prefix_identity
