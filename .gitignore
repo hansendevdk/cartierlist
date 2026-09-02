@@ -3,6 +3,10 @@ data/raw/
 data/interim/
 data/warehouse.duckdb
 data/warehouse.duckdb.wal
+# same rule, one directory deeper: data/raw/ above is anchored to the repo
+# root by its own inner slash and does not reach pipeline/data/raw/, so the
+# scraped DBA/Bilbasen raw cache needs its own line.
+pipeline/data/raw/dba_bilbasen/
 *.zip
 *.parquet
 

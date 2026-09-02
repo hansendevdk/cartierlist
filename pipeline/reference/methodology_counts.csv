@@ -4,15 +4,15 @@ Eligible DVSA MOT tests after filters,48220796,phase3_metrics_report.md,2026-07-
 Physical DVSA NT tests before filters,48626203,phase3_metrics_report.md,2026-07-31
 Crosswalked models (share of DK fleet by count),245 (96.9%),crosswalk.csv,2026-07-31
 Model/age-band cells with Phase 3 running-cost metrics,635,model_age_band_metrics.csv,2026-07-31
-Model/age-band cells with a calibrated price estimate,716,price_estimates_calibrated.csv,2026-07-31
+Model/age-band cells with a calibrated price estimate,800,price_estimates_calibrated.csv,2026-07-31
 Cells with both price and running-cost data (Rule 0 base),621,build_phase4_rankings.py,2026-07-31
 Real Danish listings used to calibrate prices,27,calibration_prices.csv,2026-07-31
-"Rows in the final bracket ranking, rank-eligible",474 of 621,model_bracket_rankings.csv,2026-07-31
+"Rows in the final bracket ranking, rank-eligible",475 of 621,model_bracket_rankings.csv,2026-07-31
 Suzuki/DS models still unpriced (no real price found yet),5,suzuki_ds_price_anchors.csv,2026-07-31
 Repair cost constant (DKK per burden-unit-year),3000.0,repair_cost_constant.csv,2026-07-31
 "Rows flagged hybrid (trim badge, or petrol economy too high for a combustion engine)",62,model_age_band_fuel_flags.csv,2026-07-31
 Rows flagged diesel-dominant (over half the cell is diesel),245,model_age_band_fuel_flags.csv,2026-07-31
-"Mileage adjustment slope (%/10,000 km)",3.91,price_estimates_calibrated.csv,2026-07-31
+"Mileage adjustment slope (%/10,000 km)",2.86,price_estimates_calibrated.csv,2026-07-31
 Ranked rows backed by two reliability sources (UK + Norway),233,model_age_band_reliability_combined.csv,2026-09-02
 Ranked rows backed by one reliability source only,334,model_age_band_reliability_combined.csv,2026-09-02
 Ranked rows flagged low reliability confidence,51,model_age_band_reliability_combined.csv,2026-09-02

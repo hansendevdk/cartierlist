@@ -6,6 +6,7 @@ requires-python = ">=3.12"
 dependencies = [
     "duckdb>=1.5.5",
     "lxml>=6.1.1",
+    "playwright>=1.62.0",
     "pyarrow>=25.0.0",
     "zipfile-deflate64>=0.2.0",
 ]

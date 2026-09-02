@@ -143,12 +143,37 @@ def bracket_for(price: float) -> tuple[str, str]:
     return BRACKETS[-1][2], BRACKETS[-1][3]
 
 
-def price_confidence(n_listings: int, pooled: bool) -> str:
+def price_confidence(
+    n_listings: int,
+    pooled: bool,
+    own_cell_anchor_count: int = 0,
+    own_cell_anchor_spread: float | None = None,
+) -> str:
     if pooled or n_listings < 30:
-        return "low"
-    if n_listings < 100:
+        existing = "low"
+    elif n_listings < 100:
+        existing = "medium"
+    else:
+        existing = "high"
+
+    # Real, own-cell Danish anchors (calibrate_price_estimates.py's
+    # price_own_cell_anchor_count/spread) are direct ground truth for this
+    # exact model/band, not a foreign-market proxy -- so they can only ever
+    # raise confidence above what the Poland-derived sample size implies,
+    # never lower it. Thresholds specified in advance, not tuned here:
+    # 5+ own anchors with a tight spread (CV <= 30%) earns "high" outright;
+    # 3+ (or an existing "medium") earns at least "medium"; below that the
+    # existing Poland-derived result is left untouched.
+    own_n = int(own_cell_anchor_count or 0)
+    own_spread = own_cell_anchor_spread
+
+    if existing == "high":
+        return "high"
+    if own_n >= 5 and own_spread is not None and own_spread <= 0.30:
+        return "high"
+    if own_n >= 3 or existing == "medium":
         return "medium"
-    return "high"
+    return existing  # "low", unchanged
 
 
 def quantile_tier(rank: int, n: int) -> str:
@@ -324,7 +349,22 @@ def main() -> None:
             "price_n_listings": n_listings,
             "price_pooled_at_brand": pooled,
             "price_calibration_factor": entry.get("calibration_factor_applied", ""),
-            "price_confidence": price_confidence(n_listings, pooled),
+            # Carried through from calibrate_price_estimates.py so the confidence
+            # figure below is auditable after the fact: which rows earned their
+            # confidence from real, own-cell Danish anchors versus a pooled or
+            # global correction, without re-deriving it from the intermediate file.
+            "price_anchor_source": entry.get("price_anchor_source", ""),
+            "price_own_cell_anchor_count": entry.get("price_own_cell_anchor_count", ""),
+            "price_own_cell_anchor_spread": entry.get("price_own_cell_anchor_spread", ""),
+            "price_confidence": price_confidence(
+                n_listings, pooled,
+                own_cell_anchor_count=int(entry.get("price_own_cell_anchor_count", 0) or 0),
+                own_cell_anchor_spread=(
+                    float(entry["price_own_cell_anchor_spread"])
+                    if entry.get("price_own_cell_anchor_spread") not in (None, "")
+                    else None
+                ),
+            ),
             # Empty for every normal (Poland-sourced) row. Only set for the Suzuki/DS
             # rows build_suzuki_ds_prices.py produces, so the site can tell the two
             # pricing mechanisms apart and describe each honestly instead of always

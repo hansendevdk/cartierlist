@@ -211,16 +211,64 @@ def main() -> None:
                   "trustworthy for pricier cars (Audi/BMW/Volvo/Skoda/RAV4/Qashqai/Focus etc.) "
                   "until more anchors are added there.")
 
-    def correction_for(value: float) -> float:
+    # --- per-cell (make, model, band) override --------------------------
+    # The global/split correction above answers "what does Denmark's market
+    # look like on average", derived from whichever models happen to have
+    # anchors. But when a SPECIFIC model/band already has enough of its own
+    # real Danish anchors, that model's own evidence is strictly better than
+    # a pooled average standing in for it -- the same "don't silently average
+    # away a better-supported source" principle build_combined_reliability.py
+    # applies to the reliability index. A group needs at least 3 real
+    # listings before its own ratio is trusted as a per-cell override; below
+    # that a single ask price is too noisy to override the broader pool.
+    MIN_OWN_CELL_LISTINGS = 3
+    per_cell_ratio: dict[tuple[str, str, str], float] = {}
+    per_cell_anchor_count: dict[tuple[str, str, str], int] = {}
+    per_cell_anchor_spread: dict[tuple[str, str, str], float | None] = {}
+    for x in group_results:
+        key = (x["make"], x["model"], x["band"])
+        per_cell_anchor_count[key] = x["n_listings"]
+        prices = [
+            float(r["real_asking_price_dkk"])
+            for r in groups[key]
+            if r.get("real_asking_price_dkk", "").strip()
+        ]
+        if len(prices) >= 2:
+            mean_price = statistics.fmean(prices)
+            spread = (statistics.pstdev(prices) / mean_price) if mean_price else None
+        else:
+            spread = None
+        per_cell_anchor_spread[key] = spread
+        if x["n_listings"] >= MIN_OWN_CELL_LISTINGS:
+            per_cell_ratio[key] = x["ratio"]
+
+    if per_cell_ratio:
+        print(f"\n{len(per_cell_ratio)} model/band cell(s) have {MIN_OWN_CELL_LISTINGS}+ real "
+              f"Danish anchors of their own and will be calibrated from their own evidence "
+              f"instead of the pooled correction:")
+        for key in sorted(per_cell_ratio):
+            print(f"  {key[0]:<12} {key[1]:<16} band{key[2]}  own ratio={per_cell_ratio[key]:.3f}  "
+                  f"({per_cell_anchor_count[key]} listings)")
+
+    def correction_for(key: tuple[str, str, str], value: float) -> tuple[float, str]:
+        """Returns (factor, source). source is 'own_cell' when this exact
+        (make, model, band) has enough of its own anchors, else 'global' or
+        'brand_pooled' -- caller decides which of the latter two applies
+        based on price_pooled_at_brand, since that flag lives on the row,
+        not on anything this function has access to."""
+        if key in per_cell_ratio:
+            return per_cell_ratio[key], "own_cell"
         if use_split:
-            return low_median if value < LOW_HIGH_SPLIT_DKK else high_median
-        return global_median
+            return (low_median if value < LOW_HIGH_SPLIT_DKK else high_median), "fallback"
+        return global_median, "fallback"
 
     # in-sample residual check -- optimistic (these ARE the calibration
     # points) but still catches a badly-misspecified split.
     errs = []
     for x in group_results:
-        corrected = x["our_estimate"] * correction_for(x["our_estimate"])
+        key = (x["make"], x["model"], x["band"])
+        factor, _source = correction_for(key, x["our_estimate"])
+        corrected = x["our_estimate"] * factor
         pct_err = abs(corrected - x["anchor_price"]) / x["anchor_price"]
         errs.append(pct_err)
     print(f"\nin-sample residual error after calibration: median {statistics.median(errs)*100:.1f}%, "
@@ -232,13 +280,25 @@ def main() -> None:
         rows = list(csv.DictReader(f))
     for r in rows:
         raw = float(r["estimated_value_dkk"])
-        factor = correction_for(raw)
+        key = (r["dmr_make"], r["dmr_model"], r["age_band"])
+        factor, source = correction_for(key, raw)
+        if source == "fallback":
+            # pooled_at_brand is decided upstream in build_price_estimates.py
+            # and carried on this same row; price_anchor_source records
+            # whether the FALLBACK correction (not the curve shape itself)
+            # rode on a brand-pooled sample or the model's own Poland sample.
+            source = "brand_pooled" if r.get("pooled_at_brand") == "True" else "global"
         r["estimated_value_dkk"] = round(raw * factor)
         r["calibration_factor_applied"] = round(factor, 4)
         r["calibrated"] = True
         r["mileage_adjustment_pct_per_10k_km"] = (
             round(mileage_pct_per_10k, 4) if mileage_pct_per_10k is not None else ""
         )
+        own_count = per_cell_anchor_count.get(key, 0)
+        own_spread = per_cell_anchor_spread.get(key)
+        r["price_own_cell_anchor_count"] = own_count
+        r["price_own_cell_anchor_spread"] = round(own_spread, 4) if own_spread is not None else ""
+        r["price_anchor_source"] = source
 
     fieldnames = list(rows[0].keys())
     with open(OUT_CSV, "w", newline="", encoding="utf-8") as f:
@@ -246,6 +306,9 @@ def main() -> None:
         w.writeheader()
         w.writerows(rows)
     print(f"\nwrote {OUT_CSV} ({len(rows)} rows, calibrated)")
+    n_own_cell = sum(1 for r in rows if r["price_anchor_source"] == "own_cell")
+    print(f"  {n_own_cell} row(s) calibrated from their own model/band's real Danish anchors "
+          f"(price_anchor_source=own_cell)")
 
     if mileage_pct_per_10k is not None:
         print(f"\nTo price a specific car: take its row's estimated_value_dkk (that's the price "
